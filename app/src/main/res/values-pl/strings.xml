@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Fantasy</string>
+    <string name="password_hint">Hasło</string>
+    <string name="login_button">Zaloguj</string>
+    <string name="create_account">Nie masz konta? Zarejestruj się</string>
+    <string name="logo_desc">Logo aplikacji</string>
+    <string name="error_empty_email">Podaj adres email</string>
+    <string name="error_password_empty">Podaj hasło</string>
+</resources>
