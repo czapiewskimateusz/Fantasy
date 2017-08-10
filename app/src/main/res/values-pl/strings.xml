@@ -7,4 +7,5 @@
     <string name="logo_desc">Logo aplikacji</string>
     <string name="error_empty_email">Podaj adres email</string>
     <string name="error_password_empty">Podaj hasło</string>
+    <string name="logout_button">Wyloguj</string>
 </resources>
