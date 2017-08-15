@@ -8,4 +8,7 @@
     <string name="error_empty_email">Podaj adres email</string>
     <string name="error_password_empty">Podaj hasło</string>
     <string name="logout_button">Wyloguj</string>
+    <string name="connection_error">Problem z wczytywaniem danych</string>
+    <string name="password_error">Hasło jest niepoprawne</string>
+    <string name="user_exists_error">Użytkownik nie istnieje</string>
 </resources>

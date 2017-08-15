@@ -1,4 +1,4 @@
-package com.example.mateusz.fantasy.Model;
+package com.example.mateusz.fantasy.Login.model;
 
 /**
  * Created by Mateusz on 09.08.2017.
