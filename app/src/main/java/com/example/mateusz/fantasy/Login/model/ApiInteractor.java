@@ -11,6 +11,9 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import static com.example.mateusz.fantasy.Login.presenter.LoginPresenter.ERROR_TAG_INCORRECT_PASSWORD;
+import static com.example.mateusz.fantasy.Login.presenter.LoginPresenter.ERROR_TAG_USER_DOESNT_EXIST;
+
 /**
  * Created by Mateusz on 15.08.2017.
  */
@@ -49,9 +52,9 @@ public class ApiInteractor implements Callback<User> {
         if (response.isSuccessful()) {
 
             if (response.body().getPassword().equals(password)){
-                loginPresenter.loginSuccessfull();
+                loginPresenter.onLoginSuccessful();
             } else {
-                loginPresenter.loginUnsuccessfull("Złe hasło");
+                loginPresenter.onLoginUnsuccessful(ERROR_TAG_INCORRECT_PASSWORD);
             }
 
         }
@@ -61,7 +64,7 @@ public class ApiInteractor implements Callback<User> {
     @Override
     public void onFailure(Call<User> call, Throwable t) {
 
-        loginPresenter.loginUnsuccessfull("Użytkownik nie istnieje");
+        loginPresenter.onLoginUnsuccessful(ERROR_TAG_USER_DOESNT_EXIST);
 
     }
 }

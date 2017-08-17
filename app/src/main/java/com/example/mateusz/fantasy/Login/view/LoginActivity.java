@@ -51,7 +51,7 @@ public class LoginActivity extends Activity implements ILoginView {
     @Override
     protected void onResume() {
         super.onResume();
-        getPresenter().onViewAttached(this);
+        getPresenter().onViewAttached(this,this);
     }
 
     @Override
@@ -113,38 +113,4 @@ public class LoginActivity extends Activity implements ILoginView {
         return sPresenter;
     }
 
-
-//    @Override
-//    public Loader<String> onCreateLoader(int i, final Bundle args) {
-//
-//        return new GetUserLoader(this, args, mPbLoadingIndicator, mTvError);
-//
-//    }
-//
-//    @Override
-//    public void onLoadFinished(Loader<String> loader, String jsonResponse) {
-//        mPbLoadingIndicator.setVisibility(View.INVISIBLE);
-//        mTvError.setVisibility(View.VISIBLE);
-//        if (null == jsonResponse) {
-//            mTvError.setText(R.string.connection_error);
-//        } else {
-//
-//            loggedUser = UserJsonUtils.getUserFromJson(jsonResponse);
-//            if (loggedUser == null) {
-//                mTvError.setText(R.string.user_exists_error);
-//
-//            } else if (loggedUser.getPassword().equals(getPassword)) {
-//                mTvError.setVisibility(View.INVISIBLE);
-//                Intent intent = new Intent(this, HomeActivity.class);
-//                startActivity(intent);
-//            } else {
-//                mTvError.setText(R.string.password_error);
-//            }
-//        }
-//    }
-//
-//    @Override
-//    public void onLoaderReset(Loader<String> loader) {
-//
-//    }
 }
