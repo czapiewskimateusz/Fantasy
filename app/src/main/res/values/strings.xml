@@ -1,14 +1,22 @@
 <resources>
-    <string name="app_name">Fantasy</string>
 
+    <string name="app_name">Fantasy</string>
+    <string name="register_label">Sign up</string>
+
+    //Hints
     <string name="email_hint" translatable="false">Email</string>
     <string name="password_hint">Password</string>
-    <string name="login_button">Log In</string>
+    <string name="password_repeat_hint">Repeat password</string>
+    <string name="firstname_hint">First name</string>
+    <string name="lastname_hint">Last name</string>
+
+    //Buttons
+    <string name="login_button">Log in</string>
     <string name="create_account">Don\'t have account? Sign up</string>
-    <string name="logout_button">Log Out</string>
+    <string name="logout_button">Log out</string>
+    <string name="register_button">Sign up</string>
 
     //Content Descriptions
-
     <string name="logo_desc">Application logo</string>
     <string name="error_empty_email">Please enter email address</string>
     <string name="error_password_empty">Please enter password</string>
@@ -17,4 +25,9 @@
     <string name="connection_error">Couldn\'t retrieve data</string>
     <string name="password_error">Password is incorrect</string>
     <string name="user_exists_error">User doesn\'t exist</string>
+    <string name="user_already_exists_error">User with provided email already exists</string>
+    <string name="firstname_empty_error">Please enter first name</string>
+    <string name="lastname_empty_error">Please enter last name</string>
+    <string name="passwords_do_not_match_error">Passwords do not match</string>
+
 </resources>

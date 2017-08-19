@@ -11,4 +11,13 @@
     <string name="connection_error">Problem z wczytywaniem danych</string>
     <string name="password_error">Hasło jest niepoprawne</string>
     <string name="user_exists_error">Użytkownik nie istnieje</string>
+    <string name="register_label">Rejestracja</string>
+    <string name="firstname_hint">Imię</string>
+    <string name="lastname_hint">Nazwisko</string>
+    <string name="password_repeat_hint">Powtórz hasło</string>
+    <string name="register_button">Zarejestruj</string>
+    <string name="user_already_exists_error">Użytkownik o podanym emailu już istnieje</string>
+    <string name="firstname_empty_error">Podaj imię</string>
+    <string name="lastname_empty_error">Podaj nazwisko</string>
+    <string name="passwords_do_not_match_error">Hasła są różne</string>
 </resources>

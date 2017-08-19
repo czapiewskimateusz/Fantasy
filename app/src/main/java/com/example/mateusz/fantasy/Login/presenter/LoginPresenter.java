@@ -3,7 +3,7 @@ package com.example.mateusz.fantasy.Login.presenter;
 import android.content.Context;
 import android.text.TextUtils;
 
-import com.example.mateusz.fantasy.Login.model.ApiInteractor;
+import com.example.mateusz.fantasy.Login.model.LoginApiInteractor;
 import com.example.mateusz.fantasy.Login.view.ILoginView;
 import com.example.mateusz.fantasy.R;
 
@@ -20,14 +20,14 @@ public class LoginPresenter {
      */
     private ILoginView view;
     private Context context;
-    private final ApiInteractor mApiinteractor;
+    private final LoginApiInteractor mApiinteractor;
 
     /**
      * Constructor
      */
     public LoginPresenter() {
 
-        mApiinteractor = new ApiInteractor(this);
+        mApiinteractor = new LoginApiInteractor(this);
 
     }
 
@@ -46,7 +46,7 @@ public class LoginPresenter {
     }
 
     /**
-     * Retrieves data from view and passes it to ApiInteractor
+     * Retrieves data from view and passes it to LoginApiInteractor
      *
      * @param email    users email
      * @param password users password

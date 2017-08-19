@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.example.mateusz.fantasy.Login.presenter.LoginPresenter;
 import com.example.mateusz.fantasy.R;
+import com.example.mateusz.fantasy.Register.view.RegisterActivity;
 import com.example.mateusz.fantasy.UI.HomeActivity;
 
 
@@ -107,6 +108,12 @@ public class LoginActivity extends Activity implements ILoginView {
             mPbLoadingIndicator.setVisibility(View.INVISIBLE);
         }
 
+    }
+
+    @OnClick (R.id.tv_register)
+    public void register(){
+        Intent intent = new Intent(this, RegisterActivity.class);
+        startActivity(intent);
     }
 
     public LoginPresenter getPresenter() {
