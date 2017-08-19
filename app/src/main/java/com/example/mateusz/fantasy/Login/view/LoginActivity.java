@@ -19,6 +19,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.example.mateusz.fantasy.Register.view.RegisterActivity.PUT_EMAIL_EXTRA;
+
 public class LoginActivity extends Activity implements ILoginView {
 
     @BindView(R.id.et_email)
@@ -46,6 +48,12 @@ public class LoginActivity extends Activity implements ILoginView {
 
         if (sPresenter == null) {
             sPresenter = new LoginPresenter();
+        }
+
+        Intent intent = getIntent();
+        String email = intent.getStringExtra(PUT_EMAIL_EXTRA);
+        if (email!=null){
+            mEtEmail.setText(email);
         }
     }
 

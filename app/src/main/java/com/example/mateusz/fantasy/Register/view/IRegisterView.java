@@ -8,7 +8,7 @@ public interface IRegisterView {
 
     static final String TAG = IRegisterView.class.getName();
 
-    void onSignUpSuccess();
+    void onSignUpSuccess(String email);
 
     void onEmailError(String error);
 
@@ -17,6 +17,8 @@ public interface IRegisterView {
     void onLastNameError(String error);
 
     void onPasswordError(String error);
+
+    void onPasswordRepeatError(String error);
 
     void onGeneralError(String error);
 

@@ -1,12 +1,15 @@
 package com.example.mateusz.fantasy.Register.view;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.mateusz.fantasy.Login.view.LoginActivity;
 import com.example.mateusz.fantasy.R;
 import com.example.mateusz.fantasy.Register.presenter.RegisterPresenter;
 
@@ -15,6 +18,8 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class RegisterActivity extends Activity implements IRegisterView {
+
+    public static final String PUT_EMAIL_EXTRA = "email_extra";
 
     //EditText
     @BindView(R.id.et_email_register)
@@ -78,8 +83,12 @@ public class RegisterActivity extends Activity implements IRegisterView {
     }
 
     @Override
-    public void onSignUpSuccess() {
+    public void onSignUpSuccess(String email) {
+        Toast.makeText(this,getString(R.string.user_successfully_created),Toast.LENGTH_LONG).show();
 
+        Intent intent = new Intent(this, LoginActivity.class);
+        intent.putExtra(PUT_EMAIL_EXTRA,email);
+        startActivity(intent);
     }
 
     @Override
@@ -100,6 +109,10 @@ public class RegisterActivity extends Activity implements IRegisterView {
     @Override
     public void onPasswordError(String error) {
         mTvPasswordError.setText(error);
+    }
+
+    @Override
+    public void onPasswordRepeatError(String error) {
         mTvPasswordRepeatError.setText(error);
     }
 

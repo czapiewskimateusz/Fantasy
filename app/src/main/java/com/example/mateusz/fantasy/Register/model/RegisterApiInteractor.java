@@ -28,7 +28,7 @@ public class RegisterApiInteractor implements Callback<Response> {
 
         RegisterWebService api = retrofit.create(RegisterWebService.class);
 
-        Call<Response> call = api.registerUser(email,password,firstname,lastname);
+        Call<Response> call = api.registerUser("\""+email+"\"","\""+password+"\"","\""+firstname+"\"","\""+lastname+"\"");
         call.enqueue(this);
     }
 

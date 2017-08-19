@@ -13,6 +13,8 @@ import com.example.mateusz.fantasy.Register.view.IRegisterView;
 
 public class RegisterPresenter {
 
+    private String mEmail;
+
     /**
      * Dependencies
      */
@@ -29,6 +31,7 @@ public class RegisterPresenter {
 
     }
 
+
     public void onViewAttached(IRegisterView view, Context context) {
 
         this.view = view;
@@ -43,38 +46,53 @@ public class RegisterPresenter {
 
     }
 
+
     public void onRegisterSuccess(){
         view.showProgress(false);
-        view.onGeneralError("Przyszło gówno");
+        view.onSignUpSuccess(mEmail);
     }
 
     public void onRegisterFailure(){
         view.showProgress(false);
+        view.onGeneralError(context.getString(R.string.user_already_exists_error));
     }
 
     public void register(String email, String firstname, String lastname, String password, String passwordRepeat) {
+
+        view.clearErrors();
 
         if (!validateFields(email, firstname, lastname, password, passwordRepeat)) {
             return;
         }
 
-        view.clearErrors();
+        this.mEmail = email;
+
         view.showProgress(true);
 
         registerApiInteractor.register(email,firstname,lastname,password);
 
     }
 
-
+    /**
+     * Function to vaildate data provided by the User
+     * @param email user email
+     * @param firstname user firstname
+     * @param lastname user lastname
+     * @param password user password
+     * @param passwordRepeat user passwordRepeat
+     * @return true if AOK
+     */
     private boolean validateFields(String email, String firstname, String lastname, String password, String passwordRepeat) {
 
         boolean check = true;
 
         if (!password.equals(passwordRepeat)){
             view.onPasswordError(context.getString(R.string.passwords_do_not_match_error));
+            view.onPasswordRepeatError(context.getString(R.string.passwords_do_not_match_error));
             check = false;
         } else{
             view.onPasswordError("");
+            view.onPasswordRepeatError("");
         }
 
         if (TextUtils.isEmpty(email)) {
@@ -92,10 +110,10 @@ public class RegisterPresenter {
         }
 
         if (TextUtils.isEmpty(passwordRepeat)) {
-            view.onPasswordError(context.getString(R.string.error_password_empty));
+            view.onPasswordRepeatError(context.getString(R.string.error_password_empty));
             check = false;
         } else {
-            view.onPasswordError("");
+            view.onPasswordRepeatError("");
         }
 
         if (TextUtils.isEmpty(firstname)) {

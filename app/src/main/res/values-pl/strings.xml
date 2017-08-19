@@ -20,4 +20,5 @@
     <string name="firstname_empty_error">Podaj imię</string>
     <string name="lastname_empty_error">Podaj nazwisko</string>
     <string name="passwords_do_not_match_error">Hasła są różne</string>
+    <string name="user_successfully_created">Konto stworzono pomyślnie</string>
 </resources>
