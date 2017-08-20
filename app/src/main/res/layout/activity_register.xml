@@ -7,6 +7,7 @@
     tools:context="com.example.mateusz.fantasy.Register.view.RegisterActivity">
 
     <EditText
+        style="@style/MyEditText"
         android:id="@+id/et_email_register"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -22,6 +23,7 @@
         android:layout_marginEnd="8dp" />
 
     <EditText
+        style="@style/MyEditText"
         android:id="@+id/et_firstname"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -39,6 +41,7 @@
         android:layout_marginEnd="8dp" />
 
     <EditText
+        style="@style/MyEditText"
         android:id="@+id/et_lastname"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -56,6 +59,7 @@
         android:layout_marginEnd="8dp" />
 
     <EditText
+        style="@style/MyEditText"
         android:id="@+id/et_password_register"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -73,6 +77,7 @@
         android:layout_marginEnd="8dp" />
 
     <EditText
+        style="@style/MyEditText"
         android:id="@+id/et_password_repeat"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -95,7 +100,11 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:background="@color/colorPrimaryDark"
+        android:background="@drawable/mybutton"
+        android:shadowColor="#000000"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="5"
         android:text="@string/register_button"
         android:textColor="@android:color/background_light"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -103,8 +112,8 @@
         app:layout_constraintHorizontal_bias="0.0"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginTop="24dp"
-        app:layout_constraintTop_toBottomOf="@+id/et_password_repeat" />
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@+id/tv_password_repeat_error" />
 
     <ProgressBar
         android:id="@+id/pb_register_loading_indicator"
@@ -120,6 +129,7 @@
         app:layout_constraintTop_toBottomOf="@+id/btn_register" />
 
     <TextView
+        style="@style/MyTextView"
         android:id="@+id/tv_error_register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -139,6 +149,7 @@
         app:layout_constraintTop_toBottomOf="@+id/btn_register" />
 
     <TextView
+        style="@style/MyTextView"
         android:id="@+id/tv_email_register_error"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -150,6 +161,7 @@
         app:layout_constraintTop_toBottomOf="@+id/et_email_register" />
 
     <TextView
+        style="@style/MyTextView"
         android:id="@+id/tv_firstname_error"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -161,6 +173,7 @@
         app:layout_constraintTop_toBottomOf="@+id/et_firstname" />
 
     <TextView
+        style="@style/MyTextView"
         android:id="@+id/tv_lastname_error"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -172,6 +185,7 @@
         app:layout_constraintTop_toBottomOf="@+id/et_lastname" />
 
     <TextView
+        style="@style/MyTextView"
         android:id="@+id/tv_password_register_error"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -183,6 +197,7 @@
         app:layout_constraintTop_toBottomOf="@+id/et_password_register" />
 
     <TextView
+        style="@style/MyTextView"
         android:id="@+id/tv_password_repeat_error"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -53,8 +53,12 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:background="@color/colorPrimaryDark"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/mybutton"
+        android:shadowColor="#000000"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="5"
         android:text="@string/login_button"
         android:textColor="@android:color/background_light"
         app:layout_constraintHorizontal_bias="0.0"
@@ -66,6 +70,7 @@
 
     <TextView
         android:id="@+id/tv_register"
+        style="@style/MyTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
@@ -73,16 +78,18 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
-        android:text="@string/create_account"
-        android:textAlignment="center"
-        android:textColor="@color/colorPrimaryDark"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:paddingTop="16dp"
+        android:clickable="false"
         android:paddingBottom="16dp"
         android:paddingLeft="16dp"
-        android:paddingRight="16dp"/>
+        android:paddingRight="16dp"
+        android:paddingTop="16dp"
+        android:text="@string/create_account"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="@color/colorPrimary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
 
     <ProgressBar
         android:id="@+id/pb_loading_indicator"
@@ -103,6 +110,7 @@
         app:layout_constraintBottom_toTopOf="@+id/tv_register" />
 
     <TextView
+        style="@style/MyTextView"
         android:id="@+id/tv_error"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -123,6 +131,7 @@
         app:layout_constraintVertical_bias="0.517" />
 
     <TextView
+        style="@style/MyTextView"
         android:id="@+id/tv_errorEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -134,6 +143,7 @@
         app:layout_constraintTop_toBottomOf="@+id/et_email" />
 
     <TextView
+        style="@style/MyTextView"
         android:id="@+id/tv_errorPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

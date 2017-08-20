@@ -12,7 +12,7 @@
 
     //Buttons
     <string name="login_button">Log in</string>
-    <string name="create_account">Don\'t have account? Sign up</string>
+    <string name="create_account">Don\'t have account? <u>Sign up</u></string>
     <string name="logout_button">Log out</string>
     <string name="register_button">Sign up</string>
 
@@ -28,9 +28,14 @@
     <string name="user_already_exists_error">User with provided email already exists</string>
     <string name="firstname_empty_error">Please enter first name</string>
     <string name="lastname_empty_error">Please enter last name</string>
-    <string name="passwords_do_not_match_error">Passwords do not match</string>
-    
+    <string name="email_length_error">Email is too long</string>
+    <string name="firstname_length_error">First name is too long</string>
+    <string name="lastname_length_error">Last name is too long</string>
+    <string name="password_length_error">Password must contain at least 6 characters</string>
+    <string name="passwords_do_not_match">Passwords do not match</string>
+
     //Dialogs
     <string name="user_successfully_created">User successfully created!</string>
+    <string name="back_button_close_app_warning">Click one more time to close the app</string>
 
 </resources>

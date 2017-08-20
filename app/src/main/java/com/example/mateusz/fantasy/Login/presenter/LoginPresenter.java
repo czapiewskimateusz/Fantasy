@@ -4,6 +4,7 @@ import android.content.Context;
 import android.text.TextUtils;
 
 import com.example.mateusz.fantasy.Login.model.LoginApiInteractor;
+import com.example.mateusz.fantasy.Login.model.User;
 import com.example.mateusz.fantasy.Login.view.ILoginView;
 import com.example.mateusz.fantasy.R;
 

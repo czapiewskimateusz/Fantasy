@@ -3,7 +3,7 @@
     <string name="app_name">Fantasy</string>
     <string name="password_hint">Hasło</string>
     <string name="login_button">Zaloguj</string>
-    <string name="create_account">Nie masz konta? Zarejestruj się</string>
+    <string name="create_account">Nie masz konta? <u>Zarejestruj się</u></string>
     <string name="logo_desc">Logo aplikacji</string>
     <string name="error_empty_email">Podaj adres email</string>
     <string name="error_password_empty">Podaj hasło</string>
@@ -19,6 +19,11 @@
     <string name="user_already_exists_error">Użytkownik o podanym emailu już istnieje</string>
     <string name="firstname_empty_error">Podaj imię</string>
     <string name="lastname_empty_error">Podaj nazwisko</string>
-    <string name="passwords_do_not_match_error">Hasła są różne</string>
     <string name="user_successfully_created">Konto stworzono pomyślnie</string>
+    <string name="email_length_error">Email jest za długi</string>
+    <string name="firstname_length_error">Imię jest za długie</string>
+    <string name="lastname_length_error">Nazwisko jest za długie</string>
+    <string name="password_length_error">Hasło musi zawierać przynajmniej 6 znaków</string>
+    <string name="passwords_do_not_match">Hasła są różne</string>
+    <string name="back_button_close_app_warning">Kliknij jeszcze raz aby zamknąć aplikację</string>
 </resources>
