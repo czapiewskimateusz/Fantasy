@@ -26,4 +26,7 @@
     <string name="password_length_error">Hasło musi zawierać przynajmniej 6 znaków</string>
     <string name="passwords_do_not_match">Hasła są różne</string>
     <string name="back_button_close_app_warning">Kliknij jeszcze raz aby zamknąć aplikację</string>
+    <string name="tab_home">Dom</string>
+    <string name="tab_league">Ligi</string>
+    <string name="tab_team">Drużyna</string>
 </resources>

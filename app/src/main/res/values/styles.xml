@@ -1,5 +1,4 @@
 <resources>
-
     <!-- Base application theme. -->
     <style name="AppTheme" parent="android:Theme.Material.Light.DarkActionBar">
         <item name="android:actionBarStyle">@style/MyActionBar</item>
@@ -11,20 +10,15 @@
         <item name="android:textColor">@android:color/background_light</item>
     </style>
 
-    <style name="FullScreenTheme" parent="android:Theme.Material.Light.NoActionBar">
-
-    </style>
+    <style name="FullScreenTheme" parent="android:Theme.Material.Light.NoActionBar"/>
 
     <style name="MyEditText" parent="android:Widget.Material.EditText">
-        <item name="android:textColor">@color/colorPrimary</item>
-        <item name="android:panelColorBackground">@color/colorPrimary</item>
         <item name="android:fontFamily">Lato</item>
     </style>
 
     <style name="MyTextView" parent="android:Widget.Material.TextView">
         <item name="android:fontFamily">Lato</item>
     </style>
-
 
 
 </resources>

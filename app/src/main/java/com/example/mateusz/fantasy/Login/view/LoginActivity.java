@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.example.mateusz.fantasy.Login.presenter.LoginPresenter;
 import com.example.mateusz.fantasy.R;
 import com.example.mateusz.fantasy.Register.view.RegisterActivity;
-import com.example.mateusz.fantasy.UI.HomeActivity;
+import com.example.mateusz.fantasy.Home.view.HomeActivity;
 
 
 import butterknife.BindView;

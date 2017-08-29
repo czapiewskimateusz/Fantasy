@@ -11,4 +11,6 @@
     <color name="colorAccentRed">#FF015B</color>
     <color name="colorAccentBlue">#05f1ff</color>
     <color name="colorAccentYellow">#EBFF00</color>
+
+    <color name="colorWhite">#FFFFFF</color>
 </resources>
