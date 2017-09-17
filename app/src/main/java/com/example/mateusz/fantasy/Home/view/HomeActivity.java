@@ -2,6 +2,7 @@ package com.example.mateusz.fantasy.Home.view;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
@@ -22,6 +23,8 @@ import com.example.mateusz.fantasy.R;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
+import static com.example.mateusz.fantasy.Login.view.LoginActivity.USER_ID_EXTRA;
 
 public class HomeActivity extends AppCompatActivity {
 

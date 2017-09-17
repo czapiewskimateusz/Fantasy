@@ -66,10 +66,10 @@ public class LoginPresenter {
     }
 
 
-    public void onLoginSuccessful() {
+    public void onLoginSuccessful(int userId) {
 
         view.showProgress(false);
-        view.onLoginSuccess();
+        view.onLoginSuccess(userId);
 
     }
 

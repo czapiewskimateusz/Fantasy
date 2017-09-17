@@ -42,7 +42,7 @@ public class LoginApiInteractor implements Callback<User> {
         if (response.isSuccessful()) {
 
             if (response.body().getPassword().equals(password)){
-                loginPresenter.onLoginSuccessful();
+                loginPresenter.onLoginSuccessful(response.body().getUserId());
             } else {
                 loginPresenter.onLoginUnsuccessful(ERROR_TAG_INCORRECT_PASSWORD);
             }

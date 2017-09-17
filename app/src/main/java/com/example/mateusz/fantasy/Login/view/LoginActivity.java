@@ -1,8 +1,12 @@
 package com.example.mateusz.fantasy.Login.view;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -22,6 +26,9 @@ import butterknife.OnClick;
 import static com.example.mateusz.fantasy.Register.view.RegisterActivity.PUT_EMAIL_EXTRA;
 
 public class LoginActivity extends Activity implements ILoginView {
+
+    public static final String USER_ID_EXTRA = "user_id";
+    public static final String PREFS_NAME = "com.example.mateusz.fantasy";
 
     @BindView(R.id.et_email)
     EditText mEtEmail;
@@ -55,6 +62,14 @@ public class LoginActivity extends Activity implements ILoginView {
         if (email!=null){
             mEtEmail.setText(email);
         }
+
+        SharedPreferences sharedPreferences = getSharedPreferences(PREFS_NAME, 0);
+        int id = sharedPreferences.getInt(USER_ID_EXTRA,0);
+
+        if (id>0){
+            intent = new Intent(this, HomeActivity.class);
+            startActivity(intent);
+        }
     }
 
     @Override
@@ -80,9 +95,15 @@ public class LoginActivity extends Activity implements ILoginView {
     }
 
     @Override
-    public void onLoginSuccess() {
+    public void onLoginSuccess(int userId) {
+
+        SharedPreferences.Editor editor = getSharedPreferences(PREFS_NAME, MODE_PRIVATE).edit();
+        editor.putInt(USER_ID_EXTRA, userId);
+        editor.apply();
+
         Intent intent = new Intent(this, HomeActivity.class);
         startActivity(intent);
+
     }
 
     @Override

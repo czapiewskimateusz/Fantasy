@@ -5,24 +5,66 @@
     android:layout_height="match_parent"
     tools:context="com.example.mateusz.fantasy.Home.view.Fragment.HomeFragment">
 
-<android.support.v4.widget.NestedScrollView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
+
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/home_scrollview"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginTop="120dp"
-        android:text="HOME Lorem ipsum dolor sit amet, consectetur adipiscing elit. In eu nibh commodo, pretium est in, ultricies enim. Donec maximus semper sapien, a vestibulum nunc iaculis vitae. Etiam aliquam, felis in varius condimentum, eros velit ullamcorper tortor, a pulvinar lacus urna ac metus. In hendrerit elit condimentum arcu sagittis, ac facilisis nisi venenatis. Sed non hendrerit ipsum. Suspendisse tempor maximus viverra. Sed vitae sapien orci. Sed tempus eleifend ligula, ut egestas neque tristique vitae. Praesent eu lacus in velit facilisis facilisis non eget nisl. Donec ut fringilla ante, quis suscipit magna. Cras hendrerit, purus ut ullamcorper faucibus, lectus ex rutrum dolor, quis feugiat mauris augue vel quam. Mauris tempus lacus eu mauris vulputate rutrum. Nullam suscipit, elit nec tempor consequat, lectus quam lobortis est, vel aliquam velit tortor in massa. Duis ultrices erat vitae dolor feugiat, sed porta libero elementum. Quisque mattis arcu ipsum, sit amet vulputate felis condimentum non.  Proin at dolor in dui malesuada dictum. Donec ac suscipit massa. Aenean augue urna, molestie sit amet blandit ut, facilisis ac elit. Suspendisse dapibus neque aliquet, ullamcorper nisl in, cursus justo. Mauris mattis volutpat arcu in commodo. Ut tortor eros, sodales cursus malesuada id, facilisis in ipsum. Curabitur sit amet odio tincidunt, condimentum erat id, ullamcorper metus. Praesent ipsum orci, ultricies ac ante nec, imperdiet porta leo. Nulla sem dolor, tempor egestas fringilla ut, auctor eget justo. Praesent et pulvinar neque, ut dapibus mauris. Suspendisse potenti. Quisque porta vitae erat vitae interdum. Nulla vulputate condimentum lacus.  Nullam ornare eu magna eget interdum. Duis nec risus vitae risus dictum tincidunt id dignissim nulla. Suspendisse malesuada tristique suscipit. Ut dictum nibh vitae faucibus bibendum. Nulla fermentum tincidunt neque, quis feugiat justo condimentum sit amet. Donec tempus tincidunt sagittis. Vestibulum accumsan ligula ex, in sagittis neque feugiat ac. Phasellus ac neque non diam efficitur maximus. Vivamus diam odio, vulputate quis ultrices vel, aliquet ut sapien. Quisque non quam purus.  Aliquam a orci dapibus, fringilla metus sit amet, malesuada ante. Maecenas aliquet augue quis mi tempus congue eget eget velit. In rhoncus viverra nisl vitae dictum. Vivamus nisl quam, fermentum in sodales sed, mattis id enim. Aenean non neque eu lacus laoreet sodales vel vel tellus. Maecenas condimentum rhoncus imperdiet. Mauris sit amet egestas ligula, nec varius erat. Fusce lobortis hendrerit ligula.  Nulla odio odio, rutrum quis malesuada ullamcorper, egestas quis magna. Vestibulum est ex, accumsan non ipsum et, ultrices euismod sem. Fusce ullamcorper enim euismod purus dapibus, vitae eleifend justo maximus. Aliquam elementum urna leo, sed luctus justo malesuada vel. Quisque interdum metus id neque laoreet tristique. Sed venenatis tortor justo, eu bibendum odio feugiat quis. Etiam enim nisl, ultricies a viverra a, rutrum sed magna. Phasellus ultricies metus sit amet varius viverra. Phasellus ornare pellentesque felis, sed dignissim tortor tristique vel. Aenean vel sagittis libero. Donec condimentum finibus odio nec scelerisque. Donec interdum sapien eu ex cursus mollis. Nulla non erat pretium, tincidunt est eget, porttitor sem."
-        android:textSize="30sp"
-        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintVertical_bias="0.0">
 
-</android.support.v4.widget.NestedScrollView>
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="16dp">
+
+            <TextView
+                android:id="@+id/tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="jashdkashjdkjhkdjahdkashdjksahdkashdkasdjhakhdjashdkashjdkjhkdjahdkashdjksahdkashdkasdjhakhdjashdkashjdkjhkdjahdkashdjksahdkashdkasdjhakhdjashdkashjdkjhkdjahdkashdjksahdkashdkasdjhakhdjashdkashjdkjhkdjahdkashdjksahdkashdkasdjhakhdjashdkashjdkjhkdjahdkashdjksahdkashdkasdjhakhdjashdkashjdkjhkdjahdkashdjksahdkashdkasdjhakhdjashdkashjdkjhkdjahdkashdjksahdkashdkasdjhakhdjashdkashjdkjhkdjahdkashdjksahdkashdkasdjhakhdjashdkashjdkjhkdjahdkashdjksahdkashdkasdjhakhdjashdkashjdkjhkdjahdkashdjksahdkashdkasdjhakhdjashdkashjdkjhkdjahdkashdjksahdkashdkasdjhakhdjashdkashjdkjhkdjahdkashdjksahdkashdkasdjhakhd"
+                android:textSize="24sp"
+                app:layout_constraintHorizontal_bias="0.503"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/btn_logout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/mybutton"
+                android:shadowColor="#000000"
+                android:shadowDx="0"
+                android:shadowDy="0"
+                android:shadowRadius="5"
+                android:text="@string/logout_button"
+                android:textColor="@android:color/background_light"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv"
+                app:layout_constraintHorizontal_bias="0.466" />
+
+        </android.support.constraint.ConstraintLayout>
+
+
+    </android.support.v4.widget.NestedScrollView>
 
 
 </android.support.constraint.ConstraintLayout>
