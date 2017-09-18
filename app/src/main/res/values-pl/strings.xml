@@ -29,4 +29,6 @@
     <string name="tab_home">Dom</string>
     <string name="tab_league">Ligi</string>
     <string name="tab_team">Drużyna</string>
+    <string name="league_code">Kod:</string>
+    <string name="position">Poz:</string>
 </resources>
