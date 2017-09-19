@@ -13,8 +13,9 @@ public class User {
     private String password;
     private String teamId;
     private int budget;
+    private int totalPoints;
 
-    public User(int userId, String firstName, String lastName, String email, String password, String teamId, int budget) {
+    public User(int userId, String firstName, String lastName, String email, String password, String teamId, int budget, int totalPoints) {
         this.userId = userId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -22,6 +23,7 @@ public class User {
         this.password = password;
         this.teamId = teamId;
         this.budget = budget;
+        this.totalPoints = totalPoints;
     }
 
     public int getUserId() {
@@ -78,5 +80,13 @@ public class User {
 
     public void setBudget(int budget) {
         this.budget = budget;
+    }
+
+    public int getTotalPoints() {
+        return totalPoints;
+    }
+
+    public void setTotalPoints(int totalPoints) {
+        this.totalPoints = totalPoints;
     }
 }

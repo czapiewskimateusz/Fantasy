@@ -8,14 +8,16 @@ import java.util.List;
  */
 
 public class League {
+    private int league_id;
     private String name;
     private int userPosition;
     private String code;
 
-    public League(String name, int userPosition, String code) {
+    public League(String name, int userPosition, String code, int league_id) {
         this.name = name;
         this.userPosition = userPosition;
         this.code = code;
+        this.league_id = league_id;
     }
 
     public String getName() {
@@ -42,20 +44,26 @@ public class League {
         this.code = code;
     }
 
+    public int getLeague_id() {
+        return league_id;
+    }
 
+    public void setLeague_id(int league_id) {
+        this.league_id = league_id;
+    }
 
-    public static List<League> initializeData(){
+    public static List<League> initializeData() {
         List<League> leagues = new ArrayList<>();
-        leagues.add(new League("LIGA NIEZWYKLYCH GENTELMANOW", 41, "441116"));
-        leagues.add(new League("BLOK EKIPA ", 12, "415516"));
-        leagues.add(new League("ELYTA", 1, "412516"));
-        leagues.add(new League("ZIOMECZKI", 125, "215516"));
-        leagues.add(new League("MISTRZOWIE FANTASY", 125, "561216"));
-        leagues.add(new League("READY4S", 2661, "098216"));
-        leagues.add(new League("PARTIA PILKARZY", 2151, "918273"));
-        leagues.add(new League("CHORZY AMATORZY", 211, "182745"));
-        leagues.add(new League("LIGA GLOBALNA", 3, "124716"));
-        leagues.add(new League("LIGA LFC", 111, "151251"));
+        leagues.add(new League("Liga Niezwykłych Gentelmanów", 41, "441116",41124));
+        leagues.add(new League("Blok Ekipa", 12, "415516",1242145));
+        leagues.add(new League("Elyta", 1, "412516",5242));
+        leagues.add(new League("Mordeczki", 125, "215516",1234));
+        leagues.add(new League("Fantazyjniacy", 125, "561216",12125));
+        leagues.add(new League("EPL FTW", 2661, "098216",1235));
+        leagues.add(new League("Partia Piłkarzy", 2151, "918273",125125));
+        leagues.add(new League("Chorzy Amatorzy", 211, "182745",65465));
+        leagues.add(new League("Liga Globalna", 3, "124716",45654));
+        leagues.add(new League("Liga kibiców Liverpool FC", 111, "151251",634636));
         return leagues;
     }
 }

@@ -9,13 +9,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.mateusz.fantasy.Home.model.League;
 import com.example.mateusz.fantasy.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -50,11 +50,17 @@ public class LeagueFragment extends Fragment {
 
         mRecyclerView = view.findViewById(R.id.rv_leagues);
 
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(view.getContext());
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(view.getContext()){
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+        };
         mRecyclerView.setLayoutManager(linearLayoutManager);
 
         RVAdapter rvAdapter = new RVAdapter(League.initializeData());
         mRecyclerView.setAdapter(rvAdapter);
+
 
     }
 
@@ -81,6 +87,7 @@ public class LeagueFragment extends Fragment {
             holder.leagueName.setText(leagues.get(position).getName());
             holder.userPosition.setText(Integer.toString(leagues.get(position).getUserPosition()));
             holder.leagueCode.setText(leagues.get(position).getCode());
+            holder.leagueId = leagues.get(position).getLeague_id();
         }
 
         @Override
@@ -96,21 +103,31 @@ public class LeagueFragment extends Fragment {
         /**
          * RecyclerView.ViewHolder class
          */
-        class LeagueViewHolder extends RecyclerView.ViewHolder {
+        class LeagueViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
             final CardView cv;
             final TextView leagueName;
             final TextView userPosition;
             final TextView leagueCode;
+            int leagueId;
 
             LeagueViewHolder(View itemView) {
                 super(itemView);
+                itemView.setOnClickListener(this);
                 cv = itemView.findViewById(R.id.cv_league);
                 leagueName = itemView.findViewById(R.id.tv_league_name);
                 userPosition = itemView.findViewById(R.id.tv_ranking);
                 leagueCode = itemView.findViewById(R.id.tv_league_code);
+                leagueId=0;
+            }
+
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getContext(),"Liga o ID: " + Integer.toString(leagueId),Toast.LENGTH_SHORT).show();
             }
         }
 
     }
+
+
 
 }

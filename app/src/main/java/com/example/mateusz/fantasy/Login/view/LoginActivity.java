@@ -86,6 +86,11 @@ public class LoginActivity extends Activity implements ILoginView {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        
+    }
+
     @OnClick(R.id.btn_logIn)
     public void login(View view) {
 

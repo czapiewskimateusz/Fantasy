@@ -31,4 +31,6 @@
     <string name="tab_team">Drużyna</string>
     <string name="league_code">Kod:</string>
     <string name="position">Poz:</string>
+    <string name="create">Stwórz</string>
+    <string name="join">Dołącz</string>
 </resources>
