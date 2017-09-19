@@ -25,27 +25,42 @@ public class LeagueFragment extends Fragment {
 
     private RecyclerView mRecyclerView;
 
-
+    /**
+     * Constructor
+     */
     public LeagueFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_league, container, false);
 
+        initRecyclerView(view);
+
+        return view;
+    }
+
+    /**
+     * Prepare RecyclerView for action
+     * @param view
+     */
+    private void initRecyclerView(View view){
+
         mRecyclerView = view.findViewById(R.id.rv_leagues);
+
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(view.getContext());
         mRecyclerView.setLayoutManager(linearLayoutManager);
 
         RVAdapter rvAdapter = new RVAdapter(League.initializeData());
         mRecyclerView.setAdapter(rvAdapter);
 
-        return view;
     }
 
+    /**
+     * RecyclerView Adapter class
+     */
     public class RVAdapter extends RecyclerView.Adapter<RVAdapter.LeagueViewHolder>{
 
         List<League> leagues;
@@ -78,7 +93,9 @@ public class LeagueFragment extends Fragment {
             super.onAttachedToRecyclerView(recyclerView);
         }
 
-
+        /**
+         * RecyclerView.ViewHolder class
+         */
         class LeagueViewHolder extends RecyclerView.ViewHolder {
             final CardView cv;
             final TextView leagueName;
