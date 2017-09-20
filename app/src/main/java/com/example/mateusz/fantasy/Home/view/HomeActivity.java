@@ -1,62 +1,82 @@
 package com.example.mateusz.fantasy.Home.view;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.MenuItem;
-import android.view.MotionEvent;
-import android.view.View;
 import android.widget.Toast;
 
+import com.example.mateusz.fantasy.Home.model.League;
+import com.example.mateusz.fantasy.Home.presenter.LeaguePresenter;
 import com.example.mateusz.fantasy.Home.view.Fragment.HomeFragment;
 import com.example.mateusz.fantasy.Home.view.Fragment.LeagueFragment;
 import com.example.mateusz.fantasy.Home.view.Fragment.TeamFragment;
-import com.example.mateusz.fantasy.Login.view.LoginActivity;
 import com.example.mateusz.fantasy.R;
 
-import butterknife.ButterKnife;
-import butterknife.OnClick;
+public class HomeActivity extends AppCompatActivity implements IHomeView,LeagueFragment.LeagueFragmentCallback {
 
-import static com.example.mateusz.fantasy.Login.view.LoginActivity.USER_ID_EXTRA;
+    /**
+     * Dependencies
+     */
+    private LeaguePresenter leaguePresenter;
 
-public class HomeActivity extends AppCompatActivity {
-
-    private BottomNavigationView bottomNavigationView;
-    private ViewPager viewPager;
-
-    private boolean doubleBackToExitPressedOnce = false;
+    private BottomNavigationView mBottomNavigationView;
+    private ViewPager mViewPager;
+    private boolean mDoubleBackToExitPressedOnce = false;
 
     /**
      * Fragments
      */
-    private LeagueFragment leagueFragment;
-    private HomeFragment homeFragment;
-    private TeamFragment teamFragment;
+    private LeagueFragment mLeagueFragment;
+    private HomeFragment mHomeFragment;
+    private TeamFragment mTeamFragment;
 
     MenuItem prevMenuItem;
 
     @Override
+    public void onLeagueRecyclerViewItemClicked(League league) {
+        leaguePresenter.startLeagueDetailActivity(league);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        viewPager = findViewById(R.id.viewpager);
-        bottomNavigationView = findViewById(R.id.bottom_navigation);
+        if (leaguePresenter == null) {
+            leaguePresenter = new LeaguePresenter();
+        }
 
-        bottomNavigationView.setOnNavigationItemSelectedListener(navigationItemSelectedListener);
+        mViewPager = findViewById(R.id.viewpager);
+        mBottomNavigationView = findViewById(R.id.bottom_navigation);
 
-        viewPager.addOnPageChangeListener(onPageChangeListener);
+        mBottomNavigationView.setOnNavigationItemSelectedListener(navigationItemSelectedListener);
 
-        setupViewPager(viewPager);
-        viewPager.setCurrentItem(1);
-        viewPager.setOffscreenPageLimit(2);
+        mViewPager.addOnPageChangeListener(onPageChangeListener);
+
+        setupViewPager(mViewPager);
+        mViewPager.setCurrentItem(1);
+        mViewPager.setOffscreenPageLimit(2);
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getPresenter().onViewAttached(this,this);
+    }
+
+    @Override
+    protected void onPause() {
+
+        super.onPause();
+        getPresenter().onViewDetached();
+
     }
 
 
@@ -68,13 +88,13 @@ public class HomeActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.action_league:
-                    viewPager.setCurrentItem(0);
+                    mViewPager.setCurrentItem(0);
                     break;
                 case R.id.action_home:
-                    viewPager.setCurrentItem(1);
+                    mViewPager.setCurrentItem(1);
                     break;
                 case R.id.action_team:
-                    viewPager.setCurrentItem(2);
+                    mViewPager.setCurrentItem(2);
                     break;
             }
             return false;
@@ -96,10 +116,10 @@ public class HomeActivity extends AppCompatActivity {
             if (prevMenuItem != null) {
                 prevMenuItem.setChecked(false);
             } else {
-                bottomNavigationView.getMenu().getItem(0).setChecked(false);
+                mBottomNavigationView.getMenu().getItem(0).setChecked(false);
             }
-            bottomNavigationView.getMenu().getItem(position).setChecked(true);
-            prevMenuItem = bottomNavigationView.getMenu().getItem(position);
+            mBottomNavigationView.getMenu().getItem(position).setChecked(true);
+            prevMenuItem = mBottomNavigationView.getMenu().getItem(position);
         }
 
         @Override
@@ -111,12 +131,15 @@ public class HomeActivity extends AppCompatActivity {
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        homeFragment = new HomeFragment();
-        leagueFragment = new LeagueFragment();
-        teamFragment = new TeamFragment();
-        adapter.addFragment(leagueFragment);
-        adapter.addFragment(homeFragment);
-        adapter.addFragment(teamFragment);
+        mHomeFragment = new HomeFragment();
+
+        mLeagueFragment = new LeagueFragment();
+        mLeagueFragment.setHomeActivityCallback(this);
+
+        mTeamFragment = new TeamFragment();
+        adapter.addFragment(mLeagueFragment);
+        adapter.addFragment(mHomeFragment);
+        adapter.addFragment(mTeamFragment);
         viewPager.setAdapter(adapter);
     }
 
@@ -124,20 +147,29 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
 
-        if (doubleBackToExitPressedOnce) {
+        if (mDoubleBackToExitPressedOnce) {
             finish();
             moveTaskToBack(true);
             return;
         }
 
-        this.doubleBackToExitPressedOnce = true;
+        this.mDoubleBackToExitPressedOnce = true;
         Toast.makeText(this, getString(R.string.back_button_close_app_warning), Toast.LENGTH_SHORT).show();
 
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                doubleBackToExitPressedOnce = false;
+                mDoubleBackToExitPressedOnce = false;
             }
         }, 2000);
+    }
+
+    @Override
+    public void startLeagueDetailActivity(Intent intent) {
+        startActivity(intent);
+    }
+
+    public LeaguePresenter getPresenter() {
+        return leaguePresenter;
     }
 }

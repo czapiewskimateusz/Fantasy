@@ -1,12 +1,9 @@
 package com.example.mateusz.fantasy.Login.view;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -43,7 +40,7 @@ public class LoginActivity extends Activity implements ILoginView {
     @BindView(R.id.tv_errorPassword)
     TextView mTvErrorPassword;
 
-    private static LoginPresenter sPresenter;
+    private LoginPresenter sPresenter;
 
 
     @Override
@@ -59,14 +56,14 @@ public class LoginActivity extends Activity implements ILoginView {
 
         Intent intent = getIntent();
         String email = intent.getStringExtra(PUT_EMAIL_EXTRA);
-        if (email!=null){
+        if (email != null) {
             mEtEmail.setText(email);
         }
 
         SharedPreferences sharedPreferences = getSharedPreferences(PREFS_NAME, 0);
-        int id = sharedPreferences.getInt(USER_ID_EXTRA,0);
+        int id = sharedPreferences.getInt(USER_ID_EXTRA, 0);
 
-        if (id>0){
+        if (id > 0) {
             intent = new Intent(this, HomeActivity.class);
             startActivity(intent);
         }
@@ -75,7 +72,7 @@ public class LoginActivity extends Activity implements ILoginView {
     @Override
     protected void onResume() {
         super.onResume();
-        getPresenter().onViewAttached(this,this);
+        getPresenter().onViewAttached(this, this);
     }
 
     @Override
@@ -88,7 +85,7 @@ public class LoginActivity extends Activity implements ILoginView {
 
     @Override
     public void onBackPressed() {
-        
+
     }
 
     @OnClick(R.id.btn_logIn)
@@ -97,6 +94,7 @@ public class LoginActivity extends Activity implements ILoginView {
         String email = mEtEmail.getText().toString();
         String password = mEtPassword.getText().toString();
         getPresenter().login(email, password);
+
     }
 
     @Override
@@ -128,15 +126,17 @@ public class LoginActivity extends Activity implements ILoginView {
 
     @Override
     public void clearErrors() {
+
         mTvErrorEmail.setText("");
         mTvErrorPassword.setText("");
         mTvError.setText("");
+
     }
 
     @Override
     public void showProgress(boolean show) {
 
-        if (show){
+        if (show) {
             mPbLoadingIndicator.setVisibility(View.VISIBLE);
         } else {
             mPbLoadingIndicator.setVisibility(View.INVISIBLE);
@@ -144,10 +144,12 @@ public class LoginActivity extends Activity implements ILoginView {
 
     }
 
-    @OnClick (R.id.tv_register)
-    public void register(){
+    @OnClick(R.id.tv_register)
+    public void register() {
+
         Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);
+
     }
 
     public LoginPresenter getPresenter() {
