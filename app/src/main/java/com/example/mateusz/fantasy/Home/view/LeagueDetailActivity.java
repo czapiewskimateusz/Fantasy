@@ -73,10 +73,10 @@ public class LeagueDetailActivity extends AppCompatActivity {
 
                 Intent sendIntent = new Intent();
                 sendIntent.setAction(Intent.ACTION_SEND);
-                sendIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.share_league_text) + mTvCode.getText().toString());
+                sendIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.share_league_text_pt1) + " \""+mTvLeagueName.getText().toString()+"\"" + getString(R.string.share_league_text_pt2) + mTvCode.getText().toString());
                 sendIntent.setType("text/plain");
                 startActivity(sendIntent);
-                
+
             }
 
         });

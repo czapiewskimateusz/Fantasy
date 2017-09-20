@@ -49,6 +49,7 @@
     <string name="create">Create</string>
     <string name="join">Join</string>
     <string name="number_of_players">Players:</string>
-    <string name="share_league_text">Your friend invited you to join Fantasy League, here\'s the code: </string>
+    <string name="share_league_text_pt1">Your friend invited you to join Fantasy League:</string>
+    <string name="share_league_text_pt2">, here\'s the code:</string>
 
 </resources>
