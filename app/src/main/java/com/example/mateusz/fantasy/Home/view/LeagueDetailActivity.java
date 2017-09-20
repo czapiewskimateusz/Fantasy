@@ -3,6 +3,8 @@ package com.example.mateusz.fantasy.Home.view;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.mateusz.fantasy.Home.model.League;
@@ -30,6 +32,8 @@ public class LeagueDetailActivity extends AppCompatActivity {
     TextView mTvCode;
     @BindView(R.id.tv_number_of_users)
     TextView mTvNumberOfPlayers;
+    @BindView(R.id.iv_share)
+    ImageView mIvShare;
 
 
     @Override
@@ -61,5 +65,20 @@ public class LeagueDetailActivity extends AppCompatActivity {
         mTvRanking.setText(Integer.toString(league.getUserPosition()));
         mTvCode.setText(league.getCode());
         mTvNumberOfPlayers.setText(Integer.toString(league.getNumberOfPlayers()));
+
+        mIvShare.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+
+                Intent sendIntent = new Intent();
+                sendIntent.setAction(Intent.ACTION_SEND);
+                sendIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.share_league_text) + mTvCode.getText().toString());
+                sendIntent.setType("text/plain");
+                startActivity(sendIntent);
+                
+            }
+
+        });
     }
 }

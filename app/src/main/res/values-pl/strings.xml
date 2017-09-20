@@ -34,4 +34,5 @@
     <string name="create">Stwórz</string>
     <string name="join">Dołącz</string>
     <string name="number_of_players">Graczy:</string>
+    <string name="share_league_text">Twój przyjaciel zaprosił Cię do ligi fantasy, oto kod:</string>
 </resources>

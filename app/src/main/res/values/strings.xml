@@ -44,11 +44,11 @@
     <string name="user_successfully_created">User successfully created!</string>
     <string name="back_button_close_app_warning">Click one more time to close the app</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
     <string name="position">Pos:</string>
     <string name="create">Create</string>
     <string name="join">Join</string>
     <string name="number_of_players">Players:</string>
+    <string name="share_league_text">Your friend invited you to join Fantasy League, here\'s the code: </string>
 
 </resources>
