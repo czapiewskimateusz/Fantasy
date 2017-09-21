@@ -1,6 +1,5 @@
 package com.example.mateusz.fantasy.Home.view;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
@@ -10,14 +9,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.example.mateusz.fantasy.Home.model.League;
+
 import com.example.mateusz.fantasy.Home.presenter.LeaguePresenter;
 import com.example.mateusz.fantasy.Home.view.Fragment.HomeFragment;
 import com.example.mateusz.fantasy.Home.view.Fragment.LeagueFragment;
 import com.example.mateusz.fantasy.Home.view.Fragment.TeamFragment;
 import com.example.mateusz.fantasy.R;
+import com.example.mateusz.fantasy.Utils.ZoomOutPageTransformer;
 
-public class HomeActivity extends AppCompatActivity implements IHomeView,LeagueFragment.LeagueFragmentCallback {
+public class HomeActivity extends AppCompatActivity implements IHomeView/*,LeagueFragment.LeagueFragmentCallback*/ {
 
     /**
      * Dependencies
@@ -28,19 +28,10 @@ public class HomeActivity extends AppCompatActivity implements IHomeView,LeagueF
     private ViewPager mViewPager;
     private boolean mDoubleBackToExitPressedOnce = false;
 
-    /**
-     * Fragments
-     */
-    private LeagueFragment mLeagueFragment;
-    private HomeFragment mHomeFragment;
-    private TeamFragment mTeamFragment;
+
 
     MenuItem prevMenuItem;
 
-    @Override
-    public void onLeagueRecyclerViewItemClicked(League league) {
-        leaguePresenter.startLeagueDetailActivity(league);
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -129,18 +120,27 @@ public class HomeActivity extends AppCompatActivity implements IHomeView,LeagueF
 
     };
 
+    /**
+     * Method to instantiate ViewPager with fragments
+     * @param viewPager viewPager to instantiate
+     */
     private void setupViewPager(ViewPager viewPager) {
+
+         LeagueFragment mLeagueFragment;
+         HomeFragment mHomeFragment;
+         TeamFragment mTeamFragment;
+
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         mHomeFragment = new HomeFragment();
 
         mLeagueFragment = new LeagueFragment();
-        mLeagueFragment.setHomeActivityCallback(this);
 
         mTeamFragment = new TeamFragment();
         adapter.addFragment(mLeagueFragment);
         adapter.addFragment(mHomeFragment);
         adapter.addFragment(mTeamFragment);
         viewPager.setAdapter(adapter);
+        viewPager.setPageTransformer(true, new ZoomOutPageTransformer());
     }
 
 
@@ -148,8 +148,7 @@ public class HomeActivity extends AppCompatActivity implements IHomeView,LeagueF
     public void onBackPressed() {
 
         if (mDoubleBackToExitPressedOnce) {
-            finish();
-            moveTaskToBack(true);
+            finishAffinity();
             return;
         }
 
@@ -162,11 +161,6 @@ public class HomeActivity extends AppCompatActivity implements IHomeView,LeagueF
                 mDoubleBackToExitPressedOnce = false;
             }
         }, 2000);
-    }
-
-    @Override
-    public void startLeagueDetailActivity(Intent intent) {
-        startActivity(intent);
     }
 
     public LeaguePresenter getPresenter() {

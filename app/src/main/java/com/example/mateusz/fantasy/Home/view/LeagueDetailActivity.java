@@ -3,12 +3,18 @@ package com.example.mateusz.fantasy.Home.view;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.mateusz.fantasy.Home.model.League;
+import com.example.mateusz.fantasy.Home.model.UserRank;
+import com.example.mateusz.fantasy.Home.presenter.RVLeagueDetailsAdapter;
 import com.example.mateusz.fantasy.R;
+
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -49,6 +55,8 @@ public class LeagueDetailActivity extends AppCompatActivity {
 
         initializeView();
 
+        initializeRecyclerView();
+
 
     }
 
@@ -60,11 +68,14 @@ public class LeagueDetailActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Initialize view with data form intent
+     */
     private void initializeView(){
         mTvLeagueName.setText(league.getName());
-        mTvRanking.setText(Integer.toString(league.getUserPosition()));
+        mTvRanking.setText(String.format(Locale.ENGLISH,"%d",league.getUserPosition()));
         mTvCode.setText(league.getCode());
-        mTvNumberOfPlayers.setText(Integer.toString(league.getNumberOfPlayers()));
+        mTvNumberOfPlayers.setText(String.format(Locale.ENGLISH,"%d",league.getNumberOfPlayers()));
 
         mIvShare.setOnClickListener(new View.OnClickListener() {
 
@@ -80,5 +91,22 @@ public class LeagueDetailActivity extends AppCompatActivity {
             }
 
         });
+    }
+
+    /**
+     * Initialize RecyclerView
+     */
+    private void initializeRecyclerView(){
+
+        RecyclerView recyclerView;
+        recyclerView = findViewById(R.id.rv_league_detail);
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(linearLayoutManager);
+
+        RVLeagueDetailsAdapter rvLeagueDetailsAdapter = new RVLeagueDetailsAdapter(UserRank.initializeData());
+        recyclerView.setAdapter(rvLeagueDetailsAdapter);
+
+        recyclerView.setHasFixedSize(true);
     }
 }
