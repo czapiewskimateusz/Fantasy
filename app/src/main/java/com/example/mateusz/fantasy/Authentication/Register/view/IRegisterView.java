@@ -1,4 +1,4 @@
-package com.example.mateusz.fantasy.Register.view;
+package com.example.mateusz.fantasy.Authentication.Register.view;
 
 /**
  * Created by Mateusz on 19.08.2017.

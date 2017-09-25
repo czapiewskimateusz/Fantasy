@@ -1,4 +1,4 @@
-package com.example.mateusz.fantasy.Login.view;
+package com.example.mateusz.fantasy.Authentication.Login.view;
 
 /**
  * Created by Mateusz on 15.08.2017.

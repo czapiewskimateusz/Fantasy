@@ -1,4 +1,4 @@
-package com.example.mateusz.fantasy.Register.model;
+package com.example.mateusz.fantasy.Authentication.Register.model;
 
 import retrofit2.Call;
 import retrofit2.http.Field;

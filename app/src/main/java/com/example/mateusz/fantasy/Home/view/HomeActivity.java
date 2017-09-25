@@ -131,14 +131,15 @@ public class HomeActivity extends AppCompatActivity implements IHomeView/*,Leagu
          TeamFragment mTeamFragment;
 
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+
         mHomeFragment = new HomeFragment();
-
         mLeagueFragment = new LeagueFragment();
-
         mTeamFragment = new TeamFragment();
+
         adapter.addFragment(mLeagueFragment);
         adapter.addFragment(mHomeFragment);
         adapter.addFragment(mTeamFragment);
+
         viewPager.setAdapter(adapter);
         viewPager.setPageTransformer(true, new ZoomOutPageTransformer());
     }

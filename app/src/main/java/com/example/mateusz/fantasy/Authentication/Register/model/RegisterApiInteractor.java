@@ -1,6 +1,6 @@
-package com.example.mateusz.fantasy.Register.model;
+package com.example.mateusz.fantasy.Authentication.Register.model;
 
-import com.example.mateusz.fantasy.Register.presenter.RegisterPresenter;
+import com.example.mateusz.fantasy.Authentication.Register.presenter.RegisterPresenter;
 import static com.example.mateusz.fantasy.Utils.NetworkUtils.getRetrofitInstance;
 
 import retrofit2.Call;

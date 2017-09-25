@@ -1,4 +1,4 @@
-package com.example.mateusz.fantasy.Register.view;
+package com.example.mateusz.fantasy.Authentication.Register.view;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -9,9 +9,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.mateusz.fantasy.Login.view.LoginActivity;
+import com.example.mateusz.fantasy.Authentication.Login.view.LoginActivity;
 import com.example.mateusz.fantasy.R;
-import com.example.mateusz.fantasy.Register.presenter.RegisterPresenter;
+import com.example.mateusz.fantasy.Authentication.Register.presenter.RegisterPresenter;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

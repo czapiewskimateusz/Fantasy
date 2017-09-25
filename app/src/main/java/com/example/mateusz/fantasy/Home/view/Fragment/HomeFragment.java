@@ -6,18 +6,19 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.example.mateusz.fantasy.Login.view.LoginActivity;
+import com.example.mateusz.fantasy.Authentication.Login.view.LoginActivity;
 import com.example.mateusz.fantasy.R;
 
 
 import static android.content.Context.MODE_PRIVATE;
-import static com.example.mateusz.fantasy.Login.view.LoginActivity.PREFS_NAME;
-import static com.example.mateusz.fantasy.Login.view.LoginActivity.USER_ID_EXTRA;
+import static com.example.mateusz.fantasy.Authentication.Login.view.LoginActivity.PREFS_NAME;
+import static com.example.mateusz.fantasy.Authentication.Login.view.LoginActivity.USER_ID_EXTRA;
 
 
 public class HomeFragment extends Fragment{
@@ -41,6 +42,7 @@ public class HomeFragment extends Fragment{
     }
 
     private void initButton() {
+
         mBtnLogOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -54,5 +56,6 @@ public class HomeFragment extends Fragment{
 
             }
         });
+
     }
 }

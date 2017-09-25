@@ -1,7 +1,7 @@
-package com.example.mateusz.fantasy.Login.model;
+package com.example.mateusz.fantasy.Authentication.Login.model;
 
 
-import com.example.mateusz.fantasy.Login.presenter.LoginPresenter;
+import com.example.mateusz.fantasy.Authentication.Login.presenter.LoginPresenter;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -9,8 +9,8 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 
 
-import static com.example.mateusz.fantasy.Login.presenter.LoginPresenter.ERROR_TAG_INCORRECT_PASSWORD;
-import static com.example.mateusz.fantasy.Login.presenter.LoginPresenter.ERROR_TAG_USER_DOESNT_EXIST;
+import static com.example.mateusz.fantasy.Authentication.Login.presenter.LoginPresenter.ERROR_TAG_INCORRECT_PASSWORD;
+import static com.example.mateusz.fantasy.Authentication.Login.presenter.LoginPresenter.ERROR_TAG_USER_DOESNT_EXIST;
 import static com.example.mateusz.fantasy.Utils.NetworkUtils.getRetrofitInstance;
 
 

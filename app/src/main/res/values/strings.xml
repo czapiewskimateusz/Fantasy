@@ -10,6 +10,7 @@
     <string name="password_repeat_hint">Repeat password</string>
     <string name="firstname_hint">First name</string>
     <string name="lastname_hint">Last name</string>
+    <string name="league_code_hint">League code</string>
 
     //Buttons
     <string name="login_button">Log in</string>

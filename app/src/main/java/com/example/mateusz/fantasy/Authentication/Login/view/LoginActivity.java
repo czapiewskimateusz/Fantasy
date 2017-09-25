@@ -1,4 +1,4 @@
-package com.example.mateusz.fantasy.Login.view;
+package com.example.mateusz.fantasy.Authentication.Login.view;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -10,9 +10,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 
-import com.example.mateusz.fantasy.Login.presenter.LoginPresenter;
+import com.example.mateusz.fantasy.Authentication.Login.presenter.LoginPresenter;
 import com.example.mateusz.fantasy.R;
-import com.example.mateusz.fantasy.Register.view.RegisterActivity;
+import com.example.mateusz.fantasy.Authentication.Register.view.RegisterActivity;
 import com.example.mateusz.fantasy.Home.view.HomeActivity;
 
 
@@ -20,7 +20,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-import static com.example.mateusz.fantasy.Register.view.RegisterActivity.PUT_EMAIL_EXTRA;
+import static com.example.mateusz.fantasy.Authentication.Register.view.RegisterActivity.PUT_EMAIL_EXTRA;
 
 public class LoginActivity extends Activity implements ILoginView {
 

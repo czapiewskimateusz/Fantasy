@@ -1,4 +1,4 @@
-package com.example.mateusz.fantasy.Login.model;
+package com.example.mateusz.fantasy.Authentication.Login.model;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

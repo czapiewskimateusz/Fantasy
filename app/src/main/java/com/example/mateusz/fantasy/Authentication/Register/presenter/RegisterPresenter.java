@@ -1,11 +1,11 @@
-package com.example.mateusz.fantasy.Register.presenter;
+package com.example.mateusz.fantasy.Authentication.Register.presenter;
 
 import android.content.Context;
 import android.text.TextUtils;
 
 import com.example.mateusz.fantasy.R;
-import com.example.mateusz.fantasy.Register.model.RegisterApiInteractor;
-import com.example.mateusz.fantasy.Register.view.IRegisterView;
+import com.example.mateusz.fantasy.Authentication.Register.model.RegisterApiInteractor;
+import com.example.mateusz.fantasy.Authentication.Register.view.IRegisterView;
 
 public class RegisterPresenter {
 

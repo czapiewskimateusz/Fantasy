@@ -36,4 +36,5 @@
     <string name="number_of_players">Graczy:</string>
     <string name="share_league_text_pt1">Twój przyjaciel zaprosił Cię do dołączenia do jego ligi Fantasy:</string>
     <string name="share_league_text_pt2">, oto kod:</string>
+    <string name="league_code_hint">Kod ligi</string>
 </resources>

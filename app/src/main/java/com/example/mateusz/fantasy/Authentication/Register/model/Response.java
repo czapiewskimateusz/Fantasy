@@ -1,4 +1,4 @@
-package com.example.mateusz.fantasy.Register.model;
+package com.example.mateusz.fantasy.Authentication.Register.model;
 
 /**
  * Created by Mateusz on 19.08.2017.

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.mateusz.fantasy.Register.view.RegisterActivity">
+    tools:context=".Authentication.Register.view.RegisterActivity">
 
     <EditText
         style="@style/MyEditText"
