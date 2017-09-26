@@ -2,17 +2,16 @@ package com.example.mateusz.fantasy.Utils;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.DialogFragment;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 
 import com.example.mateusz.fantasy.R;
 
-public class LeagueDialog extends android.support.v4.app.DialogFragment {
+public class JoinLeagueDialog extends android.support.v4.app.DialogFragment {
 
     LeagueDialogListener mListener;
 
@@ -23,18 +22,17 @@ public class LeagueDialog extends android.support.v4.app.DialogFragment {
     }
 
     public interface LeagueDialogListener {
-        public void onDialogPositiveClick(LeagueDialog dialog);
-        public void onDialogNegativeClick(LeagueDialog dialog);
+        public void onDialogPositiveClick(JoinLeagueDialog dialog);
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
         try {
-            mListener = (LeagueDialogListener) context;
-        } catch (ClassCastException e){
-            throw new ClassCastException(context.toString() + "Must implement LeagueDialogListener");
+            mListener = (LeagueDialogListener) getTargetFragment();
+        } catch (ClassCastException e) {
+            throw new ClassCastException("Calling Fragment must implement LeagueDialogListener");
         }
     }
 
@@ -47,18 +45,17 @@ public class LeagueDialog extends android.support.v4.app.DialogFragment {
 
         final View view = inflater.inflate(R.layout.dialog_join_league, null);
         builder.setView(view)
-                .setTitle(getActivity().getText(R.string.join_league_dialog_title))
-                .setPositiveButton("join", new DialogInterface.OnClickListener() {
+                .setPositiveButton(getText(R.string.join), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
 
                         EditText eTjoinLeague = view.findViewById(R.id.et_join_league);
                         code = eTjoinLeague.getText().toString();
-                        mListener.onDialogPositiveClick(LeagueDialog.this);
+                        mListener.onDialogPositiveClick(JoinLeagueDialog.this);
 
                     }
                 })
-                .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                .setNegativeButton(getText(R.string.cancel), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         dialogInterface.dismiss();

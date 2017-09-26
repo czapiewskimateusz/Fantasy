@@ -1,7 +1,6 @@
 package com.example.mateusz.fantasy.Home.presenter;
 
-import android.content.Context;
-import com.example.mateusz.fantasy.Home.view.IHomeView;
+import android.util.Log;
 
 
 public class LeaguePresenter {
@@ -11,8 +10,7 @@ public class LeaguePresenter {
     /**
      * Dependencies
      */
-    private IHomeView view;
-    private Context context;
+   // private ILeagueView view;
     //TODO private final LoginApiInteractor mApiinteractor;
 
     /**
@@ -24,18 +22,12 @@ public class LeaguePresenter {
 
     }
 
-    public void onViewAttached(Context context, IHomeView view) {
 
-        this.view = view;
-        this.context = context;
-
+    public void joinLeague(String leagueCode){
+        Log.d("PRESENTER LUKS CODE", leagueCode);
     }
 
-    public void onViewDetached() {
-
-        view = null;
-        context = null;
-
+    public void createLeague(String leagueName){
+        Log.d("PRESENTER LUKS NAME", leagueName);
     }
-
 }

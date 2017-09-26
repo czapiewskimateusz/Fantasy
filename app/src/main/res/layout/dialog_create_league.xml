@@ -7,26 +7,26 @@
 
 
     <EditText
-        android:id="@+id/et_join_league"
+        android:id="@+id/et_create_league"
         style="@style/MyEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="24dp"
         android:ems="10"
-        android:hint="@string/league_code_hint"
-        android:inputType="number"
-        android:maxLength="6"
+        android:hint="@string/league_name"
+        android:inputType="text"
+        android:maxLength="30"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_create_league_dialog_title"
-        app:layout_constraintVertical_bias="0.0"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/tv_create_league_dialog_title"
@@ -35,7 +35,7 @@
         android:background="@color/colorPrimary"
         android:fontFamily="LATO"
         android:padding="8dp"
-        android:text="@string/join_league_dialog_title"
+        android:text="@string/create_league_dialog_title"
         android:textAlignment="center"
         android:textAppearance="@android:style/TextAppearance.Material"
         android:textColor="@color/colorWhite"

@@ -10,7 +10,7 @@
         android:id="@+id/cardView"
         style="@style/CardViewStyle"
         android:layout_width="0dp"
-        android:layout_height="160dp"
+        android:layout_height="170dp"
         android:layout_marginTop="0dp"
         app:cardUseCompatPadding="true"
         app:layout_constraintHorizontal_bias="0.0"
@@ -55,8 +55,8 @@
 
             <ImageView
                 android:id="@+id/iv_league_logo_detail"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
                 android:layout_marginTop="8dp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
@@ -114,7 +114,7 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="7dp"
+                android:layout_marginTop="8dp"
                 android:text="@string/league_code"
                 android:textSize="12sp"
                 app:layout_constraintLeft_toLeftOf="@+id/tv_league_name_detail"
@@ -151,8 +151,9 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_league_detail"
-        android:layout_width="0dp"
-        android:layout_height="373dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"

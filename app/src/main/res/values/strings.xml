@@ -11,6 +11,7 @@
     <string name="firstname_hint">First name</string>
     <string name="lastname_hint">Last name</string>
     <string name="league_code_hint">League code</string>
+    <string name="league_name">League name</string>
 
     //Buttons
     <string name="login_button">Log in</string>
@@ -44,12 +45,14 @@
     //Dialogs
     <string name="user_successfully_created">User successfully created!</string>
     <string name="back_button_close_app_warning">Click one more time to close the app</string>
-    <string name="join_league_dialog_title">Join league</string>
+    <string name="join_league_dialog_title">JOIN LEAGUE</string>
+    <string name="create_league_dialog_title">CREATE LEAGUE</string>
 
 
     <string name="position">Pos:</string>
     <string name="create">Create</string>
     <string name="join">Join</string>
+    <string name="cancel">Cancel</string>
     <string name="number_of_players">Players:</string>
     <string name="share_league_text_pt1">Your friend invited you to join Fantasy League:</string>
     <string name="share_league_text_pt2">, here\'s the code:</string>

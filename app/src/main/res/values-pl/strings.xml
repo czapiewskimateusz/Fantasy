@@ -37,5 +37,8 @@
     <string name="share_league_text_pt1">Twój przyjaciel zaprosił Cię do dołączenia do jego ligi Fantasy:</string>
     <string name="share_league_text_pt2">, oto kod:</string>
     <string name="league_code_hint">Kod ligi</string>
-    <string name="join_league_dialog_title">Dołącz do ligi</string>
+    <string name="join_league_dialog_title">DOŁĄCZ DO LIGI</string>
+    <string name="cancel">Anuluj</string>
+    <string name="create_league_dialog_title">STWÓRZ LIGĘ</string>
+    <string name="league_name">Nazwa ligi</string>
 </resources>

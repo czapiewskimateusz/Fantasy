@@ -1,6 +1,5 @@
 package com.example.mateusz.fantasy.Home.view;
 
-import android.app.DialogFragment;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
@@ -16,15 +15,9 @@ import com.example.mateusz.fantasy.Home.view.Fragment.HomeFragment;
 import com.example.mateusz.fantasy.Home.view.Fragment.LeagueFragment;
 import com.example.mateusz.fantasy.Home.view.Fragment.TeamFragment;
 import com.example.mateusz.fantasy.R;
-import com.example.mateusz.fantasy.Utils.LeagueDialog;
 import com.example.mateusz.fantasy.Utils.ZoomOutPageTransformer;
 
-public class HomeActivity extends AppCompatActivity implements IHomeView/*,LeagueFragment.LeagueFragmentCallback*/ {
-
-    /**
-     * Dependencies
-     */
-    private LeaguePresenter leaguePresenter;
+public class HomeActivity extends AppCompatActivity /*,LeagueFragment.LeagueFragmentCallback*/ {
 
     private BottomNavigationView mBottomNavigationView;
     private ViewPager mViewPager;
@@ -41,10 +34,6 @@ public class HomeActivity extends AppCompatActivity implements IHomeView/*,Leagu
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        if (leaguePresenter == null) {
-            leaguePresenter = new LeaguePresenter();
-        }
-
         mViewPager = findViewById(R.id.viewpager);
         mBottomNavigationView = findViewById(R.id.bottom_navigation);
 
@@ -59,19 +48,47 @@ public class HomeActivity extends AppCompatActivity implements IHomeView/*,Leagu
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        getPresenter().onViewAttached(this,this);
+    public void onBackPressed() {
+
+        if (mDoubleBackToExitPressedOnce) {
+            finishAffinity();
+            return;
+        }
+
+        this.mDoubleBackToExitPressedOnce = true;
+        Toast.makeText(this, getString(R.string.back_button_close_app_warning), Toast.LENGTH_SHORT).show();
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mDoubleBackToExitPressedOnce = false;
+            }
+        }, 2000);
     }
 
-    @Override
-    protected void onPause() {
+    /**
+     * Method to instantiate ViewPager with fragments
+     * @param viewPager viewPager to instantiate
+     */
+    private void setupViewPager(ViewPager viewPager) {
 
-        super.onPause();
-        getPresenter().onViewDetached();
+         LeagueFragment mLeagueFragment;
+         HomeFragment mHomeFragment;
+         TeamFragment mTeamFragment;
 
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+
+        mHomeFragment = new HomeFragment();
+        mLeagueFragment = new LeagueFragment();
+        mTeamFragment = new TeamFragment();
+
+        adapter.addFragment(mLeagueFragment);
+        adapter.addFragment(mHomeFragment);
+        adapter.addFragment(mTeamFragment);
+
+        viewPager.setAdapter(adapter);
+        viewPager.setPageTransformer(true, new ZoomOutPageTransformer());
     }
-
 
     /**
      * BottomNavigationView listener
@@ -122,52 +139,4 @@ public class HomeActivity extends AppCompatActivity implements IHomeView/*,Leagu
 
     };
 
-
-    /**
-     * Method to instantiate ViewPager with fragments
-     * @param viewPager viewPager to instantiate
-     */
-    private void setupViewPager(ViewPager viewPager) {
-
-         LeagueFragment mLeagueFragment;
-         HomeFragment mHomeFragment;
-         TeamFragment mTeamFragment;
-
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-
-        mHomeFragment = new HomeFragment();
-        mLeagueFragment = new LeagueFragment();
-        mTeamFragment = new TeamFragment();
-
-        adapter.addFragment(mLeagueFragment);
-        adapter.addFragment(mHomeFragment);
-        adapter.addFragment(mTeamFragment);
-
-        viewPager.setAdapter(adapter);
-        viewPager.setPageTransformer(true, new ZoomOutPageTransformer());
-    }
-
-
-    @Override
-    public void onBackPressed() {
-
-        if (mDoubleBackToExitPressedOnce) {
-            finishAffinity();
-            return;
-        }
-
-        this.mDoubleBackToExitPressedOnce = true;
-        Toast.makeText(this, getString(R.string.back_button_close_app_warning), Toast.LENGTH_SHORT).show();
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                mDoubleBackToExitPressedOnce = false;
-            }
-        }, 2000);
-    }
-
-    public LeaguePresenter getPresenter() {
-        return leaguePresenter;
-    }
 }
