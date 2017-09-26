@@ -44,6 +44,7 @@
     //Dialogs
     <string name="user_successfully_created">User successfully created!</string>
     <string name="back_button_close_app_warning">Click one more time to close the app</string>
+    <string name="join_league_dialog_title">Join league</string>
 
 
     <string name="position">Pos:</string>

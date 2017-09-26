@@ -1,5 +1,6 @@
 package com.example.mateusz.fantasy.Home.view;
 
+import android.app.DialogFragment;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
@@ -15,6 +16,7 @@ import com.example.mateusz.fantasy.Home.view.Fragment.HomeFragment;
 import com.example.mateusz.fantasy.Home.view.Fragment.LeagueFragment;
 import com.example.mateusz.fantasy.Home.view.Fragment.TeamFragment;
 import com.example.mateusz.fantasy.R;
+import com.example.mateusz.fantasy.Utils.LeagueDialog;
 import com.example.mateusz.fantasy.Utils.ZoomOutPageTransformer;
 
 public class HomeActivity extends AppCompatActivity implements IHomeView/*,LeagueFragment.LeagueFragmentCallback*/ {
@@ -119,6 +121,7 @@ public class HomeActivity extends AppCompatActivity implements IHomeView/*,Leagu
         }
 
     };
+
 
     /**
      * Method to instantiate ViewPager with fragments

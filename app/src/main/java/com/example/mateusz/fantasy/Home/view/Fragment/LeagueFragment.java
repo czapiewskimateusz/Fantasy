@@ -2,6 +2,7 @@ package com.example.mateusz.fantasy.Home.view.Fragment;
 
 
 
+import android.app.DialogFragment;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
@@ -18,8 +19,10 @@ import android.widget.Button;
 import com.example.mateusz.fantasy.Home.model.League;
 import com.example.mateusz.fantasy.Home.presenter.RVLeagueAdapter;
 import com.example.mateusz.fantasy.R;
-import com.example.mateusz.fantasy.Utils.Dialog;
+import com.example.mateusz.fantasy.Utils.DialogUtils;
+import com.example.mateusz.fantasy.Utils.LeagueDialog;
 
+import static com.example.mateusz.fantasy.Utils.DialogUtils.getLeagueJoinDialog;
 
 
 public class LeagueFragment extends Fragment{
@@ -54,10 +57,9 @@ public class LeagueFragment extends Fragment{
         mBtnJoinLeague.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Dialog.getAlertDialog(getActivity()).show();
+                getLeagueJoinDialog(getActivity()).show();
             }
         });
-        ;
 
     }
 

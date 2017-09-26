@@ -7,39 +7,39 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.mateusz.fantasy.R;
 
-/**
- * Created by Mateusz on 25.09.2017.
- */
 
-public class Dialog {
+public class DialogUtils {
 
-    public static AlertDialog getAlertDialog(final Activity activity) {
+    public static AlertDialog getLeagueJoinDialog(final Activity activity) {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 
         LayoutInflater inflater = activity.getLayoutInflater();
 
-        builder.setView(inflater.inflate(R.layout.dialog_join_league, null))
-                .setTitle("Join league")
+        final View view = inflater.inflate(R.layout.dialog_join_league, null);
+        builder.setView(view)
+                .setTitle(activity.getText(R.string.join_league_dialog_title))
                 .setPositiveButton("join", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        Toast.makeText(activity, "Clicked POSITIVE", Toast.LENGTH_SHORT).show();
+                        EditText eTjoinLeague = view.findViewById(R.id.et_join_league);
+                        String code = eTjoinLeague.getText().toString();
+                        Toast.makeText(activity, code, Toast.LENGTH_SHORT).show();
                     }
                 })
                 .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        Toast.makeText(activity, "Clicked NEGATIVE", Toast.LENGTH_SHORT).show();
+                         dialogInterface.dismiss();
                     }
                 });
 
-        AlertDialog dialog = builder.create();
-
-        return dialog;
+        return builder.create();
     }
 }

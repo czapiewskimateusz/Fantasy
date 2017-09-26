@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -48,7 +49,9 @@ public class LoginActivity extends Activity implements ILoginView {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
         ButterKnife.bind(this);
+        setKeyboardListener();
 
         if (sPresenter == null) {
             sPresenter = new LoginPresenter();
@@ -89,7 +92,7 @@ public class LoginActivity extends Activity implements ILoginView {
     }
 
     @OnClick(R.id.btn_logIn)
-    public void login(View view) {
+    public void login() {
 
         String email = mEtEmail.getText().toString();
         String password = mEtPassword.getText().toString();
@@ -149,6 +152,22 @@ public class LoginActivity extends Activity implements ILoginView {
 
         Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);
+
+    }
+
+    private void setKeyboardListener(){
+
+        mEtPassword.setOnKeyListener(new View.OnKeyListener() {
+
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                    login();
+                    return true;
+                }
+                return false;
+            }
+
+        });
 
     }
 
