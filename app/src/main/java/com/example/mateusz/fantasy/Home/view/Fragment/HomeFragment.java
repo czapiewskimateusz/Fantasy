@@ -13,20 +13,28 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.example.mateusz.fantasy.Authentication.Login.view.LoginActivity;
+import com.example.mateusz.fantasy.Home.presenter.HomePresenter;
 import com.example.mateusz.fantasy.R;
 
 
 import static android.content.Context.MODE_PRIVATE;
 import static com.example.mateusz.fantasy.Authentication.Login.view.LoginActivity.PREFS_NAME;
+import static com.example.mateusz.fantasy.Authentication.Login.view.LoginActivity.TOTAL_POINTS_EXTRA;
 import static com.example.mateusz.fantasy.Authentication.Login.view.LoginActivity.USER_ID_EXTRA;
 
 
 public class HomeFragment extends Fragment{
 
+    private HomePresenter mHomePresenter;
+
     private Button mBtnLogOut;
+    private int mUserId;
 
     public HomeFragment() {
         // Required empty public constructor
+        if (mHomePresenter == null) {
+            mHomePresenter = new HomePresenter();
+        }
     }
 
 
@@ -35,9 +43,11 @@ public class HomeFragment extends Fragment{
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_home, container, false);
+
         mBtnLogOut = view.findViewById(R.id.btn_logout);
         initButton();
 
+        mUserId = getActivity().getIntent().getIntExtra(USER_ID_EXTRA,0);
         return view;
     }
 
@@ -49,6 +59,7 @@ public class HomeFragment extends Fragment{
 
                 SharedPreferences.Editor editor = getActivity().getSharedPreferences(PREFS_NAME, MODE_PRIVATE).edit();
                 editor.putInt(USER_ID_EXTRA, 0);
+                editor.putInt(TOTAL_POINTS_EXTRA,0);
                 editor.apply();
 
                 Intent intent = new Intent(getActivity(), LoginActivity.class);
@@ -57,5 +68,9 @@ public class HomeFragment extends Fragment{
             }
         });
 
+    }
+
+    private void initUser(){
+        mHomePresenter.initUser(mUserId);
     }
 }

@@ -32,7 +32,6 @@ public class RVLeagueAdapter extends RecyclerView.Adapter<RVLeagueAdapter.League
 
     private List<League> mLeagues;
 
-
     private Context context;
 
     /**
@@ -58,9 +57,9 @@ public class RVLeagueAdapter extends RecyclerView.Adapter<RVLeagueAdapter.League
     public void onBindViewHolder(LeagueViewHolder holder, int position) {
 
         holder.tvLeagueName.setText(mLeagues.get(position).getName());
-        holder.tvUserPosition.setText(String.format(Locale.ENGLISH,"%d",mLeagues.get(position).getUserPosition()));
+        holder.tvUserPosition.setText(String.format(Locale.ENGLISH,"%d",mLeagues.get(position).getRank()));
         holder.tvLeagueCode.setText(mLeagues.get(position).getCode());
-        holder.leagueId = mLeagues.get(position).getLeague_id();
+        holder.leagueId = mLeagues.get(position).getLeagueId();
         holder.numberOfPlayers = mLeagues.get(position).getNumberOfPlayers();
 
     }

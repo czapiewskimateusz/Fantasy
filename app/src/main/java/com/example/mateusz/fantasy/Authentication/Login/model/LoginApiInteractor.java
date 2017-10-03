@@ -42,7 +42,7 @@ public class LoginApiInteractor implements Callback<User> {
         if (response.isSuccessful()) {
 
             if (response.body().getPassword().equals(password)){
-                loginPresenter.onLoginSuccessful(response.body().getUserId());
+                loginPresenter.onLoginSuccessful(response.body().getUserId(),response.body().getTotalPoints());
             } else {
                 loginPresenter.onLoginUnsuccessful(ERROR_TAG_INCORRECT_PASSWORD);
             }
@@ -54,7 +54,7 @@ public class LoginApiInteractor implements Callback<User> {
     @Override
     public void onFailure(Call<User> call, Throwable t) {
 
-        loginPresenter.onLoginUnsuccessful(ERROR_TAG_USER_DOESNT_EXIST);
+        loginPresenter.onConnectionError();
 
     }
 }

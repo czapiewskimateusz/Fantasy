@@ -65,10 +65,10 @@ public class LoginPresenter {
     }
 
 
-    public void onLoginSuccessful(int userId) {
+    public void onLoginSuccessful(int userId, int totalPoints) {
 
         view.showProgress(false);
-        view.onLoginSuccess(userId);
+        view.onLoginSuccess(userId, totalPoints);
 
     }
 
@@ -84,6 +84,11 @@ public class LoginPresenter {
 
         }
 
+    }
+
+    public void onConnectionError(){
+        view.showProgress(false);
+        view.onConnectionError();
     }
 
 

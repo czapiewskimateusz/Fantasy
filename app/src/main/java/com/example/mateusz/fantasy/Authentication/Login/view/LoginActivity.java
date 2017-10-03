@@ -22,10 +22,12 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import static com.example.mateusz.fantasy.Authentication.Register.view.RegisterActivity.PUT_EMAIL_EXTRA;
+import static com.example.mateusz.fantasy.Utils.NetworkUtils.showConnectionErrorToast;
 
 public class LoginActivity extends Activity implements ILoginView {
 
     public static final String USER_ID_EXTRA = "user_id";
+    public static final String TOTAL_POINTS_EXTRA= "total_points";
     public static final String PREFS_NAME = "com.example.mateusz.fantasy";
 
     @BindView(R.id.et_email)
@@ -68,6 +70,7 @@ public class LoginActivity extends Activity implements ILoginView {
 
         if (id > 0) {
             intent = new Intent(this, HomeActivity.class);
+            intent.putExtra(USER_ID_EXTRA,id);
             startActivity(intent);
         }
     }
@@ -101,10 +104,11 @@ public class LoginActivity extends Activity implements ILoginView {
     }
 
     @Override
-    public void onLoginSuccess(int userId) {
+    public void onLoginSuccess(int userId, int totalPoints) {
 
         SharedPreferences.Editor editor = getSharedPreferences(PREFS_NAME, MODE_PRIVATE).edit();
         editor.putInt(USER_ID_EXTRA, userId);
+        editor.putInt(TOTAL_POINTS_EXTRA,totalPoints);
         editor.apply();
 
         Intent intent = new Intent(this, HomeActivity.class);
@@ -169,6 +173,11 @@ public class LoginActivity extends Activity implements ILoginView {
 
         });
 
+    }
+
+    @Override
+    public void onConnectionError() {
+        showConnectionErrorToast(this);
     }
 
     public LoginPresenter getPresenter() {

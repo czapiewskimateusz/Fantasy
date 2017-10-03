@@ -73,7 +73,7 @@ public class LeagueDetailActivity extends AppCompatActivity {
      */
     private void initializeView(){
         mTvLeagueName.setText(league.getName());
-        mTvRanking.setText(String.format(Locale.ENGLISH,"%d",league.getUserPosition()));
+        mTvRanking.setText(String.format(Locale.ENGLISH,"%d",league.getRank()));
         mTvCode.setText(league.getCode());
         mTvNumberOfPlayers.setText(String.format(Locale.ENGLISH,"%d",league.getNumberOfPlayers()));
 

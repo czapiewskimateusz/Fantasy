@@ -1,5 +1,10 @@
 package com.example.mateusz.fantasy.Utils;
 
+import android.app.Activity;
+import android.content.Context;
+import android.widget.Toast;
+
+import com.example.mateusz.fantasy.R;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -25,6 +30,10 @@ public class NetworkUtils {
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create(getGson()))
                 .build();
+    }
+
+    public static void showConnectionErrorToast(Activity activity){
+        Toast.makeText(activity, activity.getString(R.string.connection_error),Toast.LENGTH_SHORT).show();
     }
 
 }

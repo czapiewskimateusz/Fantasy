@@ -8,7 +8,7 @@ public interface ILoginView {
 
     static final String TAG = ILoginView.class.getName();
 
-    void onLoginSuccess(int userId);
+    void onLoginSuccess(int userId, int totalPoints);
 
     void onEmailError(String error);
 
@@ -19,4 +19,6 @@ public interface ILoginView {
     void clearErrors();
 
     void showProgress(boolean show);
+
+    void onConnectionError();
 }
