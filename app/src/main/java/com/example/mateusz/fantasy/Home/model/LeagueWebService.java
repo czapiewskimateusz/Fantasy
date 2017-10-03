@@ -12,4 +12,8 @@ public interface LeagueWebService {
     @FormUrlEncoded
     @POST("getuserleagues.php")
     Call<LeagueJsonResponse> getLeagues(@Field("user_id") int userId, @Field("user_points") int totalPoints);
+
+    @FormUrlEncoded
+    @POST("getleaguedetail.php")
+    Call<LeagueDetailJsonResponse> getUsersRank(@Field("league_id") int leagueId);
 }

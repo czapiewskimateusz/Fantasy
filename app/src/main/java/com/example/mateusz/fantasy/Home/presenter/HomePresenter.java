@@ -3,10 +3,6 @@ package com.example.mateusz.fantasy.Home.presenter;
 import com.example.mateusz.fantasy.Authentication.Login.model.User;
 import com.example.mateusz.fantasy.Home.model.HomeApiInteractor;
 
-/**
- * Created by Ready4s on 03.10.2017.
- */
-
 public class HomePresenter {
 
     private final HomeApiInteractor mHomeApiInteractor;

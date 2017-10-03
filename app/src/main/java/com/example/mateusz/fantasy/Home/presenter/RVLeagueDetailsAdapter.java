@@ -1,6 +1,8 @@
 package com.example.mateusz.fantasy.Home.presenter;
 
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,11 +17,12 @@ import java.util.Locale;
 public class RVLeagueDetailsAdapter extends RecyclerView.Adapter<RVLeagueDetailsAdapter.LeagueDetailViewHolder> {
 
     private List<UserRank> mUsers;
+    private int userId;
 
-    public RVLeagueDetailsAdapter(List<UserRank> mUsers) {
+    public RVLeagueDetailsAdapter(List<UserRank> mUsers, int userId) {
 
         this.mUsers = mUsers;
-
+        this.userId = userId;
     }
 
     @Override
@@ -38,6 +41,11 @@ public class RVLeagueDetailsAdapter extends RecyclerView.Adapter<RVLeagueDetails
         holder.tvTeamName.setText(mUsers.get(position).getTeamName());
         holder.tvUserName.setText(mUsers.get(position).getFirstName()+" "+mUsers.get(position).getLastName());
 
+        Log.d("USERID",Integer.toString(userId) + " " + mUsers.get(position).getUserId());
+        if (userId == mUsers.get(position).getUserId()){
+            holder.tvRank.setTextColor(Color.parseColor("#00ca58"));
+        }
+
     }
 
     @Override
@@ -46,7 +54,7 @@ public class RVLeagueDetailsAdapter extends RecyclerView.Adapter<RVLeagueDetails
     }
 
     /**
-     * RVLeagueDetailsAdapter's vievholder c;ass
+     * RVLeagueDetailsAdapter's viewholder class
      */
     class LeagueDetailViewHolder extends RecyclerView.ViewHolder {
 
