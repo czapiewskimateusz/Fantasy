@@ -13,7 +13,7 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".Authentication.Login.view.LoginActivity"
+            android:name=".authentication.login.view.LoginActivity"
             android:screenOrientation="portrait"
             android:theme="@style/FullScreenTheme">
             <intent-filter>
@@ -24,21 +24,21 @@
         </activity>
 
         <activity
-            android:name=".Home.view.HomeActivity"
+            android:name=".home.view.HomeActivity"
             android:screenOrientation="portrait"
             android:theme="@style/HomeTheme"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan"/>
 
         <activity
-            android:name=".Authentication.Register.view.RegisterActivity"
+            android:name=".authentication.register.view.RegisterActivity"
             android:label="@string/register_label"
-            android:parentActivityName=".Authentication.Login.view.LoginActivity"
+            android:parentActivityName=".authentication.login.view.LoginActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"/>
 
-        <activity android:name=".Home.view.LeagueDetailActivity"
+        <activity android:name=".home.view.LeagueDetailActivity"
             android:screenOrientation="portrait"
-            android:parentActivityName=".Home.view.HomeActivity"
+            android:parentActivityName=".home.view.HomeActivity"
             android:label=""
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
     </application>

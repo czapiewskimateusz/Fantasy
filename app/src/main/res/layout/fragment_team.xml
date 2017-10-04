@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.mateusz.fantasy.Home.view.Fragment.TeamFragment">
+    tools:context="com.example.mateusz.fantasy.home.view.fragment.TeamFragment">
 
 <android.support.v4.widget.NestedScrollView
     android:layout_width="368dp"
