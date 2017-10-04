@@ -36,11 +36,11 @@ public class RVLeagueAdapter extends RecyclerView.Adapter<RVLeagueAdapter.League
 
     /**
      * Constructor
-     * @param persons list of persons
+     * @param leagues list of persons
      */
-    public RVLeagueAdapter(List<League> persons, Context context) {
+    public RVLeagueAdapter(List<League> leagues, Context context) {
 
-        this.mLeagues = persons;
+        this.mLeagues = leagues;
         this.context = context;
 
     }
@@ -67,6 +67,17 @@ public class RVLeagueAdapter extends RecyclerView.Adapter<RVLeagueAdapter.League
     @Override
     public int getItemCount() {
         return mLeagues.size();
+    }
+
+
+    /**
+     * Reload view with new data
+     * @param leagues new data
+     */
+    public void refreshData(List<League> leagues){
+        mLeagues.clear();
+        mLeagues.addAll(leagues);
+        notifyDataSetChanged();
     }
 
 

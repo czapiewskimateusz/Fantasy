@@ -4,7 +4,6 @@ import com.example.mateusz.fantasy.Home.presenter.LeaguePresenter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -17,10 +16,19 @@ public class LeagueApiInteractor implements Callback<LeagueJsonResponse> {
 
     private LeaguePresenter mLeaguePresenter;
 
+    /**
+     * Constructor
+     * @param mLeaguePresenter presenter callback
+     */
     public LeagueApiInteractor(LeaguePresenter mLeaguePresenter) {
         this.mLeaguePresenter = mLeaguePresenter;
     }
 
+    /**
+     * Get all leagues in which user participates
+     * @param userId user's id
+     * @param totalPoints user's score
+     */
     public void getUserLeagues(int userId, int totalPoints){
 
         Retrofit retrofit = getRetrofitInstance();
@@ -44,6 +52,8 @@ public class LeagueApiInteractor implements Callback<LeagueJsonResponse> {
 
     @Override
     public void onFailure(Call<LeagueJsonResponse> call, Throwable t) {
+
         mLeaguePresenter.onGetLeaguesFailure(t.getMessage());
+
     }
 }

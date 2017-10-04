@@ -1,6 +1,8 @@
 package com.example.mateusz.fantasy.Home.presenter;
 
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -41,7 +43,6 @@ public class RVLeagueDetailsAdapter extends RecyclerView.Adapter<RVLeagueDetails
         holder.tvTeamName.setText(mUsers.get(position).getTeamName());
         holder.tvUserName.setText(mUsers.get(position).getFirstName()+" "+mUsers.get(position).getLastName());
 
-        Log.d("USERID",Integer.toString(userId) + " " + mUsers.get(position).getUserId());
         if (userId == mUsers.get(position).getUserId()){
             holder.tvRank.setTextColor(Color.parseColor("#00ca58"));
         }

@@ -10,4 +10,8 @@ public interface ILeagueView {
     public void showProgress(boolean show);
 
     public void presentLeagues(List<League> leagues);
+
+    public void onJoinLeagueSuccess();
+
+    public void onJoinLeagueFailure();
 }

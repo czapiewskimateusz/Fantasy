@@ -9,12 +9,14 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
 import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 
 import com.example.mateusz.fantasy.Authentication.Login.view.LoginActivity;
@@ -40,6 +42,10 @@ public class LeagueFragment extends Fragment implements ILeagueView, JoinLeagueD
 
     private LeaguePresenter mLeaguePresenter;
 
+    private int mUserId;
+    private int mTotalPoints;
+    RVLeagueAdapter rvAdapter = null;
+
     /**
      * Constructor
      */
@@ -60,10 +66,10 @@ public class LeagueFragment extends Fragment implements ILeagueView, JoinLeagueD
         initRecyclerView(view);
 
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences(LoginActivity.PREFS_NAME,0);
-        int id = sharedPreferences.getInt(USER_ID_EXTRA,0);
-        int totalPoints = sharedPreferences.getInt(TOTAL_POINTS_EXTRA,0);
+        mUserId = sharedPreferences.getInt(USER_ID_EXTRA,0);
+        mTotalPoints = sharedPreferences.getInt(TOTAL_POINTS_EXTRA,0);
 
-        mLeaguePresenter.getUserLeagues(id,totalPoints);
+        mLeaguePresenter.getUserLeagues(mUserId,mTotalPoints);
 
         return view;
     }
@@ -71,7 +77,7 @@ public class LeagueFragment extends Fragment implements ILeagueView, JoinLeagueD
     @Override
     public void onDialogPositiveClick(JoinLeagueDialog dialog) {
 
-        mLeaguePresenter.joinLeague(dialog.getCode());
+        mLeaguePresenter.joinLeague(dialog.getCode(),mUserId);
 
     }
 
@@ -98,10 +104,32 @@ public class LeagueFragment extends Fragment implements ILeagueView, JoinLeagueD
     @Override
     public void presentLeagues(List<League> leagues) {
 
-        RVLeagueAdapter rvAdapter = new RVLeagueAdapter(leagues, getContext());
-        mRecyclerView.setAdapter(rvAdapter);
+        if (rvAdapter == null){
+            rvAdapter = new RVLeagueAdapter(leagues, getContext());
+            mRecyclerView.setAdapter(rvAdapter);
+        } else {
+            rvAdapter.refreshData(leagues);
+            Log.d("POSZLO",leagues.toString());
+        }
 
     }
+
+
+    @Override
+    public void onJoinLeagueSuccess() {
+
+        mLeaguePresenter.getUserLeagues(mUserId,mTotalPoints);
+
+    }
+
+    @Override
+    public void onJoinLeagueFailure() {
+
+        Toast.makeText(getContext(),"LIGA NIE ISTNIEJE",Toast.LENGTH_SHORT).show();
+        //TODO add snackbar here to show error
+
+    }
+
 
     private void initButtons(View view) {
 

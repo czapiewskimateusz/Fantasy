@@ -1,5 +1,7 @@
 package com.example.mateusz.fantasy.Home.model;
 
+import com.example.mateusz.fantasy.Authentication.Register.model.Response;
+
 import java.util.List;
 
 import retrofit2.Call;
@@ -16,4 +18,8 @@ public interface LeagueWebService {
     @FormUrlEncoded
     @POST("getleaguedetail.php")
     Call<LeagueDetailJsonResponse> getUsersRank(@Field("league_id") int leagueId);
+
+    @FormUrlEncoded
+    @POST("joinLeague.php")
+    Call<Response> joinLeague(@Field("user_id") int userId,@Field("league_code") String leagueCode);
 }
