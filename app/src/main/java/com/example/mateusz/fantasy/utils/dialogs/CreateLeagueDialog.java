@@ -49,7 +49,7 @@ public class CreateLeagueDialog extends DialogFragment {
 
         final View view = inflater.inflate(R.layout.dialog_create_league, null);
         builder.setView(view)
-                .setPositiveButton(getText(R.string.join), new DialogInterface.OnClickListener() {
+                .setPositiveButton(getText(R.string.create), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
 

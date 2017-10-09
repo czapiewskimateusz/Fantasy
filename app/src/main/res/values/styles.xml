@@ -10,7 +10,7 @@
     </style>
     
     <style name="MyActionBar" parent="android:Theme.Material.Light.DarkActionBar">
-        <item name="android:textColor">@color/colorPrimaryDark</item>
+        <item name="android:textColor">@color/colorPrimaryLight</item>
     </style>
 
     <style name="FullScreenTheme" parent="android:Theme.Material.Light.NoActionBar">
