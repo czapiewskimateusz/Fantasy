@@ -1,30 +1,48 @@
 package com.example.mateusz.fantasy.home.view;
 
+import android.animation.Animator;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.ColorRes;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v4.view.animation.LinearOutSlowInInterpolator;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.animation.OvershootInterpolator;
 import android.widget.Toast;
 
 
+import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
+import com.aurelhubert.ahbottomnavigation.AHBottomNavigationAdapter;
+import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
+import com.aurelhubert.ahbottomnavigation.AHBottomNavigationViewPager;
 import com.example.mateusz.fantasy.home.view.fragment.HomeFragment;
 import com.example.mateusz.fantasy.home.view.fragment.LeagueFragment;
 import com.example.mateusz.fantasy.home.view.fragment.TeamFragment;
 import com.example.mateusz.fantasy.R;
 import com.example.mateusz.fantasy.utils.ZoomOutPageTransformer;
 
+import java.util.ArrayList;
+
 public class HomeActivity extends AppCompatActivity /*,LeagueFragment.LeagueFragmentCallback*/ {
 
-    private BottomNavigationView mBottomNavigationView;
-    private ViewPager mViewPager;
+    private Fragment mCurrentFragment;
+    private ViewPagerAdapter mViewPagerAdapter;
+    private ArrayList<AHBottomNavigationItem> bottomNavigationItems = new ArrayList<>();
+
+    //UI
+    private AHBottomNavigationViewPager viewPager;
+    private AHBottomNavigation bottomNavigation;
+    private FloatingActionButton floatingActionButton;
+
+
     private boolean mDoubleBackToExitPressedOnce = false;
-
-
-
-    MenuItem prevMenuItem;
 
 
     @Override
@@ -33,16 +51,127 @@ public class HomeActivity extends AppCompatActivity /*,LeagueFragment.LeagueFrag
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        mViewPager = findViewById(R.id.viewpager);
-        mBottomNavigationView = findViewById(R.id.bottom_navigation);
+        initUi();
+    }
 
-        mBottomNavigationView.setOnNavigationItemSelectedListener(navigationItemSelectedListener);
+    private void initUi(){
 
-        mViewPager.addOnPageChangeListener(onPageChangeListener);
+        bottomNavigation = findViewById(R.id.bottom_navigation);
+        viewPager = findViewById(R.id.view_pager);
+        floatingActionButton = findViewById(R.id.floating_action_button);
 
-        setupViewPager(mViewPager);
-        mViewPager.setCurrentItem(1);
-        mViewPager.setOffscreenPageLimit(2);
+        AHBottomNavigationItem item1 = new AHBottomNavigationItem(R.string.tab_league, R.drawable.ic_league, R.color.colorAccentBlue);
+        AHBottomNavigationItem item2 = new AHBottomNavigationItem(R.string.tab_home, R.drawable.ic_home, R.color.colorAccentRed);
+        AHBottomNavigationItem item3 = new AHBottomNavigationItem(R.string.tab_team, R.drawable.ic_team, R.color.colorAccentYellow);
+
+        bottomNavigationItems.add(item1);
+        bottomNavigationItems.add(item2);
+        bottomNavigationItems.add(item3);
+
+        bottomNavigation.addItems(bottomNavigationItems);
+
+        bottomNavigation.setDefaultBackgroundColor(fetchColor(R.color.colorPrimary));
+        bottomNavigation.setAccentColor(fetchColor(R.color.colorWhite));
+
+
+        bottomNavigation.manageFloatingActionButtonBehavior(floatingActionButton);
+
+        bottomNavigation.setOnTabSelectedListener(new AHBottomNavigation.OnTabSelectedListener() {
+            @Override
+            public boolean onTabSelected(int position, boolean wasSelected) {
+
+                if (mCurrentFragment == null){
+                    mCurrentFragment = mViewPagerAdapter.getCurrentFragment();
+                }
+
+                viewPager.setCurrentItem(position,false);
+
+                if (mCurrentFragment == null){
+                    return true;
+                }
+
+                mCurrentFragment = mViewPagerAdapter.getCurrentFragment();
+
+                if (position == 0){
+
+                    floatingActionButton.setVisibility(View.VISIBLE);
+                    floatingActionButton.setAlpha(0f);
+                    floatingActionButton.setScaleX(0f);
+                    floatingActionButton.setScaleY(0f);
+                    floatingActionButton.animate()
+                            .alpha(1)
+                            .scaleX(1)
+                            .scaleY(1)
+                            .setDuration(300)
+                            .setInterpolator(new OvershootInterpolator())
+                            .setListener(new Animator.AnimatorListener() {
+                                @Override
+                                public void onAnimationStart(Animator animation) {
+
+                                }
+
+                                @Override
+                                public void onAnimationEnd(Animator animation) {
+                                    floatingActionButton.animate()
+                                            .setInterpolator(new LinearOutSlowInInterpolator())
+                                            .start();
+                                }
+
+                                @Override
+                                public void onAnimationCancel(Animator animation) {
+
+                                }
+
+                                @Override
+                                public void onAnimationRepeat(Animator animation) {
+
+                                }
+                            })
+                            .start();
+
+                } else {
+                    if (floatingActionButton.getVisibility() == View.VISIBLE) {
+                        floatingActionButton.animate()
+                                .alpha(0)
+                                .scaleX(0)
+                                .scaleY(0)
+                                .setDuration(300)
+                                .setInterpolator(new LinearOutSlowInInterpolator())
+                                .setListener(new Animator.AnimatorListener() {
+                                    @Override
+                                    public void onAnimationStart(Animator animation) {
+
+                                    }
+
+                                    @Override
+                                    public void onAnimationEnd(Animator animation) {
+                                        floatingActionButton.setVisibility(View.GONE);
+                                    }
+
+                                    @Override
+                                    public void onAnimationCancel(Animator animation) {
+                                        floatingActionButton.setVisibility(View.GONE);
+                                    }
+
+                                    @Override
+                                    public void onAnimationRepeat(Animator animation) {
+
+                                    }
+                                })
+                                .start();
+                    }
+
+                }
+
+                return true;
+            }
+        });
+
+        viewPager.setOffscreenPageLimit(2);
+        mViewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
+        viewPager.setAdapter(mViewPagerAdapter);
+
+        mCurrentFragment = mViewPagerAdapter.getCurrentFragment();
 
     }
 
@@ -65,77 +194,8 @@ public class HomeActivity extends AppCompatActivity /*,LeagueFragment.LeagueFrag
         }, 2000);
     }
 
-    /**
-     * Method to instantiate ViewPager with fragments
-     * @param viewPager viewPager to instantiate
-     */
-    private void setupViewPager(ViewPager viewPager) {
-
-         LeagueFragment mLeagueFragment;
-         HomeFragment mHomeFragment;
-         TeamFragment mTeamFragment;
-
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-
-        mHomeFragment = new HomeFragment();
-        mLeagueFragment = new LeagueFragment();
-        mTeamFragment = new TeamFragment();
-
-        adapter.addFragment(mLeagueFragment);
-        adapter.addFragment(mHomeFragment);
-        adapter.addFragment(mTeamFragment);
-
-        viewPager.setAdapter(adapter);
-        viewPager.setPageTransformer(true, new ZoomOutPageTransformer());
+    private int fetchColor(@ColorRes int color) {
+        return ContextCompat.getColor(this, color);
     }
-
-    /**
-     * BottomNavigationView listener
-     */
-    private BottomNavigationView.OnNavigationItemSelectedListener navigationItemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            switch (item.getItemId()) {
-                case R.id.action_league:
-                    mViewPager.setCurrentItem(0);
-                    break;
-                case R.id.action_home:
-                    mViewPager.setCurrentItem(1);
-                    break;
-                case R.id.action_team:
-                    mViewPager.setCurrentItem(2);
-                    break;
-            }
-            return false;
-        }
-    };
-
-    /**
-     * ViewPagerChangeListener
-     */
-    private ViewPager.OnPageChangeListener onPageChangeListener = new ViewPager.OnPageChangeListener() {
-
-        @Override
-        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-        }
-
-        @Override
-        public void onPageSelected(int position) {
-            if (prevMenuItem != null) {
-                prevMenuItem.setChecked(false);
-            } else {
-                mBottomNavigationView.getMenu().getItem(0).setChecked(false);
-            }
-            mBottomNavigationView.getMenu().getItem(position).setChecked(true);
-            prevMenuItem = mBottomNavigationView.getMenu().getItem(position);
-        }
-
-        @Override
-        public void onPageScrollStateChanged(int state) {
-
-        }
-
-    };
 
 }

@@ -186,7 +186,7 @@ public class LeagueFragment extends Fragment implements ILeagueView, JoinLeagueD
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(view.getContext()) {
             @Override
             public boolean canScrollVertically() {
-                return false;
+                return true;
             }
         };
         mRecyclerView.setLayoutManager(linearLayoutManager);
