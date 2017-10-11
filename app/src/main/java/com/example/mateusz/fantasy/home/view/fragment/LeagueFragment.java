@@ -3,18 +3,22 @@ package com.example.mateusz.fantasy.home.view.fragment;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.design.widget.BaseTransientBottomBar;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -29,16 +33,20 @@ import com.example.mateusz.fantasy.utils.dialogs.JoinLeagueDialog;
 
 import java.util.List;
 
+
 import static com.example.mateusz.fantasy.authentication.login.view.LoginActivity.TOTAL_POINTS_EXTRA;
 import static com.example.mateusz.fantasy.authentication.login.view.LoginActivity.USER_ID_EXTRA;
 
 
-public class LeagueFragment extends Fragment implements ILeagueView, JoinLeagueDialog.LeagueDialogListener, CreateLeagueDialog.CreateLeagueDialogListener {
+public class LeagueFragment extends Fragment implements ILeagueView, JoinLeagueDialog.LeagueDialogListener, CreateLeagueDialog.CreateLeagueDialogListener, ParentFragment {
 
+    //UI
     private Button mBtnCreateLeague;
     private Button mBtnJoinLeague;
+    private FloatingActionButton mFabTestSnackbbar;
     private RecyclerView mRecyclerView;
-    private ProgressBar mProgressBar;
+    public ProgressBar mProgressBar;
+    public FrameLayout fragmentContainer;
 
     private LeaguePresenter mLeaguePresenter;
 
@@ -62,8 +70,20 @@ public class LeagueFragment extends Fragment implements ILeagueView, JoinLeagueD
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_league, container, false);
 
-        initButtons(view);
+        //initButtons(view);
         initRecyclerView(view);
+
+        mFabTestSnackbbar = view.findViewById(R.id.fab);
+        mFabTestSnackbbar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(getView(),"SNACKBAR postaje", BaseTransientBottomBar.LENGTH_LONG).show();
+            }
+        });
+
+
+        mProgressBar = view.findViewById(R.id.pB_league_fragment);
+        fragmentContainer = view.findViewById(R.id.league_fragment_container);
 
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences(LoginActivity.PREFS_NAME, 0);
         mUserId = sharedPreferences.getInt(USER_ID_EXTRA, 0);
@@ -137,42 +157,68 @@ public class LeagueFragment extends Fragment implements ILeagueView, JoinLeagueD
 
     }
 
-    private void initButtons(View view) {
 
-        mProgressBar = view.findViewById(R.id.pB_league_fragment);
+//    private void initButtons(View view) {
+//
+//        mProgressBar = view.findViewById(R.id.pB_league_fragment);
+//
+////        mBtnCreateLeague = view.findViewById(R.id.btn_create_league);
+////        mBtnCreateLeague.setOnClickListener(new View.OnClickListener() {
+////            @Override
+////            public void onClick(View view) {
+////
+////                final AlphaAnimation buttonClick = new AlphaAnimation(1F, 0.8F);
+////                view.startAnimation(buttonClick);
+////
+////                CreateLeagueDialog createLeagueDialog = new CreateLeagueDialog();
+////                createLeagueDialog.setTargetFragment(LeagueFragment.this, 0);
+////                createLeagueDialog.show(getFragmentManager(), "league_join_dialog");
+////
+////            }
+////        });
+//
+////        mBtnJoinLeague = view.findViewById(R.id.btn_join_league);
+////        mBtnJoinLeague.setOnClickListener(new View.OnClickListener() {
+////            @Override
+////            public void onClick(View view) {
+////
+////                final AlphaAnimation buttonClick = new AlphaAnimation(1F, 0.8F);
+////                view.startAnimation(buttonClick);
+////
+////                JoinLeagueDialog leagueDialog = new JoinLeagueDialog();
+////                leagueDialog.setTargetFragment(LeagueFragment.this, 0);
+////                leagueDialog.show(getFragmentManager(), "league_join_dialog");
+////
+////            }
+////        });
+//
+//    }
 
-        mBtnCreateLeague = view.findViewById(R.id.btn_create_league);
-        mBtnCreateLeague.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+    /**
+     * Called when a fragment will be displayed
+     */
+    @Override
+    public void willBeDisplayed() {
 
-                final AlphaAnimation buttonClick = new AlphaAnimation(1F, 0.8F);
-                view.startAnimation(buttonClick);
-
-                CreateLeagueDialog createLeagueDialog = new CreateLeagueDialog();
-                createLeagueDialog.setTargetFragment(LeagueFragment.this, 0);
-                createLeagueDialog.show(getFragmentManager(), "league_join_dialog");
-
-            }
-        });
-
-        mBtnJoinLeague = view.findViewById(R.id.btn_join_league);
-        mBtnJoinLeague.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                final AlphaAnimation buttonClick = new AlphaAnimation(1F, 0.8F);
-                view.startAnimation(buttonClick);
-
-                JoinLeagueDialog leagueDialog = new JoinLeagueDialog();
-                leagueDialog.setTargetFragment(LeagueFragment.this, 0);
-                leagueDialog.show(getFragmentManager(), "league_join_dialog");
-
-            }
-        });
+        if (fragmentContainer != null) {
+            Animation fadeIn = AnimationUtils.loadAnimation(getActivity(), R.anim.fade_in);
+            fragmentContainer.startAnimation(fadeIn);
+        }
 
     }
 
+    /**
+     * Called when a fragment will be hidden
+     */
+    @Override
+    public void willBeHidden() {
+
+        if (fragmentContainer != null) {
+            Animation fadeOut = AnimationUtils.loadAnimation(getActivity(), R.anim.fade_out);
+            fragmentContainer.startAnimation(fadeOut);
+        }
+
+    }
 
     /**
      * Prepare RecyclerView for action
@@ -182,13 +228,7 @@ public class LeagueFragment extends Fragment implements ILeagueView, JoinLeagueD
     private void initRecyclerView(View view) {
 
         mRecyclerView = view.findViewById(R.id.rv_leagues);
-
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(view.getContext()) {
-            @Override
-            public boolean canScrollVertically() {
-                return true;
-            }
-        };
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(view.getContext());
         mRecyclerView.setLayoutManager(linearLayoutManager);
 
     }

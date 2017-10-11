@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 
 import com.example.mateusz.fantasy.home.view.fragment.HomeFragment;
 import com.example.mateusz.fantasy.home.view.fragment.LeagueFragment;
+import com.example.mateusz.fantasy.home.view.fragment.ParentFragment;
 import com.example.mateusz.fantasy.home.view.fragment.TeamFragment;
 
 import java.util.ArrayList;
@@ -17,7 +18,7 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
 
     private final List<Fragment> fragments = new ArrayList<>();
 
-    private Fragment mCurrentFragment;
+    private ParentFragment mCurrentFragment;
 
     public ViewPagerAdapter(FragmentManager manager) {
         super(manager);
@@ -32,7 +33,7 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
     public void setPrimaryItem(ViewGroup container, int position, Object object) {
 
         if (getCurrentFragment() != object){
-            mCurrentFragment = (Fragment) object;
+            mCurrentFragment = (ParentFragment) object;
         }
 
         super.setPrimaryItem(container, position, object);
@@ -48,7 +49,7 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
         return fragments.size();
     }
 
-    public Fragment getCurrentFragment() {
+    public ParentFragment getCurrentFragment() {
         return mCurrentFragment;
     }
 }

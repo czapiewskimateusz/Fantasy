@@ -15,7 +15,7 @@
     <!--> Czubek </!-->
     <path android:fillColor="@color/colorPrimary" android:pathData="M416.1,0L95.9,0c-9.1,0 -16.4,7.4 -16.4,16.4L79.4,53h353.1L432.6,16.4C432.6,7.4 425.2,0 416.1,0"/>
     <!--> Gwiazdka </!-->
-    <path android:fillColor="@color/colorSecondary" android:pathData="M256,97.1l23.2,44.1h47.4l-35.3,44.1l8.8,53l-44.1,-25.8l-44.1,25.8l8.8,-53l-35.3,-44.1h47.4L256,97.1z"/>
+    <path android:fillColor="@color/colorWhite" android:pathData="M256,97.1l23.2,44.1h47.4l-35.3,44.1l8.8,53l-44.1,-25.8l-44.1,25.8l8.8,-53l-35.3,-44.1h47.4L256,97.1z"/>
     <!--> Lewe ucho</!-->
     <path android:fillColor="@color/colorPrimary" android:pathData="M42.8,70.6h36.6v35.3L42.8,105.9c-4.1,0 -7.5,4.5 -7.5,8.6v80.1c0,21.5 11.5,41.8 29.9,52.8l16.3,9.8c3.4,19.8 10.9,38.2 21.8,54.1l-6.5,-3.7l-49.8,-29.9C18.1,260.3 0,228.5 0,194.6L0,114.6C0,91 19.3,70.6 42.8,70.6"/>
 </vector>
