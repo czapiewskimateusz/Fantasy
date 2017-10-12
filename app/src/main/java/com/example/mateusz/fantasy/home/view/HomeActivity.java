@@ -61,9 +61,9 @@ public class HomeActivity extends AppCompatActivity /*,LeagueFragment.LeagueFrag
         viewPager = findViewById(R.id.view_pager);
        // floatingActionButton = findViewById(R.id.floating_action_button);
 
-        AHBottomNavigationItem item1 = new AHBottomNavigationItem(R.string.tab_league, R.drawable.ic_league, R.color.colorAccentBlue);
-        AHBottomNavigationItem item2 = new AHBottomNavigationItem(R.string.tab_home, R.drawable.ic_home, R.color.colorAccentRed);
-        AHBottomNavigationItem item3 = new AHBottomNavigationItem(R.string.tab_team, R.drawable.ic_team, R.color.colorAccentYellow);
+        AHBottomNavigationItem item1 = new AHBottomNavigationItem(R.string.tab_league, R.drawable.ic_league, R.color.accent);
+        AHBottomNavigationItem item2 = new AHBottomNavigationItem(R.string.tab_home, R.drawable.ic_home, R.color.accent);
+        AHBottomNavigationItem item3 = new AHBottomNavigationItem(R.string.tab_team, R.drawable.ic_team, R.color.accent);
 
         bottomNavigationItems.add(item1);
         bottomNavigationItems.add(item2);
@@ -71,10 +71,10 @@ public class HomeActivity extends AppCompatActivity /*,LeagueFragment.LeagueFrag
 
         bottomNavigation.addItems(bottomNavigationItems);
 
-        bottomNavigation.setDefaultBackgroundColor(fetchColor(R.color.colorPrimary));
+        bottomNavigation.setDefaultBackgroundColor(fetchColor(R.color.primary));
+        bottomNavigation.setInactiveColor(fetchColor(R.color.light_grey));
         bottomNavigation.setAccentColor(fetchColor(R.color.colorWhite));
 
-       // bottomNavigation.manageFloatingActionButtonBehavior(floatingActionButton);
 
         bottomNavigation.setOnTabSelectedListener(new AHBottomNavigation.OnTabSelectedListener() {
             @Override

@@ -24,16 +24,18 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
             android:layout_marginStart="16dp"
+            android:layout_marginTop="0dp"
             android:background="@drawable/rounded_corner"
             android:fontFamily="LATO"
             android:padding="4dp"
+            android:textAlignment="textStart"
             android:textAppearance="@android:style/TextAppearance.Material.Subhead"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="12sp"
+            android:textColor="@color/colorWhite"
+            android:textSize="14sp"
+            android:textStyle="bold"
             app:layout_constraintLeft_toRightOf="@+id/iv_league_logo_detail"
-            tools:text="Liga Niezwykłych Gentelmanów"
             app:layout_constraintTop_toTopOf="@+id/iv_league_logo_detail"
-            android:layout_marginTop="0dp" />
+            tools:text="Liga Niezwykłych Gentelmanów" />
 
         <TextView
             android:id="@+id/tv_ranking"
@@ -80,7 +82,7 @@
             android:clickable="false"
             android:fontFamily="LATO"
             android:textAppearance="@android:style/TextAppearance.Material"
-            android:textColor="@color/colorPrimaryDark"
+            android:textColor="@color/primary_text"
             app:layout_constraintBottom_toBottomOf="@+id/tv_league_code_desc"
             app:layout_constraintLeft_toRightOf="@+id/tv_league_code_desc"
             app:layout_constraintTop_toTopOf="@+id/tv_league_code_desc"
@@ -88,8 +90,8 @@
 
         <ImageView
             android:id="@+id/iv_arrow_right"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:layout_width="48dp"
+            android:layout_height="49dp"
             android:layout_marginBottom="8dp"
             android:layout_marginRight="0dp"
             android:layout_marginTop="8dp"
@@ -98,7 +100,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            />
+            app:srcCompat="@drawable/ic_keyboard_arrow_right_48px" />
 
     </android.support.constraint.ConstraintLayout>
 </android.support.v7.widget.CardView>

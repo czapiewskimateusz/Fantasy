@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout
+    android:id="@+id/league_rank_container"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -8,28 +10,28 @@
 
     <TextView
         android:id="@+id/tv_user_rank"
-        android:layout_centerVertical="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginBottom="8dp"
         android:layout_marginStart="16dp"
-        android:textColor="@color/colorPrimaryDark"
-        app:layout_constraintLeft_toLeftOf="parent"
-        tools:text="152125"
-        app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="8dp"
+        android:textColor="@color/primary_text"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="8dp" />
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="152125" />
 
     <TextView
         android:id="@+id/tv_users_team_name"
-        android:layout_toEndOf="@+id/tv_user_rank"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/colorPrimaryDark"
-        android:textStyle="bold"
-        tools:text="AC Pajace"
         android:layout_marginStart="48dp"
-        android:layout_marginTop="8dp" />
+        android:layout_marginTop="8dp"
+        android:layout_toEndOf="@+id/tv_user_rank"
+        android:textColor="@color/primary_text"
+        android:textStyle="bold"
+        tools:text="AC Pajace" />
 
     <TextView
         android:id="@+id/tv_user_name"
@@ -45,14 +47,14 @@
         android:id="@+id/tv_total_points"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/colorPrimaryDark"
-        tools:text="1291"
-        android:layout_centerVertical="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="8dp"
+        android:layout_centerVertical="true"
         android:layout_marginBottom="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginRight="16dp" />
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/primary_text"
+        tools:text="1291" />
 
 
 

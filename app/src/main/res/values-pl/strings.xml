@@ -41,4 +41,6 @@
     <string name="cancel">Anuluj</string>
     <string name="create_league_dialog_title">STWÓRZ LIGĘ</string>
     <string name="league_name">Nazwa ligi</string>
+    <string name="create_league_error">Nie udało się stworzyć ligi, spróbuj ponownie</string>
+    <string name="join_league_error">Liga nie istnieje lub kod jest nieprawidłowy</string>
 </resources>

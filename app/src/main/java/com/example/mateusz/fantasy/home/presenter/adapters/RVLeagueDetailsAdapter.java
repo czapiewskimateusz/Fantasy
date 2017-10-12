@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.mateusz.fantasy.home.model.repo.UserRank;
@@ -41,7 +42,7 @@ public class RVLeagueDetailsAdapter extends RecyclerView.Adapter<RVLeagueDetails
         holder.tvUserName.setText(mUsers.get(position).getFirstName()+" "+mUsers.get(position).getLastName());
 
         if (userId == mUsers.get(position).getUserId()){
-            holder.tvRank.setTextColor(Color.parseColor("#00ca58"));
+            holder.container.setBackgroundColor(Color.parseColor("#CFD8DC"));
         }
 
     }
@@ -60,6 +61,7 @@ public class RVLeagueDetailsAdapter extends RecyclerView.Adapter<RVLeagueDetails
         final TextView tvTeamName;
         final TextView tvUserName;
         final TextView tvTotalPoints;
+        final RelativeLayout container;
 
 
         LeagueDetailViewHolder(View itemView) {
@@ -70,6 +72,7 @@ public class RVLeagueDetailsAdapter extends RecyclerView.Adapter<RVLeagueDetails
             tvTeamName = itemView.findViewById(R.id.tv_users_team_name);
             tvUserName = itemView.findViewById(R.id.tv_user_name);
             tvTotalPoints = itemView.findViewById(R.id.tv_total_points);
+            container = itemView.findViewById(R.id.league_rank_container);
 
         }
 

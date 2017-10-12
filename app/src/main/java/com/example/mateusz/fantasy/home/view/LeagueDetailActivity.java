@@ -17,6 +17,7 @@ import com.example.mateusz.fantasy.home.presenter.LeagueDetailPresenter;
 import com.example.mateusz.fantasy.home.presenter.adapters.RVLeagueDetailsAdapter;
 import com.example.mateusz.fantasy.R;
 
+import java.lang.reflect.Array;
 import java.util.List;
 import java.util.Locale;
 

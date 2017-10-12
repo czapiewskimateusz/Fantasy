@@ -41,6 +41,8 @@
     <string name="lastname_length_error">Last name is too long</string>
     <string name="password_length_error">Password must contain at least 6 characters</string>
     <string name="passwords_do_not_match">Passwords do not match</string>
+    <string name="create_league_error">Couldn\'t create league, try again later</string>
+    <string name="join_league_error">League doesn\'t exist or code is incorrect</string>
 
     //Dialogs
     <string name="user_successfully_created">User successfully created!</string>
