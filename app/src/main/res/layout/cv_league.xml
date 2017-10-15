@@ -27,7 +27,7 @@
             android:layout_marginTop="0dp"
             android:background="@drawable/rounded_corner"
             android:fontFamily="LATO"
-            android:padding="4dp"
+            android:padding="6dp"
             android:textAlignment="textStart"
             android:textAppearance="@android:style/TextAppearance.Material.Subhead"
             android:textColor="@color/colorWhite"
@@ -35,7 +35,8 @@
             android:textStyle="bold"
             app:layout_constraintLeft_toRightOf="@+id/iv_league_logo_detail"
             app:layout_constraintTop_toTopOf="@+id/iv_league_logo_detail"
-            tools:text="Liga Niezwykłych Gentelmanów" />
+            tools:text="Liga Niezwykłych Gentelmanów"
+            android:transitionName="tran_league_name"/>
 
         <TextView
             android:id="@+id/tv_ranking"
@@ -58,7 +59,8 @@
             android:layout_marginTop="16dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_cup" />
+            app:srcCompat="@drawable/ic_cup"
+            android:transitionName="tran_cup"/>
 
         <TextView
             android:id="@+id/tv_league_code_desc"

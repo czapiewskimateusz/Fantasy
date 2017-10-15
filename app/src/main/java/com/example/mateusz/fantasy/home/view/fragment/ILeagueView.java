@@ -16,4 +16,6 @@ public interface ILeagueView {
     public void onJoinLeagueFailure();
 
     public void onCreateLeagueFailure();
+
+    public void setRefreshing(boolean set);
 }

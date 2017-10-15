@@ -1,14 +1,19 @@
 package com.example.mateusz.fantasy.home.presenter.adapters;
 
 
+import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.util.Pair;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.mateusz.fantasy.home.model.repo.League;
@@ -90,6 +95,7 @@ public class RVLeagueAdapter extends RecyclerView.Adapter<RVLeagueAdapter.League
         final TextView tvLeagueName;
         final TextView tvUserPosition;
         final TextView tvLeagueCode;
+        final ImageView ivLeagueLogo;
         int leagueId;
         int numberOfPlayers;
         private final Context context;
@@ -102,6 +108,7 @@ public class RVLeagueAdapter extends RecyclerView.Adapter<RVLeagueAdapter.League
             tvLeagueName = itemView.findViewById(R.id.tv_league_name_detail);
             tvUserPosition = itemView.findViewById(R.id.tv_ranking);
             tvLeagueCode = itemView.findViewById(R.id.tv_league_code);
+            ivLeagueLogo = itemView.findViewById(R.id.iv_league_logo_detail);
             leagueId = 0;
             numberOfPlayers = 0;
             this.context = context;
@@ -120,7 +127,16 @@ public class RVLeagueAdapter extends RecyclerView.Adapter<RVLeagueAdapter.League
             bundle.putInt(NUMBER_OF_PLAYERS,numberOfPlayers);
 
             intent.putExtra(LEAGUE_BUNDLE_EXTRA,bundle);
-            context.startActivity(intent);
+
+            View sharedViewLogo = ivLeagueLogo;
+            View sharedViewName = tvLeagueName;
+
+            Pair<View, String> p1 = Pair.create(sharedViewLogo, "tran_cup");
+            Pair<View, String> p2 = Pair.create(sharedViewName, "tran_league_name");
+
+            ActivityOptionsCompat activityOptions = ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) context,p1,p2);
+
+            context.startActivity(intent, activityOptions.toBundle());
 
         }
     }

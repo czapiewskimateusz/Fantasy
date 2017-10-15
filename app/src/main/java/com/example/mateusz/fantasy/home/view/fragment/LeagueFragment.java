@@ -1,18 +1,15 @@
 package com.example.mateusz.fantasy.home.view.fragment;
 
 
-import android.animation.Animator;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.BaseTransientBottomBar;
-import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 
-
-import android.support.v4.view.animation.LinearOutSlowInInterpolator;
-import android.support.v7.view.ContextThemeWrapper;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
@@ -21,11 +18,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.view.animation.OvershootInterpolator;
-import android.widget.Button;
-import android.widget.FrameLayout;
+
 import android.widget.ProgressBar;
-import android.widget.Toast;
+
 
 
 import com.example.mateusz.fantasy.authentication.login.view.LoginActivity;
@@ -40,7 +35,6 @@ import com.github.clans.fab.FloatingActionMenu;
 import java.util.List;
 
 
-import static android.R.attr.delay;
 import static com.example.mateusz.fantasy.authentication.login.view.LoginActivity.TOTAL_POINTS_EXTRA;
 import static com.example.mateusz.fantasy.authentication.login.view.LoginActivity.USER_ID_EXTRA;
 
@@ -52,10 +46,13 @@ public class LeagueFragment extends Fragment implements ILeagueView, JoinLeagueD
     private com.github.clans.fab.FloatingActionButton mFABCreateLeague;
     private com.github.clans.fab.FloatingActionButton mFABJoinLeague;
     private RecyclerView mRecyclerView;
-    public ProgressBar mProgressBar;
-    public FrameLayout fragmentContainer;
+    private ProgressBar mProgressBar;
 
-    private LeaguePresenter mLeaguePresenter;
+    private CoordinatorLayout mFragmentContainer;
+    private SwipeRefreshLayout mSwipeRefreshLayout;
+
+
+    public LeaguePresenter mLeaguePresenter;
 
     private int mUserId;
     private int mTotalPoints;
@@ -86,7 +83,10 @@ public class LeagueFragment extends Fragment implements ILeagueView, JoinLeagueD
         initButtons();
 
         mProgressBar = view.findViewById(R.id.pB_league_fragment);
-        fragmentContainer = view.findViewById(R.id.league_fragment_container);
+        mFragmentContainer = view.findViewById(R.id.leagues_container);
+        mSwipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout);
+
+        initSwipeToRefresh();
 
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences(LoginActivity.PREFS_NAME, 0);
         mUserId = sharedPreferences.getInt(USER_ID_EXTRA, 0);
@@ -146,14 +146,14 @@ public class LeagueFragment extends Fragment implements ILeagueView, JoinLeagueD
     @Override
     public void onJoinLeagueFailure() {
 
-        Snackbar.make(getView(), getContext().getString(R.string.join_league_error), BaseTransientBottomBar.LENGTH_LONG).show();
+        Snackbar.make(mFragmentContainer, getContext().getString(R.string.join_league_error), BaseTransientBottomBar.LENGTH_LONG).show();
 
     }
 
     @Override
     public void onCreateLeagueFailure() {
 
-        Snackbar.make(getView(), getContext().getString(R.string.create_league_error), BaseTransientBottomBar.LENGTH_LONG).show();
+        Snackbar.make(mFragmentContainer, getContext().getString(R.string.create_league_error), BaseTransientBottomBar.LENGTH_LONG).show();
 
     }
 
@@ -175,7 +175,7 @@ public class LeagueFragment extends Fragment implements ILeagueView, JoinLeagueD
                     public void run() {
                         createLeagueDialog.show(getFragmentManager(), "league_join_dialog");
                     }
-                }, 300);
+                }, 200);
 
 
             }
@@ -194,7 +194,7 @@ public class LeagueFragment extends Fragment implements ILeagueView, JoinLeagueD
                     public void run() {
                         leagueDialog.show(getFragmentManager(), "league_join_dialog");
                     }
-                }, 300);
+                }, 200);
 
             }
         });
@@ -208,9 +208,9 @@ public class LeagueFragment extends Fragment implements ILeagueView, JoinLeagueD
     public void willBeDisplayed() {
 
 
-        if (fragmentContainer != null) {
+        if (mFragmentContainer != null) {
             Animation fadeIn = AnimationUtils.loadAnimation(getActivity(), R.anim.fade_in);
-            fragmentContainer.startAnimation(fadeIn);
+            mFragmentContainer.startAnimation(fadeIn);
         }
 
     }
@@ -221,13 +221,17 @@ public class LeagueFragment extends Fragment implements ILeagueView, JoinLeagueD
     @Override
     public void willBeHidden() {
 
-        if (fragmentContainer != null) {
+        if (mFragmentContainer != null) {
             Animation fadeOut = AnimationUtils.loadAnimation(getActivity(), R.anim.fade_out);
-            fragmentContainer.startAnimation(fadeOut);
+            mFragmentContainer.startAnimation(fadeOut);
         }
 
     }
 
+    @Override
+    public void setRefreshing(boolean set) {
+        mSwipeRefreshLayout.setRefreshing(set);
+    }
 
     /**
      * Prepare RecyclerView for action
@@ -245,16 +249,26 @@ public class LeagueFragment extends Fragment implements ILeagueView, JoinLeagueD
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 switch (newState) {
                     case RecyclerView.SCROLL_STATE_IDLE:
-
+                        mFloatingActionMenu.showMenu(true);
                         break;
                     default:
-                        
+                        mFloatingActionMenu.hideMenu(true);
                         break;
                 }
                 super.onScrollStateChanged(recyclerView, newState);
             }
         });
 
+    }
+
+    private void initSwipeToRefresh(){
+
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                reloadLeagues();
+            }
+        });
     }
 
 }

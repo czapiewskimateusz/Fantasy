@@ -57,7 +57,7 @@ public class LeaguePresenter {
 
         view.presentLeagues(leagues);
         view.showProgress(false);
-
+        view.setRefreshing(false);
     }
 
     /**

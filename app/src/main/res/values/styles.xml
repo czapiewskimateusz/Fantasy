@@ -21,13 +21,14 @@
         <item name="android:colorPrimaryDark">@color/primary_dark</item>
         <!--   theme UI controls like checkboxes and text fields -->
         <item name="android:colorAccent">@color/accent</item>
+        <item name="android:windowContentTransitions">true</item>
     </style>
     
     <style name="MyActionBar" parent="android:Theme.Material.Light.DarkActionBar">
         <item name="android:textColor">@color/primary_text</item>
     </style>
 
-    <style name="FullScreenTheme" parent="android:Theme.Material.Light.NoActionBar">
+    <style name="FullScreenTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:navigationBarColor"> @color/primary</item>
         <!-- Main theme colors -->
         <!--   your app branding color for the app bar -->
@@ -36,6 +37,7 @@
         <item name="android:colorPrimaryDark">@color/primary_dark</item>
         <!--   theme UI controls like checkboxes and text fields -->
         <item name="android:colorAccent">@color/accent</item>
+        <item name="android:windowContentTransitions">true</item>
         </style>
 
     <style name="MyEditText" parent="android:Widget.Material.EditText">
