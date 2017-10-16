@@ -1,19 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="primary">#607D8B</color>
-    <color name="primary_dark">#455A64</color>
-    <color name="primary_light">#cfd8dc</color>
-    <color name="accent">#2196f3</color>
-    <color name="accent_dark">#1565c0</color>
+    <!--<color name="primary">#607D8B</color>-->
+    <!--<color name="primary_dark">#455A64</color>-->
+    <!--<color name="primary_light">#cfd8dc</color>-->
+    <!--<color name="accent">#2196f3</color>-->
+    <!--<color name="accent_dark">#1565c0</color>-->
+    <!--<color name="primary_text">#212121</color>-->
+    <!--<color name="secondary_text">#757575</color>-->
+    <!--<color name="icons">#FFFFFF</color>-->
+    <!--<color name="divider">#BDBDBD</color>-->
 
-    <color name="gold">#e5c100</color>
-
-    <color name="logo">#1565c0 </color>
+    <color name="primary">#673ab7</color>
+    <color name="primary_dark">#512DA8</color>
+    <color name="primary_light">#D1C4E9</color>
+    <color name="accent">#4caf50</color>
     <color name="primary_text">#212121</color>
     <color name="secondary_text">#757575</color>
     <color name="icons">#FFFFFF</color>
     <color name="divider">#BDBDBD</color>
+
+    <color name="gold">#e5c100</color>
+
+    <color name="logo">#512DA8 </color>
 
     <color name="light_grey">#b3b3b3</color>
 

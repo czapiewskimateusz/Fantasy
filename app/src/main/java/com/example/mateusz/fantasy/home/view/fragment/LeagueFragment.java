@@ -175,7 +175,7 @@ public class LeagueFragment extends Fragment implements ILeagueView, JoinLeagueD
                     public void run() {
                         createLeagueDialog.show(getFragmentManager(), "league_join_dialog");
                     }
-                }, 200);
+                }, 250);
 
 
             }
@@ -194,7 +194,7 @@ public class LeagueFragment extends Fragment implements ILeagueView, JoinLeagueD
                     public void run() {
                         leagueDialog.show(getFragmentManager(), "league_join_dialog");
                     }
-                }, 200);
+                }, 250);
 
             }
         });
