@@ -20,13 +20,13 @@
 
         <TextView
             android:id="@+id/tv_league_name_detail"
+            style="@style/MyTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="0dp"
             android:background="@drawable/rounded_corner"
-            android:fontFamily="LATO"
             android:padding="6dp"
             android:textAlignment="textStart"
             android:textAppearance="@android:style/TextAppearance.Material.Subhead"
@@ -44,7 +44,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="2dp"
             android:textAppearance="@android:style/TextAppearance.Material.Small"
             app:layout_constraintLeft_toLeftOf="@+id/iv_league_logo_detail"
             app:layout_constraintRight_toRightOf="@+id/iv_league_logo_detail"
@@ -53,14 +53,14 @@
 
         <ImageView
             android:id="@+id/iv_league_logo_detail"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="16dp"
+            android:transitionName="tran_cup"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_cup"
-            android:transitionName="tran_cup"/>
+            app:srcCompat="@drawable/ic_cup" />
 
         <TextView
             android:id="@+id/tv_league_code_desc"
@@ -92,8 +92,8 @@
 
         <ImageView
             android:id="@+id/iv_arrow_right"
-            android:layout_width="48dp"
-            android:layout_height="49dp"
+            android:layout_width="35dp"
+            android:layout_height="50dp"
             android:layout_marginBottom="8dp"
             android:layout_marginRight="0dp"
             android:layout_marginTop="8dp"

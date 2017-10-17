@@ -38,7 +38,7 @@
         android:text="@string/join_league_dialog_title"
         android:textAlignment="center"
         android:textAppearance="@android:style/TextAppearance.Material"
-        android:textColor="@color/colorWhite"
+        android:textColor="@color/primary_text"
         android:textSize="24sp"
         android:textStyle="bold"
         android:typeface="normal"

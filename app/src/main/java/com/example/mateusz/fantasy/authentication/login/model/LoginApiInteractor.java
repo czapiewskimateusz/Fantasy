@@ -10,6 +10,7 @@ import retrofit2.Retrofit;
 
 
 import static com.example.mateusz.fantasy.authentication.login.presenter.LoginPresenter.ERROR_TAG_INCORRECT_PASSWORD;
+import static com.example.mateusz.fantasy.authentication.login.presenter.LoginPresenter.ERROR_TAG_USER_DOESNT_EXIST;
 import static com.example.mateusz.fantasy.utils.NetworkUtils.getRetrofitInstance;
 
 
@@ -53,7 +54,7 @@ public class LoginApiInteractor implements Callback<User> {
     @Override
     public void onFailure(Call<User> call, Throwable t) {
 
-        loginPresenter.onConnectionError();
+        loginPresenter.onLoginUnsuccessful(ERROR_TAG_USER_DOESNT_EXIST);
 
     }
 }

@@ -59,13 +59,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="4dp"
                 android:layout_marginStart="4dp"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="2dp"
                 android:textColor="@color/primary_text"
                 android:textSize="14sp"
                 app:layout_constraintLeft_toLeftOf="@+id/tv_ranking_desc"
                 app:layout_constraintRight_toRightOf="@+id/tv_ranking_desc"
                 app:layout_constraintTop_toBottomOf="@+id/tv_ranking_desc"
-                tools:text="1512" />
+                tools:text="1512"
+                app:layout_constraintHorizontal_bias="0.538" />
 
             <ImageView
                 android:id="@+id/iv_league_logo_detail"
@@ -144,7 +145,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="4dp"
                 android:layout_marginStart="4dp"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="2dp"
                 android:textColor="@color/primary_text"
                 app:layout_constraintLeft_toLeftOf="@+id/tv_code_detail_desc"
                 app:layout_constraintRight_toRightOf="@+id/tv_code_detail_desc"
@@ -155,7 +156,7 @@
                 android:id="@+id/tv_number_of_users"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="2dp"
                 android:textColor="@color/primary_text"
                 app:layout_constraintLeft_toLeftOf="@+id/tv_number_of_users_desc"
                 app:layout_constraintRight_toRightOf="@+id/tv_number_of_users_desc"

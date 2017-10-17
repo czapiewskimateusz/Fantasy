@@ -40,7 +40,7 @@
             android:screenOrientation="portrait"
             android:parentActivityName=".home.view.HomeActivity"
             android:label=""
-            android:theme="@style/FullScreenTheme"/>
+            android:theme="@style/HomeTheme"/>
     </application>
 
 </manifest>
