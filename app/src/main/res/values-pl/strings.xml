@@ -43,4 +43,8 @@
     <string name="league_name">Nazwa ligi</string>
     <string name="create_league_error">Nie udało się stworzyć ligi, spróbuj ponownie</string>
     <string name="join_league_error">Liga nie istnieje lub kod jest nieprawidłowy</string>
+    <string name="deadline">Ostateczny termin wybrania drużyny</string>
+    <string name="average">Średnio</string>
+    <string name="highest">Największy</string>
+    <string name="your_score">Twój Wynik</string>
 </resources>

@@ -1,6 +1,6 @@
 package com.example.mateusz.fantasy.home.model.webService;
 
-import com.example.mateusz.fantasy.authentication.login.model.User;
+import com.example.mateusz.fantasy.home.model.repo.HomeUser;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -12,5 +12,5 @@ public interface HomeWebService {
 
     @FormUrlEncoded
     @POST("getUserById.php")
-    Call<User> getUser(@Field("user_id") int userId);
+    Call<HomeUser> getUser(@Field("user_id") int userId);
 }

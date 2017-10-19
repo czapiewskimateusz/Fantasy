@@ -1,6 +1,7 @@
 package com.example.mateusz.fantasy.home.model.API;
 
 import com.example.mateusz.fantasy.authentication.login.model.User;
+import com.example.mateusz.fantasy.home.model.repo.HomeUser;
 import com.example.mateusz.fantasy.home.model.webService.HomeWebService;
 import com.example.mateusz.fantasy.home.presenter.HomePresenter;
 
@@ -11,7 +12,7 @@ import retrofit2.Retrofit;
 
 import static com.example.mateusz.fantasy.utils.NetworkUtils.getRetrofitInstance;
 
-public class HomeApiInteractor implements Callback<User> {
+public class HomeApiInteractor implements Callback<HomeUser> {
 
     private HomePresenter mHomePresenter;
 
@@ -24,13 +25,13 @@ public class HomeApiInteractor implements Callback<User> {
         Retrofit retrofit = getRetrofitInstance();
 
         HomeWebService api = retrofit.create(HomeWebService.class);
-        Call<User> call = api.getUser(userId);
+        Call<HomeUser> call = api.getUser(userId);
         call.enqueue(this);
 
     }
 
     @Override
-    public void onResponse(Call<User> call, Response<User> response) {
+    public void onResponse(Call<HomeUser> call, Response<HomeUser> response) {
 
         if (response.isSuccessful()){
             mHomePresenter.onGetUserSuccess(response.body());
@@ -39,7 +40,9 @@ public class HomeApiInteractor implements Callback<User> {
     }
 
     @Override
-    public void onFailure(Call<User> call, Throwable t) {
-        mHomePresenter.onGetUserFailure("Something went wrong");
+    public void onFailure(Call<HomeUser> call, Throwable t) {
+
+        mHomePresenter.onGetUserFailure(t.getMessage());
+
     }
 }

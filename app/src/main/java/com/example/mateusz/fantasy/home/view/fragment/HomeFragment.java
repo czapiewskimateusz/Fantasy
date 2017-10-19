@@ -13,14 +13,14 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 
 import com.example.mateusz.fantasy.authentication.login.view.LoginActivity;
+import com.example.mateusz.fantasy.home.model.repo.HomeUser;
 import com.example.mateusz.fantasy.home.presenter.HomePresenter;
 import com.example.mateusz.fantasy.R;
+import com.example.mateusz.fantasy.utils.NetworkUtils;
 
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 import static android.content.Context.MODE_PRIVATE;
 import static com.example.mateusz.fantasy.authentication.login.view.LoginActivity.PREFS_NAME;
@@ -28,11 +28,18 @@ import static com.example.mateusz.fantasy.authentication.login.view.LoginActivit
 import static com.example.mateusz.fantasy.authentication.login.view.LoginActivity.USER_ID_EXTRA;
 
 
-public class HomeFragment extends Fragment implements ParentFragment{
+public class HomeFragment extends Fragment implements ParentFragment, IHomeView{
 
 
     //UI
     public FrameLayout fragmentContainer;
+    private TextView mTvUserName;
+    private TextView mTvUserTeamName;
+    private TextView mTvGw;
+    private TextView mTvUserScore;
+    private TextView mTvAverageScore;
+    private TextView mTvHHighestScore;
+    private TextView mTvDeadlineDate;
 
     //Dependencies
     private HomePresenter mHomePresenter;
@@ -44,7 +51,7 @@ public class HomeFragment extends Fragment implements ParentFragment{
     public HomeFragment() {
         // Required empty public constructor
         if (mHomePresenter == null) {
-            mHomePresenter = new HomePresenter();
+            mHomePresenter = new HomePresenter(this);
         }
     }
 
@@ -56,10 +63,15 @@ public class HomeFragment extends Fragment implements ParentFragment{
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
         fragmentContainer = view.findViewById(R.id.home_fragment_container);
-        mBtnLogOut = view.findViewById(R.id.btn_logout);
-        initButton();
 
-        mUserId = getActivity().getIntent().getIntExtra(USER_ID_EXTRA,0);
+        initTextViews(view);
+        initButton(view);
+        getLoggedUserId();
+
+        mockView();
+
+        mHomePresenter.initUser(mUserId);
+
         return view;
     }
 
@@ -69,11 +81,12 @@ public class HomeFragment extends Fragment implements ParentFragment{
      */
     @Override
     public void willBeDisplayed() {
-        // Do what you want here, for example animate the content
+
         if (fragmentContainer != null) {
             Animation fadeIn = AnimationUtils.loadAnimation(getActivity(), R.anim.fade_in);
             fragmentContainer.startAnimation(fadeIn);
         }
+
     }
 
     /**
@@ -81,15 +94,32 @@ public class HomeFragment extends Fragment implements ParentFragment{
      */
     @Override
     public void willBeHidden() {
+
         if (fragmentContainer != null) {
             Animation fadeOut = AnimationUtils.loadAnimation(getActivity(), R.anim.fade_out);
             fragmentContainer.startAnimation(fadeOut);
         }
+
     }
 
+    @Override
+    public void getUser(HomeUser user) {
 
-    private void initButton() {
+        mTvUserName.setText(user.getFirstName()+" "+user.getLastName());
+        mTvUserTeamName.setText(user.getTeamName());
 
+    }
+
+    @Override
+    public void showConnectionError() {
+
+        NetworkUtils.showConnectionErrorToast(getActivity());
+
+    }
+
+    private void initButton(View view) {
+
+        mBtnLogOut = view.findViewById(R.id.btn_logout);
         mBtnLogOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -107,7 +137,32 @@ public class HomeFragment extends Fragment implements ParentFragment{
 
     }
 
-    private void initUser(){
-        mHomePresenter.initUser(mUserId);
+    private void initTextViews(View view){
+
+        mTvUserName = view.findViewById(R.id.tv_home_user_name);
+        mTvUserTeamName = view.findViewById(R.id.tv_home_team_name);
+        mTvGw = view.findViewById(R.id.tv_home_gw);
+        mTvUserScore = view.findViewById(R.id.tv_home_points);
+        mTvAverageScore = view.findViewById(R.id.tv_average_points);
+        mTvHHighestScore = view.findViewById(R.id.tv_highest_points);
+        mTvDeadlineDate = view.findViewById(R.id.tv_home_deadline);
+
     }
+
+    private void mockView(){
+
+        mTvGw.setText("Gameweek 9 Points");
+        mTvGw.setText("Gameweek 9 Points");
+        mTvUserScore.setText("59");
+        mTvAverageScore.setText("51");
+        mTvHHighestScore.setText("141");
+        mTvDeadlineDate.setText("27.10.2017");
+
+    }
+
+    private void getLoggedUserId(){
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(LoginActivity.PREFS_NAME, 0);
+        mUserId =  sharedPreferences.getInt(USER_ID_EXTRA, 0);
+    }
+
 }

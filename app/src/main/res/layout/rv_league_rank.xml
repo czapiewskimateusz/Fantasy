@@ -34,7 +34,7 @@
         tools:text="AC Pajace" />
 
     <TextView
-        android:id="@+id/tv_user_name"
+        android:id="@+id/tv_home_user_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"

@@ -117,6 +117,7 @@ public class LeagueDetailActivity extends AppCompatActivity implements ILeagueDe
      * Initialize view with data form intent
      */
     private void initializeView(){
+
         mTvLeagueName.setText(mLeague.getName());
         mTvRanking.setText(String.format(Locale.ENGLISH,"%d", mLeague.getRank()));
         mTvCode.setText(mLeague.getCode());
@@ -136,6 +137,7 @@ public class LeagueDetailActivity extends AppCompatActivity implements ILeagueDe
             }
 
         });
+
     }
 
     /**
@@ -147,5 +149,6 @@ public class LeagueDetailActivity extends AppCompatActivity implements ILeagueDe
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setHasFixedSize(true);
+
     }
 }

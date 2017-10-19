@@ -71,7 +71,8 @@ public class HomeActivity extends AppCompatActivity /*,LeagueFragment.LeagueFrag
 
         bottomNavigation.addItems(bottomNavigationItems);
 
-        bottomNavigation.setAccentColor(fetchColor(R.color.accent));
+        bottomNavigation.setAccentColor(fetchColor(R.color.primary));
+        bottomNavigation.setInactiveColor(fetchColor(R.color.light_grey));
         bottomNavigation.setBehaviorTranslationEnabled(false);
         bottomNavigation.setOnTabSelectedListener(new AHBottomNavigation.OnTabSelectedListener() {
             @Override

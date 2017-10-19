@@ -70,7 +70,7 @@ public class RVLeagueDetailsAdapter extends RecyclerView.Adapter<RVLeagueDetails
 
             tvRank = itemView.findViewById(R.id.tv_user_rank);
             tvTeamName = itemView.findViewById(R.id.tv_users_team_name);
-            tvUserName = itemView.findViewById(R.id.tv_user_name);
+            tvUserName = itemView.findViewById(R.id.tv_home_user_name);
             tvTotalPoints = itemView.findViewById(R.id.tv_total_points);
             container = itemView.findViewById(R.id.league_rank_container);
 
