@@ -211,6 +211,7 @@ public class LeagueFragment extends Fragment implements ILeagueView, JoinLeagueD
         if (mFragmentContainer != null) {
             Animation fadeIn = AnimationUtils.loadAnimation(getActivity(), R.anim.fade_in);
             mFragmentContainer.startAnimation(fadeIn);
+            mRecyclerView.smoothScrollToPosition(0);
         }
 
     }

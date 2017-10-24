@@ -23,7 +23,7 @@
 
 
 
-    <color name="gold">@color/accent</color>
+    <color name="gold">#ffc107</color>
 
     <color name="logo">@color/accent</color>
     <!--<color name="logo">#38003d</color>-->

@@ -165,8 +165,10 @@ public class HomeFragment extends Fragment implements ParentFragment, IHomeView{
 
 
     private void getLoggedUserId(){
+
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences(LoginActivity.PREFS_NAME, 0);
         mUserId =  sharedPreferences.getInt(USER_ID_EXTRA, 0);
+
     }
 
 }

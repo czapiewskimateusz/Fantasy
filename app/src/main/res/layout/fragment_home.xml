@@ -9,16 +9,26 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <ImageView
+            android:id="@+id/iv_home_bcg2"
+            android:layout_width="0dp"
+            android:layout_height="120dp"
+            android:layout_marginTop="8dp"
+            android:background="@color/primary"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_home_gw"
+
+            app:srcCompat="@color/primary" />
+
         <TextView
             android:id="@+id/tv_highest_points_desc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="0dp"
-            android:layout_marginRight="0dp"
-            android:layout_marginTop="2dp"
             android:padding="4dp"
             android:text="@string/highest"
-            android:textColor="@color/primary_text"
+            android:textColor="@color/colorWhite"
             app:layout_constraintHorizontal_bias="0.555"
             app:layout_constraintLeft_toLeftOf="@+id/tv_highest_points"
             app:layout_constraintRight_toRightOf="@+id/tv_highest_points"
@@ -28,13 +38,10 @@
             android:id="@+id/tv_average_points_desc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="0dp"
-            android:layout_marginRight="0dp"
-            android:layout_marginTop="2dp"
 
             android:padding="4dp"
             android:text="@string/average"
-            android:textColor="@color/primary_text"
+            android:textColor="@color/colorWhite"
             app:layout_constraintHorizontal_bias="0.555"
             app:layout_constraintLeft_toLeftOf="@+id/tv_average_points"
             app:layout_constraintRight_toRightOf="@+id/tv_average_points"
@@ -42,17 +49,13 @@
 
         <Button
             android:id="@+id/btn_logout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:background="@drawable/mybutton"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:background="@color/accent"
             android:text="@string/logout_button"
             android:textColor="@color/primary_text"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent" />
 
@@ -69,15 +72,14 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp" />
 
         <ImageView
             android:id="@+id/iv_home_bcg"
             android:layout_width="0dp"
-            android:layout_height="120dp"
-            android:layout_marginLeft="0dp"
-            android:layout_marginRight="0dp"
-            android:layout_marginTop="0dp"
+            android:layout_height="110dp"
             android:background="@color/primary"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -100,7 +102,9 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Mateusz Czapiewski"
-            app:layout_constraintHorizontal_bias="0.504" />
+            app:layout_constraintHorizontal_bias="0.504"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp" />
 
         <TextView
             android:id="@+id/tv_home_team_name"
@@ -116,7 +120,9 @@
             app:layout_constraintLeft_toLeftOf="@+id/tv_home_user_name"
             app:layout_constraintRight_toRightOf="@+id/tv_home_user_name"
             app:layout_constraintTop_toBottomOf="@+id/tv_home_user_name"
-            tools:text="FC Bobry" />
+            tools:text="FC Bobry"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp" />
 
         <ImageView
             android:id="@+id/iv_settings"
@@ -126,48 +132,48 @@
             android:layout_marginTop="8dp"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_settings" />
+            app:srcCompat="@drawable/ic_settings"
+            android:layout_marginEnd="8dp" />
 
         <TextView
             android:id="@+id/tv_home_deadline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="0dp"
-            android:layout_marginRight="0dp"
+            android:layout_marginTop="8dp"
             android:fontFamily="Lato"
             android:textColor="@color/primary_text"
-            android:textSize="18sp"
+            android:textSize="24sp"
+            app:layout_constraintHorizontal_bias="0.503"
             app:layout_constraintLeft_toLeftOf="@+id/tv_deadline_desc"
             app:layout_constraintRight_toRightOf="@+id/tv_deadline_desc"
-            tools:text="20.10.2017"
-            app:layout_constraintHorizontal_bias="0.503"
-            android:layout_marginBottom="32dp"
-            app:layout_constraintBottom_toTopOf="@+id/btn_logout" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_deadline_desc"
+            tools:text="20.10.2017" />
 
         <TextView
             android:id="@+id/tv_deadline_desc"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginRight="0dp"
+            android:layout_marginTop="32dp"
             android:background="@drawable/rounded_corner"
             android:fontFamily="Lato"
             android:padding="8dp"
             android:text="@string/deadline"
             android:textAlignment="center"
             android:textColor="@color/colorWhite"
+            android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintHorizontal_bias="0.505"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toTopOf="@+id/tv_home_deadline" />
+            app:layout_constraintTop_toBottomOf="@+id/iv_home_bcg2" />
 
         <TextView
             android:id="@+id/tv_home_gw"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="16dp"
             android:background="@drawable/rounded_corner"
             android:fontFamily="Lato"
             android:padding="8dp"
@@ -178,72 +184,67 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/iv_home_bcg"
-            tools:text="Gameweek 9 Points" />
+            tools:text="Gameweek 9 Points"
+            app:layout_constraintHorizontal_bias="0.0" />
 
         <TextView
             android:id="@+id/tv_home_points"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="0dp"
-            android:layout_marginRight="0dp"
-            android:layout_marginTop="8dp"
             android:fontFamily="Lato"
-            android:textSize="64sp"
-            android:background="@drawable/rounded_corner"
-            android:textColor="@color/accent"
             android:paddingLeft="8dp"
             android:paddingRight="8dp"
+            android:textAlignment="center"
+            android:textColor="@color/accent"
+            android:textSize="64sp"
             app:layout_constraintLeft_toLeftOf="@+id/tv_home_gw"
             app:layout_constraintRight_toRightOf="@+id/tv_home_gw"
-            app:layout_constraintTop_toBottomOf="@+id/tv_home_gw"
+            app:layout_constraintTop_toTopOf="@+id/iv_home_bcg2"
             tools:text="59" />
 
         <TextView
             android:id="@+id/tv_your_score_desc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="0dp"
-            android:layout_marginRight="0dp"
-            android:layout_marginTop="2dp"
-            android:text="@string/your_score"
-            android:textColor="@color/primary_text"
             android:padding="4dp"
+            android:text="@string/your_score"
+            android:textColor="@color/colorWhite"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintLeft_toLeftOf="@+id/tv_home_points"
             app:layout_constraintRight_toRightOf="@+id/tv_home_points"
-            app:layout_constraintTop_toBottomOf="@+id/tv_home_points"
-            app:layout_constraintHorizontal_bias="0.666" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_home_points" />
 
         <TextView
             android:id="@+id/tv_average_points"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="-1dp"
-            android:layout_marginRight="32dp"
-            android:background="@drawable/rounded_corner"
             android:fontFamily="Lato"
             android:paddingLeft="8dp"
             android:paddingRight="8dp"
+            android:textAlignment="center"
             android:textColor="@color/colorWhite"
             android:textSize="40sp"
-            app:layout_constraintBottom_toTopOf="@+id/tv_your_score_desc"
-            app:layout_constraintRight_toLeftOf="@+id/tv_home_points"
-            tools:text="43" />
+            app:layout_constraintBottom_toBottomOf="@+id/tv_home_points"
+            tools:text="43"
+            android:layout_marginLeft="32dp"
+            app:layout_constraintLeft_toLeftOf="parent" />
 
         <TextView
             android:id="@+id/tv_highest_points"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="-1dp"
-            android:layout_marginLeft="32dp"
-            android:background="@drawable/rounded_corner"
+
             android:fontFamily="Lato"
             android:paddingLeft="8dp"
             android:paddingRight="8dp"
+            android:textAlignment="center"
             android:textColor="@color/colorWhite"
             android:textSize="40sp"
-            app:layout_constraintBottom_toTopOf="@+id/tv_your_score_desc"
-            app:layout_constraintLeft_toRightOf="@+id/tv_home_points"
-            tools:text="151" />
+            app:layout_constraintBottom_toBottomOf="@+id/tv_home_points"
+            tools:text="151"
+            android:layout_marginBottom="0dp"
+            android:layout_marginRight="32dp"
+            app:layout_constraintRight_toRightOf="parent" />
 
     </android.support.constraint.ConstraintLayout>
 
