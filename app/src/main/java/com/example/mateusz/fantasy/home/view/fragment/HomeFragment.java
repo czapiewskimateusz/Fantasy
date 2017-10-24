@@ -16,6 +16,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.example.mateusz.fantasy.authentication.login.view.LoginActivity;
+import com.example.mateusz.fantasy.home.model.repo.HomeData;
 import com.example.mateusz.fantasy.home.model.repo.HomeUser;
 import com.example.mateusz.fantasy.home.presenter.HomePresenter;
 import com.example.mateusz.fantasy.R;
@@ -47,6 +48,7 @@ public class HomeFragment extends Fragment implements ParentFragment, IHomeView{
     public Button mBtnLogOut;
 
     private int mUserId;
+    private int mTeamId;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -67,8 +69,6 @@ public class HomeFragment extends Fragment implements ParentFragment, IHomeView{
         initTextViews(view);
         initButton(view);
         getLoggedUserId();
-
-        mockView();
 
         mHomePresenter.initUser(mUserId);
 
@@ -107,13 +107,27 @@ public class HomeFragment extends Fragment implements ParentFragment, IHomeView{
 
         mTvUserName.setText(user.getFirstName()+" "+user.getLastName());
         mTvUserTeamName.setText(user.getTeamName());
+        mTeamId = user.getTeamId();
 
+        mHomePresenter.getHomeData(mTeamId);
     }
 
     @Override
     public void showConnectionError() {
 
         NetworkUtils.showConnectionErrorToast(getActivity());
+
+    }
+
+    @Override
+    public void presentData(HomeData body) {
+
+        String gw = getString(R.string.gw_gameweek) + " " + body.getGw() + " " + getString(R.string.gw_points);
+        mTvGw.setText(gw);
+        mTvUserScore.setText(Integer.toString(body.getYourScore()));
+        mTvAverageScore.setText(Integer.toString(body.getAvg()));
+        mTvHHighestScore.setText(Integer.toString(body.getMax()));
+        mTvDeadlineDate.setText(body.getDeadline());
 
     }
 
@@ -149,16 +163,6 @@ public class HomeFragment extends Fragment implements ParentFragment, IHomeView{
 
     }
 
-    private void mockView(){
-
-        mTvGw.setText("Gameweek 9 Points");
-        mTvGw.setText("Gameweek 9 Points");
-        mTvUserScore.setText("59");
-        mTvAverageScore.setText("51");
-        mTvHHighestScore.setText("141");
-        mTvDeadlineDate.setText("27.10.2017");
-
-    }
 
     private void getLoggedUserId(){
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences(LoginActivity.PREFS_NAME, 0);

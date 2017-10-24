@@ -62,5 +62,7 @@
     <string name="your_score">Your Score</string>
     <string name="average">Average</string>
     <string name="highest">Highest</string>
+    <string name="gw_gameweek">Gameweek</string>
+    <string name="gw_points">points</string>
 
 </resources>

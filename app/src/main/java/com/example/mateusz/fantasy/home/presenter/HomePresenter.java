@@ -1,24 +1,26 @@
 package com.example.mateusz.fantasy.home.presenter;
 
-import android.util.Log;
-
-import com.example.mateusz.fantasy.home.model.API.HomeApiInteractor;
+import com.example.mateusz.fantasy.home.model.API.GetHomeDataAPI;
+import com.example.mateusz.fantasy.home.model.API.GetHomeUserDataAPI;
+import com.example.mateusz.fantasy.home.model.repo.HomeData;
 import com.example.mateusz.fantasy.home.model.repo.HomeUser;
 import com.example.mateusz.fantasy.home.view.fragment.IHomeView;
 
 public class HomePresenter {
 
-    private final HomeApiInteractor mHomeApiInteractor;
+    private final GetHomeUserDataAPI mGetHomeUserDataAPI;
+    private final GetHomeDataAPI mGetHomeDataAPI;
     private final IHomeView view;
 
     public HomePresenter(IHomeView view) {
         this.view = view;
-        mHomeApiInteractor = new HomeApiInteractor(this);
+        mGetHomeUserDataAPI = new GetHomeUserDataAPI(this);
+        mGetHomeDataAPI = new GetHomeDataAPI(this);
     }
 
     public void initUser(int userId){
 
-        mHomeApiInteractor.getUser(userId);
+        mGetHomeUserDataAPI.getUser(userId);
 
     }
 
@@ -29,6 +31,24 @@ public class HomePresenter {
     }
 
     public void onGetUserFailure(String message){
+
+        view.showConnectionError();
+
+    }
+
+    public void getHomeData(int teamId){
+
+        mGetHomeDataAPI.getData(teamId);
+
+    }
+
+    public void onGetHomeDataSuccess(HomeData body) {
+
+        view.presentData(body);
+
+    }
+
+    public void onGetDataFailure() {
 
         view.showConnectionError();
 

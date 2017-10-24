@@ -12,11 +12,11 @@ import retrofit2.Retrofit;
 
 import static com.example.mateusz.fantasy.utils.NetworkUtils.getRetrofitInstance;
 
-public class HomeApiInteractor implements Callback<HomeUser> {
+public class GetHomeUserDataAPI implements Callback<HomeUser> {
 
     private HomePresenter mHomePresenter;
 
-    public HomeApiInteractor(HomePresenter mHomePresenter) {
+    public GetHomeUserDataAPI(HomePresenter mHomePresenter) {
         this.mHomePresenter = mHomePresenter;
     }
 
