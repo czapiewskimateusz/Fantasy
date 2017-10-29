@@ -11,10 +11,9 @@
         <item name="android:colorPrimaryDark">@color/primary_dark</item>
         <item name="android:colorAccent">@color/accent</item>
         <item name="android:windowContentTransitions">true</item>
-    </style>
-    
-    <style name="MyActionBar" parent="android:Theme.Material.Light.DarkActionBar">
-        <item name="android:textColor">@color/primary_text</item>
+        <item name="colorControlNormal">#c5c5c5</item>
+        <item name="colorControlActivated">@color/accent</item>
+        <item name="colorControlHighlight">@color/accent</item>
     </style>
 
     <style name="FullScreenTheme" parent="android:Theme.Material.Light.NoActionBar">
@@ -23,6 +22,11 @@
         <item name="android:colorAccent">@color/accent</item>
         <item name="android:windowContentTransitions">true</item>
     </style>
+    
+    <style name="MyActionBar" parent="android:Theme.Material.Light.DarkActionBar">
+        <item name="android:textColor">@color/primary_text</item>
+    </style>
+
 
     <style name="MyEditText" parent="android:Widget.Material.EditText">
         <item name="android:fontFamily">Lato</item>
@@ -31,6 +35,11 @@
 
     <style name="MyTextView" parent="android:Widget.Material.TextView">
         <item name="android:fontFamily">Lato</item>
+    </style>
+
+    <style name="MyText" parent="Theme.AppCompat">
+        <item name="android:textColor">@color/primary</item>
+        <item name="android:textSize">12sp</item>
     </style>
 
     <style name="CardViewStyle" parent="CardView">

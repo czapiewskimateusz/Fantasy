@@ -27,20 +27,28 @@
             android:name=".home.view.HomeActivity"
             android:screenOrientation="portrait"
             android:theme="@style/HomeTheme"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"/>
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
 
         <activity
             android:name=".authentication.register.view.RegisterActivity"
             android:label="@string/register_label"
             android:parentActivityName=".authentication.login.view.LoginActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme"/>
+            android:theme="@style/AppTheme" />
 
-        <activity android:name=".home.view.LeagueDetailActivity"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".home.view.HomeActivity"
+        <activity
+            android:name=".home.view.LeagueDetailActivity"
             android:label=""
-            android:theme="@style/HomeTheme"/>
+            android:parentActivityName=".home.view.HomeActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/HomeTheme" />
+
+        <activity android:name=".home.view.UserDetailActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"
+            android:theme="@style/HomeTheme"
+            android:screenOrientation="portrait"
+            android:label="@string/edit_user_label"
+            android:parentActivityName=".home.view.HomeActivity"/>
     </application>
 
 </manifest>

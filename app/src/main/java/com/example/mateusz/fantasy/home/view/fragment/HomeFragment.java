@@ -13,6 +13,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.mateusz.fantasy.authentication.login.view.LoginActivity;
@@ -20,6 +21,7 @@ import com.example.mateusz.fantasy.home.model.repo.HomeData;
 import com.example.mateusz.fantasy.home.model.repo.HomeUser;
 import com.example.mateusz.fantasy.home.presenter.HomePresenter;
 import com.example.mateusz.fantasy.R;
+import com.example.mateusz.fantasy.home.view.UserDetailActivity;
 import com.example.mateusz.fantasy.utils.NetworkUtils;
 
 
@@ -31,6 +33,11 @@ import static com.example.mateusz.fantasy.authentication.login.view.LoginActivit
 
 public class HomeFragment extends Fragment implements ParentFragment, IHomeView{
 
+    public static final String FIRST_NAME_EXTRA = "first_name";
+    public static final String LAST_NAME_EXTRA = "last_name";
+    public static final String EMAIL_EXTRA = "email";
+    public static final String PASSWORD_EXTRA = "password";
+    public static final String BUNDLE_EXTRA = "bundle";
 
     //UI
     public FrameLayout fragmentContainer;
@@ -41,6 +48,7 @@ public class HomeFragment extends Fragment implements ParentFragment, IHomeView{
     private TextView mTvAverageScore;
     private TextView mTvHHighestScore;
     private TextView mTvDeadlineDate;
+    private ImageView mIvSettings;
 
     //Dependencies
     private HomePresenter mHomePresenter;
@@ -49,6 +57,7 @@ public class HomeFragment extends Fragment implements ParentFragment, IHomeView{
 
     private int mUserId;
     private int mTeamId;
+    private HomeUser mHomeUser;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -108,8 +117,9 @@ public class HomeFragment extends Fragment implements ParentFragment, IHomeView{
         mTvUserName.setText(user.getFirstName()+" "+user.getLastName());
         mTvUserTeamName.setText(user.getTeamName());
         mTeamId = user.getTeamId();
-
+        mHomeUser = user;
         mHomePresenter.getHomeData(mTeamId);
+
     }
 
     @Override
@@ -125,7 +135,7 @@ public class HomeFragment extends Fragment implements ParentFragment, IHomeView{
         String gw = getString(R.string.gw_gameweek) + " " + body.getGw() + " " + getString(R.string.gw_points);
         mTvGw.setText(gw);
         mTvUserScore.setText(Integer.toString(body.getYourScore()));
-        mTvAverageScore.setText(Integer.toString(body.getAvg()));
+        mTvAverageScore.setText(Integer.toString((int)body.getAvg()));
         mTvHHighestScore.setText(Integer.toString(body.getMax()));
         mTvDeadlineDate.setText(body.getDeadline());
 
@@ -160,6 +170,25 @@ public class HomeFragment extends Fragment implements ParentFragment, IHomeView{
         mTvAverageScore = view.findViewById(R.id.tv_average_points);
         mTvHHighestScore = view.findViewById(R.id.tv_highest_points);
         mTvDeadlineDate = view.findViewById(R.id.tv_home_deadline);
+
+        mIvSettings = view.findViewById(R.id.iv_settings);
+        mIvSettings.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                Bundle bundle = new Bundle();
+                bundle.putString(FIRST_NAME_EXTRA,mHomeUser.getFirstName());
+                bundle.putString(LAST_NAME_EXTRA,mHomeUser.getLastName());
+                bundle.putString(EMAIL_EXTRA,mHomeUser.getEmail());
+                bundle.putString(PASSWORD_EXTRA,mHomeUser.getPassword());
+
+                Intent intent = new Intent(getContext(),UserDetailActivity.class);
+                intent.putExtra(BUNDLE_EXTRA,bundle);
+
+                getContext().startActivity(intent);
+            }
+
+        });
 
     }
 

@@ -5,13 +5,16 @@ public class HomeUser {
     private String firstName;
     private String lastName;
     private String teamName;
+    private String password;
+    private String email;
     private int teamId;
 
-    public HomeUser(String firstName, String lastName, String teamName, int teamId) {
-
+    public HomeUser(String firstName, String lastName, String teamName, String password, String email, int teamId) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.teamName = teamName;
+        this.password = password;
+        this.email = email;
         this.teamId = teamId;
     }
 
@@ -41,6 +44,22 @@ public class HomeUser {
 
     public int getTeamId() {
         return teamId;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public void setTeamId(int teamId) {

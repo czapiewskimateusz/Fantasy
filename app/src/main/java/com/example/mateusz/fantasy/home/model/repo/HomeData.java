@@ -5,10 +5,10 @@ public class HomeData {
     int gw;
     int yourScore;
     int max;
-    int avg;
+    double avg;
     String deadline;
 
-    public HomeData(int gw, int yourScore, int max, int avg, String deadline) {
+    public HomeData(int gw, int yourScore, int max, double avg, String deadline) {
         this.gw = gw;
         this.yourScore = yourScore;
         this.max = max;
@@ -40,7 +40,7 @@ public class HomeData {
         this.max = max;
     }
 
-    public int getAvg() {
+    public double getAvg() {
         return avg;
     }
 
