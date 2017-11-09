@@ -59,7 +59,6 @@ public class HomeActivity extends AppCompatActivity /*,LeagueFragment.LeagueFrag
 
         bottomNavigation = findViewById(R.id.bottom_navigation);
         viewPager = findViewById(R.id.view_pager);
-       // floatingActionButton = findViewById(R.id.floating_action_button);
 
         AHBottomNavigationItem item1 = new AHBottomNavigationItem(R.string.tab_league, R.drawable.ic_league, R.color.accent);
         AHBottomNavigationItem item2 = new AHBottomNavigationItem(R.string.tab_home, R.drawable.ic_home, R.color.accent);
@@ -71,9 +70,10 @@ public class HomeActivity extends AppCompatActivity /*,LeagueFragment.LeagueFrag
 
         bottomNavigation.addItems(bottomNavigationItems);
 
+
         bottomNavigation.setAccentColor(fetchColor(R.color.primary));
         bottomNavigation.setInactiveColor(fetchColor(R.color.light_grey));
-        bottomNavigation.setBehaviorTranslationEnabled(false);
+        bottomNavigation.setBehaviorTranslationEnabled(true);
         bottomNavigation.setOnTabSelectedListener(new AHBottomNavigation.OnTabSelectedListener() {
             @Override
             public boolean onTabSelected(int position, boolean wasSelected) {
@@ -84,7 +84,7 @@ public class HomeActivity extends AppCompatActivity /*,LeagueFragment.LeagueFrag
 
                 }
 
-                viewPager.setCurrentItem(position, false);
+                viewPager.setCurrentItem(position, true);
 
                 if (mCurrentFragment == null) {
 
@@ -100,77 +100,6 @@ public class HomeActivity extends AppCompatActivity /*,LeagueFragment.LeagueFrag
 
                     mCurrentFragment = mViewPagerAdapter.getCurrentFragment();
                     mCurrentFragment.willBeDisplayed();
-
-//                if (position == 0) {
-//
-//                    floatingActionButton.setVisibility(View.VISIBLE);
-//                    floatingActionButton.setAlpha(0f);
-//                    floatingActionButton.setScaleX(0f);
-//                    floatingActionButton.setScaleY(0f);
-//                    floatingActionButton.animate()
-//                            .alpha(1)
-//                            .scaleX(1)
-//                            .scaleY(1)
-//                            .setDuration(300)
-//                            .setInterpolator(new OvershootInterpolator())
-//                            .setListener(new Animator.AnimatorListener() {
-//                                @Override
-//                                public void onAnimationStart(Animator animation) {
-//
-//                                }
-//
-//                                @Override
-//                                public void onAnimationEnd(Animator animation) {
-//                                    floatingActionButton.animate()
-//                                            .setInterpolator(new LinearOutSlowInInterpolator())
-//                                            .start();
-//                                }
-//
-//                                @Override
-//                                public void onAnimationCancel(Animator animation) {
-//
-//                                }
-//
-//                                @Override
-//                                public void onAnimationRepeat(Animator animation) {
-//
-//                                }
-//                            })
-//                            .start();
-//
-//                } else {
-//                    if (floatingActionButton.getVisibility() == View.VISIBLE) {
-//                        floatingActionButton.animate()
-//                                .alpha(0)
-//                                .scaleX(0)
-//                                .scaleY(0)
-//                                .setDuration(300)
-//                                .setInterpolator(new LinearOutSlowInInterpolator())
-//                                .setListener(new Animator.AnimatorListener() {
-//                                    @Override
-//                                    public void onAnimationStart(Animator animation) {
-//
-//                                    }
-//
-//                                    @Override
-//                                    public void onAnimationEnd(Animator animation) {
-//                                        floatingActionButton.setVisibility(View.GONE);
-//                                    }
-//
-//                                    @Override
-//                                    public void onAnimationCancel(Animator animation) {
-//                                        floatingActionButton.setVisibility(View.GONE);
-//                                    }
-//
-//                                    @Override
-//                                    public void onAnimationRepeat(Animator animation) {
-//
-//                                    }
-//                                })
-//                                .start();
-//                    }
-//
-//                }
 
                 return true;
             }
