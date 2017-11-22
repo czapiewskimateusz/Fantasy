@@ -21,28 +21,21 @@ public class GetHomeUserDataAPI implements Callback<HomeUser> {
     }
 
     public void getUser(int userId) {
-
         Retrofit retrofit = getRetrofitInstance();
-
         HomeWebService api = retrofit.create(HomeWebService.class);
         Call<HomeUser> call = api.getUser(userId);
         call.enqueue(this);
-
     }
 
     @Override
     public void onResponse(Call<HomeUser> call, Response<HomeUser> response) {
-
-        if (response.isSuccessful()){
+        if (response.isSuccessful())
             mHomePresenter.onGetUserSuccess(response.body());
-        }
 
     }
 
     @Override
     public void onFailure(Call<HomeUser> call, Throwable t) {
-
         mHomePresenter.onGetUserFailure(t.getMessage());
-
     }
 }

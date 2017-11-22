@@ -24,37 +24,25 @@ public class LoginApiInteractor implements Callback<User> {
     }
 
     public void login(String email, String password) {
-
         this.password = password;
-
         Retrofit retrofit = getRetrofitInstance();
-
         LoginWebService api = retrofit.create(LoginWebService.class);
-
         Call<User> call = api.getUser("\""+email+"\"");
         call.enqueue(this);
-
     }
 
     @Override
     public void onResponse(Call<User> call, Response<User> response) {
-
         if (response.isSuccessful()) {
-
-            if (response.body().getPassword().equals(password)){
+            if (response.body().getPassword().equals(password))
                 loginPresenter.onLoginSuccessful(response.body().getUserId(),response.body().getTotalPoints());
-            } else {
+             else
                 loginPresenter.onLoginUnsuccessful(ERROR_TAG_INCORRECT_PASSWORD);
-            }
-
         }
-
     }
 
     @Override
     public void onFailure(Call<User> call, Throwable t) {
-
         loginPresenter.onLoginUnsuccessful(ERROR_TAG_USER_DOESNT_EXIST);
-
     }
 }

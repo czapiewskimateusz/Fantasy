@@ -23,26 +23,19 @@ public class RegisterApiInteractor implements Callback<Response> {
     }
 
     public void register(String email, String firstname, String lastname, String password){
-
         Retrofit retrofit = getRetrofitInstance();
-
         RegisterWebService api = retrofit.create(RegisterWebService.class);
-
         Call<Response> call = api.registerUser("\""+email+"\"","\""+password+"\"","\""+firstname+"\"","\""+lastname+"\"");
         call.enqueue(this);
     }
 
     @Override
     public void onResponse(Call<Response> call, retrofit2.Response<Response> response) {
-
         if (response.isSuccessful()) {
-
-            if (response.body().getMessage().equals(MESSAGE_SUCCESSFUL)){
+            if (response.body().getMessage().equals(MESSAGE_SUCCESSFUL))
                 registerPresenter.onRegisterSuccess();
-            } else if (response.body().getMessage().equals(MESSAGE_FAILURE)){
+             else if (response.body().getMessage().equals(MESSAGE_FAILURE))
                 registerPresenter.onRegisterFailure();
-            }
-
         }
     }
 

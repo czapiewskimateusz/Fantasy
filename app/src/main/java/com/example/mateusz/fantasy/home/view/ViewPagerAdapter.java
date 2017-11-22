@@ -32,10 +32,7 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
     @Override
     public void setPrimaryItem(ViewGroup container, int position, Object object) {
 
-        if (getCurrentFragment() != object){
-            mCurrentFragment = (ParentFragment) object;
-        }
-
+        if (getCurrentFragment() != object) mCurrentFragment = (ParentFragment) object;
         super.setPrimaryItem(container, position, object);
     }
 

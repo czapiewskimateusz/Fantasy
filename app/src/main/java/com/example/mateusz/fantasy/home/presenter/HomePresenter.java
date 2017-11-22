@@ -19,38 +19,26 @@ public class HomePresenter {
     }
 
     public void initUser(int userId){
-
         mGetHomeUserDataAPI.getUser(userId);
-
     }
 
     public void onGetUserSuccess(HomeUser user){
-
         view.getUser(user);
-
     }
 
     public void onGetUserFailure(String message){
-
         view.showConnectionError();
-
     }
 
     public void getHomeData(int teamId){
-
         mGetHomeDataAPI.getData(teamId);
-
     }
 
     public void onGetHomeDataSuccess(HomeData body) {
-
         view.presentData(body);
-
     }
 
     public void onGetDataFailure() {
-
         view.showConnectionError();
-
     }
 }

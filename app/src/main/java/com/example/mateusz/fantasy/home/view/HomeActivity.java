@@ -40,93 +40,76 @@ public class HomeActivity extends AppCompatActivity /*,LeagueFragment.LeagueFrag
     //UI
     private AHBottomNavigationViewPager viewPager;
     private AHBottomNavigation bottomNavigation;
-   // private FloatingActionButton floatingActionButton;
-
 
     private boolean mDoubleBackToExitPressedOnce = false;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-
         initUi();
     }
 
     private void initUi() {
-
         bottomNavigation = findViewById(R.id.bottom_navigation);
         viewPager = findViewById(R.id.view_pager);
+        addItemsToBottomNavigation(bottomNavigation);
+        customizeBottomNavigation(bottomNavigation);
+        setOnTabSelectedListenerToBottomNavigation(bottomNavigation);
+        initViewPager();
+        setDefaultPage();
+    }
 
-        AHBottomNavigationItem item1 = new AHBottomNavigationItem(R.string.tab_league, R.drawable.ic_league, R.color.accent);
-        AHBottomNavigationItem item2 = new AHBottomNavigationItem(R.string.tab_home, R.drawable.ic_home, R.color.accent);
-        AHBottomNavigationItem item3 = new AHBottomNavigationItem(R.string.tab_team, R.drawable.ic_team, R.color.accent);
+    private void setDefaultPage() {
+        bottomNavigation.setCurrentItem(1);
+        viewPager.setCurrentItem(1);
+        mCurrentFragment = mViewPagerAdapter.getCurrentFragment();
+    }
 
-        bottomNavigationItems.add(item1);
-        bottomNavigationItems.add(item2);
-        bottomNavigationItems.add(item3);
+    private void initViewPager() {
+        viewPager.setOffscreenPageLimit(3);
+        mViewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
+        viewPager.setAdapter(mViewPagerAdapter);
+    }
 
-        bottomNavigation.addItems(bottomNavigationItems);
-
-
-        bottomNavigation.setAccentColor(fetchColor(R.color.primary));
-        bottomNavigation.setInactiveColor(fetchColor(R.color.light_grey));
-        bottomNavigation.setBehaviorTranslationEnabled(true);
+    private void setOnTabSelectedListenerToBottomNavigation(AHBottomNavigation bottomNavigation) {
         bottomNavigation.setOnTabSelectedListener(new AHBottomNavigation.OnTabSelectedListener() {
             @Override
             public boolean onTabSelected(int position, boolean wasSelected) {
-
-                if (mCurrentFragment == null) {
-
-                    mCurrentFragment = mViewPagerAdapter.getCurrentFragment();
-
-                }
-
+                if (mCurrentFragment == null) mCurrentFragment = mViewPagerAdapter.getCurrentFragment();
                 viewPager.setCurrentItem(position, true);
-
-                if (mCurrentFragment == null) {
-
-                    return true;
-
-                }
-
-                if (mCurrentFragment != null){
-
-                    mCurrentFragment.willBeHidden();
-
-                }
-
-                    mCurrentFragment = mViewPagerAdapter.getCurrentFragment();
-                    mCurrentFragment.willBeDisplayed();
-
+                if (mCurrentFragment == null) return true;
+                if (mCurrentFragment != null) mCurrentFragment.willBeHidden();
+                mCurrentFragment = mViewPagerAdapter.getCurrentFragment();
+                mCurrentFragment.willBeDisplayed();
                 return true;
             }
         });
+    }
 
-        viewPager.setOffscreenPageLimit(2);
-        mViewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
-        viewPager.setAdapter(mViewPagerAdapter);
+    private void customizeBottomNavigation(AHBottomNavigation bottomNavigation) {
+        bottomNavigation.setAccentColor(fetchColor(R.color.primary));
+        bottomNavigation.setInactiveColor(fetchColor(R.color.light_grey));
+    }
 
-        bottomNavigation.setCurrentItem(1);
-        viewPager.setCurrentItem(1);
-
-        mCurrentFragment = mViewPagerAdapter.getCurrentFragment();
-
+    private void addItemsToBottomNavigation(AHBottomNavigation bottomNavigation) {
+        AHBottomNavigationItem item1 = new AHBottomNavigationItem(R.string.tab_league, R.drawable.ic_league, R.color.accent);
+        AHBottomNavigationItem item2 = new AHBottomNavigationItem(R.string.tab_home, R.drawable.ic_home, R.color.accent);
+        AHBottomNavigationItem item3 = new AHBottomNavigationItem(R.string.tab_team, R.drawable.ic_team, R.color.accent);
+        bottomNavigationItems.add(item1);
+        bottomNavigationItems.add(item2);
+        bottomNavigationItems.add(item3);
+        bottomNavigation.addItems(bottomNavigationItems);
     }
 
     @Override
     public void onBackPressed() {
-
         if (mDoubleBackToExitPressedOnce) {
             finishAffinity();
             return;
         }
-
         this.mDoubleBackToExitPressedOnce = true;
         Toast.makeText(this, getString(R.string.back_button_close_app_warning), Toast.LENGTH_SHORT).show();
-
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {

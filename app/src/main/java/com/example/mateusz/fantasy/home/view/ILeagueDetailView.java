@@ -6,10 +6,10 @@ import java.util.List;
 
 public interface ILeagueDetailView {
 
-    public void showProgress(boolean show);
+    void showProgress(boolean show);
 
-    public void presentUsersRank(List<UserRank> usersRank);
+    void presentUsersRank(List<UserRank> usersRank);
 
-    public void onConnectionError();
+    void onConnectionError();
 
 }

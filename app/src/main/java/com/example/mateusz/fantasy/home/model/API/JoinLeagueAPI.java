@@ -27,9 +27,7 @@ public class JoinLeagueAPI implements Callback<Response> {
      * @param userId user's id
      */
     public void joinLeague(String leagueCode, int userId) {
-
         Retrofit retrofit = getRetrofitInstance();
-
         LeagueWebService api = retrofit.create(LeagueWebService.class);
         Call<Response> call = api.joinLeague(userId, leagueCode);
         call.enqueue(this);
@@ -37,20 +35,16 @@ public class JoinLeagueAPI implements Callback<Response> {
 
     @Override
     public void onResponse(Call<Response> call, retrofit2.Response<Response> response) {
-
         if (response.isSuccessful()){
-            if (response.body().getMessage().equals(MESSAGE_SUCCESSFUL)){
+            if (response.body().getMessage().equals(MESSAGE_SUCCESSFUL))
                 mLeaguePresenter.onJoinLeagueSuccess();
-            } else if (response.body().getMessage().equals(MESSAGE_FAILURE)){
+             else if (response.body().getMessage().equals(MESSAGE_FAILURE))
                 mLeaguePresenter.onJoinLeagueFailure();
-            }
         }
     }
 
     @Override
     public void onFailure(Call<Response> call, Throwable t) {
-
-
-
+        //TODO
     }
 }

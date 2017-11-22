@@ -13,6 +13,7 @@
             android:id="@+id/iv_pitch"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:scaleType="fitXY"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -24,289 +25,8 @@
             app:srcCompat="@drawable/pitch" />
 
 
-        <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            xmlns:tools="http://schemas.android.com/tools"
-            android:id="@+id/constraintLayout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.097">
-
-            <ImageView
-                android:id="@+id/iv_kit"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/manutd_1" />
-
-            <TextView
-                android:id="@+id/tv_player_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:background="@color/accent_dark"
-                android:padding="2dp"
-                android:text="De Gea"
-                android:textColor="@color/primary_text"
-                android:textSize="12sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/iv_kit"
-                tools:text="De Gea" />
-
-            <TextView
-                android:id="@+id/tv_player_score"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:background="@color/accent_light"
-                android:padding="2dp"
-                android:text="24"
-                android:textAlignment="center"
-                android:textColor="@color/secondary_text"
-                android:textSize="12sp"
-                app:layout_constraintEnd_toEndOf="@+id/tv_player_name"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/tv_player_name"
-                app:layout_constraintTop_toBottomOf="@+id/tv_player_name"
-                tools:text="24" />
-        </android.support.constraint.ConstraintLayout>
-
-        <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            xmlns:tools="http://schemas.android.com/tools"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHorizontal_bias="0.053"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.34">
-
-            <ImageView
-                android:id="@+id/iv_kit1"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/chelsea_1" />
-
-            <TextView
-                android:id="@+id/tv_player_name1"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:background="@color/accent_dark"
-                android:ellipsize="end"
-                android:maxLines="1"
-                android:padding="2dp"
-                android:text="Azpilicueta"
-                android:textAlignment="textStart"
-                android:textColor="@color/primary_text"
-                android:textSize="12sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/iv_kit1"
-                tools:text="Azpilicueta" />
-
-            <TextView
-                android:id="@+id/tv_player_score1"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:background="@color/accent_light"
-                android:padding="2dp"
-                android:text="11"
-                android:textAlignment="center"
-                android:textColor="@color/secondary_text"
-                android:textSize="12sp"
-                app:layout_constraintEnd_toEndOf="@+id/tv_player_name1"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/tv_player_name1"
-                app:layout_constraintTop_toBottomOf="@+id/tv_player_name1"
-                tools:text="11" />
-        </android.support.constraint.ConstraintLayout>
-
-        <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            xmlns:tools="http://schemas.android.com/tools"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHorizontal_bias="0.35"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.34">
-
-            <ImageView
-                android:id="@+id/iv_kit2"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/bournemouth_1" />
-
-            <TextView
-                android:id="@+id/tv_player_name2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:background="@color/accent_dark"
-                android:padding="2dp"
-                android:text="Daniels"
-                android:textColor="@color/primary_text"
-                android:textSize="12sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/iv_kit2"
-                tools:text="Daniels" />
-
-            <TextView
-                android:id="@+id/tv_player_score2"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:background="@color/accent_light"
-                android:padding="2dp"
-                android:text="8"
-                android:textAlignment="center"
-                android:textColor="@color/secondary_text"
-                android:textSize="12sp"
-                app:layout_constraintEnd_toEndOf="@+id/tv_player_name2"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/tv_player_name2"
-                app:layout_constraintTop_toBottomOf="@+id/tv_player_name2"
-                tools:text="8" />
-        </android.support.constraint.ConstraintLayout>
-
-        <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            xmlns:tools="http://schemas.android.com/tools"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHorizontal_bias="0.679"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.34">
-
-            <ImageView
-                android:id="@+id/iv_kit3"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/mancity_1" />
-
-            <TextView
-                android:id="@+id/tv_player_name3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:background="@color/accent_dark"
-                android:padding="2dp"
-                android:text="Otamendi"
-                android:textColor="@color/primary_text"
-                android:textSize="12sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/iv_kit3"
-                tools:text="Otamendi" />
-
-            <TextView
-                android:id="@+id/tv_player_score3"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:background="@color/accent_light"
-                android:padding="2dp"
-                android:text="6"
-                android:textAlignment="center"
-                android:textColor="@color/secondary_text"
-                android:textSize="12sp"
-                app:layout_constraintEnd_toEndOf="@+id/tv_player_name3"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/tv_player_name3"
-                app:layout_constraintTop_toBottomOf="@+id/tv_player_name3"
-                tools:text="6" />
-        </android.support.constraint.ConstraintLayout>
-
-        <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            xmlns:tools="http://schemas.android.com/tools"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHorizontal_bias="0.945"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.34">
-
-            <ImageView
-                android:id="@+id/iv_kit4"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/manutd_1" />
-
-            <TextView
-                android:id="@+id/tv_player_name4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:background="@color/accent_dark"
-                android:padding="2dp"
-                android:text="Valencia"
-                android:textColor="@color/primary_text"
-                android:textSize="12sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/iv_kit4"
-                tools:text="Valencia" />
-
-            <TextView
-                android:id="@+id/tv_player_score4"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:background="@color/accent_light"
-                android:padding="2dp"
-                android:text="24"
-                android:textAlignment="center"
-                android:textColor="@color/secondary_text"
-                android:textSize="12sp"
-                app:layout_constraintEnd_toEndOf="@+id/tv_player_name4"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/tv_player_name4"
-                app:layout_constraintTop_toBottomOf="@+id/tv_player_name4"
-                tools:text="24" />
-        </android.support.constraint.ConstraintLayout>
-
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/tv_team_GW"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@color/primary"
@@ -319,6 +39,19 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_team"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_team_GW" />
+
 
     </android.support.constraint.ConstraintLayout>
 

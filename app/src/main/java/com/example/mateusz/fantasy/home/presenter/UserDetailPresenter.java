@@ -21,12 +21,9 @@ public class UserDetailPresenter {
     }
 
     public void editUser(String firstName, String lastName, String email, String newPassword, String newPasswordRepeat) {
-
         view.clearErrors();
-
-        if (validateFields(email,firstName,lastName, newPassword, newPasswordRepeat)){
+        if (validateFields(email,firstName,lastName, newPassword, newPasswordRepeat))
             return;
-        }
     }
 
     /**
@@ -49,9 +46,8 @@ public class UserDetailPresenter {
         } else if (email.length() > 50) {
             view.onEmailError(context.getString(R.string.email_length_error));
             check = false;
-        } else {
+        } else
             view.onEmailError("");
-        }
 
         if (TextUtils.isEmpty(firstname)) {
             view.onFirstNameError(context.getString(R.string.firstname_empty_error));
@@ -59,9 +55,8 @@ public class UserDetailPresenter {
         } else if (firstname.length() > 50) {
             view.onFirstNameError(context.getString(R.string.firstname_length_error));
             check = false;
-        } else {
+        } else
             view.onFirstNameError("");
-        }
 
         if (TextUtils.isEmpty(lastname)) {
             view.onLastNameError(context.getString(R.string.lastname_empty_error));
@@ -69,9 +64,8 @@ public class UserDetailPresenter {
         } else if (lastname.length() > 50) {
             view.onLastNameError(context.getString(R.string.lastname_length_error));
             check = false;
-        } else {
+        } else
             view.onLastNameError("");
-        }
 
         if (TextUtils.isEmpty(password)) {
             view.onPasswordError(context.getString(R.string.error_password_empty));
@@ -79,9 +73,8 @@ public class UserDetailPresenter {
         } else if (password.length() < 6) {
             view.onPasswordError(context.getString(R.string.password_length_error));
             check = false;
-        } else {
+        } else
             view.onPasswordError("");
-        }
 
         if (!password.equals(passwordRepeat)) {
             view.onPasswordError(context.getString(R.string.passwords_do_not_match));
@@ -98,12 +91,9 @@ public class UserDetailPresenter {
         } else if (passwordRepeat.length() < 6) {
             view.onPasswordRepeatError(context.getString(R.string.password_length_error));
             check = false;
-        } else {
+        } else
             view.onPasswordRepeatError("");
-        }
-
 
         return check;
-
     }
 }

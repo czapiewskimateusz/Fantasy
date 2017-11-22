@@ -3,6 +3,7 @@
     android:id="@+id/leagues_container"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
+    android:background="@drawable/stadium"
     tools:context="com.example.mateusz.fantasy.home.view.fragment.LeagueFragment"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"

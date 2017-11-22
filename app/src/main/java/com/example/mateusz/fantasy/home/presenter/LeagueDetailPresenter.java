@@ -21,31 +21,23 @@ public class LeagueDetailPresenter {
      * Constructor
      */
     public LeagueDetailPresenter(ILeagueDetailView view) {
-
         this.view = view;
         mApiinteractor = new GetLeagueDetailAPI(this);
-
     }
 
     public void getUsersRank(int leagueId){
-
         view.showProgress(true);
         mApiinteractor.getUsersRank(leagueId);
-
     }
 
     public void presentUsersRank(List<UserRank> usersRank){
-
         view.presentUsersRank(usersRank);
         view.showProgress(false);
-
     }
 
     public void onGetUsersRankFailure(String message){
-
         view.showProgress(false);
         Log.d("RETRO ERROR", message);
         view.onConnectionError();
-
     }
 }

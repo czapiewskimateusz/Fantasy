@@ -47,57 +47,43 @@ public class UserDetailActivity extends Activity implements UserDetailView {
         getDataFromIntent();
 
         mUserDetailPresenter = new UserDetailPresenter(this, this);
-
     }
 
     @Override
     public void onEmailError(String string) {
-
         mLayoutEmail.setError(string);
-
     }
 
     @Override
     public void onFirstNameError(String string) {
-
         mLayoutFirstName.setError(string);
-
     }
 
     @Override
     public void onLastNameError(String string) {
-
         mLayoutLastName.setError(string);
-
     }
 
     @Override
     public void onPasswordError(String string) {
-
         mLayoutPassword.setError(string);
-
     }
 
     @Override
     public void onPasswordRepeatError(String string) {
-
         mLayoutPasswordRepeat.setError(string);
-
     }
 
     @Override
     public void clearErrors() {
-
         mLayoutFirstName.setError("");
         mLayoutLastName.setError("");
         mLayoutEmail.setError("");
         mLayoutPassword.setError("");
         mLayoutPasswordRepeat.setError("");
-
     }
 
     private void initViews() {
-
         mEtFirstName = findViewById(R.id.et_edit_first_name);
         mEtLastName = findViewById(R.id.et_edit_last_name);
         mEtEmail = findViewById(R.id.et_edit_email);
@@ -123,11 +109,9 @@ public class UserDetailActivity extends Activity implements UserDetailView {
                 editUser();
             }
         });
-
     }
 
     private void getDataFromIntent() {
-
         Bundle bundle = getIntent().getBundleExtra(BUNDLE_EXTRA);
 
         mLayoutFirstName.setHint(bundle.getString(FIRST_NAME_EXTRA));
@@ -135,32 +119,22 @@ public class UserDetailActivity extends Activity implements UserDetailView {
         mLayoutEmail.setHint(bundle.getString(EMAIL_EXTRA));
 
         mUserPassword = bundle.getString(PASSWORD_EXTRA);
-
     }
 
     private void editUser() {
-
         String firstName = mEtFirstName.getText().toString();
         String lastName = mEtLastName.getText().toString();
         String email = mEtEmail.getText().toString();
         String newPassword = mEtPassword.getText().toString();
         String newPasswordRepeat = mEtPasswordRepeat.getText().toString();
 
-        if (TextUtils.isEmpty(firstName)) {
-            firstName = mLayoutFirstName.getHint().toString();
-        }
+        if (TextUtils.isEmpty(firstName)) firstName = mLayoutFirstName.getHint().toString();
 
-        if (TextUtils.isEmpty(lastName)) {
-            lastName = mLayoutLastName.getHint().toString();
-        }
+        if (TextUtils.isEmpty(lastName)) lastName = mLayoutLastName.getHint().toString();
 
-        if (TextUtils.isEmpty(email)) {
-            email = mLayoutEmail.getHint().toString();
-        }
+        if (TextUtils.isEmpty(email)) email = mLayoutEmail.getHint().toString();
 
-        if (TextUtils.isEmpty(newPassword) && TextUtils.isEmpty(newPasswordRepeat)) {
-            newPassword = newPasswordRepeat = mUserPassword;
-        }
+        if (TextUtils.isEmpty(newPassword) && TextUtils.isEmpty(newPasswordRepeat)) newPassword = newPasswordRepeat = mUserPassword;
 
         mUserDetailPresenter.editUser(firstName, lastName, email, newPassword, newPasswordRepeat);
     }

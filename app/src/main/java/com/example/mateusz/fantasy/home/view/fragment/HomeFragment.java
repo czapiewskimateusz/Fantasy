@@ -61,9 +61,7 @@ public class HomeFragment extends Fragment implements ParentFragment, IHomeView{
 
     public HomeFragment() {
         // Required empty public constructor
-        if (mHomePresenter == null) {
-            mHomePresenter = new HomePresenter(this);
-        }
+        if (mHomePresenter == null) mHomePresenter = new HomePresenter(this);
     }
 
 
@@ -78,9 +76,7 @@ public class HomeFragment extends Fragment implements ParentFragment, IHomeView{
         initTextViews(view);
         initButton(view);
         getLoggedUserId();
-
         mHomePresenter.initUser(mUserId);
-
         return view;
     }
 
@@ -90,12 +86,10 @@ public class HomeFragment extends Fragment implements ParentFragment, IHomeView{
      */
     @Override
     public void willBeDisplayed() {
-
         if (fragmentContainer != null) {
             Animation fadeIn = AnimationUtils.loadAnimation(getActivity(), R.anim.fade_in);
             fragmentContainer.startAnimation(fadeIn);
         }
-
     }
 
     /**
@@ -103,46 +97,37 @@ public class HomeFragment extends Fragment implements ParentFragment, IHomeView{
      */
     @Override
     public void willBeHidden() {
-
         if (fragmentContainer != null) {
             Animation fadeOut = AnimationUtils.loadAnimation(getActivity(), R.anim.fade_out);
             fragmentContainer.startAnimation(fadeOut);
         }
-
     }
 
     @Override
     public void getUser(HomeUser user) {
-
         mTvUserName.setText(user.getFirstName()+" "+user.getLastName());
         mTvUserTeamName.setText(user.getTeamName());
         mTeamId = user.getTeamId();
         mHomeUser = user;
         mHomePresenter.getHomeData(mTeamId);
-
     }
 
     @Override
     public void showConnectionError() {
-
         NetworkUtils.showConnectionErrorToast(getActivity());
-
     }
 
     @Override
     public void presentData(HomeData body) {
-
-        String gw = getString(R.string.gw_gameweek) + " " + body.getGw() + " " + getString(R.string.gw_points);
+        String gw = getString(R.string.gw_gameweek) + " " + body.getGw();
         mTvGw.setText(gw);
         mTvUserScore.setText(Integer.toString(body.getYourScore()));
         mTvAverageScore.setText(Integer.toString((int)body.getAvg()));
         mTvHHighestScore.setText(Integer.toString(body.getMax()));
         mTvDeadlineDate.setText(body.getDeadline());
-
     }
 
     private void initButton(View view) {
-
         mBtnLogOut = view.findViewById(R.id.btn_logout);
         mBtnLogOut.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -155,10 +140,8 @@ public class HomeFragment extends Fragment implements ParentFragment, IHomeView{
 
                 Intent intent = new Intent(getActivity(), LoginActivity.class);
                 startActivity(intent);
-
             }
         });
-
     }
 
     private void initTextViews(View view){
@@ -189,15 +172,10 @@ public class HomeFragment extends Fragment implements ParentFragment, IHomeView{
             }
 
         });
-
     }
-
 
     private void getLoggedUserId(){
-
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences(LoginActivity.PREFS_NAME, 0);
         mUserId =  sharedPreferences.getInt(USER_ID_EXTRA, 0);
-
     }
-
 }

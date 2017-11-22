@@ -61,23 +61,20 @@ public class LeagueDetailActivity extends AppCompatActivity implements ILeagueDe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_league_detail);
+        ButterKnife.bind(this);
 
         mLeagueDetailPresenter = new LeagueDetailPresenter(this);
 
-        SharedPreferences sharedPreferences = getSharedPreferences(PREFS_NAME,0);
-        mUserId = sharedPreferences.getInt(USER_ID_EXTRA,0);
-
-        ButterKnife.bind(this);
-
-        Intent intent = getIntent();
-
-        getLeagueFromIntent(intent);
-
+        getDataFromSharedPreferences();
+        getLeagueFromIntent();
         initializeView();
         initializeRecyclerView();
-
         mLeagueDetailPresenter.getUsersRank(mLeague.getLeagueId());
+    }
 
+    private void getDataFromSharedPreferences() {
+        SharedPreferences sharedPreferences = getSharedPreferences(PREFS_NAME,0);
+        mUserId = sharedPreferences.getInt(USER_ID_EXTRA,0);
     }
 
     @Override
@@ -101,11 +98,10 @@ public class LeagueDetailActivity extends AppCompatActivity implements ILeagueDe
 
     }
 
-    private void getLeagueFromIntent(Intent intent){
-
+    private void getLeagueFromIntent(){
+        Intent intent = getIntent();
         Bundle bundle = intent.getBundleExtra(LEAGUE_BUNDLE_EXTRA);
         mLeague = new League(bundle.getString(NAME),bundle.getInt(USER_POSITION),bundle.getString(CODE),bundle.getInt(LEAGUE_ID),bundle.getInt(NUMBER_OF_PLAYERS));
-
     }
 
     @Override
@@ -117,38 +113,31 @@ public class LeagueDetailActivity extends AppCompatActivity implements ILeagueDe
      * Initialize view with data form intent
      */
     private void initializeView(){
-
         mTvLeagueName.setText(mLeague.getName());
         mTvRanking.setText(String.format(Locale.ENGLISH,"%d", mLeague.getRank()));
         mTvCode.setText(mLeague.getCode());
         mTvNumberOfPlayers.setText(String.format(Locale.ENGLISH,"%d", mLeague.getNumberOfPlayers()));
-
         mIvShare.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
-
                 Intent sendIntent = new Intent();
                 sendIntent.setAction(Intent.ACTION_SEND);
                 sendIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.share_league_text_pt1) + " \""+mTvLeagueName.getText().toString()+"\"" + getString(R.string.share_league_text_pt2) + mTvCode.getText().toString());
                 sendIntent.setType("text/plain");
                 startActivity(sendIntent);
-
             }
 
         });
-
     }
 
     /**
      * Initialize RecyclerView
      */
     private void initializeRecyclerView(){
-
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setHasFixedSize(true);
-
     }
 }

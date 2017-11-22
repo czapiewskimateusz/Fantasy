@@ -25,9 +25,7 @@ public class GetLeagueDetailAPI implements Callback<LeagueDetailJsonResponse> {
     }
 
     public void getUsersRank(int leagueId) {
-
         Retrofit retrofit = getRetrofitInstance();
-
         LeagueWebService api = retrofit.create(LeagueWebService.class);
         Call<LeagueDetailJsonResponse> call = api.getUsersRank(leagueId);
         call.enqueue(this);
@@ -35,12 +33,10 @@ public class GetLeagueDetailAPI implements Callback<LeagueDetailJsonResponse> {
 
     @Override
     public void onResponse(Call<LeagueDetailJsonResponse> call, Response<LeagueDetailJsonResponse> response) {
-
         if (response.isSuccessful()){
             ArrayList<UserRank> usersRank = new ArrayList<>(Arrays.asList(response.body().getUsersRank()));
             leagueDetailPresenter.presentUsersRank(usersRank);
         }
-
     }
 
     @Override

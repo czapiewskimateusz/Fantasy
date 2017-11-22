@@ -1,9 +1,5 @@
 package com.example.mateusz.fantasy.authentication.login.model;
 
-/**
- * Created by Mateusz on 09.08.2017.
- */
-
 public class User {
 
     private int userId;

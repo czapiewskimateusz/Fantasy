@@ -51,7 +51,6 @@ public class LeagueFragment extends Fragment implements ILeagueView, JoinLeagueD
     private CoordinatorLayout mFragmentContainer;
     private SwipeRefreshLayout mSwipeRefreshLayout;
 
-
     public LeaguePresenter mLeaguePresenter;
 
     private int mUserId;
@@ -62,12 +61,8 @@ public class LeagueFragment extends Fragment implements ILeagueView, JoinLeagueD
      * Constructor
      */
     public LeagueFragment() {
-
-        if (mLeaguePresenter == null) {
-            mLeaguePresenter = new LeaguePresenter(this);
-        }
+        if (mLeaguePresenter == null) mLeaguePresenter = new LeaguePresenter(this);
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -99,21 +94,16 @@ public class LeagueFragment extends Fragment implements ILeagueView, JoinLeagueD
 
     @Override
     public void onDialogPositiveClick(JoinLeagueDialog dialog) {
-
         mLeaguePresenter.joinLeague(dialog.getCode(), mUserId);
-
     }
 
     @Override
     public void onDialogPositiveClick(CreateLeagueDialog dialog) {
-
         mLeaguePresenter.createLeague(dialog.getName(), mUserId);
-
     }
 
     @Override
     public void showProgress(boolean show) {
-
         if (show) {
             mProgressBar.setVisibility(View.VISIBLE);
             mRecyclerView.setVisibility(View.INVISIBLE);
@@ -121,54 +111,41 @@ public class LeagueFragment extends Fragment implements ILeagueView, JoinLeagueD
             mProgressBar.setVisibility(View.INVISIBLE);
             mRecyclerView.setVisibility(View.VISIBLE);
         }
-
     }
 
     @Override
     public void presentLeagues(List<League> leagues) {
-
         if (rvAdapter == null) {
             rvAdapter = new RVLeagueAdapter(leagues, getContext());
             mRecyclerView.setAdapter(rvAdapter);
         } else {
             rvAdapter.refreshData(leagues);
         }
-
     }
 
     @Override
     public void reloadLeagues() {
-
         mLeaguePresenter.getUserLeagues(mUserId, mTotalPoints);
-
     }
 
     @Override
     public void onJoinLeagueFailure() {
-
         Snackbar.make(mFragmentContainer, getContext().getString(R.string.join_league_error), BaseTransientBottomBar.LENGTH_LONG).show();
-
     }
 
     @Override
     public void onCreateLeagueFailure() {
-
         Snackbar.make(mFragmentContainer, getContext().getString(R.string.create_league_error), BaseTransientBottomBar.LENGTH_LONG).show();
-
     }
 
 
     private void initButtons() {
-
         mFABCreateLeague.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 mFloatingActionMenu.close(true);
-
                 final CreateLeagueDialog createLeagueDialog = new CreateLeagueDialog();
                 createLeagueDialog.setTargetFragment(LeagueFragment.this, 0);
-
 
                 new Handler().postDelayed(new Runnable() {
                     @Override
@@ -176,15 +153,12 @@ public class LeagueFragment extends Fragment implements ILeagueView, JoinLeagueD
                         createLeagueDialog.show(getFragmentManager(), "league_join_dialog");
                     }
                 }, 250);
-
-
             }
         });
 
         mFABJoinLeague.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 mFloatingActionMenu.close(true);
                 final JoinLeagueDialog leagueDialog = new JoinLeagueDialog();
                 leagueDialog.setTargetFragment(LeagueFragment.this, 0);
@@ -195,10 +169,8 @@ public class LeagueFragment extends Fragment implements ILeagueView, JoinLeagueD
                         leagueDialog.show(getFragmentManager(), "league_join_dialog");
                     }
                 }, 250);
-
             }
         });
-
     }
 
     /**
@@ -206,14 +178,11 @@ public class LeagueFragment extends Fragment implements ILeagueView, JoinLeagueD
      */
     @Override
     public void willBeDisplayed() {
-
-
         if (mFragmentContainer != null) {
             Animation fadeIn = AnimationUtils.loadAnimation(getActivity(), R.anim.fade_in);
             mFragmentContainer.startAnimation(fadeIn);
             mRecyclerView.smoothScrollToPosition(0);
         }
-
     }
 
     /**
@@ -221,12 +190,10 @@ public class LeagueFragment extends Fragment implements ILeagueView, JoinLeagueD
      */
     @Override
     public void willBeHidden() {
-
         if (mFragmentContainer != null) {
             Animation fadeOut = AnimationUtils.loadAnimation(getActivity(), R.anim.fade_out);
             mFragmentContainer.startAnimation(fadeOut);
         }
-
     }
 
     @Override
@@ -240,7 +207,6 @@ public class LeagueFragment extends Fragment implements ILeagueView, JoinLeagueD
      * @param view parent view
      */
     private void initRecyclerView(View view) {
-
         mRecyclerView = view.findViewById(R.id.rv_leagues);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(view.getContext());
         mRecyclerView.setLayoutManager(linearLayoutManager);
@@ -259,11 +225,9 @@ public class LeagueFragment extends Fragment implements ILeagueView, JoinLeagueD
                 super.onScrollStateChanged(recyclerView, newState);
             }
         });
-
     }
 
     private void initSwipeToRefresh(){
-
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
