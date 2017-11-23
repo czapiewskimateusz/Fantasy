@@ -22,12 +22,12 @@
     <!--<color name="divider">#BDBDBD</color>-->
 
     PURPLE GREEN
-    <color name="primary">#3f51b5</color>
-    <color name="primary_dark">#303F9F</color>
-    <color name="primary_light">#C5CAE9</color>
-    <color name="accent">#ffc107</color>
-    <color name="accent_dark">#ffc107</color>
-    <color name="accent_light">#ffc107</color>
+    <color name="primary">#212121</color>
+    <color name="primary_dark">#000000</color>
+    <color name="primary_light">#484848</color>
+    <color name="accent">#00e676</color>
+    <color name="accent_dark">#00b248</color>
+    <color name="accent_light">#66ffa6</color>
     <color name="primary_text">#212121</color>
     <color name="secondary_text">#757575</color>
     <color name="icons">#FFFFFF</color>
@@ -36,10 +36,10 @@
     <color name="color_player_name">#4CAF50</color>
     <color name="color_player_score">#8BC34A</color>
 
-    <color name="color_trans_accent">#4Dffc107</color>
-    <color name="color_trans_primary">#803f51b5</color>
-    <color name="color_trans_primary_dark">#CC303F9F</color>
-    <color name="color_trans_cardView">#80ffffff</color>
+    <color name="color_trans_accent">#4D00b248</color>
+    <color name="color_trans_primary">#80212121</color>
+    <color name="color_trans_primary_dark">#CC212121</color>
+    <color name="color_trans_cardView">#CC212121</color>
 
     <color name="gold">#ffc107</color>
 

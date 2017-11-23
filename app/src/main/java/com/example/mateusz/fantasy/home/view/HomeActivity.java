@@ -77,7 +77,7 @@ public class HomeActivity extends AppCompatActivity /*,LeagueFragment.LeagueFrag
             @Override
             public boolean onTabSelected(int position, boolean wasSelected) {
                 if (mCurrentFragment == null) mCurrentFragment = mViewPagerAdapter.getCurrentFragment();
-                viewPager.setCurrentItem(position, true);
+                viewPager.setCurrentItem(position, false);
                 if (mCurrentFragment == null) return true;
                 if (mCurrentFragment != null) mCurrentFragment.willBeHidden();
                 mCurrentFragment = mViewPagerAdapter.getCurrentFragment();

@@ -39,24 +39,28 @@ public class RVTeamAdapter extends RecyclerView.Adapter<RVTeamAdapter.TeamViewHo
 
     @Override
     public TeamViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.rv_formation_line,parent,false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.rv_formation_line, parent, false);
         return new TeamViewHolder(v);
     }
 
     @Override
     public void onBindViewHolder(TeamViewHolder holder, int position) {
-
-        holder.rvFormationLine.setLayoutManager(new LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false));
+        holder.rvFormationLine.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
         holder.rvFormationLine.setNestedScrollingEnabled(false);
+        holder.rvFormationLine.setHasFixedSize(true);
 
-    switch (position){
-            case 0: holder.rvFormationLine.setAdapter(new RVFormationAdapter(goalkeepers,context));
-                    break;
-            case 1: holder.rvFormationLine.setAdapter(new RVFormationAdapter(defenders,context));
+        switch (position) {
+            case 0:
+                holder.rvFormationLine.setAdapter(new RVFormationAdapter(goalkeepers, context));
                 break;
-            case 2: holder.rvFormationLine.setAdapter(new RVFormationAdapter(midfielders,context));
+            case 1:
+                holder.rvFormationLine.setAdapter(new RVFormationAdapter(defenders, context));
                 break;
-            case 3: holder.rvFormationLine.setAdapter(new RVFormationAdapter(attackers,context));
+            case 2:
+                holder.rvFormationLine.setAdapter(new RVFormationAdapter(midfielders, context));
+                break;
+            case 3:
+                holder.rvFormationLine.setAdapter(new RVFormationAdapter(attackers, context));
                 break;
         }
     }
@@ -66,10 +70,10 @@ public class RVTeamAdapter extends RecyclerView.Adapter<RVTeamAdapter.TeamViewHo
         return 4;
     }
 
-    private void assignPlayerToFormation(ArrayList<Player> players){
+    private void assignPlayerToFormation(ArrayList<Player> players) {
         initArrayLists();
 
-        for (Player p: players) {
+        for (Player p : players) {
             if (p.getPosition().equals(GOALKEEPER)) goalkeepers.add(p);
             if (p.getPosition().equals(DEFENDER)) defenders.add(p);
             if (p.getPosition().equals(MIDFIELDER)) midfielders.add(p);

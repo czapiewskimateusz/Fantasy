@@ -86,5 +86,6 @@ public class TeamFragment extends Fragment implements ParentFragment {
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRvTeam.setLayoutManager(linearLayoutManager);
         mRvTeam.setNestedScrollingEnabled(false);
+        mRvTeam.setHasFixedSize(true);
     }
 }
