@@ -3,6 +3,7 @@ package com.example.mateusz.fantasy.home.view.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,11 +11,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.mateusz.fantasy.R;
 import com.example.mateusz.fantasy.home.model.repo.Player;
 import com.example.mateusz.fantasy.home.presenter.adapters.RVTeamAdapter;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -24,11 +30,13 @@ import butterknife.ButterKnife;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class TeamFragment extends Fragment implements ParentFragment {
+public class TeamFragment extends Fragment implements ParentFragment,RVTeamAdapter.TeamFragmentCallback {
 
     public FrameLayout fragmentContainer;
     private RecyclerView mRvTeam;
     private RVTeamAdapter rvTeamAdapter;
+    private TextView tvTeamHeader;
+    private Button transferButton;
 
     public TeamFragment() {
         // Required empty public constructor
@@ -39,11 +47,24 @@ public class TeamFragment extends Fragment implements ParentFragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_team, container, false);
-
-        fragmentContainer = view.findViewById(R.id.team_fragment_container);
+        initViews(view);
         initRecyclerView(view);
         presentTeams(Player.getMockPlayerData());
         return view;
+    }
+
+    private void initViews(View view) {
+        fragmentContainer = view.findViewById(R.id.team_fragment_container);
+        transferButton = view.findViewById(R.id.btn_transfer);
+        transferButton.setEnabled(false);
+        transferButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onButtonClick();
+            }
+        });
+        tvTeamHeader = view.findViewById(R.id.tv_team_GW);
+        tvTeamHeader.setText(getString(R.string.gw_gameweek) + " 9");
     }
 
     /**
@@ -68,9 +89,9 @@ public class TeamFragment extends Fragment implements ParentFragment {
         }
     }
 
-    void presentTeams(ArrayList<Player> players){
-        if (rvTeamAdapter == null){
-            rvTeamAdapter = new RVTeamAdapter(players,getContext());
+    void presentTeams(ArrayList<Player> players) {
+        if (rvTeamAdapter == null) {
+            rvTeamAdapter = new RVTeamAdapter(players, getContext(),this);
             mRvTeam.setAdapter(rvTeamAdapter);
         }
     }
@@ -82,10 +103,26 @@ public class TeamFragment extends Fragment implements ParentFragment {
      */
     private void initRecyclerView(View view) {
         mRvTeam = view.findViewById(R.id.rv_team);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(view.getContext());
-        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        mRvTeam.setLayoutManager(linearLayoutManager);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(view.getContext(), 4);
+        gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+            @Override
+            public int getSpanSize(int position) {
+                if (position == 0) return 4;
+                if (position > 0 && position < 9) return 1;
+                return 2;
+            }
+        });
+        mRvTeam.setLayoutManager(gridLayoutManager);
         mRvTeam.setNestedScrollingEnabled(false);
         mRvTeam.setHasFixedSize(true);
+    }
+
+    public void onButtonClick(){
+        Toast.makeText(getContext(),"Kliknięty guzik",Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void setButtonEnable(boolean set) {
+        transferButton.setEnabled(set);
     }
 }

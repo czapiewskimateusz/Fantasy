@@ -47,7 +47,7 @@
     <string name="average">Średnio</string>
     <string name="highest">Największy</string>
     <string name="your_score">Twój Wynik</string>
-    <string name="gw_gameweek">Kolejka</string>
+    <string name="gw_gameweek">KOLEJKA</string>
     <string name="gw_points">punkty</string>
     <string name="edit_user_label">Edytuj konto</string>
     <string name="change_password_button">Zmień hasło</string>

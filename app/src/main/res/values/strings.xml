@@ -23,6 +23,7 @@
     <string name="register_button">Sign up</string>
     <string name="change_password_button">Change password</string>
     <string name="save_edit_button">Save</string>
+    <string name="transfer_button" translatable="false">Transfer</string>
 
     //Navigation
     <string name="tab_league">Leagues</string>
@@ -68,7 +69,7 @@
     <string name="your_score">Your Score</string>
     <string name="average">Average</string>
     <string name="highest">Highest</string>
-    <string name="gw_gameweek">Gameweek</string>
+    <string name="gw_gameweek">GAMEWEEK</string>
     <string name="gw_points">points</string>
 
 </resources>

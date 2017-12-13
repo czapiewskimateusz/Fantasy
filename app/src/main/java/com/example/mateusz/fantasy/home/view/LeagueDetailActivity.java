@@ -17,7 +17,6 @@ import com.example.mateusz.fantasy.home.presenter.LeagueDetailPresenter;
 import com.example.mateusz.fantasy.home.presenter.adapters.RVLeagueDetailsAdapter;
 import com.example.mateusz.fantasy.R;
 
-import java.lang.reflect.Array;
 import java.util.List;
 import java.util.Locale;
 
@@ -67,9 +66,15 @@ public class LeagueDetailActivity extends AppCompatActivity implements ILeagueDe
 
         getDataFromSharedPreferences();
         getLeagueFromIntent();
-        initializeView();
-        initializeRecyclerView();
+        initView();
+        initRecyclerView();
         mLeagueDetailPresenter.getUsersRank(mLeague.getLeagueId());
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        showProgress(false);
     }
 
     private void getDataFromSharedPreferences() {
@@ -79,7 +84,6 @@ public class LeagueDetailActivity extends AppCompatActivity implements ILeagueDe
 
     @Override
     public void showProgress(boolean show) {
-
         if (show){
             mProgressBar.setVisibility(View.VISIBLE);
             recyclerView.setVisibility(View.INVISIBLE);
@@ -87,15 +91,12 @@ public class LeagueDetailActivity extends AppCompatActivity implements ILeagueDe
             mProgressBar.setVisibility(View.INVISIBLE);
             recyclerView.setVisibility(View.VISIBLE);
         }
-
     }
 
     @Override
     public void presentUsersRank(List<UserRank> usersRank) {
-
         RVLeagueDetailsAdapter rvLeagueDetailsAdapter = new RVLeagueDetailsAdapter(usersRank,mUserId);
         recyclerView.setAdapter(rvLeagueDetailsAdapter);
-
     }
 
     private void getLeagueFromIntent(){
@@ -112,7 +113,7 @@ public class LeagueDetailActivity extends AppCompatActivity implements ILeagueDe
     /**
      * Initialize view with data form intent
      */
-    private void initializeView(){
+    private void initView(){
         mTvLeagueName.setText(mLeague.getName());
         mTvRanking.setText(String.format(Locale.ENGLISH,"%d", mLeague.getRank()));
         mTvCode.setText(mLeague.getCode());
@@ -134,7 +135,7 @@ public class LeagueDetailActivity extends AppCompatActivity implements ILeagueDe
     /**
      * Initialize RecyclerView
      */
-    private void initializeRecyclerView(){
+    private void initRecyclerView(){
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);

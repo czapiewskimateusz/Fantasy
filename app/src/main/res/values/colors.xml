@@ -50,4 +50,7 @@
 
     <color name="light_grey">#b3b3b3</color>
     <color name="colorWhite">#ffffff</color>
+    <color name="player_name_color">#99000000</color>
+    <color name="player_score_color">#4D000000</color>
+    <color name="player_selected">#FF4081</color>
 </resources>

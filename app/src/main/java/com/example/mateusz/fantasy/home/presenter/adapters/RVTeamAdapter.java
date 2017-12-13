@@ -1,102 +1,136 @@
 package com.example.mateusz.fantasy.home.presenter.adapters;
 
 import android.content.Context;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.LinearSnapHelper;
+import android.support.annotation.ColorRes;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.mateusz.fantasy.R;
 import com.example.mateusz.fantasy.home.model.repo.Player;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import static com.example.mateusz.fantasy.home.model.repo.Player.ATTACKER;
-import static com.example.mateusz.fantasy.home.model.repo.Player.DEFENDER;
-import static com.example.mateusz.fantasy.home.model.repo.Player.GOALKEEPER;
-import static com.example.mateusz.fantasy.home.model.repo.Player.MIDFIELDER;
+import static com.example.mateusz.fantasy.home.model.repo.Teams.ARSENAL;
+import static com.example.mateusz.fantasy.home.model.repo.Teams.BOURNEMOUTH;
+import static com.example.mateusz.fantasy.home.model.repo.Teams.BRIGHTON;
+import static com.example.mateusz.fantasy.home.model.repo.Teams.BURNLEY;
+import static com.example.mateusz.fantasy.home.model.repo.Teams.CHELSEA;
+import static com.example.mateusz.fantasy.home.model.repo.Teams.CRYSTAL_PALACE;
+import static com.example.mateusz.fantasy.home.model.repo.Teams.EVERTON;
+import static com.example.mateusz.fantasy.home.model.repo.Teams.HUDDERSFIELD;
+import static com.example.mateusz.fantasy.home.model.repo.Teams.LEICESTER;
+import static com.example.mateusz.fantasy.home.model.repo.Teams.LIVERPOOL_FC;
+import static com.example.mateusz.fantasy.home.model.repo.Teams.MAN_CITY;
+import static com.example.mateusz.fantasy.home.model.repo.Teams.MAN_UTD;
+import static com.example.mateusz.fantasy.home.model.repo.Teams.NEWCASTLE;
+import static com.example.mateusz.fantasy.home.model.repo.Teams.SOUTHAMPTON;
+import static com.example.mateusz.fantasy.home.model.repo.Teams.SPURS;
+import static com.example.mateusz.fantasy.home.model.repo.Teams.STOKE;
+import static com.example.mateusz.fantasy.home.model.repo.Teams.SWANSEA;
+import static com.example.mateusz.fantasy.home.model.repo.Teams.WATFORD;
+import static com.example.mateusz.fantasy.home.model.repo.Teams.WEST_BROM;
 
 
 public class RVTeamAdapter extends RecyclerView.Adapter<RVTeamAdapter.TeamViewHolder> {
     private ArrayList<Player> players;
-    private ArrayList<Player> goalkeepers;
-    private ArrayList<Player> defenders;
-    private ArrayList<Player> midfielders;
-    private ArrayList<Player> attackers;
-
-    private RVFormationAdapter rvFormationAdapter;
+    private ArrayList<Player> selectedPlayers;
     private Context context;
+    private TeamFragmentCallback teamFragmentCallback;
 
-    public RVTeamAdapter(ArrayList<Player> players, Context context) {
+    public interface TeamFragmentCallback{
+        void setButtonEnable(boolean set);
+    }
+
+    public RVTeamAdapter(ArrayList<Player> players, Context context, TeamFragmentCallback teamFragmentCallback) {
         this.players = players;
+        selectedPlayers = new ArrayList<Player>();
         this.context = context;
-
-        assignPlayerToFormation(players);
+        this.teamFragmentCallback = teamFragmentCallback;
     }
 
     @Override
     public TeamViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.rv_formation_line, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.rv_player,parent,false);
         return new TeamViewHolder(v);
     }
 
     @Override
     public void onBindViewHolder(TeamViewHolder holder, int position) {
-        holder.rvFormationLine.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
-        holder.rvFormationLine.setNestedScrollingEnabled(false);
-        holder.rvFormationLine.setHasFixedSize(true);
-
-        switch (position) {
-            case 0:
-                holder.rvFormationLine.setAdapter(new RVFormationAdapter(goalkeepers, context));
-                break;
-            case 1:
-                holder.rvFormationLine.setAdapter(new RVFormationAdapter(defenders, context));
-                break;
-            case 2:
-                holder.rvFormationLine.setAdapter(new RVFormationAdapter(midfielders, context));
-                break;
-            case 3:
-                holder.rvFormationLine.setAdapter(new RVFormationAdapter(attackers, context));
-                break;
-        }
+       holder.name.setText(players.get(position).getName());
+       holder.score.setText(Integer.toString(players.get(position).getPoints()));
+       holder.player = players.get(position);
+       setPlayersKit(holder,position);
     }
 
     @Override
     public int getItemCount() {
-        return 4;
+        return players.size();
     }
 
-    private void assignPlayerToFormation(ArrayList<Player> players) {
-        initArrayLists();
-
-        for (Player p : players) {
-            if (p.getPosition().equals(GOALKEEPER)) goalkeepers.add(p);
-            if (p.getPosition().equals(DEFENDER)) defenders.add(p);
-            if (p.getPosition().equals(MIDFIELDER)) midfielders.add(p);
-            if (p.getPosition().equals(ATTACKER)) attackers.add(p);
-        }
-    }
-
-    private void initArrayLists() {
-        goalkeepers = new ArrayList<Player>();
-        defenders = new ArrayList<Player>();
-        midfielders = new ArrayList<Player>();
-        attackers = new ArrayList<Player>();
+    private void setPlayersKit(TeamViewHolder holder, int position) {
+        if (players.get(position).getTeam().equals(ARSENAL)) holder.kit.setImageResource(R.drawable.arsenal_1);
+        if (players.get(position).getTeam().equals(BOURNEMOUTH)) holder.kit.setImageResource(R.drawable.bournemouth_1);
+        if (players.get(position).getTeam().equals(BRIGHTON)) holder.kit.setImageResource(R.drawable.brighton_1);
+        if (players.get(position).getTeam().equals(BURNLEY)) holder.kit.setImageResource(R.drawable.burnley_1);
+        if (players.get(position).getTeam().equals(CHELSEA)) holder.kit.setImageResource(R.drawable.chelsea_1);
+        if (players.get(position).getTeam().equals(CRYSTAL_PALACE)) holder.kit.setImageResource(R.drawable.crystalpalace_1);
+        if (players.get(position).getTeam().equals(EVERTON)) holder.kit.setImageResource(R.drawable.everton_1);
+        if (players.get(position).getTeam().equals(HUDDERSFIELD)) holder.kit.setImageResource(R.drawable.huddersfield_1);
+        if (players.get(position).getTeam().equals(LEICESTER)) holder.kit.setImageResource(R.drawable.leicester_1);
+        if (players.get(position).getTeam().equals(LIVERPOOL_FC)) holder.kit.setImageResource(R.drawable.liverpool_1);
+        if (players.get(position).getTeam().equals(MAN_CITY)) holder.kit.setImageResource(R.drawable.mancity_1);
+        if (players.get(position).getTeam().equals(MAN_UTD)) holder.kit.setImageResource(R.drawable.manutd_1);
+        if (players.get(position).getTeam().equals(NEWCASTLE)) holder.kit.setImageResource(R.drawable.newcastle_1);
+        if (players.get(position).getTeam().equals(SOUTHAMPTON)) holder.kit.setImageResource(R.drawable.southampton_1);
+        if (players.get(position).getTeam().equals(SPURS)) holder.kit.setImageResource(R.drawable.spurs_1);
+        if (players.get(position).getTeam().equals(STOKE)) holder.kit.setImageResource(R.drawable.stoke_1);
+        if (players.get(position).getTeam().equals(SWANSEA)) holder.kit.setImageResource(R.drawable.swansea_1);
+        if (players.get(position).getTeam().equals(WATFORD)) holder.kit.setImageResource(R.drawable.watford_1);
+        if (players.get(position).getTeam().equals(WEST_BROM)) holder.kit.setImageResource(R.drawable.westbrom_2);
     }
 
     /**
      * View holder class for a team
      */
-    class TeamViewHolder extends RecyclerView.ViewHolder {
-        final RecyclerView rvFormationLine;
+    class TeamViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        final ImageView kit;
+        final TextView name;
+        final TextView score;
+        boolean alreadyClicked = false;
+        Player player;
 
         TeamViewHolder(View itemView) {
             super(itemView);
-            rvFormationLine = itemView.findViewById(R.id.rv_position_line);
+            itemView.setOnClickListener(this);
+            kit = itemView.findViewById(R.id.iv_kit);
+            name = itemView.findViewById(R.id.tv_player_name);
+            score = itemView.findViewById(R.id.tv_player_score);
         }
+
+        @Override
+        public void onClick(View view) {
+            if (alreadyClicked){
+                selectedPlayers.remove(player);
+                if (selectedPlayers.isEmpty()) teamFragmentCallback.setButtonEnable(false);
+                name.setBackgroundColor(fetchColor(R.color.player_name_color));
+                score.setBackgroundColor(fetchColor(R.color.player_score_color));
+                alreadyClicked =false;
+            } else {
+                teamFragmentCallback.setButtonEnable(true);
+                selectedPlayers.add(player);
+                name.setBackgroundColor(fetchColor(R.color.player_selected));
+                score.setBackgroundColor(fetchColor(R.color.player_selected));
+                alreadyClicked =true;
+            }
+        }
+    }
+
+    private int fetchColor(@ColorRes int color) {
+        return ContextCompat.getColor(context, color);
     }
 }

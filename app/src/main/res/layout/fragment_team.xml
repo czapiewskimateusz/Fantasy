@@ -31,26 +31,37 @@
             android:layout_height="wrap_content"
             android:background="@color/color_trans_primary_dark"
             android:padding="4dp"
-            android:text="GW 9"
             android:textAlignment="center"
-            android:textColor="@color/colorWhite"
+            android:textColor="@color/accent"
             android:textSize="24sp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Gameweek 9" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_team"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginBottom="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/btn_transfer"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_team_GW" />
+
+        <Button
+            android:id="@+id/btn_transfer"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@color/accent"
+            android:text="@string/transfer_button"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
 
 
     </android.support.constraint.ConstraintLayout>

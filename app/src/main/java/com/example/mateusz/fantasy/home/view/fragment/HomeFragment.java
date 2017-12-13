@@ -137,7 +137,6 @@ public class HomeFragment extends Fragment implements ParentFragment, IHomeView{
         mBtnLogOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 SharedPreferences.Editor editor = getActivity().getSharedPreferences(PREFS_NAME, MODE_PRIVATE).edit();
                 editor.putInt(USER_ID_EXTRA, 0);
                 editor.putInt(TOTAL_POINTS_EXTRA,0);

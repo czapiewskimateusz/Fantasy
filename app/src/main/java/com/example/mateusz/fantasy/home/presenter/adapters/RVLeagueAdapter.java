@@ -6,6 +6,7 @@ import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.util.Pair;
 import android.support.v7.widget.CardView;
@@ -43,10 +44,8 @@ public class RVLeagueAdapter extends RecyclerView.Adapter<RVLeagueAdapter.League
      * @param leagues list of persons
      */
     public RVLeagueAdapter(List<League> leagues, Context context) {
-
         this.mLeagues = leagues;
         this.context = context;
-
     }
 
     @Override
@@ -110,24 +109,30 @@ public class RVLeagueAdapter extends RecyclerView.Adapter<RVLeagueAdapter.League
         @Override
         public void onClick(View view) {
             Intent intent = new Intent(context, LeagueDetailActivity.class);
+            Bundle bundle = prepareBundle();
+            intent.putExtra(LEAGUE_BUNDLE_EXTRA,bundle);
+            ActivityOptionsCompat activityOptions = getActivityOptionsCompat();
+            context.startActivity(intent, activityOptions.toBundle());
+        }
+
+        @NonNull
+        private ActivityOptionsCompat getActivityOptionsCompat() {
+            View sharedViewLogo = ivLeagueLogo;
+            View sharedViewName = tvLeagueName;
+            Pair<View, String> p1 = Pair.create(sharedViewLogo, "tran_cup");
+            Pair<View, String> p2 = Pair.create(sharedViewName, "tran_league_name");
+            return ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) context,p1,p2);
+        }
+
+        @NonNull
+        private Bundle prepareBundle() {
             Bundle bundle = new Bundle();
             bundle.putInt(LEAGUE_ID,leagueId);
             bundle.putString(NAME, tvLeagueName.getText().toString());
             bundle.putInt(USER_POSITION,Integer.parseInt(tvUserPosition.getText().toString()));
             bundle.putString(CODE, tvLeagueCode.getText().toString());
             bundle.putInt(NUMBER_OF_PLAYERS,numberOfPlayers);
-
-            intent.putExtra(LEAGUE_BUNDLE_EXTRA,bundle);
-
-            View sharedViewLogo = ivLeagueLogo;
-            View sharedViewName = tvLeagueName;
-
-            Pair<View, String> p1 = Pair.create(sharedViewLogo, "tran_cup");
-            Pair<View, String> p2 = Pair.create(sharedViewName, "tran_league_name");
-
-            ActivityOptionsCompat activityOptions = ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) context,p1,p2);
-
-            context.startActivity(intent, activityOptions.toBundle());
+            return bundle;
         }
     }
 

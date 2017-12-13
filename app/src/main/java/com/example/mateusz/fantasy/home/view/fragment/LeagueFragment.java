@@ -68,28 +68,28 @@ public class LeagueFragment extends Fragment implements ILeagueView, JoinLeagueD
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_league, container, false);
-
-        initRecyclerView(view);
-
-        mFloatingActionMenu = view.findViewById(R.id.fab_leagues_menu);
-        mFABCreateLeague = view.findViewById(R.id.fab_create_league);
-        mFABJoinLeague = view.findViewById(R.id.fab_join_league);
-
+        initViews(view);
         initButtons();
-
-        mProgressBar = view.findViewById(R.id.pB_league_fragment);
-        mFragmentContainer = view.findViewById(R.id.leagues_container);
-        mSwipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout);
-
+        initRecyclerView(view);
         initSwipeToRefresh();
+        getUserDataFromSharedPreferencess();
+        mLeaguePresenter.getUserLeagues(mUserId, mTotalPoints);
+        return view;
+    }
 
+    private void getUserDataFromSharedPreferencess() {
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences(LoginActivity.PREFS_NAME, 0);
         mUserId = sharedPreferences.getInt(USER_ID_EXTRA, 0);
         mTotalPoints = sharedPreferences.getInt(TOTAL_POINTS_EXTRA, 0);
+    }
 
-        mLeaguePresenter.getUserLeagues(mUserId, mTotalPoints);
-
-        return view;
+    private void initViews(View view) {
+        mFloatingActionMenu = view.findViewById(R.id.fab_leagues_menu);
+        mFABCreateLeague = view.findViewById(R.id.fab_create_league);
+        mFABJoinLeague = view.findViewById(R.id.fab_join_league);
+        mProgressBar = view.findViewById(R.id.pB_league_fragment);
+        mFragmentContainer = view.findViewById(R.id.leagues_container);
+        mSwipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout);
     }
 
     @Override
