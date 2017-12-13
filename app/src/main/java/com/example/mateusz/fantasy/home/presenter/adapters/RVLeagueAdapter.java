@@ -36,7 +36,6 @@ import static com.example.mateusz.fantasy.home.presenter.LeaguePresenter.LEAGUE_
 public class RVLeagueAdapter extends RecyclerView.Adapter<RVLeagueAdapter.LeagueViewHolder> {
 
     private List<League> mLeagues;
-
     private Context context;
 
     /**
@@ -52,21 +51,17 @@ public class RVLeagueAdapter extends RecyclerView.Adapter<RVLeagueAdapter.League
 
     @Override
     public LeagueViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.cv_league, parent, false);
         return new LeagueViewHolder(v,context);
-
     }
 
     @Override
     public void onBindViewHolder(LeagueViewHolder holder, int position) {
-
         holder.tvLeagueName.setText(mLeagues.get(position).getName());
         holder.tvUserPosition.setText(String.format(Locale.ENGLISH,"%d",mLeagues.get(position).getRank()));
         holder.tvLeagueCode.setText(mLeagues.get(position).getCode());
         holder.leagueId = mLeagues.get(position).getLeagueId();
         holder.numberOfPlayers = mLeagues.get(position).getNumberOfPlayers();
-
     }
 
     @Override
@@ -90,7 +85,6 @@ public class RVLeagueAdapter extends RecyclerView.Adapter<RVLeagueAdapter.League
      * RecyclerView.ViewHolder class
      */
     class LeagueViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-
         final CardView cv;
         final TextView tvLeagueName;
         final TextView tvUserPosition;
@@ -101,7 +95,6 @@ public class RVLeagueAdapter extends RecyclerView.Adapter<RVLeagueAdapter.League
         private final Context context;
 
         LeagueViewHolder(View itemView, Context context) {
-
             super(itemView);
             itemView.setOnClickListener(this);
             cv = itemView.findViewById(R.id.cv_league);
@@ -116,9 +109,7 @@ public class RVLeagueAdapter extends RecyclerView.Adapter<RVLeagueAdapter.League
 
         @Override
         public void onClick(View view) {
-
             Intent intent = new Intent(context, LeagueDetailActivity.class);
-
             Bundle bundle = new Bundle();
             bundle.putInt(LEAGUE_ID,leagueId);
             bundle.putString(NAME, tvLeagueName.getText().toString());
@@ -137,7 +128,6 @@ public class RVLeagueAdapter extends RecyclerView.Adapter<RVLeagueAdapter.League
             ActivityOptionsCompat activityOptions = ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) context,p1,p2);
 
             context.startActivity(intent, activityOptions.toBundle());
-
         }
     }
 

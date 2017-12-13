@@ -48,6 +48,12 @@
         <item name="cardBackgroundColor">@color/color_trans_cardView</item>
     </style>
 
+    <style name="CardViewDetailStyle" parent="CardView">
+        <item name="cardCornerRadius">4dp</item>
+        <item name="cardElevation">4dp</item>
+        <item name="cardBackgroundColor">@color/colorWhite</item>
+    </style>
+
     <style name="MenuButtonsSmall">
         <item name="fab_size">mini</item>
         <item name="fab_colorNormal">#1565C0</item>

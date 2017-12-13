@@ -14,6 +14,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.mateusz.fantasy.authentication.login.view.LoginActivity;
@@ -49,6 +50,8 @@ public class HomeFragment extends Fragment implements ParentFragment, IHomeView{
     private TextView mTvHHighestScore;
     private TextView mTvDeadlineDate;
     private ImageView mIvSettings;
+    private ProgressBar mUserNameProgressBar;
+    private ProgressBar mPointsProgressBar;
 
     //Dependencies
     private HomePresenter mHomePresenter;
@@ -73,7 +76,7 @@ public class HomeFragment extends Fragment implements ParentFragment, IHomeView{
 
         fragmentContainer = view.findViewById(R.id.home_fragment_container);
 
-        initTextViews(view);
+        initViews(view);
         initButton(view);
         getLoggedUserId();
         mHomePresenter.initUser(mUserId);
@@ -105,6 +108,7 @@ public class HomeFragment extends Fragment implements ParentFragment, IHomeView{
 
     @Override
     public void getUser(HomeUser user) {
+        mUserNameProgressBar.setVisibility(View.GONE);
         mTvUserName.setText(user.getFirstName()+" "+user.getLastName());
         mTvUserTeamName.setText(user.getTeamName());
         mTeamId = user.getTeamId();
@@ -119,6 +123,7 @@ public class HomeFragment extends Fragment implements ParentFragment, IHomeView{
 
     @Override
     public void presentData(HomeData body) {
+        mPointsProgressBar.setVisibility(View.GONE);
         String gw = getString(R.string.gw_gameweek) + " " + body.getGw();
         mTvGw.setText(gw);
         mTvUserScore.setText(Integer.toString(body.getYourScore()));
@@ -144,8 +149,7 @@ public class HomeFragment extends Fragment implements ParentFragment, IHomeView{
         });
     }
 
-    private void initTextViews(View view){
-
+    private void initViews(View view){
         mTvUserName = view.findViewById(R.id.tv_home_user_name);
         mTvUserTeamName = view.findViewById(R.id.tv_home_team_name);
         mTvGw = view.findViewById(R.id.tv_home_gw);
@@ -153,10 +157,17 @@ public class HomeFragment extends Fragment implements ParentFragment, IHomeView{
         mTvAverageScore = view.findViewById(R.id.tv_average_points);
         mTvHHighestScore = view.findViewById(R.id.tv_highest_points);
         mTvDeadlineDate = view.findViewById(R.id.tv_home_deadline);
+        mUserNameProgressBar = view.findViewById(R.id.pb_home_user_name);
+        mPointsProgressBar = view.findViewById(R.id.pb_points_home);
+        mUserNameProgressBar.setVisibility(View.VISIBLE);
+        mPointsProgressBar.setVisibility(View.VISIBLE);
 
         mIvSettings = view.findViewById(R.id.iv_settings);
-        mIvSettings.setOnClickListener(new View.OnClickListener() {
+        setSettingsOnClickListener();
+    }
 
+    private void setSettingsOnClickListener() {
+        mIvSettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Bundle bundle = new Bundle();
@@ -170,7 +181,6 @@ public class HomeFragment extends Fragment implements ParentFragment, IHomeView{
 
                 getContext().startActivity(intent);
             }
-
         });
     }
 
@@ -178,4 +188,5 @@ public class HomeFragment extends Fragment implements ParentFragment, IHomeView{
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences(LoginActivity.PREFS_NAME, 0);
         mUserId =  sharedPreferences.getInt(USER_ID_EXTRA, 0);
     }
+
 }
