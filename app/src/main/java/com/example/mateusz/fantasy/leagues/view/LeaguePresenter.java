@@ -1,14 +1,10 @@
-package com.example.mateusz.fantasy.home.presenter;
+package com.example.mateusz.fantasy.leagues.view;
 
 
-import android.content.Intent;
-import android.util.Log;
-
-import com.example.mateusz.fantasy.home.model.API.CreateLeagueAPI;
-import com.example.mateusz.fantasy.home.model.API.JoinLeagueAPI;
-import com.example.mateusz.fantasy.home.model.repo.League;
-import com.example.mateusz.fantasy.home.model.API.GetLeaguesAPI;
-import com.example.mateusz.fantasy.home.view.fragment.ILeagueView;
+import com.example.mateusz.fantasy.leagues.model.API.CreateLeagueAPI;
+import com.example.mateusz.fantasy.leagues.model.API.GetLeaguesAPI;
+import com.example.mateusz.fantasy.leagues.model.API.JoinLeagueAPI;
+import com.example.mateusz.fantasy.leagues.model.repo.League;
 
 import java.util.List;
 

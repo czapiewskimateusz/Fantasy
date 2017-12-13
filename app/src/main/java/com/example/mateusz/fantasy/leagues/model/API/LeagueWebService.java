@@ -1,8 +1,8 @@
-package com.example.mateusz.fantasy.home.model.webService;
+package com.example.mateusz.fantasy.leagues.model.API;
 
 import com.example.mateusz.fantasy.authentication.register.model.Response;
-import com.example.mateusz.fantasy.home.model.repo.LeagueDetailJsonResponse;
-import com.example.mateusz.fantasy.home.model.repo.LeagueJsonResponse;
+import com.example.mateusz.fantasy.leagues.model.repo.LeagueDetailJsonResponse;
+import com.example.mateusz.fantasy.leagues.model.repo.LeagueJsonResponse;
 
 import retrofit2.Call;
 import retrofit2.http.Field;

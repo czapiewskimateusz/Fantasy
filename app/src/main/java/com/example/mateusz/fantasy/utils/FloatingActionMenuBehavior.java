@@ -27,10 +27,8 @@ public class FloatingActionMenuBehavior extends CoordinatorLayout.Behavior {
 
     @Override
     public boolean onDependentViewChanged(CoordinatorLayout parent, View child, View dependency) {
-        if (child instanceof FloatingActionMenu && dependency instanceof Snackbar.SnackbarLayout) {
+        if (child instanceof FloatingActionMenu && dependency instanceof Snackbar.SnackbarLayout)
             this.updateTranslation(parent, child, dependency);
-        }
-
         return false;
     }
 
@@ -43,13 +41,9 @@ public class FloatingActionMenuBehavior extends CoordinatorLayout.Behavior {
                 ViewCompat.animate(child)
                         .translationY(translationY)
                         .setListener((ViewPropertyAnimatorListener) null);
-            } else {
-                ViewCompat.setTranslationY(child, translationY);
-            }
-
+            } else ViewCompat.setTranslationY(child, translationY);
             this.mTranslationY = translationY;
         }
-
     }
 
     private float getTranslationY(CoordinatorLayout parent, View child) {
@@ -63,7 +57,6 @@ public class FloatingActionMenuBehavior extends CoordinatorLayout.Behavior {
                 minOffset = Math.min(minOffset, ViewCompat.getTranslationY(view) - (float) view.getHeight());
             }
         }
-
         return minOffset;
     }
 }

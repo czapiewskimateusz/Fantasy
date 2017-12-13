@@ -1,9 +1,8 @@
-package com.example.mateusz.fantasy.home.model.API;
+package com.example.mateusz.fantasy.leagues.model.API;
 
-import com.example.mateusz.fantasy.home.model.repo.League;
-import com.example.mateusz.fantasy.home.model.repo.LeagueJsonResponse;
-import com.example.mateusz.fantasy.home.model.webService.LeagueWebService;
-import com.example.mateusz.fantasy.home.presenter.LeaguePresenter;
+import com.example.mateusz.fantasy.leagues.view.LeaguePresenter;
+import com.example.mateusz.fantasy.leagues.model.repo.League;
+import com.example.mateusz.fantasy.leagues.model.repo.LeagueJsonResponse;
 
 import java.util.ArrayList;
 import java.util.Arrays;

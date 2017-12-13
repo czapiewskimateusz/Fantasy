@@ -6,9 +6,9 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.view.ViewGroup;
 
 import com.example.mateusz.fantasy.home.view.fragment.HomeFragment;
-import com.example.mateusz.fantasy.home.view.fragment.LeagueFragment;
+import com.example.mateusz.fantasy.leagues.view.LeagueFragment;
 import com.example.mateusz.fantasy.home.view.fragment.ParentFragment;
-import com.example.mateusz.fantasy.home.view.fragment.TeamFragment;
+import com.example.mateusz.fantasy.team.view.TeamFragment;
 
 import java.util.ArrayList;
 import java.util.List;

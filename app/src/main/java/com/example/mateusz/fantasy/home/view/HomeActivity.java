@@ -1,33 +1,18 @@
 package com.example.mateusz.fantasy.home.view;
 
-import android.animation.Animator;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.ColorRes;
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.view.ViewPager;
-import android.support.v4.view.animation.LinearOutSlowInInterpolator;
 import android.support.v7.app.AppCompatActivity;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.animation.OvershootInterpolator;
 import android.widget.Toast;
 
 
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
-import com.aurelhubert.ahbottomnavigation.AHBottomNavigationAdapter;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationViewPager;
-import com.example.mateusz.fantasy.home.view.fragment.HomeFragment;
-import com.example.mateusz.fantasy.home.view.fragment.LeagueFragment;
 import com.example.mateusz.fantasy.home.view.fragment.ParentFragment;
-import com.example.mateusz.fantasy.home.view.fragment.TeamFragment;
 import com.example.mateusz.fantasy.R;
-import com.example.mateusz.fantasy.utils.ZoomOutPageTransformer;
 
 import java.util.ArrayList;
 
@@ -102,21 +87,21 @@ public class HomeActivity extends AppCompatActivity /*,LeagueFragment.LeagueFrag
         bottomNavigation.addItems(bottomNavigationItems);
     }
 
-    @Override
-    public void onBackPressed() {
-        if (mDoubleBackToExitPressedOnce) {
-            finishAffinity();
-            return;
-        }
-        this.mDoubleBackToExitPressedOnce = true;
-        Toast.makeText(this, getString(R.string.back_button_close_app_warning), Toast.LENGTH_SHORT).show();
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                mDoubleBackToExitPressedOnce = false;
-            }
-        }, 2000);
-    }
+//    @Override
+//    public void onBackPressed() {
+//        if (mDoubleBackToExitPressedOnce) {
+//            finishAffinity();
+//            return;
+//        }
+//        this.mDoubleBackToExitPressedOnce = true;
+//        Toast.makeText(this, getString(R.string.back_button_close_app_warning), Toast.LENGTH_SHORT).show();
+//        new Handler().postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                mDoubleBackToExitPressedOnce = false;
+//            }
+//        }, 2000);
+//    }
 
     private int fetchColor(@ColorRes int color) {
         return ContextCompat.getColor(this, color);

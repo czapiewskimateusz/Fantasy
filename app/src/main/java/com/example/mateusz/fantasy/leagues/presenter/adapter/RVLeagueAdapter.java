@@ -1,8 +1,7 @@
-package com.example.mateusz.fantasy.home.presenter.adapters;
+package com.example.mateusz.fantasy.leagues.presenter.adapter;
 
 
 import android.app.Activity;
-import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,19 +16,19 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.mateusz.fantasy.home.model.repo.League;
-import com.example.mateusz.fantasy.home.view.LeagueDetailActivity;
 import com.example.mateusz.fantasy.R;
+import com.example.mateusz.fantasy.leagues.view.LeagueDetailActivity;
+import com.example.mateusz.fantasy.leagues.model.repo.League;
 
 import java.util.List;
 import java.util.Locale;
 
-import static com.example.mateusz.fantasy.home.model.repo.League.CODE;
-import static com.example.mateusz.fantasy.home.model.repo.League.LEAGUE_ID;
-import static com.example.mateusz.fantasy.home.model.repo.League.NAME;
-import static com.example.mateusz.fantasy.home.model.repo.League.NUMBER_OF_PLAYERS;
-import static com.example.mateusz.fantasy.home.model.repo.League.USER_POSITION;
-import static com.example.mateusz.fantasy.home.presenter.LeaguePresenter.LEAGUE_BUNDLE_EXTRA;
+import static com.example.mateusz.fantasy.leagues.model.repo.League.CODE;
+import static com.example.mateusz.fantasy.leagues.model.repo.League.LEAGUE_ID;
+import static com.example.mateusz.fantasy.leagues.model.repo.League.NAME;
+import static com.example.mateusz.fantasy.leagues.model.repo.League.NUMBER_OF_PLAYERS;
+import static com.example.mateusz.fantasy.leagues.model.repo.League.USER_POSITION;
+import static com.example.mateusz.fantasy.leagues.view.LeaguePresenter.LEAGUE_BUNDLE_EXTRA;
 
 /**
  * RecyclerView Adapter class

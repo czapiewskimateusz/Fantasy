@@ -15,7 +15,6 @@ import com.example.mateusz.fantasy.R;
 public class JoinLeagueDialog extends android.support.v4.app.DialogFragment {
 
     LeagueDialogListener mListener;
-
     private String code;
 
     public String getCode() {
@@ -29,7 +28,6 @@ public class JoinLeagueDialog extends android.support.v4.app.DialogFragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         try {
             mListener = (LeagueDialogListener) getTargetFragment();
         } catch (ClassCastException e) {
@@ -39,25 +37,16 @@ public class JoinLeagueDialog extends android.support.v4.app.DialogFragment {
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-
         LayoutInflater inflater = getActivity().getLayoutInflater();
-
         final View view = inflater.inflate(R.layout.dialog_join_league, null);
         builder.setView(view)
                 .setPositiveButton(getText(R.string.join), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-
                         EditText eTJoinLeague = view.findViewById(R.id.et_join_league);
                         code = eTJoinLeague.getText().toString();
-
-                        if (!TextUtils.isEmpty(code)){
-                            mListener.onDialogPositiveClick(JoinLeagueDialog.this);
-                        }
-
-
+                        if (!TextUtils.isEmpty(code)) mListener.onDialogPositiveClick(JoinLeagueDialog.this);
                     }
                 })
                 .setNegativeButton(getText(R.string.cancel), new DialogInterface.OnClickListener() {
@@ -66,7 +55,6 @@ public class JoinLeagueDialog extends android.support.v4.app.DialogFragment {
                         dialogInterface.dismiss();
                     }
                 });
-
         return builder.create();
     }
 }

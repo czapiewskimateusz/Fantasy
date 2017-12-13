@@ -1,4 +1,4 @@
-package com.example.mateusz.fantasy.home.model.repo;
+package com.example.mateusz.fantasy.team.model;
 
 /**
  * Created by Mateusz on 22.11.2017.

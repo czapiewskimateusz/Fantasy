@@ -1,4 +1,4 @@
-package com.example.mateusz.fantasy.home.model.repo;
+package com.example.mateusz.fantasy.leagues.model.repo;
 
 public class LeagueJsonResponse {
 

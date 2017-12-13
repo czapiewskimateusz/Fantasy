@@ -1,4 +1,4 @@
-package com.example.mateusz.fantasy.home.presenter.adapters;
+package com.example.mateusz.fantasy.team.presenter.adapters;
 
 import android.content.Context;
 import android.support.annotation.ColorRes;
@@ -11,29 +11,29 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.mateusz.fantasy.R;
-import com.example.mateusz.fantasy.home.model.repo.Player;
+import com.example.mateusz.fantasy.team.model.Player;
 
 import java.util.ArrayList;
 
-import static com.example.mateusz.fantasy.home.model.repo.Teams.ARSENAL;
-import static com.example.mateusz.fantasy.home.model.repo.Teams.BOURNEMOUTH;
-import static com.example.mateusz.fantasy.home.model.repo.Teams.BRIGHTON;
-import static com.example.mateusz.fantasy.home.model.repo.Teams.BURNLEY;
-import static com.example.mateusz.fantasy.home.model.repo.Teams.CHELSEA;
-import static com.example.mateusz.fantasy.home.model.repo.Teams.CRYSTAL_PALACE;
-import static com.example.mateusz.fantasy.home.model.repo.Teams.EVERTON;
-import static com.example.mateusz.fantasy.home.model.repo.Teams.HUDDERSFIELD;
-import static com.example.mateusz.fantasy.home.model.repo.Teams.LEICESTER;
-import static com.example.mateusz.fantasy.home.model.repo.Teams.LIVERPOOL_FC;
-import static com.example.mateusz.fantasy.home.model.repo.Teams.MAN_CITY;
-import static com.example.mateusz.fantasy.home.model.repo.Teams.MAN_UTD;
-import static com.example.mateusz.fantasy.home.model.repo.Teams.NEWCASTLE;
-import static com.example.mateusz.fantasy.home.model.repo.Teams.SOUTHAMPTON;
-import static com.example.mateusz.fantasy.home.model.repo.Teams.SPURS;
-import static com.example.mateusz.fantasy.home.model.repo.Teams.STOKE;
-import static com.example.mateusz.fantasy.home.model.repo.Teams.SWANSEA;
-import static com.example.mateusz.fantasy.home.model.repo.Teams.WATFORD;
-import static com.example.mateusz.fantasy.home.model.repo.Teams.WEST_BROM;
+import static com.example.mateusz.fantasy.team.model.Teams.ARSENAL;
+import static com.example.mateusz.fantasy.team.model.Teams.BOURNEMOUTH;
+import static com.example.mateusz.fantasy.team.model.Teams.BRIGHTON;
+import static com.example.mateusz.fantasy.team.model.Teams.BURNLEY;
+import static com.example.mateusz.fantasy.team.model.Teams.CHELSEA;
+import static com.example.mateusz.fantasy.team.model.Teams.CRYSTAL_PALACE;
+import static com.example.mateusz.fantasy.team.model.Teams.EVERTON;
+import static com.example.mateusz.fantasy.team.model.Teams.HUDDERSFIELD;
+import static com.example.mateusz.fantasy.team.model.Teams.LEICESTER;
+import static com.example.mateusz.fantasy.team.model.Teams.LIVERPOOL_FC;
+import static com.example.mateusz.fantasy.team.model.Teams.MAN_CITY;
+import static com.example.mateusz.fantasy.team.model.Teams.MAN_UTD;
+import static com.example.mateusz.fantasy.team.model.Teams.NEWCASTLE;
+import static com.example.mateusz.fantasy.team.model.Teams.SOUTHAMPTON;
+import static com.example.mateusz.fantasy.team.model.Teams.SPURS;
+import static com.example.mateusz.fantasy.team.model.Teams.STOKE;
+import static com.example.mateusz.fantasy.team.model.Teams.SWANSEA;
+import static com.example.mateusz.fantasy.team.model.Teams.WATFORD;
+import static com.example.mateusz.fantasy.team.model.Teams.WEST_BROM;
 
 
 public class RVTeamAdapter extends RecyclerView.Adapter<RVTeamAdapter.TeamViewHolder> {
@@ -44,6 +44,7 @@ public class RVTeamAdapter extends RecyclerView.Adapter<RVTeamAdapter.TeamViewHo
 
     public interface TeamFragmentCallback{
         void setButtonEnable(boolean set);
+        void updatePlayersToTransfer(ArrayList<Player> playersToTransfer);
     }
 
     public RVTeamAdapter(ArrayList<Player> players, Context context, TeamFragmentCallback teamFragmentCallback) {
@@ -116,6 +117,7 @@ public class RVTeamAdapter extends RecyclerView.Adapter<RVTeamAdapter.TeamViewHo
         public void onClick(View view) {
             if (alreadyClicked){
                 selectedPlayers.remove(player);
+                teamFragmentCallback.updatePlayersToTransfer(selectedPlayers);
                 if (selectedPlayers.isEmpty()) teamFragmentCallback.setButtonEnable(false);
                 name.setBackgroundColor(fetchColor(R.color.player_name_color));
                 score.setBackgroundColor(fetchColor(R.color.player_score_color));
@@ -123,6 +125,7 @@ public class RVTeamAdapter extends RecyclerView.Adapter<RVTeamAdapter.TeamViewHo
             } else {
                 teamFragmentCallback.setButtonEnable(true);
                 selectedPlayers.add(player);
+                teamFragmentCallback.updatePlayersToTransfer(selectedPlayers);
                 name.setBackgroundColor(fetchColor(R.color.player_selected));
                 score.setBackgroundColor(fetchColor(R.color.player_selected));
                 alreadyClicked =true;

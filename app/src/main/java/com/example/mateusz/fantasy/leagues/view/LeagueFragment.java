@@ -1,4 +1,4 @@
-package com.example.mateusz.fantasy.home.view.fragment;
+package com.example.mateusz.fantasy.leagues.view;
 
 
 import android.content.SharedPreferences;
@@ -24,10 +24,10 @@ import android.widget.ProgressBar;
 
 
 import com.example.mateusz.fantasy.authentication.login.view.LoginActivity;
-import com.example.mateusz.fantasy.home.model.repo.League;
-import com.example.mateusz.fantasy.home.presenter.LeaguePresenter;
-import com.example.mateusz.fantasy.home.presenter.adapters.RVLeagueAdapter;
+import com.example.mateusz.fantasy.home.view.fragment.ParentFragment;
 import com.example.mateusz.fantasy.R;
+import com.example.mateusz.fantasy.leagues.model.repo.League;
+import com.example.mateusz.fantasy.leagues.presenter.adapter.RVLeagueAdapter;
 import com.example.mateusz.fantasy.utils.dialogs.CreateLeagueDialog;
 import com.example.mateusz.fantasy.utils.dialogs.JoinLeagueDialog;
 import com.github.clans.fab.FloatingActionMenu;

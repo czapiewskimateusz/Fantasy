@@ -1,11 +1,11 @@
-package com.example.mateusz.fantasy.home.presenter;
+package com.example.mateusz.fantasy.leagues.presenter;
 
 
 import android.util.Log;
 
-import com.example.mateusz.fantasy.home.model.API.GetLeagueDetailAPI;
-import com.example.mateusz.fantasy.home.model.repo.UserRank;
-import com.example.mateusz.fantasy.home.view.ILeagueDetailView;
+import com.example.mateusz.fantasy.leagues.view.ILeagueDetailView;
+import com.example.mateusz.fantasy.leagues.model.API.GetLeagueDetailAPI;
+import com.example.mateusz.fantasy.leagues.model.repo.UserRank;
 
 import java.util.List;
 

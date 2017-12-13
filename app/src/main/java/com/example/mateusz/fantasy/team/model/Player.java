@@ -1,15 +1,6 @@
-package com.example.mateusz.fantasy.home.model.repo;
+package com.example.mateusz.fantasy.team.model;
 
 import java.util.ArrayList;
-
-import static com.example.mateusz.fantasy.home.model.repo.Teams.BOURNEMOUTH;
-import static com.example.mateusz.fantasy.home.model.repo.Teams.CHELSEA;
-import static com.example.mateusz.fantasy.home.model.repo.Teams.CRYSTAL_PALACE;
-import static com.example.mateusz.fantasy.home.model.repo.Teams.LIVERPOOL_FC;
-import static com.example.mateusz.fantasy.home.model.repo.Teams.MAN_CITY;
-import static com.example.mateusz.fantasy.home.model.repo.Teams.MAN_UTD;
-import static com.example.mateusz.fantasy.home.model.repo.Teams.SPURS;
-import static com.example.mateusz.fantasy.home.model.repo.Teams.WATFORD;
 
 public class Player {
 
@@ -86,17 +77,17 @@ public class Player {
     public static ArrayList<Player> getMockPlayerData(){
         ArrayList<Player> players = new ArrayList<Player>();
 
-        players.add(new Player("De Gea",MAN_UTD, GOALKEEPER, 6,0,0));
-        players.add(new Player("Azpilicueta",CHELSEA, DEFENDER,8,0,0));
-        players.add(new Player("Valencia",MAN_UTD, DEFENDER,2,0,0));
-        players.add(new Player("Vertronghen",SPURS, DEFENDER,1,0,0));
-        players.add(new Player("Daniels",BOURNEMOUTH, DEFENDER,8,0,0));
-        players.add(new Player("Sane",MAN_CITY, MIDFIELDER,7,0,0));
-        players.add(new Player("McArthur",CRYSTAL_PALACE, MIDFIELDER,8,0,0));
-        players.add(new Player("Salah",LIVERPOOL_FC, MIDFIELDER,16,0,0));
-        players.add(new Player("Doucure",WATFORD, MIDFIELDER,3,0,0));
-        players.add(new Player("Jesus",MAN_CITY, ATTACKER,8,0,0));
-        players.add(new Player("Lukaku",MAN_UTD, ATTACKER,12,0,0));
+        players.add(new Player("De Gea", Teams.MAN_UTD, GOALKEEPER, 6,0,0));
+        players.add(new Player("Azpilicueta", Teams.CHELSEA, DEFENDER,8,0,0));
+        players.add(new Player("Valencia", Teams.MAN_UTD, DEFENDER,2,0,0));
+        players.add(new Player("Vertronghen", Teams.SPURS, DEFENDER,1,0,0));
+        players.add(new Player("Daniels", Teams.BOURNEMOUTH, DEFENDER,8,0,0));
+        players.add(new Player("Sane", Teams.MAN_CITY, MIDFIELDER,7,0,0));
+        players.add(new Player("McArthur", Teams.CRYSTAL_PALACE, MIDFIELDER,8,0,0));
+        players.add(new Player("Salah", Teams.LIVERPOOL_FC, MIDFIELDER,16,0,0));
+        players.add(new Player("Doucure", Teams.WATFORD, MIDFIELDER,3,0,0));
+        players.add(new Player("Jesus", Teams.MAN_CITY, ATTACKER,8,0,0));
+        players.add(new Player("Lukaku", Teams.MAN_UTD, ATTACKER,12,0,0));
 
         return players;
     }

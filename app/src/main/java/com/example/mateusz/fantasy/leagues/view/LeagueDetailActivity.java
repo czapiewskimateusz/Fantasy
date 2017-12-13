@@ -1,4 +1,4 @@
-package com.example.mateusz.fantasy.home.view;
+package com.example.mateusz.fantasy.leagues.view;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -11,11 +11,11 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.example.mateusz.fantasy.home.model.repo.League;
-import com.example.mateusz.fantasy.home.model.repo.UserRank;
-import com.example.mateusz.fantasy.home.presenter.LeagueDetailPresenter;
-import com.example.mateusz.fantasy.home.presenter.adapters.RVLeagueDetailsAdapter;
 import com.example.mateusz.fantasy.R;
+import com.example.mateusz.fantasy.leagues.model.repo.League;
+import com.example.mateusz.fantasy.leagues.model.repo.UserRank;
+import com.example.mateusz.fantasy.leagues.presenter.LeagueDetailPresenter;
+import com.example.mateusz.fantasy.leagues.presenter.adapter.RVLeagueDetailsAdapter;
 
 import java.util.List;
 import java.util.Locale;
@@ -25,12 +25,11 @@ import butterknife.ButterKnife;
 
 import static com.example.mateusz.fantasy.authentication.login.view.LoginActivity.PREFS_NAME;
 import static com.example.mateusz.fantasy.authentication.login.view.LoginActivity.USER_ID_EXTRA;
-import static com.example.mateusz.fantasy.home.model.repo.League.CODE;
-import static com.example.mateusz.fantasy.home.model.repo.League.LEAGUE_ID;
-import static com.example.mateusz.fantasy.home.model.repo.League.NAME;
-import static com.example.mateusz.fantasy.home.model.repo.League.NUMBER_OF_PLAYERS;
-import static com.example.mateusz.fantasy.home.model.repo.League.USER_POSITION;
-import static com.example.mateusz.fantasy.home.presenter.LeaguePresenter.LEAGUE_BUNDLE_EXTRA;
+import static com.example.mateusz.fantasy.leagues.model.repo.League.CODE;
+import static com.example.mateusz.fantasy.leagues.model.repo.League.LEAGUE_ID;
+import static com.example.mateusz.fantasy.leagues.model.repo.League.NAME;
+import static com.example.mateusz.fantasy.leagues.model.repo.League.NUMBER_OF_PLAYERS;
+import static com.example.mateusz.fantasy.leagues.model.repo.League.USER_POSITION;
 import static com.example.mateusz.fantasy.utils.NetworkUtils.showConnectionErrorToast;
 
 public class LeagueDetailActivity extends AppCompatActivity implements ILeagueDetailView {
@@ -101,7 +100,7 @@ public class LeagueDetailActivity extends AppCompatActivity implements ILeagueDe
 
     private void getLeagueFromIntent(){
         Intent intent = getIntent();
-        Bundle bundle = intent.getBundleExtra(LEAGUE_BUNDLE_EXTRA);
+        Bundle bundle = intent.getBundleExtra(LeaguePresenter.LEAGUE_BUNDLE_EXTRA);
         mLeague = new League(bundle.getString(NAME),bundle.getInt(USER_POSITION),bundle.getString(CODE),bundle.getInt(LEAGUE_ID),bundle.getInt(NUMBER_OF_PLAYERS));
     }
 

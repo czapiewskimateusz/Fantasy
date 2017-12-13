@@ -31,9 +31,7 @@ public class NetworkUtils {
     }
 
     public static void showConnectionErrorToast(Activity activity){
-
         Toast.makeText(activity, activity.getString(R.string.connection_error),Toast.LENGTH_SHORT).show();
-        //Snackbar.make(view,activity.getString(R.string.connection_error), BaseTransientBottomBar.LENGTH_LONG);
     }
 
 }

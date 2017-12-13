@@ -37,7 +37,7 @@
             android:theme="@style/AppTheme" />
 
         <activity
-            android:name=".home.view.LeagueDetailActivity"
+            android:name=".leagues.view.LeagueDetailActivity"
             android:label=""
             android:parentActivityName=".home.view.HomeActivity"
             android:screenOrientation="portrait"

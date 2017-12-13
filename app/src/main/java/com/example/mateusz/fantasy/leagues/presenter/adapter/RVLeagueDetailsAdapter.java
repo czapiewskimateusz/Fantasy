@@ -1,4 +1,4 @@
-package com.example.mateusz.fantasy.home.presenter.adapters;
+package com.example.mateusz.fantasy.leagues.presenter.adapter;
 
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
@@ -8,8 +8,8 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.example.mateusz.fantasy.home.model.repo.UserRank;
 import com.example.mateusz.fantasy.R;
+import com.example.mateusz.fantasy.leagues.model.repo.UserRank;
 
 import java.util.List;
 import java.util.Locale;

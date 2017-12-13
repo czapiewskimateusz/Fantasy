@@ -1,6 +1,6 @@
-package com.example.mateusz.fantasy.home.view;
+package com.example.mateusz.fantasy.leagues.view;
 
-import com.example.mateusz.fantasy.home.model.repo.UserRank;
+import com.example.mateusz.fantasy.leagues.model.repo.UserRank;
 
 import java.util.List;
 

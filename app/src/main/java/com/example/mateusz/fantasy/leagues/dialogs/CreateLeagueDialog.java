@@ -1,4 +1,4 @@
-package com.example.mateusz.fantasy.utils.dialogs;
+package com.example.mateusz.fantasy.leagues.dialogs;
 
 import android.app.AlertDialog;
 import android.app.Dialog;

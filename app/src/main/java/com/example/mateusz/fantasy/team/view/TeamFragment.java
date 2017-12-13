@@ -1,10 +1,11 @@
-package com.example.mateusz.fantasy.home.view.fragment;
+package com.example.mateusz.fantasy.team.view;
 
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,19 +14,14 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.FrameLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mateusz.fantasy.R;
-import com.example.mateusz.fantasy.home.model.repo.Player;
-import com.example.mateusz.fantasy.home.presenter.adapters.RVTeamAdapter;
-
-import org.w3c.dom.Text;
+import com.example.mateusz.fantasy.home.view.fragment.ParentFragment;
+import com.example.mateusz.fantasy.team.model.Player;
+import com.example.mateusz.fantasy.team.presenter.adapters.RVTeamAdapter;
 
 import java.util.ArrayList;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -35,8 +31,8 @@ public class TeamFragment extends Fragment implements ParentFragment,RVTeamAdapt
     public FrameLayout fragmentContainer;
     private RecyclerView mRvTeam;
     private RVTeamAdapter rvTeamAdapter;
-    private TextView tvTeamHeader;
     private Button transferButton;
+    private ArrayList<Player> playersToTransfer;
 
     public TeamFragment() {
         // Required empty public constructor
@@ -63,8 +59,6 @@ public class TeamFragment extends Fragment implements ParentFragment,RVTeamAdapt
                 onButtonClick();
             }
         });
-        tvTeamHeader = view.findViewById(R.id.tv_team_GW);
-        tvTeamHeader.setText(getString(R.string.gw_gameweek) + " 9");
     }
 
     /**
@@ -103,6 +97,14 @@ public class TeamFragment extends Fragment implements ParentFragment,RVTeamAdapt
      */
     private void initRecyclerView(View view) {
         mRvTeam = view.findViewById(R.id.rv_team);
+        GridLayoutManager gridLayoutManager = getGridLayoutManager(view);
+        mRvTeam.setLayoutManager(gridLayoutManager);
+        mRvTeam.setNestedScrollingEnabled(false);
+        mRvTeam.setHasFixedSize(true);
+    }
+
+    @NonNull
+    private GridLayoutManager getGridLayoutManager(View view) {
         GridLayoutManager gridLayoutManager = new GridLayoutManager(view.getContext(), 4);
         gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
             @Override
@@ -112,17 +114,24 @@ public class TeamFragment extends Fragment implements ParentFragment,RVTeamAdapt
                 return 2;
             }
         });
-        mRvTeam.setLayoutManager(gridLayoutManager);
-        mRvTeam.setNestedScrollingEnabled(false);
-        mRvTeam.setHasFixedSize(true);
+        return gridLayoutManager;
     }
 
     public void onButtonClick(){
-        Toast.makeText(getContext(),"Kliknięty guzik",Toast.LENGTH_SHORT).show();
+        TransferFragment newFragment = new TransferFragment();
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.replace(R.id.team_fragment_container, newFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 
     @Override
     public void setButtonEnable(boolean set) {
         transferButton.setEnabled(set);
+    }
+
+    @Override
+    public void updatePlayersToTransfer(ArrayList<Player> playersToTransfer) {
+        this.playersToTransfer = playersToTransfer;
     }
 }

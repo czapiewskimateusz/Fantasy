@@ -1,10 +1,9 @@
-package com.example.mateusz.fantasy.home.model.API;
+package com.example.mateusz.fantasy.leagues.model.API;
 
 
-import com.example.mateusz.fantasy.home.model.repo.LeagueDetailJsonResponse;
-import com.example.mateusz.fantasy.home.model.repo.UserRank;
-import com.example.mateusz.fantasy.home.model.webService.LeagueWebService;
-import com.example.mateusz.fantasy.home.presenter.LeagueDetailPresenter;
+import com.example.mateusz.fantasy.leagues.presenter.LeagueDetailPresenter;
+import com.example.mateusz.fantasy.leagues.model.repo.LeagueDetailJsonResponse;
+import com.example.mateusz.fantasy.leagues.model.repo.UserRank;
 
 import java.util.ArrayList;
 import java.util.Arrays;
