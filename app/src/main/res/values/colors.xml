@@ -1,26 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    INDIGO AMBER
-    <!--<color name="primary">#3f51b5</color>-->
-    <!--<color name="primary_dark">#303F9F</color>-->
-    <!--<color name="primary_light">#C5CAE9</color>-->
-    <!--<color name="accent">#ffc107</color>-->
-    <!--<color name="primary_text">#212121</color>-->
-    <!--<color name="secondary_text">#757575</color>-->
-    <!--<color name="icons">#FFFFFF</color>-->
-    <!--<color name="divider">#BDBDBD</color>-->
-
-    TEAL PINK
-    <!--<color name="primary">#009688</color>-->
-    <!--<color name="primary_dark">#00796B</color>-->
-    <!--<color name="primary_light">#B2DFDB</color>-->
-    <!--<color name="accent">#FF4081</color>-->
-    <!--<color name="primary_text">#212121</color>-->
-    <!--<color name="secondary_text">#757575</color>-->
-    <!--<color name="icons">#FFFFFF</color>-->
-    <!--<color name="divider">#BDBDBD</color>-->
-
     PURPLE GREEN
     <color name="primary">#212121</color>
     <color name="primary_dark">#000000</color>
@@ -38,7 +18,8 @@
 
     <color name="color_trans_accent">#4D00b248</color>
     <color name="color_trans_primary">#80212121</color>
-    <color name="color_trans_primary_dark">#CC212121</color>
+    <color name="color_trans_primary_dark">#cc212121</color>
+    <color name="color_trans_primary_even_darker">#F2212121</color>
     <color name="color_trans_cardView">#CC212121</color>
 
     <color name="gold">#ffc107</color>
@@ -53,4 +34,9 @@
     <color name="player_name_color">#99000000</color>
     <color name="player_score_color">#4D000000</color>
     <color name="player_selected">@color/accent</color>
+
+    <color name="color_position_gk">#03A9F4</color>
+    <color name="color_position_def">#4CAF50</color>
+    <color name="color_position_mid">#FFC107</color>
+    <color name="color_position_atk">#E91E63</color>
 </resources>

@@ -16,7 +16,7 @@ import com.example.mateusz.fantasy.R;
 
 import java.util.ArrayList;
 
-public class HomeActivity extends AppCompatActivity /*,LeagueFragment.LeagueFragmentCallback*/ {
+public class HomeActivity extends AppCompatActivity {
 
     private ParentFragment mCurrentFragment;
     private ViewPagerAdapter mViewPagerAdapter;

@@ -55,4 +55,20 @@
     <string name="new_password_hint">Nowe hasło</string>
     <string name="new_password_repeat_hint">Powtórz nowe hasło</string>
     <string name="edit_user_dialog">Aby przejść dalej podaj hasło</string>
+    //Sort
+    <string-array name="sortA_types">
+        <item>Nazwa</item>
+        <item>Drużyna</item>
+        <item>Pozycja</item>
+    </string-array>
+    <string-array name="sortB_types">
+        <item>Cena</item>
+        <item>Zdobyte punkty</item>
+    </string-array>
+    <string name="gk">BR</string>
+    <string name="def">OBR</string>
+    <string name="mid">MID</string>
+    <string name="atk">ATK</string>
+    <string name="sort">Sortuj:</string>
+    <string name="budget">BUDŻET</string>
 </resources>

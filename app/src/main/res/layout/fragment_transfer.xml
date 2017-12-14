@@ -9,31 +9,224 @@
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorWhite">
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="32dp"
-            android:text="WITAMY WE FRAGMENCIE DO TRANSFERÓW"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        android:background="@drawable/stadium">
 
         <Button
             android:id="@+id/btn_make_transfers"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:text="Fuck Go BACK!"
-            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_height="64dp"
+            android:background="@color/accent"
+            android:text="@string/save_edit_button"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView" />
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_all_players"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rv_selected_players" />
+
+        <ImageView
+            android:id="@+id/iv_transfer_bckg"
+            android:layout_width="0dp"
+            android:layout_height="160dp"
+            android:src="@color/color_trans_primary_dark"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_make_transfers"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_selected_players"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_transfer_bckg" />
+
+        <Spinner
+            android:id="@+id/sp_sortA"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="32dp"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_sort_desc"
+            app:layout_constraintEnd_toStartOf="@+id/sp_sortB"
+            app:layout_constraintStart_toEndOf="@+id/tv_sort_desc"
+            app:layout_constraintTop_toTopOf="@+id/tv_sort_desc" />
+
+        <Spinner
+            android:id="@+id/sp_sortB"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/sp_sortA"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/sp_sortA" />
+
+        <TextView
+            android:id="@+id/tv_sort_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/sort"
+            android:textColor="@color/colorWhite"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_make_transfers" />
+
+        <TextView
+            android:id="@+id/tv_desc_gk"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/gk"
+            android:textColor="@color/colorWhite"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_desc_def"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/def"
+            android:textColor="@color/colorWhite"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/tv_desc_gk"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_desc_mid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/mid"
+            android:textColor="@color/colorWhite"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/tv_desc_def"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_desc_atk"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/atk"
+            android:textColor="@color/colorWhite"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tv_desc_mid"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_gk_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="0"
+            android:textAlignment="center"
+            android:textColor="@color/accent"
+            app:layout_constraintEnd_toEndOf="@+id/tv_desc_gk"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/tv_desc_gk"
+            app:layout_constraintTop_toBottomOf="@+id/tv_desc_gk"
+            tools:text="1" />
+
+        <TextView
+            android:id="@+id/tv_def_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="0"
+            android:textAlignment="center"
+            android:textColor="@color/accent"
+            app:layout_constraintEnd_toEndOf="@+id/tv_desc_def"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/tv_desc_def"
+            app:layout_constraintTop_toBottomOf="@+id/tv_desc_def"
+            tools:text="4" />
+
+        <TextView
+            android:id="@+id/tv_mid_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="0"
+            android:textAlignment="center"
+            android:textColor="@color/accent"
+            app:layout_constraintEnd_toEndOf="@+id/tv_desc_mid"
+            app:layout_constraintStart_toStartOf="@+id/tv_desc_mid"
+            app:layout_constraintTop_toBottomOf="@+id/tv_desc_mid"
+            tools:text="4" />
+
+        <TextView
+            android:id="@+id/tv_atk_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="0"
+            android:textAlignment="center"
+            android:textColor="@color/accent"
+            app:layout_constraintEnd_toEndOf="@+id/tv_desc_atk"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/tv_desc_atk"
+            app:layout_constraintTop_toBottomOf="@+id/tv_desc_atk"
+            tools:text="2" />
+
+        <TextView
+            android:id="@+id/tv_budget"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="0"
+            android:textAlignment="center"
+            android:textColor="@color/accent"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/tv_budget_desc"
+            app:layout_constraintStart_toStartOf="@+id/tv_budget_desc"
+            app:layout_constraintTop_toBottomOf="@+id/tv_budget_desc"
+            tools:text="100" />
+
+        <TextView
+            android:id="@+id/tv_budget_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/budget"
+            android:textColor="@color/colorWhite"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/btn_make_transfers"
+            app:layout_constraintStart_toEndOf="@+id/tv_desc_atk"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
     </android.support.constraint.ConstraintLayout>
 
 </FrameLayout>

@@ -2,52 +2,53 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:layout_width="134dp"
     android:layout_height="wrap_content">
-
-    <ImageView
-        android:id="@+id/iv_kit"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginEnd="12dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="4dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/liverpool_1" />
 
     <TextView
         android:id="@+id/tv_name"
-        android:layout_width="0dp"
+        android:layout_width="70dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:background="#99000000"
         android:ellipsize="end"
         android:maxLines="1"
         android:padding="2dp"
         android:textAlignment="center"
         android:textColor="@color/colorWhite"
-        android:textSize="12sp"
-        app:layout_constraintEnd_toEndOf="@+id/iv_kit"
-        app:layout_constraintStart_toStartOf="@+id/iv_kit"
-        app:layout_constraintTop_toBottomOf="@+id/iv_kit"
-        tools:text="Dea gea" />
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="De Gea" />
 
     <TextView
-        android:id="@+id/tv_player_score"
+        android:id="@+id/tv_player_position"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
         android:background="#4D000000"
         android:padding="2dp"
         android:textAlignment="center"
         android:textColor="@color/colorWhite"
-        android:textSize="12sp"
+        android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/tv_name"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="@+id/tv_name"
         app:layout_constraintTop_toBottomOf="@+id/tv_name"
-        tools:text="24" />
+        tools:text="GK" />
+
+    <TextView
+        android:id="@+id/tv_player_value"
+        android:layout_width="48dp"
+        android:layout_height="0dp"
+        android:background="@color/color_trans_primary_dark"
+        android:gravity="center"
+        android:textColor="@color/accent"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tv_player_position"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="12.3" />
 </android.support.constraint.ConstraintLayout>

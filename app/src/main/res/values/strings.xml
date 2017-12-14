@@ -71,8 +71,22 @@
     <string name="highest">Highest</string>
     <string name="gw_gameweek">GAMEWEEK</string>
     <string name="gw_points">points</string>
+    <string name="gk">GK</string>
+    <string name="def">DEF</string>
+    <string name="mid">MID</string>
+    <string name="atk">ATK</string>
+    <string name="sort">Sort:</string>
+    <string name="budget">BUDGET</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    //Sort
+    <string-array name="sortA_types">
+        <item>Name</item>
+        <item>Team</item>
+        <item>Position</item>
+    </string-array>
+    <string-array name="sortB_types">
+        <item>Value</item>
+        <item>Total points</item>
+    </string-array>
 
 </resources>

@@ -62,7 +62,6 @@ public class LeagueDetailActivity extends AppCompatActivity implements ILeagueDe
         ButterKnife.bind(this);
 
         mLeagueDetailPresenter = new LeagueDetailPresenter(this);
-
         getDataFromSharedPreferences();
         getLeagueFromIntent();
         initView();

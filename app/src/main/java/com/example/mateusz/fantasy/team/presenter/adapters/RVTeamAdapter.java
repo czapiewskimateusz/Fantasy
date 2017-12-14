@@ -62,10 +62,11 @@ public class RVTeamAdapter extends RecyclerView.Adapter<RVTeamAdapter.TeamViewHo
 
     @Override
     public void onBindViewHolder(TeamViewHolder holder, int position) {
-       holder.name.setText(players.get(position).getName());
-       holder.score.setText(Integer.toString(players.get(position).getPoints()));
-       holder.player = players.get(position);
-       setPlayersKit(holder,position);
+        players.get(position);
+        holder.name.setText(players.get(position).getName());
+        holder.score.setText(Integer.toString(players.get(position).getTotalPoints()));
+        holder.player = players.get(position);
+        setPlayersKit(holder,players.get(position));
     }
 
     @Override
@@ -73,26 +74,26 @@ public class RVTeamAdapter extends RecyclerView.Adapter<RVTeamAdapter.TeamViewHo
         return players.size();
     }
 
-    private void setPlayersKit(TeamViewHolder holder, int position) {
-        if (players.get(position).getTeam().equals(ARSENAL)) holder.kit.setImageResource(R.drawable.arsenal_1);
-        if (players.get(position).getTeam().equals(BOURNEMOUTH)) holder.kit.setImageResource(R.drawable.bournemouth_1);
-        if (players.get(position).getTeam().equals(BRIGHTON)) holder.kit.setImageResource(R.drawable.brighton_1);
-        if (players.get(position).getTeam().equals(BURNLEY)) holder.kit.setImageResource(R.drawable.burnley_1);
-        if (players.get(position).getTeam().equals(CHELSEA)) holder.kit.setImageResource(R.drawable.chelsea_1);
-        if (players.get(position).getTeam().equals(CRYSTAL_PALACE)) holder.kit.setImageResource(R.drawable.crystalpalace_1);
-        if (players.get(position).getTeam().equals(EVERTON)) holder.kit.setImageResource(R.drawable.everton_1);
-        if (players.get(position).getTeam().equals(HUDDERSFIELD)) holder.kit.setImageResource(R.drawable.huddersfield_1);
-        if (players.get(position).getTeam().equals(LEICESTER)) holder.kit.setImageResource(R.drawable.leicester_1);
-        if (players.get(position).getTeam().equals(LIVERPOOL_FC)) holder.kit.setImageResource(R.drawable.liverpool_1);
-        if (players.get(position).getTeam().equals(MAN_CITY)) holder.kit.setImageResource(R.drawable.mancity_1);
-        if (players.get(position).getTeam().equals(MAN_UTD)) holder.kit.setImageResource(R.drawable.manutd_1);
-        if (players.get(position).getTeam().equals(NEWCASTLE)) holder.kit.setImageResource(R.drawable.newcastle_1);
-        if (players.get(position).getTeam().equals(SOUTHAMPTON)) holder.kit.setImageResource(R.drawable.southampton_1);
-        if (players.get(position).getTeam().equals(SPURS)) holder.kit.setImageResource(R.drawable.spurs_1);
-        if (players.get(position).getTeam().equals(STOKE)) holder.kit.setImageResource(R.drawable.stoke_1);
-        if (players.get(position).getTeam().equals(SWANSEA)) holder.kit.setImageResource(R.drawable.swansea_1);
-        if (players.get(position).getTeam().equals(WATFORD)) holder.kit.setImageResource(R.drawable.watford_1);
-        if (players.get(position).getTeam().equals(WEST_BROM)) holder.kit.setImageResource(R.drawable.westbrom_2);
+    private void setPlayersKit(TeamViewHolder holder, Player player) {
+        if (player.getTeam().equals(ARSENAL)) holder.kit.setImageResource(R.drawable.arsenal_1);
+        if (player.getTeam().equals(BOURNEMOUTH)) holder.kit.setImageResource(R.drawable.bournemouth_1);
+        if (player.getTeam().equals(BRIGHTON)) holder.kit.setImageResource(R.drawable.brighton_1);
+        if (player.getTeam().equals(BURNLEY)) holder.kit.setImageResource(R.drawable.burnley_1);
+        if (player.getTeam().equals(CHELSEA)) holder.kit.setImageResource(R.drawable.chelsea_1);
+        if (player.getTeam().equals(CRYSTAL_PALACE)) holder.kit.setImageResource(R.drawable.crystalpalace_1);
+        if (player.getTeam().equals(EVERTON)) holder.kit.setImageResource(R.drawable.everton_1);
+        if (player.getTeam().equals(HUDDERSFIELD)) holder.kit.setImageResource(R.drawable.huddersfield_1);
+        if (player.getTeam().equals(LEICESTER)) holder.kit.setImageResource(R.drawable.leicester_1);
+        if (player.getTeam().equals(LIVERPOOL_FC)) holder.kit.setImageResource(R.drawable.liverpool_1);
+        if (player.getTeam().equals(MAN_CITY)) holder.kit.setImageResource(R.drawable.mancity_1);
+        if (player.getTeam().equals(MAN_UTD)) holder.kit.setImageResource(R.drawable.manutd_1);
+        if (player.getTeam().equals(NEWCASTLE)) holder.kit.setImageResource(R.drawable.newcastle_1);
+        if (player.getTeam().equals(SOUTHAMPTON)) holder.kit.setImageResource(R.drawable.southampton_1);
+        if (player.getTeam().equals(SPURS)) holder.kit.setImageResource(R.drawable.spurs_1);
+        if (player.getTeam().equals(STOKE)) holder.kit.setImageResource(R.drawable.stoke_1);
+        if (player.getTeam().equals(SWANSEA)) holder.kit.setImageResource(R.drawable.swansea_1);
+        if (player.getTeam().equals(WATFORD)) holder.kit.setImageResource(R.drawable.watford_1);
+        if (player.getTeam().equals(WEST_BROM)) holder.kit.setImageResource(R.drawable.westbrom_2);
     }
 
     /**
@@ -109,28 +110,33 @@ public class RVTeamAdapter extends RecyclerView.Adapter<RVTeamAdapter.TeamViewHo
             super(itemView);
             itemView.setOnClickListener(this);
             kit = itemView.findViewById(R.id.iv_kit);
-            name = itemView.findViewById(R.id.tv_player_name);
+            name = itemView.findViewById(R.id.tv_name);
             score = itemView.findViewById(R.id.tv_player_score);
         }
 
         @Override
         public void onClick(View view) {
             if (alreadyClicked){
+                alreadyClicked =false;
                 selectedPlayers.remove(player);
                 teamFragmentCallback.updatePlayersToTransfer(selectedPlayers);
-                if (selectedPlayers.isEmpty()) teamFragmentCallback.setButtonEnable(false);
                 name.setBackgroundColor(fetchColor(R.color.player_name_color));
+                name.setTextColor(fetchColor(R.color.colorWhite));
                 score.setBackgroundColor(fetchColor(R.color.player_score_color));
-                alreadyClicked =false;
+                score.setTextColor(fetchColor(R.color.colorWhite));
+                if (selectedPlayers.isEmpty()) teamFragmentCallback.setButtonEnable(false);
             } else {
-                teamFragmentCallback.setButtonEnable(true);
+                alreadyClicked =true;
                 selectedPlayers.add(player);
                 teamFragmentCallback.updatePlayersToTransfer(selectedPlayers);
                 name.setBackgroundColor(fetchColor(R.color.player_selected));
+                name.setTextColor(fetchColor(R.color.primary_dark));
                 score.setBackgroundColor(fetchColor(R.color.player_selected));
-                alreadyClicked =true;
+                score.setTextColor(fetchColor(R.color.primary_dark));
+                teamFragmentCallback.setButtonEnable(true);
             }
         }
+
     }
 
     private int fetchColor(@ColorRes int color) {

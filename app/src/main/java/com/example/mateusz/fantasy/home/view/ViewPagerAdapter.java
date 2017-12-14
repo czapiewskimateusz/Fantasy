@@ -17,7 +17,6 @@ import java.util.List;
 public class ViewPagerAdapter extends FragmentPagerAdapter {
 
     private final List<Fragment> fragments = new ArrayList<>();
-
     private ParentFragment mCurrentFragment;
 
     public ViewPagerAdapter(FragmentManager manager) {
