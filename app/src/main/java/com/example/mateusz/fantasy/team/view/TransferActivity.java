@@ -280,7 +280,7 @@ public class TransferActivity extends AppCompatActivity implements RVAllPlayerAd
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         selectedPlayersRV.setHasFixedSize(true);
         selectedPlayersRV.setLayoutManager(linearLayoutManager);
-        selectedPlayerAdapter = new RVSelectedPlayerAdapter(selectedPlayers, this);
+        selectedPlayerAdapter = new RVSelectedPlayerAdapter(selectedPlayers, this, this);
         selectedPlayersRV.setAdapter(selectedPlayerAdapter);
     }
 

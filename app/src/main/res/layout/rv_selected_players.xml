@@ -22,7 +22,7 @@
         tools:text="De Gea" />
 
     <TextView
-        android:id="@+id/tv_player_position"
+        android:id="@+id/tv_player_value"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="#4D000000"
@@ -36,19 +36,19 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="@+id/tv_name"
         app:layout_constraintTop_toBottomOf="@+id/tv_name"
-        tools:text="GK" />
+        tools:text="12.3" />
 
     <TextView
-        android:id="@+id/tv_player_value"
+        android:id="@+id/tv_player_position"
         android:layout_width="48dp"
         android:layout_height="0dp"
         android:background="@color/color_trans_primary_dark"
         android:gravity="center"
         android:textColor="@color/accent"
-        android:textSize="18sp"
+        android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tv_player_position"
+        app:layout_constraintStart_toEndOf="@+id/tv_player_value"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="12.3" />
+        tools:text="OBR" />
 </android.support.constraint.ConstraintLayout>

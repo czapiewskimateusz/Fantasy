@@ -87,21 +87,21 @@ public class HomeActivity extends AppCompatActivity {
         bottomNavigation.addItems(bottomNavigationItems);
     }
 
-//    @Override
-//    public void onBackPressed() {
-//        if (mDoubleBackToExitPressedOnce) {
-//            finishAffinity();
-//            return;
-//        }
-//        this.mDoubleBackToExitPressedOnce = true;
-//        Toast.makeText(this, getString(R.string.back_button_close_app_warning), Toast.LENGTH_SHORT).show();
-//        new Handler().postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                mDoubleBackToExitPressedOnce = false;
-//            }
-//        }, 2000);
-//    }
+    @Override
+    public void onBackPressed() {
+        if (mDoubleBackToExitPressedOnce) {
+            finishAffinity();
+            return;
+        }
+        this.mDoubleBackToExitPressedOnce = true;
+        Toast.makeText(this, getString(R.string.back_button_close_app_warning), Toast.LENGTH_SHORT).show();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mDoubleBackToExitPressedOnce = false;
+            }
+        }, 2000);
+    }
 
     private int fetchColor(@ColorRes int color) {
         return ContextCompat.getColor(this, color);
