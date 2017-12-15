@@ -20,10 +20,16 @@ import java.util.Locale;
 public class RVAllPlayerAdapter extends RecyclerView.Adapter<RVAllPlayerAdapter.AllPlayerViewHolder> {
     private ArrayList<Player> allPlayers;
     private Context context;
+    private CallbackInterface callbackInterface;
 
-    public RVAllPlayerAdapter(ArrayList<Player> allPlayers,Context context) {
+    public interface CallbackInterface{
+        void addToSelectedPlayers(Player player);
+    }
+
+    public RVAllPlayerAdapter(ArrayList<Player> allPlayers, Context context, CallbackInterface callbackInterface) {
         this.allPlayers = allPlayers;
         this.context = context;
+        this.callbackInterface = callbackInterface;
     }
 
 
@@ -84,7 +90,7 @@ public class RVAllPlayerAdapter extends RecyclerView.Adapter<RVAllPlayerAdapter.
 
         @Override
         public void onClick(View view) {
-
+            callbackInterface.addToSelectedPlayers(player);
         }
     }
 }

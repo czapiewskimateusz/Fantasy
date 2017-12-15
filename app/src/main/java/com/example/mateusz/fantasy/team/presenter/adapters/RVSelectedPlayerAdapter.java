@@ -14,9 +14,15 @@ import java.util.ArrayList;
 
 public class RVSelectedPlayerAdapter extends RecyclerView.Adapter<RVSelectedPlayerAdapter.SelectedPlayerViewHolder> {
     private ArrayList<Player> selectedPlayers;
+    private SelectedPlayersCallback selectedPlayersCallback;
 
-    public RVSelectedPlayerAdapter(ArrayList<Player> selectedPlayers) {
+    public interface SelectedPlayersCallback{
+        void removeFromSelectedPlayers(Player player);
+    }
+
+    public RVSelectedPlayerAdapter(ArrayList<Player> selectedPlayers, SelectedPlayersCallback selectedPlayersCallback) {
         this.selectedPlayers = selectedPlayers;
+        this.selectedPlayersCallback = selectedPlayersCallback;
     }
 
 
@@ -59,8 +65,7 @@ public class RVSelectedPlayerAdapter extends RecyclerView.Adapter<RVSelectedPlay
 
         @Override
         public void onClick(View view) {
-            selectedPlayers.remove(player);
-            notifyDataSetChanged();
+           selectedPlayersCallback.removeFromSelectedPlayers(player);
         }
     }
 }

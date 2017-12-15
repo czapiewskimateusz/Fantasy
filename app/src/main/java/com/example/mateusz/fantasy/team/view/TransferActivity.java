@@ -1,16 +1,13 @@
 package com.example.mateusz.fantasy.team.view;
 
-
-import android.os.Bundle;
+import android.content.Intent;
 import android.support.annotation.ColorRes;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -18,6 +15,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.mateusz.fantasy.R;
+import com.example.mateusz.fantasy.home.view.HomeActivity;
 import com.example.mateusz.fantasy.team.model.Player;
 import com.example.mateusz.fantasy.team.presenter.adapters.RVAllPlayerAdapter;
 import com.example.mateusz.fantasy.team.presenter.adapters.RVSelectedPlayerAdapter;
@@ -25,18 +23,18 @@ import com.example.mateusz.fantasy.team.presenter.adapters.RVSelectedPlayerAdapt
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Locale;
 
-
-public class TransferFragment extends Fragment {
+public class TransferActivity extends AppCompatActivity implements RVAllPlayerAdapter.CallbackInterface, RVSelectedPlayerAdapter.SelectedPlayersCallback {
     private ArrayList<Player> playersToTransfer;
     private ArrayList<Player> usersTeam;
     private ArrayList<Player> selectedPlayers;
     private ArrayList<Player> allPlayers;
-    private int goalkeepers=0;
-    private int midfielders=0;
-    private int defenders=0;
-    private int attackers=0;
-    private double budget=0.0;
+    private int goalkeepers = 0;
+    private int midfielders = 0;
+    private int defenders = 0;
+    private int attackers = 0;
+    private double budget = 0.0;
 
     private Button makeTransfersButton;
     private Spinner sortA;
@@ -52,34 +50,34 @@ public class TransferFragment extends Fragment {
     private RVSelectedPlayerAdapter selectedPlayerAdapter;
     private RVAllPlayerAdapter allPlayerAdapter;
 
-    public TransferFragment() {
-        // Required empty public constructor
-    }
-
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_transfer, container, false);
-
-        playersToTransfer = Player.getMockToTransferData();
-        selectedPlayers = Player.getMockToTransferData();
-        allPlayers = Player.getMockPlayerData();
-
-        initViews(view);
-        setupSort(sortA,R.array.sortA_types);
-        setupSort(sortB,R.array.sortB_types);
-        setOnClickListenerToButton();
+        setContentView(R.layout.activity_transfer);
+//        playersToTransfer = Player.getMockToTransferData();
+        selectedPlayers = new ArrayList<>();
+        allPlayers = Player.getMockTransferData();
+        budget = 100.00;
+        initViews();
         assignPlayersToTransfer();
         initSelectedPlayersRV();
         initAllPlayersRV();
-        setListenerSortA();
-        setListenerSortB();
-        return view;
+    }
+
+    @Override
+    public void addToSelectedPlayers(Player player) {
+        if (!selectedPlayers.contains(player)) {
+            selectedPlayers.add(player);
+            selectedPlayerAdapter.notifyDataSetChanged();
+            addToTransfer(player);
+        }
+    }
+
+    @Override
+    public void removeFromSelectedPlayers(Player player) {
+        selectedPlayers.remove(player);
+        selectedPlayerAdapter.notifyDataSetChanged();
+        removeFromTransfer(player);
     }
 
     private void setListenerSortB() {
@@ -93,6 +91,7 @@ public class TransferFragment extends Fragment {
                 }
                 allPlayerAdapter.notifyDataSetChanged();
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
 
@@ -106,13 +105,14 @@ public class TransferFragment extends Fragment {
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
                 if (position == 0) {
                     sortByName();
-                } else if (position == 1){
+                } else if (position == 1) {
                     sortByTeam();
                 } else {
                     sortByPosition();
                 }
                 allPlayerAdapter.notifyDataSetChanged();
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
 
@@ -124,7 +124,7 @@ public class TransferFragment extends Fragment {
         Collections.sort(allPlayers, new Comparator<Player>() {
             @Override
             public int compare(Player player, Player t1) {
-                return t1.getTotalPoints()-player.getTotalPoints();
+                return t1.getTotalPoints() - player.getTotalPoints();
             }
         });
     }
@@ -133,7 +133,7 @@ public class TransferFragment extends Fragment {
         Collections.sort(allPlayers, new Comparator<Player>() {
             @Override
             public int compare(Player player, Player t1) {
-                Double d = t1.getValue()-player.getValue();
+                Double d = t1.getValue() - player.getValue();
                 return d.intValue();
             }
         });
@@ -143,7 +143,7 @@ public class TransferFragment extends Fragment {
         Collections.sort(allPlayers, new Comparator<Player>() {
             @Override
             public int compare(Player player, Player t1) {
-                return player.getPosition()-t1.getPosition();
+                return player.getPosition() - t1.getPosition();
             }
         });
     }
@@ -161,7 +161,7 @@ public class TransferFragment extends Fragment {
         Collections.sort(allPlayers, new Comparator<Player>() {
             @Override
             public int compare(Player player, Player t1) {
-                return  player.getName().compareTo(t1.getName());
+                return player.getName().compareTo(t1.getName());
             }
         });
     }
@@ -170,44 +170,84 @@ public class TransferFragment extends Fragment {
         makeTransfersButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                TeamFragment newFragment = new TeamFragment();
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.replace(R.id.transfer_fragment_container, newFragment);
-                transaction.addToBackStack(null);
-                transaction.commit();
+                Intent intent = new Intent(TransferActivity.this, HomeActivity.class);
+                startActivity(intent);
             }
         });
     }
 
-    private void initViews(View view) {
-        sortA = view.findViewById(R.id.sp_sortA);
-        sortB = view.findViewById(R.id.sp_sortB);
-        makeTransfersButton = view.findViewById(R.id.btn_make_transfers);
+    private void initViews() {
+        sortA = findViewById(R.id.sp_sortA);
+        sortB = findViewById(R.id.sp_sortB);
+        makeTransfersButton = findViewById(R.id.btn_make_transfers);
         makeTransfersButton.setEnabled(false);
-        selectedPlayersRV = view.findViewById(R.id.rv_selected_players);
-        allPlayersRV = view.findViewById(R.id.rv_all_players);
-        gkLeftTV = view.findViewById(R.id.tv_gk_left);
-        defLeftTV = view.findViewById(R.id.tv_def_left);
-        midLeftTV = view.findViewById(R.id.tv_mid_left);
-        atkLeftTV = view.findViewById(R.id.tv_atk_left);
-        budgetTV = view.findViewById(R.id.tv_budget);
+        selectedPlayersRV = findViewById(R.id.rv_selected_players);
+        allPlayersRV = findViewById(R.id.rv_all_players);
+        gkLeftTV = findViewById(R.id.tv_gk_left);
+        defLeftTV = findViewById(R.id.tv_def_left);
+        midLeftTV = findViewById(R.id.tv_mid_left);
+        atkLeftTV = findViewById(R.id.tv_atk_left);
+        budgetTV = findViewById(R.id.tv_budget);
+
+        setupSort(sortA, R.array.sortA_types);
+        setupSort(sortB, R.array.sortB_types);
+        setListenerSortA();
+        setListenerSortB();
+        setOnClickListenerToButton();
     }
 
     private void setupSort(Spinner spinner, int array) {
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),array,R.layout.spinner_xml);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, array, R.layout.spinner_xml);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
     }
 
     private void assignPlayersToTransfer() {
-        for (Player p:playersToTransfer){
-            if (p.getPosition()==1) goalkeepers++;
-            if (p.getPosition()==2) defenders++;
-            if (p.getPosition()==3) midfielders++;
-            if (p.getPosition()==4) attackers++;
+        if (playersToTransfer == null){
+            goalkeepers = 1;
+            defenders = 4;
+            midfielders = 4;
+            attackers = 2;
+        } else {
+            for (Player p : playersToTransfer) {
+                if (p.getPosition() == 1) goalkeepers++;
+                if (p.getPosition() == 2) defenders++;
+                if (p.getPosition() == 3) midfielders++;
+                if (p.getPosition() == 4) attackers++;
+            }
         }
         setColors();
         setTexts();
+    }
+
+    private void addToTransfer(Player p) {
+        if (p.getPosition() == 1) goalkeepers--;
+        if (p.getPosition() == 2) defenders--;
+        if (p.getPosition() == 3) midfielders--;
+        if (p.getPosition() == 4) attackers--;
+        budget -= p.getValue();
+        setColors();
+        setTexts();
+        if (checkTransferConditions()) makeTransfersButton.setEnabled(true);
+        else makeTransfersButton.setEnabled(false);
+    }
+
+    private void removeFromTransfer(Player p) {
+        if (p.getPosition() == 1) goalkeepers++;
+        if (p.getPosition() == 2) defenders++;
+        if (p.getPosition() == 3) midfielders++;
+        if (p.getPosition() == 4) attackers++;
+        budget += p.getValue();
+        setColors();
+        setTexts();
+        if (checkTransferConditions()) makeTransfersButton.setEnabled(true);
+        else makeTransfersButton.setEnabled(false);
+    }
+
+    private boolean checkTransferConditions() {
+        if (goalkeepers == 0 && (defenders == 0) && (midfielders == 0) && (attackers == 0) && (budget >= 0.0))
+            return true;
+        return false;
     }
 
     private void setTexts() {
@@ -215,41 +255,45 @@ public class TransferFragment extends Fragment {
         defLeftTV.setText(String.valueOf(defenders));
         midLeftTV.setText(String.valueOf(midfielders));
         atkLeftTV.setText(String.valueOf(attackers));
-        budgetTV.setText(String.valueOf(18.3));
+        budgetTV.setText(String.format(Locale.ENGLISH,"%3.1f",budget));
     }
 
     private void setColors() {
-        if (goalkeepers>0) gkLeftTV.setTextColor(fetchColor(android.R.color.holo_red_dark));
+        if (goalkeepers > 0 || goalkeepers < 0)
+            gkLeftTV.setTextColor(fetchColor(android.R.color.holo_red_dark));
         else gkLeftTV.setTextColor(fetchColor(R.color.accent));
-        if (defenders>0) defLeftTV.setTextColor(fetchColor(android.R.color.holo_red_dark));
+        if (defenders > 0 || defenders < 0)
+            defLeftTV.setTextColor(fetchColor(android.R.color.holo_red_dark));
         else defLeftTV.setTextColor(fetchColor(R.color.accent));
-        if (midfielders>0) midLeftTV.setTextColor(fetchColor(android.R.color.holo_red_dark));
+        if (midfielders > 0 || midfielders < 0)
+            midLeftTV.setTextColor(fetchColor(android.R.color.holo_red_dark));
         else midLeftTV.setTextColor(fetchColor(R.color.accent));
-        if (attackers>0) atkLeftTV.setTextColor(fetchColor(android.R.color.holo_red_dark));
+        if (attackers > 0 || attackers < 0)
+            atkLeftTV.setTextColor(fetchColor(android.R.color.holo_red_dark));
         else atkLeftTV.setTextColor(fetchColor(R.color.accent));
-        if (budget<0) budgetTV.setTextColor(fetchColor(android.R.color.holo_red_dark));
+        if (budget < 0) budgetTV.setTextColor(fetchColor(android.R.color.holo_red_dark));
         else budgetTV.setTextColor(fetchColor(R.color.accent));
     }
 
-    void initSelectedPlayersRV(){
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+    void initSelectedPlayersRV() {
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         selectedPlayersRV.setHasFixedSize(true);
         selectedPlayersRV.setLayoutManager(linearLayoutManager);
-        selectedPlayerAdapter = new RVSelectedPlayerAdapter(selectedPlayers);
+        selectedPlayerAdapter = new RVSelectedPlayerAdapter(selectedPlayers, this);
         selectedPlayersRV.setAdapter(selectedPlayerAdapter);
     }
 
     private void initAllPlayersRV() {
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         allPlayersRV.setHasFixedSize(true);
         allPlayersRV.setLayoutManager(linearLayoutManager);
-        allPlayerAdapter = new RVAllPlayerAdapter(allPlayers,getContext());
+        allPlayerAdapter = new RVAllPlayerAdapter(allPlayers, this, this);
         allPlayersRV.setAdapter(allPlayerAdapter);
     }
 
     private int fetchColor(@ColorRes int color) {
-        return ContextCompat.getColor(getContext(), color);
+        return ContextCompat.getColor(this, color);
     }
 }

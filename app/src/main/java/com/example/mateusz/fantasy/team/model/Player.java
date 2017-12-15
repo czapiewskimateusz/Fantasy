@@ -115,9 +115,23 @@ public class Player implements Comparable<Player>{
         return players;
     }
 
-    public static ArrayList<Player> getMockToTransferData(){
+    public static ArrayList<Player> getMockTransferData(){
         ArrayList<Player> players = new ArrayList<Player>();
         players.add(new Player(11,"Lukaku",ATTACKER, Teams.MAN_UTD,10.8,63));
+        players.add(new Player(12,"Solanke",ATTACKER, Teams.LIVERPOOL_FC,4.7,13));
+        players.add(new Player(16,"Kane",ATTACKER, Teams.SPURS,12.8,97));
+        players.add(new Player(13,"Oxlade-Chamberlain",MIDFIELDER, Teams.LIVERPOOL_FC,6.5,37));
+        players.add(new Player(14,"Matip",DEFENDER, Teams.LIVERPOOL_FC,5.1,48));
+        players.add(new Player(2,"Azpilicueta", DEFENDER,Teams.CHELSEA,6.7,67));
+        players.add(new Player(17,"Otamendi", DEFENDER,Teams.MAN_CITY,6.8,72));
+        players.add(new Player(3,"Valencia", DEFENDER,Teams.MAN_UTD ,6.8,78));
+        players.add(new Player(8,"Salah",MIDFIELDER, Teams.LIVERPOOL_FC ,9.8,101));
+        players.add(new Player(4,"Vertronghen", DEFENDER,Teams.SPURS,5.6,67));
+        players.add(new Player(1,"De Gea", GOALKEEPER,Teams.MAN_UTD, 6.1,76));
+        players.add(new Player(15,"Cech", GOALKEEPER,Teams.ARSENAL, 5.7,51));
+        players.add(new Player(6,"Sane", MIDFIELDER, Teams.MAN_CITY ,8.2,85));
+        players.add(new Player(7,"McArthur",MIDFIELDER, Teams.CRYSTAL_PALACE ,4.4,65));
+        players.add(new Player(9,"Doucure",MIDFIELDER, Teams.WATFORD,6.2,62));
         players.add(new Player(10,"Jesus", ATTACKER,Teams.MAN_CITY,8.7,69));
         players.add(new Player(5,"Daniels", DEFENDER,Teams.BOURNEMOUTH, 4.7,25));
         Collections.sort(players);

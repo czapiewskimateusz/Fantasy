@@ -1,6 +1,7 @@
 package com.example.mateusz.fantasy.team.view;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -118,11 +119,8 @@ public class TeamFragment extends Fragment implements ParentFragment,RVTeamAdapt
     }
 
     public void onButtonClick(){
-        TransferFragment newFragment = new TransferFragment();
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        transaction.replace(R.id.team_fragment_container, newFragment);
-        transaction.addToBackStack(null);
-        transaction.commit();
+        Intent intent = new Intent(getContext(),TransferActivity.class);
+        getContext().startActivity(intent);
     }
 
     @Override
