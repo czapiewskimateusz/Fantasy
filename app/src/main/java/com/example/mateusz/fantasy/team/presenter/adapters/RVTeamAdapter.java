@@ -65,7 +65,7 @@ public class RVTeamAdapter extends RecyclerView.Adapter<RVTeamAdapter.TeamViewHo
     public void onBindViewHolder(TeamViewHolder holder, int position) {
         players.get(position);
         holder.name.setText(players.get(position).getName());
-        holder.score.setText(String.format(Locale.ENGLISH,"%d",players.get(position).getTotalPoints()));
+        holder.score.setText(String.format(Locale.ENGLISH,"%d",players.get(position).getCurrentGWPoints()));
         holder.player = players.get(position);
         setPlayersKit(holder,players.get(position));
     }
