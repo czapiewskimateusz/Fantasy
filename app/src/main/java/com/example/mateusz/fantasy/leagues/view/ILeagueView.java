@@ -7,15 +7,17 @@ import java.util.List;
 
 public interface ILeagueView {
 
-    public void showProgress(boolean show);
+    void showProgress(boolean show);
 
-    public void presentLeagues(List<League> leagues);
+    void presentLeagues(List<League> leagues);
 
-    public void reloadLeagues();
+    void reloadLeagues();
 
-    public void onJoinLeagueFailure();
+    void onJoinLeagueFailure();
 
-    public void onCreateLeagueFailure();
+    void onCreateLeagueFailure();
 
-    public void setRefreshing(boolean set);
+    void setRefreshing(boolean set);
+
+    void onGetLeaguesFailure();
 }

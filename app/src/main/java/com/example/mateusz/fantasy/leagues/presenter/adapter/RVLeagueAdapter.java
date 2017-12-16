@@ -28,7 +28,7 @@ import static com.example.mateusz.fantasy.leagues.model.repo.League.LEAGUE_ID;
 import static com.example.mateusz.fantasy.leagues.model.repo.League.NAME;
 import static com.example.mateusz.fantasy.leagues.model.repo.League.NUMBER_OF_PLAYERS;
 import static com.example.mateusz.fantasy.leagues.model.repo.League.USER_POSITION;
-import static com.example.mateusz.fantasy.leagues.view.LeaguePresenter.LEAGUE_BUNDLE_EXTRA;
+import static com.example.mateusz.fantasy.leagues.presenter.LeaguePresenter.LEAGUE_BUNDLE_EXTRA;
 
 /**
  * RecyclerView Adapter class

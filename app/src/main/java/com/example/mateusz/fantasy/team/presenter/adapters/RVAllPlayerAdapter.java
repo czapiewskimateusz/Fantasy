@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.mateusz.fantasy.R;
-import com.example.mateusz.fantasy.team.model.Player;
+import com.example.mateusz.fantasy.team.model.repo.Player;
 
 import java.util.ArrayList;
 import java.util.Locale;

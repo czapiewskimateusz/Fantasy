@@ -1,7 +1,5 @@
-package com.example.mateusz.fantasy.team.model;
+package com.example.mateusz.fantasy.team.model.repo;
 
-import android.os.Parcel;
-import android.os.Parcelable;
 import android.support.annotation.NonNull;
 
 import java.io.Serializable;
@@ -22,6 +20,7 @@ public class Player implements Comparable<Player>, Serializable{
     private String team;
     private double value;
     private int totalPoints;
+    private int currentGWPoints;
 
     public int getPlayerId() {
         return playerId;
@@ -71,13 +70,22 @@ public class Player implements Comparable<Player>, Serializable{
         this.totalPoints = totalPoints;
     }
 
-    public Player(int playerId, String name, String position, String team, double value, int totalPoints) {
+    public int getCurrentGWPoints() {
+        return currentGWPoints;
+    }
+
+    public void setCurrentGWPoints(int currentGWPoints) {
+        this.currentGWPoints = currentGWPoints;
+    }
+
+    public Player(int playerId, String name, String position, String team, double value, int totalPoints, int currentGWPoints) {
         this.playerId = playerId;
         this.name = name;
         this.position = setPosition(position);
         this.team = team;
         this.value = value;
         this.totalPoints = totalPoints;
+        this.currentGWPoints = currentGWPoints;
     }
 
 
@@ -102,7 +110,7 @@ public class Player implements Comparable<Player>, Serializable{
     public int compareTo(@NonNull Player player) {
         return position-player.getPosition();
     }
-    
+
     @Override
     public boolean equals(Object obj) {
         if (!(obj instanceof  Player)) return false;
@@ -111,40 +119,40 @@ public class Player implements Comparable<Player>, Serializable{
 
     public static ArrayList<Player> getMockPlayerData(){
         ArrayList<Player> players = new ArrayList<Player>();
-        players.add(new Player(11,"Lukaku",ATTACKER, Teams.MAN_UTD,10.8,63));
-        players.add(new Player(2,"Azpilicueta", DEFENDER,Teams.CHELSEA,6.7,67));
-        players.add(new Player(3,"Valencia", DEFENDER,Teams.MAN_UTD ,6.8,78));
-        players.add(new Player(8,"Salah",MIDFIELDER, Teams.LIVERPOOL_FC ,9.8,81));
-        players.add(new Player(4,"Vertronghen", DEFENDER,Teams.SPURS,5.6,67));
-        players.add(new Player(1,"De Gea", GOALKEEPER,Teams.MAN_UTD, 6.1,76));
-        players.add(new Player(6,"Sane", MIDFIELDER, Teams.MAN_CITY ,8.2,85));
-        players.add(new Player(7,"McArthur",MIDFIELDER, Teams.CRYSTAL_PALACE ,4.4,65));
-        players.add(new Player(9,"Doucure",MIDFIELDER, Teams.WATFORD,6.2,62));
-        players.add(new Player(10,"Jesus", ATTACKER,Teams.MAN_CITY,8.7,69));
-        players.add(new Player(5,"Daniels", DEFENDER,Teams.BOURNEMOUTH, 4.7,25));
+        players.add(new Player(11,"Lukaku",ATTACKER, Teams.MAN_UTD,10.8,63, 8));
+        players.add(new Player(2,"Azpilicueta", DEFENDER,Teams.CHELSEA,6.7,67, 6));
+        players.add(new Player(3,"Valencia", DEFENDER,Teams.MAN_UTD ,6.8,78, 6));
+        players.add(new Player(8,"Salah",MIDFIELDER, Teams.LIVERPOOL_FC ,9.8,81, 1));
+        players.add(new Player(4,"Vertronghen", DEFENDER,Teams.SPURS,5.6,67, 4));
+        players.add(new Player(1,"De Gea", GOALKEEPER,Teams.MAN_UTD, 6.1,76, 5));
+        players.add(new Player(6,"Sane", MIDFIELDER, Teams.MAN_CITY ,8.2,85, 12));
+        players.add(new Player(7,"McArthur",MIDFIELDER, Teams.CRYSTAL_PALACE ,4.4,65, 6));
+        players.add(new Player(9,"Doucure",MIDFIELDER, Teams.WATFORD,6.2,62, 2));
+        players.add(new Player(10,"Jesus", ATTACKER,Teams.MAN_CITY,8.7,69, 8));
+        players.add(new Player(5,"Daniels", DEFENDER,Teams.BOURNEMOUTH, 4.7,25, 6));
         Collections.sort(players);
         return players;
     }
 
     public static ArrayList<Player> getMockTransferData(){
         ArrayList<Player> players = new ArrayList<Player>();
-        players.add(new Player(11,"Lukaku",ATTACKER, Teams.MAN_UTD,10.8,63));
-        players.add(new Player(12,"Solanke",ATTACKER, Teams.LIVERPOOL_FC,4.7,13));
-        players.add(new Player(16,"Kane",ATTACKER, Teams.SPURS,12.8,97));
-        players.add(new Player(13,"Oxlade-Chamberlain",MIDFIELDER, Teams.LIVERPOOL_FC,6.5,37));
-        players.add(new Player(14,"Matip",DEFENDER, Teams.LIVERPOOL_FC,5.1,48));
-        players.add(new Player(2,"Azpilicueta", DEFENDER,Teams.CHELSEA,6.7,67));
-        players.add(new Player(17,"Otamendi", DEFENDER,Teams.MAN_CITY,6.8,72));
-        players.add(new Player(3,"Valencia", DEFENDER,Teams.MAN_UTD ,6.8,78));
-        players.add(new Player(8,"Salah",MIDFIELDER, Teams.LIVERPOOL_FC ,9.8,101));
-        players.add(new Player(4,"Vertronghen", DEFENDER,Teams.SPURS,5.6,67));
-        players.add(new Player(1,"De Gea", GOALKEEPER,Teams.MAN_UTD, 6.1,76));
-        players.add(new Player(15,"Cech", GOALKEEPER,Teams.ARSENAL, 5.7,51));
-        players.add(new Player(6,"Sane", MIDFIELDER, Teams.MAN_CITY ,8.2,85));
-        players.add(new Player(7,"McArthur",MIDFIELDER, Teams.CRYSTAL_PALACE ,4.4,65));
-        players.add(new Player(9,"Doucure",MIDFIELDER, Teams.WATFORD,6.2,62));
-        players.add(new Player(10,"Jesus", ATTACKER,Teams.MAN_CITY,8.7,69));
-        players.add(new Player(5,"Daniels", DEFENDER,Teams.BOURNEMOUTH, 4.7,25));
+        players.add(new Player(11,"Lukaku",ATTACKER, Teams.MAN_UTD,10.8,63, 5));
+        players.add(new Player(12,"Solanke",ATTACKER, Teams.LIVERPOOL_FC,4.7,13, 4));
+        players.add(new Player(16,"Kane",ATTACKER, Teams.SPURS,12.8,97, 2));
+        players.add(new Player(13,"Oxlade-Chamberlain",MIDFIELDER, Teams.LIVERPOOL_FC,6.5,37, 7));
+        players.add(new Player(14,"Matip",DEFENDER, Teams.LIVERPOOL_FC,5.1,48, 2));
+        players.add(new Player(2,"Azpilicueta", DEFENDER,Teams.CHELSEA,6.7,67, 8));
+        players.add(new Player(17,"Otamendi", DEFENDER,Teams.MAN_CITY,6.8,72, 6));
+        players.add(new Player(3,"Valencia", DEFENDER,Teams.MAN_UTD ,6.8,78, 3));
+        players.add(new Player(8,"Salah",MIDFIELDER, Teams.LIVERPOOL_FC ,9.8,101, 1));
+        players.add(new Player(4,"Vertronghen", DEFENDER,Teams.SPURS,5.6,67, 3));
+        players.add(new Player(1,"De Gea", GOALKEEPER,Teams.MAN_UTD, 6.1,76, 6));
+        players.add(new Player(15,"Cech", GOALKEEPER,Teams.ARSENAL, 5.7,51, 2));
+        players.add(new Player(6,"Sane", MIDFIELDER, Teams.MAN_CITY ,8.2,85, 3));
+        players.add(new Player(7,"McArthur",MIDFIELDER, Teams.CRYSTAL_PALACE ,4.4,65, 7));
+        players.add(new Player(9,"Doucure",MIDFIELDER, Teams.WATFORD,6.2,62, 8));
+        players.add(new Player(10,"Jesus", ATTACKER,Teams.MAN_CITY,8.7,69, 4));
+        players.add(new Player(5,"Daniels", DEFENDER,Teams.BOURNEMOUTH, 4.7,25, 2));
         Collections.sort(players);
         return players;
     }

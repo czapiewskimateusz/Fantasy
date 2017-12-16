@@ -11,29 +11,30 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.mateusz.fantasy.R;
-import com.example.mateusz.fantasy.team.model.Player;
+import com.example.mateusz.fantasy.team.model.repo.Player;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
-import static com.example.mateusz.fantasy.team.model.Teams.ARSENAL;
-import static com.example.mateusz.fantasy.team.model.Teams.BOURNEMOUTH;
-import static com.example.mateusz.fantasy.team.model.Teams.BRIGHTON;
-import static com.example.mateusz.fantasy.team.model.Teams.BURNLEY;
-import static com.example.mateusz.fantasy.team.model.Teams.CHELSEA;
-import static com.example.mateusz.fantasy.team.model.Teams.CRYSTAL_PALACE;
-import static com.example.mateusz.fantasy.team.model.Teams.EVERTON;
-import static com.example.mateusz.fantasy.team.model.Teams.HUDDERSFIELD;
-import static com.example.mateusz.fantasy.team.model.Teams.LEICESTER;
-import static com.example.mateusz.fantasy.team.model.Teams.LIVERPOOL_FC;
-import static com.example.mateusz.fantasy.team.model.Teams.MAN_CITY;
-import static com.example.mateusz.fantasy.team.model.Teams.MAN_UTD;
-import static com.example.mateusz.fantasy.team.model.Teams.NEWCASTLE;
-import static com.example.mateusz.fantasy.team.model.Teams.SOUTHAMPTON;
-import static com.example.mateusz.fantasy.team.model.Teams.SPURS;
-import static com.example.mateusz.fantasy.team.model.Teams.STOKE;
-import static com.example.mateusz.fantasy.team.model.Teams.SWANSEA;
-import static com.example.mateusz.fantasy.team.model.Teams.WATFORD;
-import static com.example.mateusz.fantasy.team.model.Teams.WEST_BROM;
+import static com.example.mateusz.fantasy.team.model.repo.Teams.ARSENAL;
+import static com.example.mateusz.fantasy.team.model.repo.Teams.BOURNEMOUTH;
+import static com.example.mateusz.fantasy.team.model.repo.Teams.BRIGHTON;
+import static com.example.mateusz.fantasy.team.model.repo.Teams.BURNLEY;
+import static com.example.mateusz.fantasy.team.model.repo.Teams.CHELSEA;
+import static com.example.mateusz.fantasy.team.model.repo.Teams.CRYSTAL_PALACE;
+import static com.example.mateusz.fantasy.team.model.repo.Teams.EVERTON;
+import static com.example.mateusz.fantasy.team.model.repo.Teams.HUDDERSFIELD;
+import static com.example.mateusz.fantasy.team.model.repo.Teams.LEICESTER;
+import static com.example.mateusz.fantasy.team.model.repo.Teams.LIVERPOOL_FC;
+import static com.example.mateusz.fantasy.team.model.repo.Teams.MAN_CITY;
+import static com.example.mateusz.fantasy.team.model.repo.Teams.MAN_UTD;
+import static com.example.mateusz.fantasy.team.model.repo.Teams.NEWCASTLE;
+import static com.example.mateusz.fantasy.team.model.repo.Teams.SOUTHAMPTON;
+import static com.example.mateusz.fantasy.team.model.repo.Teams.SPURS;
+import static com.example.mateusz.fantasy.team.model.repo.Teams.STOKE;
+import static com.example.mateusz.fantasy.team.model.repo.Teams.SWANSEA;
+import static com.example.mateusz.fantasy.team.model.repo.Teams.WATFORD;
+import static com.example.mateusz.fantasy.team.model.repo.Teams.WEST_BROM;
 
 
 public class RVTeamAdapter extends RecyclerView.Adapter<RVTeamAdapter.TeamViewHolder> {
@@ -49,7 +50,7 @@ public class RVTeamAdapter extends RecyclerView.Adapter<RVTeamAdapter.TeamViewHo
 
     public RVTeamAdapter(ArrayList<Player> players, Context context, TeamFragmentCallback teamFragmentCallback) {
         this.players = players;
-        selectedPlayers = new ArrayList<Player>();
+        selectedPlayers = new ArrayList<>();
         this.context = context;
         this.teamFragmentCallback = teamFragmentCallback;
     }
@@ -64,7 +65,7 @@ public class RVTeamAdapter extends RecyclerView.Adapter<RVTeamAdapter.TeamViewHo
     public void onBindViewHolder(TeamViewHolder holder, int position) {
         players.get(position);
         holder.name.setText(players.get(position).getName());
-        holder.score.setText(Integer.toString(players.get(position).getTotalPoints()));
+        holder.score.setText(String.format(Locale.ENGLISH,"%d",players.get(position).getTotalPoints()));
         holder.player = players.get(position);
         setPlayersKit(holder,players.get(position));
     }

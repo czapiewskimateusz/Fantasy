@@ -1,8 +1,4 @@
-package com.example.mateusz.fantasy.team.model;
-
-/**
- * Created by Mateusz on 22.11.2017.
- */
+package com.example.mateusz.fantasy.team.model.repo;
 
 public class Teams {
 

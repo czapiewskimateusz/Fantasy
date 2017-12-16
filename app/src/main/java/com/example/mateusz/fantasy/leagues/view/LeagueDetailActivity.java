@@ -15,6 +15,7 @@ import com.example.mateusz.fantasy.R;
 import com.example.mateusz.fantasy.leagues.model.repo.League;
 import com.example.mateusz.fantasy.leagues.model.repo.UserRank;
 import com.example.mateusz.fantasy.leagues.presenter.LeagueDetailPresenter;
+import com.example.mateusz.fantasy.leagues.presenter.LeaguePresenter;
 import com.example.mateusz.fantasy.leagues.presenter.adapter.RVLeagueDetailsAdapter;
 
 import java.util.List;

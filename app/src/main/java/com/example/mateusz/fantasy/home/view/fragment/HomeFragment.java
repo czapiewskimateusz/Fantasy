@@ -1,10 +1,10 @@
 package com.example.mateusz.fantasy.home.view.fragment;
 
 
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,7 +32,7 @@ import static com.example.mateusz.fantasy.authentication.login.view.LoginActivit
 import static com.example.mateusz.fantasy.authentication.login.view.LoginActivity.USER_ID_EXTRA;
 
 
-public class HomeFragment extends Fragment implements ParentFragment, IHomeView{
+public class HomeFragment extends Fragment implements ParentFragment, IHomeView {
 
     public static final String FIRST_NAME_EXTRA = "first_name";
     public static final String LAST_NAME_EXTRA = "last_name";
@@ -52,11 +52,10 @@ public class HomeFragment extends Fragment implements ParentFragment, IHomeView{
     private ImageView mIvSettings;
     private ProgressBar mUserNameProgressBar;
     private ProgressBar mPointsProgressBar;
+    public Button mBtnLogOut;
 
     //Dependencies
     private HomePresenter mHomePresenter;
-
-    public Button mBtnLogOut;
 
     private int mUserId;
     private int mTeamId;
@@ -109,7 +108,7 @@ public class HomeFragment extends Fragment implements ParentFragment, IHomeView{
     @Override
     public void getUser(HomeUser user) {
         mUserNameProgressBar.setVisibility(View.GONE);
-        mTvUserName.setText(user.getFirstName()+" "+user.getLastName());
+        mTvUserName.setText(user.getFirstName() + " " + user.getLastName());
         mTvUserTeamName.setText(user.getTeamName());
         mTeamId = user.getTeamId();
         mHomeUser = user;
@@ -119,6 +118,7 @@ public class HomeFragment extends Fragment implements ParentFragment, IHomeView{
     @Override
     public void showConnectionError() {
         NetworkUtils.showConnectionErrorToast(getActivity());
+        mHomePresenter.initUser(mUserId);
     }
 
     @Override
@@ -127,7 +127,7 @@ public class HomeFragment extends Fragment implements ParentFragment, IHomeView{
         String gw = getString(R.string.gw_gameweek) + " " + body.getGw();
         mTvGw.setText(gw);
         mTvUserScore.setText(Integer.toString(body.getYourScore()));
-        mTvAverageScore.setText(Integer.toString((int)body.getAvg()));
+        mTvAverageScore.setText(Integer.toString((int) body.getAvg()));
         mTvHHighestScore.setText(Integer.toString(body.getMax()));
         mTvDeadlineDate.setText(body.getDeadline());
     }
@@ -137,18 +137,21 @@ public class HomeFragment extends Fragment implements ParentFragment, IHomeView{
         mBtnLogOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SharedPreferences.Editor editor = getActivity().getSharedPreferences(PREFS_NAME, MODE_PRIVATE).edit();
-                editor.putInt(USER_ID_EXTRA, 0);
-                editor.putInt(TOTAL_POINTS_EXTRA,0);
-                editor.apply();
-
+                deleteUserFromSharedPreferences();
                 Intent intent = new Intent(getActivity(), LoginActivity.class);
                 startActivity(intent);
             }
         });
     }
 
-    private void initViews(View view){
+    private void deleteUserFromSharedPreferences() {
+        SharedPreferences.Editor editor = getActivity().getSharedPreferences(PREFS_NAME, MODE_PRIVATE).edit();
+        editor.putInt(USER_ID_EXTRA, 0);
+        editor.putInt(TOTAL_POINTS_EXTRA, 0);
+        editor.apply();
+    }
+
+    private void initViews(View view) {
         mTvUserName = view.findViewById(R.id.tv_home_user_name);
         mTvUserTeamName = view.findViewById(R.id.tv_home_team_name);
         mTvGw = view.findViewById(R.id.tv_home_gw);
@@ -169,23 +172,27 @@ public class HomeFragment extends Fragment implements ParentFragment, IHomeView{
         mIvSettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Bundle bundle = new Bundle();
-                bundle.putString(FIRST_NAME_EXTRA,mHomeUser.getFirstName());
-                bundle.putString(LAST_NAME_EXTRA,mHomeUser.getLastName());
-                bundle.putString(EMAIL_EXTRA,mHomeUser.getEmail());
-                bundle.putString(PASSWORD_EXTRA,mHomeUser.getPassword());
-
-                Intent intent = new Intent(getContext(),UserDetailActivity.class);
-                intent.putExtra(BUNDLE_EXTRA,bundle);
-
+                Bundle bundle = createBundle();
+                Intent intent = new Intent(getContext(), UserDetailActivity.class);
+                intent.putExtra(BUNDLE_EXTRA, bundle);
                 getContext().startActivity(intent);
             }
         });
     }
 
-    private void getLoggedUserId(){
+    @NonNull
+    private Bundle createBundle() {
+        Bundle bundle = new Bundle();
+        bundle.putString(FIRST_NAME_EXTRA, mHomeUser.getFirstName());
+        bundle.putString(LAST_NAME_EXTRA, mHomeUser.getLastName());
+        bundle.putString(EMAIL_EXTRA, mHomeUser.getEmail());
+        bundle.putString(PASSWORD_EXTRA, mHomeUser.getPassword());
+        return bundle;
+    }
+
+    private void getLoggedUserId() {
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences(LoginActivity.PREFS_NAME, 0);
-        mUserId =  sharedPreferences.getInt(USER_ID_EXTRA, 0);
+        mUserId = sharedPreferences.getInt(USER_ID_EXTRA, 0);
     }
 
 }

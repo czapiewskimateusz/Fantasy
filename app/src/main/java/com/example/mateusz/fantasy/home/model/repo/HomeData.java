@@ -2,11 +2,11 @@ package com.example.mateusz.fantasy.home.model.repo;
 
 public class HomeData {
 
-    int gw;
-    int yourScore;
-    int max;
-    double avg;
-    String deadline;
+    private int gw;
+    private int yourScore;
+    private int max;
+    private double avg;
+    private String deadline;
 
     public HomeData(int gw, int yourScore, int max, double avg, String deadline) {
         this.gw = gw;

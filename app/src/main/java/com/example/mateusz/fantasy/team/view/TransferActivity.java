@@ -11,14 +11,17 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.mateusz.fantasy.R;
 import com.example.mateusz.fantasy.home.view.HomeActivity;
-import com.example.mateusz.fantasy.team.model.Player;
+import com.example.mateusz.fantasy.team.model.repo.Player;
+import com.example.mateusz.fantasy.team.presenter.TransferPresenter;
 import com.example.mateusz.fantasy.team.presenter.adapters.RVAllPlayerAdapter;
 import com.example.mateusz.fantasy.team.presenter.adapters.RVSelectedPlayerAdapter;
+import com.example.mateusz.fantasy.utils.NetworkUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -28,7 +31,7 @@ import java.util.Locale;
 import static com.example.mateusz.fantasy.team.view.TeamFragment.PLAYERS_TO_TRANSFER_EXTRA;
 import static com.example.mateusz.fantasy.team.view.TeamFragment.USERS_TEAM_EXTRA;
 
-public class TransferActivity extends AppCompatActivity implements RVAllPlayerAdapter.CallbackInterface, RVSelectedPlayerAdapter.SelectedPlayersCallback {
+public class TransferActivity extends AppCompatActivity implements RVAllPlayerAdapter.CallbackInterface, RVSelectedPlayerAdapter.SelectedPlayersCallback, ITransferView {
     private ArrayList<Player> playersToTransfer;
     private ArrayList<Player> usersTeam;
     private ArrayList<Player> selectedPlayers;
@@ -47,27 +50,49 @@ public class TransferActivity extends AppCompatActivity implements RVAllPlayerAd
     private TextView midLeftTV;
     private TextView atkLeftTV;
     private TextView budgetTV;
+    private ProgressBar transferPB;
 
     private RecyclerView selectedPlayersRV;
     private RecyclerView allPlayersRV;
     private RVSelectedPlayerAdapter selectedPlayerAdapter;
     private RVAllPlayerAdapter allPlayerAdapter;
 
+    private TransferPresenter transferPresenter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_transfer);
         selectedPlayers = new ArrayList<>();
-        allPlayers = Player.getMockTransferData();
         budget = 75.00;
         initViews();
         getPlayersToTransferFromIntent();
         assignPlayersToTransfer();
         initSelectedPlayersRV();
         initAllPlayersRV();
+        transferPresenter = new TransferPresenter(this);
+        transferPresenter.getAllPlayers();
     }
 
+    @Override
+    public void showProgress(boolean show) {
+        if (show) {
+            allPlayersRV.setVisibility(View.INVISIBLE);
+            transferPB.setVisibility(View.VISIBLE);
+        } else {
+            allPlayersRV.setVisibility(View.VISIBLE);
+            transferPB.setVisibility(View.INVISIBLE);
+        }
+    }
 
+    @Override
+    public void presentAllPlayers(ArrayList<Player> allPlayers) {
+        this.allPlayers = allPlayers;
+        if (playersToTransfer != null) allPlayers.removeAll(playersToTransfer);
+        if (usersTeam != null) allPlayers.removeAll(usersTeam);
+        allPlayerAdapter = new RVAllPlayerAdapter(allPlayers, this, this);
+        allPlayersRV.setAdapter(allPlayerAdapter);
+    }
 
     @Override
     public void addToSelectedPlayers(Player player) {
@@ -85,6 +110,13 @@ public class TransferActivity extends AppCompatActivity implements RVAllPlayerAd
         removeFromTransfer(player);
     }
 
+    @Override
+    public void onGetAllPlayersFailure() {
+        NetworkUtils.showConnectionErrorToast(this);
+        transferPresenter.getAllPlayers();
+    }
+
+    @SuppressWarnings("unchecked")
     private void getPlayersToTransferFromIntent() {
         Intent intent = getIntent();
         playersToTransfer = (ArrayList<Player>) intent.getSerializableExtra(PLAYERS_TO_TRANSFER_EXTRA);
@@ -100,7 +132,7 @@ public class TransferActivity extends AppCompatActivity implements RVAllPlayerAd
                 } else {
                     sortByTotalPoints();
                 }
-                allPlayerAdapter.notifyDataSetChanged();
+               if (allPlayerAdapter!=null) allPlayerAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -121,7 +153,7 @@ public class TransferActivity extends AppCompatActivity implements RVAllPlayerAd
                 } else {
                     sortByPosition();
                 }
-                allPlayerAdapter.notifyDataSetChanged();
+                if (allPlayerAdapter != null) allPlayerAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -132,49 +164,60 @@ public class TransferActivity extends AppCompatActivity implements RVAllPlayerAd
     }
 
     private void sortByTotalPoints() {
-        Collections.sort(allPlayers, new Comparator<Player>() {
-            @Override
-            public int compare(Player player, Player t1) {
-                return t1.getTotalPoints() - player.getTotalPoints();
-            }
-        });
+        if (allPlayers != null) {
+            Collections.sort(allPlayers, new Comparator<Player>() {
+                @Override
+                public int compare(Player player, Player t1) {
+                    return t1.getTotalPoints() - player.getTotalPoints();
+                }
+            });
+        }
     }
 
     private void sortByValue() {
-        Collections.sort(allPlayers, new Comparator<Player>() {
-            @Override
-            public int compare(Player player, Player t1) {
-                Double d = t1.getValue() - player.getValue();
-                return d.intValue();
-            }
-        });
+        if (allPlayers != null) {
+            Collections.sort(allPlayers, new Comparator<Player>() {
+                @Override
+                public int compare(Player player, Player t1) {
+                    Double d = t1.getValue() - player.getValue();
+                    return d.intValue();
+                }
+            });
+        }
     }
 
     private void sortByPosition() {
-        Collections.sort(allPlayers, new Comparator<Player>() {
-            @Override
-            public int compare(Player player, Player t1) {
-                return player.getPosition() - t1.getPosition();
-            }
-        });
+        if (allPlayers != null) {
+            Collections.sort(allPlayers, new Comparator<Player>() {
+                @Override
+                public int compare(Player player, Player t1) {
+                    return player.getPosition() - t1.getPosition();
+                }
+            });
+        }
     }
 
     private void sortByTeam() {
-        Collections.sort(allPlayers, new Comparator<Player>() {
-            @Override
-            public int compare(Player player, Player t1) {
-                return player.getTeam().compareTo(t1.getTeam());
-            }
-        });
+        if (allPlayers != null) {
+            Collections.sort(allPlayers, new Comparator<Player>() {
+                @Override
+                public int compare(Player player, Player t1) {
+                    return player.getTeam().compareTo(t1.getTeam());
+                }
+            });
+        }
+
     }
 
     private void sortByName() {
-        Collections.sort(allPlayers, new Comparator<Player>() {
-            @Override
-            public int compare(Player player, Player t1) {
-                return player.getName().compareTo(t1.getName());
-            }
-        });
+        if (allPlayers != null) {
+            Collections.sort(allPlayers, new Comparator<Player>() {
+                @Override
+                public int compare(Player player, Player t1) {
+                    return player.getName().compareTo(t1.getName());
+                }
+            });
+        }
     }
 
     private void setOnClickListenerToButton() {
@@ -182,14 +225,14 @@ public class TransferActivity extends AppCompatActivity implements RVAllPlayerAd
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(TransferActivity.this, HomeActivity.class);
-                if (usersTeam == null){
+                if (usersTeam == null) {
                     usersTeam = selectedPlayers;
                 } else {
                     usersTeam.removeAll(playersToTransfer);
                     usersTeam.addAll(selectedPlayers);
                 }
                 Collections.sort(usersTeam);
-                intent.putExtra(USERS_TEAM_EXTRA,usersTeam);
+                intent.putExtra(USERS_TEAM_EXTRA, usersTeam);
                 startActivity(intent);
             }
         });
@@ -207,6 +250,7 @@ public class TransferActivity extends AppCompatActivity implements RVAllPlayerAd
         midLeftTV = findViewById(R.id.tv_mid_left);
         atkLeftTV = findViewById(R.id.tv_atk_left);
         budgetTV = findViewById(R.id.tv_budget);
+        transferPB = findViewById(R.id.pb_transfer);
 
         setupSort(sortA, R.array.sortA_types);
         setupSort(sortB, R.array.sortB_types);
@@ -222,14 +266,12 @@ public class TransferActivity extends AppCompatActivity implements RVAllPlayerAd
     }
 
     private void assignPlayersToTransfer() {
-        if (playersToTransfer == null){
+        if (playersToTransfer == null) {
             goalkeepers = 1;
             defenders = 4;
             midfielders = 4;
             attackers = 2;
         } else {
-            allPlayers.removeAll(playersToTransfer);
-            allPlayers.removeAll(usersTeam);
             for (Player p : playersToTransfer) {
                 if (p.getPosition() == 1) goalkeepers++;
                 if (p.getPosition() == 2) defenders++;
@@ -266,9 +308,7 @@ public class TransferActivity extends AppCompatActivity implements RVAllPlayerAd
     }
 
     private boolean checkTransferConditions() {
-        if (goalkeepers == 0 && (defenders == 0) && (midfielders == 0) && (attackers == 0) && (budget >= 0.0))
-            return true;
-        return false;
+        return (goalkeepers == 0 && defenders == 0 && midfielders == 0 && attackers == 0 && budget >= 0.0);
     }
 
     private void setTexts() {
@@ -276,7 +316,7 @@ public class TransferActivity extends AppCompatActivity implements RVAllPlayerAd
         defLeftTV.setText(String.valueOf(defenders));
         midLeftTV.setText(String.valueOf(midfielders));
         atkLeftTV.setText(String.valueOf(attackers));
-        budgetTV.setText(String.format(Locale.ENGLISH,"%3.1f",budget));
+        budgetTV.setText(String.format(Locale.ENGLISH, "%3.1f", budget));
     }
 
     private void setColors() {
@@ -310,8 +350,6 @@ public class TransferActivity extends AppCompatActivity implements RVAllPlayerAd
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         allPlayersRV.setHasFixedSize(true);
         allPlayersRV.setLayoutManager(linearLayoutManager);
-        allPlayerAdapter = new RVAllPlayerAdapter(allPlayers, this, this);
-        allPlayersRV.setAdapter(allPlayerAdapter);
     }
 
     private int fetchColor(@ColorRes int color) {

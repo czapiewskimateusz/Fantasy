@@ -1,10 +1,11 @@
-package com.example.mateusz.fantasy.leagues.view;
+package com.example.mateusz.fantasy.leagues.presenter;
 
 
 import com.example.mateusz.fantasy.leagues.model.API.CreateLeagueAPI;
 import com.example.mateusz.fantasy.leagues.model.API.GetLeaguesAPI;
 import com.example.mateusz.fantasy.leagues.model.API.JoinLeagueAPI;
 import com.example.mateusz.fantasy.leagues.model.repo.League;
+import com.example.mateusz.fantasy.leagues.view.ILeagueView;
 
 import java.util.List;
 
@@ -56,6 +57,7 @@ public class LeaguePresenter {
      */
     public void onGetLeaguesFailure() {
         view.showProgress(false);
+        view.onGetLeaguesFailure();
     }
 
     /**
@@ -66,7 +68,6 @@ public class LeaguePresenter {
     public void joinLeague(String leagueCode, int userId) {
         mJoinLeagueAPI.joinLeague(leagueCode,userId);
     }
-
 
     public void onJoinLeagueSuccess(){
         view.reloadLeagues();

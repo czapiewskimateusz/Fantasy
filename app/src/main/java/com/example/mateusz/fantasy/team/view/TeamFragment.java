@@ -2,10 +2,10 @@ package com.example.mateusz.fantasy.team.view;
 
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,14 +15,16 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.FrameLayout;
-import android.widget.Toast;
 
 import com.example.mateusz.fantasy.R;
+import com.example.mateusz.fantasy.authentication.login.view.LoginActivity;
 import com.example.mateusz.fantasy.home.view.fragment.ParentFragment;
-import com.example.mateusz.fantasy.team.model.Player;
+import com.example.mateusz.fantasy.team.model.repo.Player;
 import com.example.mateusz.fantasy.team.presenter.adapters.RVTeamAdapter;
 
 import java.util.ArrayList;
+
+import static com.example.mateusz.fantasy.authentication.login.view.LoginActivity.USER_ID_EXTRA;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -38,6 +40,7 @@ public class TeamFragment extends Fragment implements ParentFragment,RVTeamAdapt
     private Button transferButton;
     private ArrayList<Player> playersToTransfer;
     private ArrayList<Player> usersTeam;
+    private int mUserId;
 
     public TeamFragment() {
         // Required empty public constructor
@@ -50,11 +53,16 @@ public class TeamFragment extends Fragment implements ParentFragment,RVTeamAdapt
         View view = inflater.inflate(R.layout.fragment_team, container, false);
         initViews(view);
         initRecyclerView(view);
+        getLoggedUserId();
+        getTeamFromIntent();
+        presentTeams(usersTeam);
+        return view;
+    }
+    @SuppressWarnings("unchecked")
+    private void getTeamFromIntent() {
         Intent intent = getActivity().getIntent();
         usersTeam = (ArrayList<Player>) intent.getSerializableExtra(USERS_TEAM_EXTRA);
         if (usersTeam == null) usersTeam = Player.getMockPlayerData();
-        presentTeams(usersTeam);
-        return view;
     }
 
     private void initViews(View view) {
@@ -140,5 +148,10 @@ public class TeamFragment extends Fragment implements ParentFragment,RVTeamAdapt
     @Override
     public void updatePlayersToTransfer(ArrayList<Player> playersToTransfer) {
         this.playersToTransfer = playersToTransfer;
+    }
+
+    private void getLoggedUserId() {
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(LoginActivity.PREFS_NAME, 0);
+        mUserId = sharedPreferences.getInt(USER_ID_EXTRA, 0);
     }
 }

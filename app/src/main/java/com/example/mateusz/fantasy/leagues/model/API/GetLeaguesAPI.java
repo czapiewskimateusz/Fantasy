@@ -1,6 +1,6 @@
 package com.example.mateusz.fantasy.leagues.model.API;
 
-import com.example.mateusz.fantasy.leagues.view.LeaguePresenter;
+import com.example.mateusz.fantasy.leagues.presenter.LeaguePresenter;
 import com.example.mateusz.fantasy.leagues.model.repo.League;
 import com.example.mateusz.fantasy.leagues.model.repo.LeagueJsonResponse;
 
@@ -15,7 +15,6 @@ import retrofit2.Retrofit;
 import static com.example.mateusz.fantasy.utils.NetworkUtils.getRetrofitInstance;
 
 public class GetLeaguesAPI implements Callback<LeagueJsonResponse> {
-
     private LeaguePresenter mLeaguePresenter;
 
     /**

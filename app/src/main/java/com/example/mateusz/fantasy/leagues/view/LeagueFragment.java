@@ -27,7 +27,9 @@ import com.example.mateusz.fantasy.authentication.login.view.LoginActivity;
 import com.example.mateusz.fantasy.home.view.fragment.ParentFragment;
 import com.example.mateusz.fantasy.R;
 import com.example.mateusz.fantasy.leagues.model.repo.League;
+import com.example.mateusz.fantasy.leagues.presenter.LeaguePresenter;
 import com.example.mateusz.fantasy.leagues.presenter.adapter.RVLeagueAdapter;
+import com.example.mateusz.fantasy.utils.NetworkUtils;
 import com.example.mateusz.fantasy.utils.dialogs.CreateLeagueDialog;
 import com.example.mateusz.fantasy.utils.dialogs.JoinLeagueDialog;
 import com.github.clans.fab.FloatingActionMenu;
@@ -138,6 +140,11 @@ public class LeagueFragment extends Fragment implements ILeagueView, JoinLeagueD
         Snackbar.make(mFragmentContainer, getContext().getString(R.string.create_league_error), BaseTransientBottomBar.LENGTH_LONG).show();
     }
 
+    @Override
+    public void onGetLeaguesFailure() {
+        NetworkUtils.showConnectionErrorToast(getActivity());
+        mLeaguePresenter.getUserLeagues(mUserId,mTotalPoints);
+    }
 
     private void initButtons() {
         mFABCreateLeague.setOnClickListener(new View.OnClickListener() {
