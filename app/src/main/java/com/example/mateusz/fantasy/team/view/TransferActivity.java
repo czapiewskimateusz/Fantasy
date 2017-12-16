@@ -25,6 +25,9 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Locale;
 
+import static com.example.mateusz.fantasy.team.view.TeamFragment.PLAYERS_TO_TRANSFER_EXTRA;
+import static com.example.mateusz.fantasy.team.view.TeamFragment.USERS_TEAM_EXTRA;
+
 public class TransferActivity extends AppCompatActivity implements RVAllPlayerAdapter.CallbackInterface, RVSelectedPlayerAdapter.SelectedPlayersCallback {
     private ArrayList<Player> playersToTransfer;
     private ArrayList<Player> usersTeam;
@@ -54,15 +57,17 @@ public class TransferActivity extends AppCompatActivity implements RVAllPlayerAd
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_transfer);
-//        playersToTransfer = Player.getMockToTransferData();
         selectedPlayers = new ArrayList<>();
         allPlayers = Player.getMockTransferData();
-        budget = 100.00;
+        budget = 75.00;
         initViews();
+        getPlayersToTransferFromIntent();
         assignPlayersToTransfer();
         initSelectedPlayersRV();
         initAllPlayersRV();
     }
+
+
 
     @Override
     public void addToSelectedPlayers(Player player) {
@@ -78,6 +83,12 @@ public class TransferActivity extends AppCompatActivity implements RVAllPlayerAd
         selectedPlayers.remove(player);
         selectedPlayerAdapter.notifyDataSetChanged();
         removeFromTransfer(player);
+    }
+
+    private void getPlayersToTransferFromIntent() {
+        Intent intent = getIntent();
+        playersToTransfer = (ArrayList<Player>) intent.getSerializableExtra(PLAYERS_TO_TRANSFER_EXTRA);
+        usersTeam = (ArrayList<Player>) intent.getSerializableExtra(USERS_TEAM_EXTRA);
     }
 
     private void setListenerSortB() {
@@ -171,6 +182,14 @@ public class TransferActivity extends AppCompatActivity implements RVAllPlayerAd
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(TransferActivity.this, HomeActivity.class);
+                if (usersTeam == null){
+                    usersTeam = selectedPlayers;
+                } else {
+                    usersTeam.removeAll(playersToTransfer);
+                    usersTeam.addAll(selectedPlayers);
+                }
+                Collections.sort(usersTeam);
+                intent.putExtra(USERS_TEAM_EXTRA,usersTeam);
                 startActivity(intent);
             }
         });
@@ -209,6 +228,8 @@ public class TransferActivity extends AppCompatActivity implements RVAllPlayerAd
             midfielders = 4;
             attackers = 2;
         } else {
+            allPlayers.removeAll(playersToTransfer);
+            allPlayers.removeAll(usersTeam);
             for (Player p : playersToTransfer) {
                 if (p.getPosition() == 1) goalkeepers++;
                 if (p.getPosition() == 2) defenders++;

@@ -29,11 +29,15 @@ import java.util.ArrayList;
  */
 public class TeamFragment extends Fragment implements ParentFragment,RVTeamAdapter.TeamFragmentCallback {
 
+    public static final String PLAYERS_TO_TRANSFER_EXTRA = "playersToTransferExtra";
+    public static final String USERS_TEAM_EXTRA = "usersTeam";
+
     public FrameLayout fragmentContainer;
     private RecyclerView mRvTeam;
     private RVTeamAdapter rvTeamAdapter;
     private Button transferButton;
     private ArrayList<Player> playersToTransfer;
+    private ArrayList<Player> usersTeam;
 
     public TeamFragment() {
         // Required empty public constructor
@@ -46,7 +50,10 @@ public class TeamFragment extends Fragment implements ParentFragment,RVTeamAdapt
         View view = inflater.inflate(R.layout.fragment_team, container, false);
         initViews(view);
         initRecyclerView(view);
-        presentTeams(Player.getMockPlayerData());
+        Intent intent = getActivity().getIntent();
+        usersTeam = (ArrayList<Player>) intent.getSerializableExtra(USERS_TEAM_EXTRA);
+        if (usersTeam == null) usersTeam = Player.getMockPlayerData();
+        presentTeams(usersTeam);
         return view;
     }
 
@@ -120,6 +127,8 @@ public class TeamFragment extends Fragment implements ParentFragment,RVTeamAdapt
 
     public void onButtonClick(){
         Intent intent = new Intent(getContext(),TransferActivity.class);
+        intent.putExtra(PLAYERS_TO_TRANSFER_EXTRA,playersToTransfer);
+        intent.putExtra(USERS_TEAM_EXTRA,usersTeam);
         getContext().startActivity(intent);
     }
 

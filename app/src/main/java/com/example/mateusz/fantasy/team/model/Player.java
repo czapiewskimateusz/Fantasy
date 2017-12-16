@@ -1,11 +1,14 @@
 package com.example.mateusz.fantasy.team.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class Player implements Comparable<Player>{
+public class Player implements Comparable<Player>, Serializable{
 
     //Player positions
     public static final String GOALKEEPER = "GK"; // 1
@@ -77,6 +80,8 @@ public class Player implements Comparable<Player>{
         this.totalPoints = totalPoints;
     }
 
+
+
     public static int setPosition(String position){
         if (position.equals(GOALKEEPER)) return 1;
         if (position.equals(DEFENDER)) return 2;
@@ -96,6 +101,12 @@ public class Player implements Comparable<Player>{
     @Override
     public int compareTo(@NonNull Player player) {
         return position-player.getPosition();
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof  Player)) return false;
+        return getPlayerId()==((Player) obj).getPlayerId();
     }
 
     public static ArrayList<Player> getMockPlayerData(){
