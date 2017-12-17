@@ -1,9 +1,5 @@
 package com.example.mateusz.fantasy.authentication.register.view;
 
-/**
- * Created by Mateusz on 19.08.2017.
- */
-
 public interface IRegisterView {
 
     static final String TAG = IRegisterView.class.getName();
@@ -15,6 +11,8 @@ public interface IRegisterView {
     void onFirstNameError(String error);
 
     void onLastNameError(String error);
+
+    void onTeamNameError(String error);
 
     void onPasswordError(String error);
 

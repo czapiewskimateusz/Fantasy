@@ -32,13 +32,14 @@ public class RVLeagueDetailsAdapter extends RecyclerView.Adapter<RVLeagueDetails
 
     @Override
     public void onBindViewHolder(LeagueDetailViewHolder holder, int position) {
+        if (position % 2==0) holder.container.setBackgroundColor(Color.parseColor("#F2212121"));
         holder.tvTotalPoints.setText(String.format(Locale.ENGLISH, "%d", mUsers.get(position).getTotalPoints()));
         holder.tvRank.setText(String.format(Locale.ENGLISH, "%d", mUsers.get(position).getRank()));
         holder.tvTeamName.setText(mUsers.get(position).getTeamName());
         holder.tvUserName.setText(mUsers.get(position).getFirstName() + " " + mUsers.get(position).getLastName());
 
         if (userId == mUsers.get(position).getUserId())
-            holder.container.setBackgroundColor(Color.parseColor("#CFD8DC"));
+            holder.container.setBackgroundColor(Color.parseColor("#E91E63"));
     }
 
     @Override

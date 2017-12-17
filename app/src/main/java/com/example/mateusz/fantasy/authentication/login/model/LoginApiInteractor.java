@@ -15,7 +15,6 @@ import static com.example.mateusz.fantasy.utils.NetworkUtils.getRetrofitInstance
 
 
 public class LoginApiInteractor implements Callback<User> {
-
     private String password;
     private LoginPresenter loginPresenter;
 
@@ -35,7 +34,7 @@ public class LoginApiInteractor implements Callback<User> {
     public void onResponse(Call<User> call, Response<User> response) {
         if (response.isSuccessful()) {
             if (response.body().getPassword().equals(password))
-                loginPresenter.onLoginSuccessful(response.body().getUserId(),response.body().getTotalPoints());
+                loginPresenter.onLoginSuccessful(response.body().getUserId(),response.body().getTotalPoints(), response.body().getTeamId(),response.body().getBudget());
              else
                 loginPresenter.onLoginUnsuccessful(ERROR_TAG_INCORRECT_PASSWORD);
         }
@@ -43,6 +42,6 @@ public class LoginApiInteractor implements Callback<User> {
 
     @Override
     public void onFailure(Call<User> call, Throwable t) {
-        loginPresenter.onLoginUnsuccessful(ERROR_TAG_USER_DOESNT_EXIST);
+        loginPresenter.onConnectionError();
     }
 }

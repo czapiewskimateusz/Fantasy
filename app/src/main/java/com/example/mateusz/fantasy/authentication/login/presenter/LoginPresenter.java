@@ -26,23 +26,17 @@ public class LoginPresenter {
      * Constructor
      */
     public LoginPresenter() {
-
         mApiinteractor = new LoginApiInteractor(this);
-
     }
 
     public void onViewAttached(ILoginView view, Context context) {
-
         this.view = view;
         this.context = context;
-
     }
 
     public void onViewDetached() {
-
         view = null;
         context = null;
-
     }
 
     /**
@@ -52,38 +46,21 @@ public class LoginPresenter {
      * @param password users password
      */
     public void login(String email, String password) {
-
-        if (!validateFields(email, password)) {
-            return;
-        }
-
+        if (!validateFields(email, password)) return;
         view.clearErrors();
         view.showProgress(true);
-
         mApiinteractor.login(email, password);
-
     }
 
-
-    public void onLoginSuccessful(int userId, int totalPoints) {
-
+    public void onLoginSuccessful(int userId, int totalPoints, int teamId, float budget) {
         view.showProgress(false);
-        view.onLoginSuccess(userId, totalPoints);
-
+        view.onLoginSuccess(userId, totalPoints, teamId, budget);
     }
 
     public void onLoginUnsuccessful(String error) {
-
         view.showProgress(false);
-        if (error.equals(ERROR_TAG_INCORRECT_PASSWORD)) {
-            view.onGeneralError(context.getString(R.string.password_error));
-        }
-        if (error.equals(ERROR_TAG_USER_DOESNT_EXIST)) {
-
-            view.onGeneralError(context.getString(R.string.user_exists_error));
-
-        }
-
+        if (error.equals(ERROR_TAG_INCORRECT_PASSWORD)) view.onGeneralError(context.getString(R.string.password_error));
+        if (error.equals(ERROR_TAG_USER_DOESNT_EXIST)) view.onGeneralError(context.getString(R.string.user_exists_error));
     }
 
     public void onConnectionError(){

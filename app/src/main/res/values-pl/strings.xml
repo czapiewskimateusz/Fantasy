@@ -71,4 +71,7 @@
     <string name="atk">ATK</string>
     <string name="sort">Sortuj:</string>
     <string name="budget">BUDŻET</string>
+    <string name="team_name">Nazwa drużyny</string>
+    <string name="teamName_empty_error">Nazwa drużyny jest pusta</string>
+    <string name="teamName_length_error">Nazwa drużyny jest za długa</string>
 </resources>

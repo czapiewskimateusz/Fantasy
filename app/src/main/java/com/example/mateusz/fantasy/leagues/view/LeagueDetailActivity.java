@@ -67,6 +67,7 @@ public class LeagueDetailActivity extends AppCompatActivity implements ILeagueDe
         getLeagueFromIntent();
         initView();
         initRecyclerView();
+        showProgress(true);
         mLeagueDetailPresenter.getUsersRank(mLeague.getLeagueId());
     }
 
@@ -107,6 +108,7 @@ public class LeagueDetailActivity extends AppCompatActivity implements ILeagueDe
     @Override
     public void onConnectionError() {
         showConnectionErrorToast(this);
+        mLeagueDetailPresenter.getUsersRank(mLeague.getLeagueId());
     }
 
     /**

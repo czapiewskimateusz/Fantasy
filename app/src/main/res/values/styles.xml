@@ -51,7 +51,7 @@
     <style name="CardViewDetailStyle" parent="CardView">
         <item name="cardCornerRadius">4dp</item>
         <item name="cardElevation">4dp</item>
-        <item name="cardBackgroundColor">@color/colorWhite</item>
+        <item name="cardBackgroundColor">@color/color_trans_primary_even_darker</item>
     </style>
 
     <style name="MenuButtonsSmall">

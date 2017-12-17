@@ -15,21 +15,27 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ProgressBar;
 
 import com.example.mateusz.fantasy.R;
 import com.example.mateusz.fantasy.authentication.login.view.LoginActivity;
 import com.example.mateusz.fantasy.home.view.fragment.ParentFragment;
 import com.example.mateusz.fantasy.team.model.repo.Player;
+import com.example.mateusz.fantasy.team.presenter.TeamPresenter;
 import com.example.mateusz.fantasy.team.presenter.adapters.RVTeamAdapter;
+import com.example.mateusz.fantasy.utils.NetworkUtils;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
+import static com.example.mateusz.fantasy.authentication.login.view.LoginActivity.BUDGET_EXTRA;
+import static com.example.mateusz.fantasy.authentication.login.view.LoginActivity.TEAM_ID_EXTRA;
 import static com.example.mateusz.fantasy.authentication.login.view.LoginActivity.USER_ID_EXTRA;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class TeamFragment extends Fragment implements ParentFragment,RVTeamAdapter.TeamFragmentCallback {
+public class TeamFragment extends Fragment implements ParentFragment, RVTeamAdapter.TeamFragmentCallback, ITeamView {
 
     public static final String PLAYERS_TO_TRANSFER_EXTRA = "playersToTransferExtra";
     public static final String USERS_TEAM_EXTRA = "usersTeam";
@@ -38,9 +44,14 @@ public class TeamFragment extends Fragment implements ParentFragment,RVTeamAdapt
     private RecyclerView mRvTeam;
     private RVTeamAdapter rvTeamAdapter;
     private Button transferButton;
+    private ProgressBar teamProgressBar;
     private ArrayList<Player> playersToTransfer;
     private ArrayList<Player> usersTeam;
     private int mUserId;
+    private int mTeamId;
+    private float mBudget;
+
+    private TeamPresenter teamPresenter;
 
     public TeamFragment() {
         // Required empty public constructor
@@ -53,22 +64,48 @@ public class TeamFragment extends Fragment implements ParentFragment,RVTeamAdapt
         View view = inflater.inflate(R.layout.fragment_team, container, false);
         initViews(view);
         initRecyclerView(view);
-        getLoggedUserId();
+        getLoggedUserData();
         getTeamFromIntent();
-        presentTeams(usersTeam);
+        teamPresenter = new TeamPresenter(this);
+        teamPresenter.getUserTeam(mTeamId);
         return view;
     }
+
+    @Override
+    public void showProgress(boolean show) {
+        if (show) {
+            mRvTeam.setVisibility(View.INVISIBLE);
+            teamProgressBar.setVisibility(View.VISIBLE);
+        } else {
+            mRvTeam.setVisibility(View.VISIBLE);
+            teamProgressBar.setVisibility(View.INVISIBLE);
+        }
+    }
+
+    @Override
+    public void presentTeam(ArrayList<Player> usersTeam) {
+        this.usersTeam = usersTeam;
+        Collections.sort(usersTeam);
+        initRVAdapter(usersTeam);
+    }
+
+    @Override
+    public void onGetTeamFailure() {
+        NetworkUtils.showConnectionErrorToast(getActivity());
+        teamPresenter.getUserTeam(mTeamId);
+    }
+
     @SuppressWarnings("unchecked")
     private void getTeamFromIntent() {
         Intent intent = getActivity().getIntent();
         usersTeam = (ArrayList<Player>) intent.getSerializableExtra(USERS_TEAM_EXTRA);
-        if (usersTeam == null) usersTeam = Player.getMockPlayerData();
     }
 
     private void initViews(View view) {
         fragmentContainer = view.findViewById(R.id.team_fragment_container);
         transferButton = view.findViewById(R.id.btn_transfer);
         transferButton.setEnabled(false);
+        teamProgressBar = view.findViewById(R.id.pb_team);
         transferButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -99,9 +136,9 @@ public class TeamFragment extends Fragment implements ParentFragment,RVTeamAdapt
         }
     }
 
-    void presentTeams(ArrayList<Player> players) {
+    void initRVAdapter(ArrayList<Player> players) {
         if (rvTeamAdapter == null) {
-            rvTeamAdapter = new RVTeamAdapter(players, getContext(),this);
+            rvTeamAdapter = new RVTeamAdapter(players, getContext(), this);
             mRvTeam.setAdapter(rvTeamAdapter);
         }
     }
@@ -133,10 +170,11 @@ public class TeamFragment extends Fragment implements ParentFragment,RVTeamAdapt
         return gridLayoutManager;
     }
 
-    public void onButtonClick(){
-        Intent intent = new Intent(getContext(),TransferActivity.class);
-        intent.putExtra(PLAYERS_TO_TRANSFER_EXTRA,playersToTransfer);
-        intent.putExtra(USERS_TEAM_EXTRA,usersTeam);
+    public void onButtonClick() {
+        Intent intent = new Intent(getContext(), TransferActivity.class);
+        intent.putExtra(PLAYERS_TO_TRANSFER_EXTRA, playersToTransfer);
+        intent.putExtra(USERS_TEAM_EXTRA, usersTeam);
+        intent.putExtra(BUDGET_EXTRA,mBudget);
         getContext().startActivity(intent);
     }
 
@@ -150,8 +188,10 @@ public class TeamFragment extends Fragment implements ParentFragment,RVTeamAdapt
         this.playersToTransfer = playersToTransfer;
     }
 
-    private void getLoggedUserId() {
+    private void getLoggedUserData() {
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences(LoginActivity.PREFS_NAME, 0);
         mUserId = sharedPreferences.getInt(USER_ID_EXTRA, 0);
+        mTeamId = sharedPreferences.getInt(TEAM_ID_EXTRA,0);
+        mBudget = sharedPreferences.getFloat(BUDGET_EXTRA,0);
     }
 }

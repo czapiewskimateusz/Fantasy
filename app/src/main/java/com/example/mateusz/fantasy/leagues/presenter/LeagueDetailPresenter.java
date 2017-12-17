@@ -36,7 +36,6 @@ public class LeagueDetailPresenter {
     }
 
     public void onGetUsersRankFailure(String message){
-        view.showProgress(false);
         Log.d("RETRO ERROR", message);
         view.onConnectionError();
     }

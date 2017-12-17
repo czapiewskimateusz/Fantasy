@@ -31,6 +31,8 @@ public class LoginActivity extends Activity implements ILoginView {
     public static final String USER_ID_EXTRA = "user_id";
     public static final String TOTAL_POINTS_EXTRA= "total_points";
     public static final String PREFS_NAME = "com.example.mateusz.fantasy";
+    public static final String TEAM_ID_EXTRA ="team_id" ;
+    public static final String BUDGET_EXTRA ="budget" ;
 
     @BindView(R.id.et_email)
     EditText mEtEmail;
@@ -57,15 +59,11 @@ public class LoginActivity extends Activity implements ILoginView {
         ButterKnife.bind(this);
         setKeyboardListener();
 
-        if (sPresenter == null) {
-            sPresenter = new LoginPresenter();
-        }
+        if (sPresenter == null) sPresenter = new LoginPresenter();
 
         Intent intent = getIntent();
         String email = intent.getStringExtra(PUT_EMAIL_EXTRA);
-        if (email != null) {
-            mEtEmail.setText(email);
-        }
+        if (email != null) mEtEmail.setText(email);
 
         SharedPreferences sharedPreferences = getSharedPreferences(PREFS_NAME, 0);
         int id = sharedPreferences.getInt(USER_ID_EXTRA, 0);
@@ -98,19 +96,19 @@ public class LoginActivity extends Activity implements ILoginView {
 
     @OnClick(R.id.btn_logIn)
     public void login() {
-
         String email = mEtEmail.getText().toString();
         String password = mEtPassword.getText().toString();
         getPresenter().login(email, password);
-
     }
 
     @Override
-    public void onLoginSuccess(int userId, int totalPoints) {
+    public void onLoginSuccess(int userId, int totalPoints, int teamId, float budget) {
 
         SharedPreferences.Editor editor = getSharedPreferences(PREFS_NAME, MODE_PRIVATE).edit();
         editor.putInt(USER_ID_EXTRA, userId);
         editor.putInt(TOTAL_POINTS_EXTRA,totalPoints);
+        editor.putInt(TEAM_ID_EXTRA,teamId);
+        editor.putFloat(BUDGET_EXTRA,budget);
         editor.apply();
 
         Intent intent = new Intent(this, HomeActivity.class);
@@ -180,6 +178,7 @@ public class LoginActivity extends Activity implements ILoginView {
     @Override
     public void onConnectionError() {
         showConnectionErrorToast(this);
+
     }
 
     public LoginPresenter getPresenter() {

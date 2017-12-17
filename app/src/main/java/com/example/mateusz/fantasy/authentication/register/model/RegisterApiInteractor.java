@@ -7,10 +7,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Retrofit;
 
-/**
- * Created by Mateusz on 19.08.2017.
- */
-
 public class RegisterApiInteractor implements Callback<Response> {
 
     public static final String MESSAGE_SUCCESSFUL = "success";
@@ -22,10 +18,10 @@ public class RegisterApiInteractor implements Callback<Response> {
         this.registerPresenter = registerPresenter;
     }
 
-    public void register(String email, String firstname, String lastname, String password){
+    public void register(String email, String firstname, String lastname, String teamName, String password){
         Retrofit retrofit = getRetrofitInstance();
         RegisterWebService api = retrofit.create(RegisterWebService.class);
-        Call<Response> call = api.registerUser("\""+email+"\"","\""+password+"\"","\""+firstname+"\"","\""+lastname+"\"");
+        Call<Response> call = api.registerUser("\""+email+"\"","\""+password+"\"","\""+firstname+"\"","\""+lastname+"\"","\""+teamName+"\"");
         call.enqueue(this);
     }
 
@@ -41,6 +37,6 @@ public class RegisterApiInteractor implements Callback<Response> {
 
     @Override
     public void onFailure(Call<Response> call, Throwable t) {
-        //// TODO: 19.08.2017 implement failure
+        registerPresenter.onConnectionError();
     }
 }

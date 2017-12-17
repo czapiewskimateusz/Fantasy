@@ -28,6 +28,8 @@ public class RegisterActivity extends Activity implements IRegisterView {
     public EditText mEtFirstName;
     @BindView(R.id.et_lastname)
     public EditText mEtLastName;
+    @BindView(R.id.et_team_name)
+    public EditText mEtTeamname;
     @BindView(R.id.et_password_register)
     public EditText mEtPassword;
     @BindView(R.id.et_password_repeat)
@@ -40,6 +42,8 @@ public class RegisterActivity extends Activity implements IRegisterView {
     public TextView mTvFirstnameError;
     @BindView(R.id.tv_lastname_error)
     public TextView mTvLastnameError;
+    @BindView(R.id.tv_team_name_error)
+    public TextView mTvTeamError;
     @BindView(R.id.tv_password_register_error)
     public TextView mTvPasswordError;
     @BindView(R.id.tv_password_repeat_error)
@@ -51,7 +55,7 @@ public class RegisterActivity extends Activity implements IRegisterView {
     @BindView(R.id.pb_register_loading_indicator)
     ProgressBar mPbLoadingIndicator;
 
-    private static RegisterPresenter sPresenter;
+    private RegisterPresenter sPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,25 +65,19 @@ public class RegisterActivity extends Activity implements IRegisterView {
         ButterKnife.bind(this);
         getActionBar().setDisplayHomeAsUpEnabled(true);
 
-        if (sPresenter == null) {
-            sPresenter = new RegisterPresenter();
-        }
+        if (sPresenter == null) sPresenter = new RegisterPresenter();
     }
 
     @Override
     protected void onResume() {
-
         super.onResume();
         getPresenter().onViewAttached(this, this);
-
     }
 
     @Override
     protected void onPause() {
-
         super.onPause();
         getPresenter().onViewDetached();
-
     }
 
     @Override
@@ -107,6 +105,11 @@ public class RegisterActivity extends Activity implements IRegisterView {
     }
 
     @Override
+    public void onTeamNameError(String error) {
+        mTvTeamError.setText(error);
+    }
+
+    @Override
     public void onPasswordError(String error) {
         mTvPasswordError.setText(error);
     }
@@ -126,6 +129,7 @@ public class RegisterActivity extends Activity implements IRegisterView {
         mTvEmailError.setText("");
         mTvFirstnameError.setText("");
         mTvLastnameError.setText("");
+        mTvTeamError.setText("");
         mTvPasswordError.setText("");
         mTvPasswordRepeatError.setText("");
         mTvGeneralRegisterError.setText("");
@@ -133,25 +137,21 @@ public class RegisterActivity extends Activity implements IRegisterView {
 
     @Override
     public void showProgress(boolean show) {
-
-        if (show){
-            mPbLoadingIndicator.setVisibility(View.VISIBLE);
-        } else {
-            mPbLoadingIndicator.setVisibility(View.INVISIBLE);
-        }
-
+        if (show) mPbLoadingIndicator.setVisibility(View.VISIBLE);
+         else mPbLoadingIndicator.setVisibility(View.INVISIBLE);
     }
 
     @OnClick(R.id.btn_register)
     public void register() {
 
         String email = mEtEmail.getText().toString();
-        String firstname = mEtFirstName.getText().toString();
-        String lastname = mEtLastName.getText().toString();
+        String firstName = mEtFirstName.getText().toString();
+        String lastName = mEtLastName.getText().toString();
+        String teamName = mEtTeamname.getText().toString();
         String password = mEtPassword.getText().toString();
         String passwordRepeat = mEtPasswordRepeat.getText().toString();
 
-        getPresenter().register(email,firstname,lastname,password,passwordRepeat);
+        getPresenter().register(email,firstName,lastName,teamName,password,passwordRepeat);
 
     }
 

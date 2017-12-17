@@ -45,6 +45,8 @@
     <string name="email_length_error">Email is too long</string>
     <string name="firstname_length_error">First name is too long</string>
     <string name="lastname_length_error">Last name is too long</string>
+    <string name="teamName_empty_error">Team name is empty</string>
+    <string name="teamName_length_error">Team name is too long</string>
     <string name="password_length_error">Password must contain at least 6 characters</string>
     <string name="passwords_do_not_match">Passwords do not match</string>
     <string name="create_league_error">Couldn\'t create league, try again later</string>
@@ -77,6 +79,7 @@
     <string name="atk">ATK</string>
     <string name="sort">Sort:</string>
     <string name="budget">BUDGET</string>
+    <string name="team_name">Team name</string>
 
     //Sort
     <string-array name="sortA_types">

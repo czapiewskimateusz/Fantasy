@@ -22,50 +22,40 @@ public class RegisterPresenter {
      * Constructor
      */
     public RegisterPresenter() {
-
         this.registerApiInteractor = new RegisterApiInteractor(this);
-
     }
 
     public void onViewAttached(IRegisterView view, Context context) {
-
         this.view = view;
         this.context = context;
-
     }
 
     public void onViewDetached() {
-
         view = null;
         context = null;
-
     }
 
     public void onRegisterSuccess() {
-
         view.showProgress(false);
         view.onSignUpSuccess(mEmail);
-
     }
 
     public void onRegisterFailure() {
-
         view.showProgress(false);
         view.onGeneralError(context.getString(R.string.user_already_exists_error));
-
     }
 
-    public void register(String email, String firstname, String lastname, String password, String passwordRepeat) {
+    public void register(String email, String firstname, String lastname, String teamName, String password, String passwordRepeat) {
 
         view.clearErrors();
 
-        if (!validateFields(email, firstname, lastname, password, passwordRepeat)) {
+        if (!validateFields(email, firstname, lastname, teamName, password, passwordRepeat)) {
             return;
         }
 
         this.mEmail = email;
         view.showProgress(true);
-        registerApiInteractor.register(email, firstname, lastname, password);
+        registerApiInteractor.register(email, firstname, lastname, teamName, password);
 
     }
 
@@ -79,7 +69,7 @@ public class RegisterPresenter {
      * @param passwordRepeat user passwordRepeat
      * @return true if AOK
      */
-    private boolean validateFields(String email, String firstname, String lastname, String password, String passwordRepeat) {
+    private boolean validateFields(String email, String firstname, String lastname,String teamName, String password, String passwordRepeat) {
 
         boolean check = true;
 
@@ -113,6 +103,16 @@ public class RegisterPresenter {
             view.onLastNameError("");
         }
 
+        if (TextUtils.isEmpty(teamName)) {
+            view.onTeamNameError(context.getString(R.string.teamName_empty_error));
+            check = false;
+        } else if (lastname.length() > 50) {
+            view.onTeamNameError(context.getString(R.string.teamName_length_error));
+            check = false;
+        } else {
+            view.onTeamNameError("");
+        }
+
         if (TextUtils.isEmpty(password)) {
             view.onPasswordError(context.getString(R.string.error_password_empty));
             check = false;
@@ -141,9 +141,10 @@ public class RegisterPresenter {
         } else {
             view.onPasswordRepeatError("");
         }
-
-
         return check;
+    }
 
+    public void onConnectionError() {
+        view.onGeneralError(context.getString(R.string.connection_error));
     }
 }

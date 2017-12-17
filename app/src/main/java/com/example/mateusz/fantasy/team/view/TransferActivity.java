@@ -28,6 +28,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Locale;
 
+import static com.example.mateusz.fantasy.authentication.login.view.LoginActivity.BUDGET_EXTRA;
 import static com.example.mateusz.fantasy.team.view.TeamFragment.PLAYERS_TO_TRANSFER_EXTRA;
 import static com.example.mateusz.fantasy.team.view.TeamFragment.USERS_TEAM_EXTRA;
 
@@ -40,7 +41,7 @@ public class TransferActivity extends AppCompatActivity implements RVAllPlayerAd
     private int midfielders = 0;
     private int defenders = 0;
     private int attackers = 0;
-    private double budget = 0.0;
+    private float budget = 0;
 
     private Button makeTransfersButton;
     private Spinner sortA;
@@ -64,7 +65,6 @@ public class TransferActivity extends AppCompatActivity implements RVAllPlayerAd
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_transfer);
         selectedPlayers = new ArrayList<>();
-        budget = 75.00;
         initViews();
         getPlayersToTransferFromIntent();
         assignPlayersToTransfer();
@@ -121,6 +121,7 @@ public class TransferActivity extends AppCompatActivity implements RVAllPlayerAd
         Intent intent = getIntent();
         playersToTransfer = (ArrayList<Player>) intent.getSerializableExtra(PLAYERS_TO_TRANSFER_EXTRA);
         usersTeam = (ArrayList<Player>) intent.getSerializableExtra(USERS_TEAM_EXTRA);
+        budget = intent.getFloatExtra(BUDGET_EXTRA,0);
     }
 
     private void setListenerSortB() {
@@ -273,6 +274,7 @@ public class TransferActivity extends AppCompatActivity implements RVAllPlayerAd
             attackers = 2;
         } else {
             for (Player p : playersToTransfer) {
+                budget += p.getValue();
                 if (p.getPosition() == 1) goalkeepers++;
                 if (p.getPosition() == 2) defenders++;
                 if (p.getPosition() == 3) midfielders++;

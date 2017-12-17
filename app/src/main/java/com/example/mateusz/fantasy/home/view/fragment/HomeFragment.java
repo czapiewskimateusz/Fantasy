@@ -27,7 +27,9 @@ import com.example.mateusz.fantasy.utils.NetworkUtils;
 
 
 import static android.content.Context.MODE_PRIVATE;
+import static com.example.mateusz.fantasy.authentication.login.view.LoginActivity.BUDGET_EXTRA;
 import static com.example.mateusz.fantasy.authentication.login.view.LoginActivity.PREFS_NAME;
+import static com.example.mateusz.fantasy.authentication.login.view.LoginActivity.TEAM_ID_EXTRA;
 import static com.example.mateusz.fantasy.authentication.login.view.LoginActivity.TOTAL_POINTS_EXTRA;
 import static com.example.mateusz.fantasy.authentication.login.view.LoginActivity.USER_ID_EXTRA;
 
@@ -148,6 +150,8 @@ public class HomeFragment extends Fragment implements ParentFragment, IHomeView 
         SharedPreferences.Editor editor = getActivity().getSharedPreferences(PREFS_NAME, MODE_PRIVATE).edit();
         editor.putInt(USER_ID_EXTRA, 0);
         editor.putInt(TOTAL_POINTS_EXTRA, 0);
+        editor.putInt(TEAM_ID_EXTRA,0);
+        editor.putFloat(BUDGET_EXTRA,0);
         editor.apply();
     }
 

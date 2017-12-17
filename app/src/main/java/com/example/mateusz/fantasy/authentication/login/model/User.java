@@ -7,11 +7,11 @@ public class User {
     private String lastName;
     private String email;
     private String password;
-    private String teamId;
-    private int budget;
+    private int teamId;
+    private float budget;
     private int totalPoints;
 
-    public User(int userId, String firstName, String lastName, String email, String password, String teamId, int budget, int totalPoints) {
+    public User(int userId, String firstName, String lastName, String email, String password, int teamId, float budget, int totalPoints) {
         this.userId = userId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -62,19 +62,19 @@ public class User {
         this.password = password;
     }
 
-    public String getTeamId() {
+    public int getTeamId() {
         return teamId;
     }
 
-    public void setTeamId(String teamId) {
+    public void setTeamId(int teamId) {
         this.teamId = teamId;
     }
 
-    public int getBudget() {
+    public float getBudget() {
         return budget;
     }
 
-    public void setBudget(int budget) {
+    public void setBudget(float budget) {
         this.budget = budget;
     }
 

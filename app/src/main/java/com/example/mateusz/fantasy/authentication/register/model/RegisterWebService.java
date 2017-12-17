@@ -9,5 +9,9 @@ public interface RegisterWebService {
 
     @FormUrlEncoded
     @POST("registerUser.php")
-    Call<Response> registerUser(@Field("email") String email,@Field("password") String password,@Field("firstName") String firstName,@Field("lastName") String lastName);
+    Call<Response> registerUser(@Field("email") String email,
+                                @Field("password") String password,
+                                @Field("firstName") String firstName,
+                                @Field("lastName") String lastName,
+                                @Field("teamName") String teamName);
 }

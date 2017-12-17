@@ -35,7 +35,7 @@
     <color name="player_score_color">#4D000000</color>
     <color name="player_selected">@color/accent</color>
 
-    <color name="color_position_gk">#03A9F4</color>
+    <color name="color_position_gk">#03a9f4</color>
     <color name="color_position_def">#4CAF50</color>
     <color name="color_position_mid">#FFC107</color>
     <color name="color_position_atk">#E91E63</color>
