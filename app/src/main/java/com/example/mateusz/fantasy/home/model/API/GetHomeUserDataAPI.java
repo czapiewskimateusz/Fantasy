@@ -1,6 +1,5 @@
 package com.example.mateusz.fantasy.home.model.API;
 
-import com.example.mateusz.fantasy.authentication.login.model.User;
 import com.example.mateusz.fantasy.home.model.repo.HomeUser;
 import com.example.mateusz.fantasy.home.model.webService.HomeWebService;
 import com.example.mateusz.fantasy.home.presenter.HomePresenter;

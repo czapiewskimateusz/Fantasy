@@ -103,7 +103,6 @@ public class LoginActivity extends Activity implements ILoginView {
 
     @Override
     public void onLoginSuccess(int userId, int totalPoints, int teamId, float budget) {
-
         SharedPreferences.Editor editor = getSharedPreferences(PREFS_NAME, MODE_PRIVATE).edit();
         editor.putInt(USER_ID_EXTRA, userId);
         editor.putInt(TOTAL_POINTS_EXTRA,totalPoints);
@@ -113,7 +112,6 @@ public class LoginActivity extends Activity implements ILoginView {
 
         Intent intent = new Intent(this, HomeActivity.class);
         startActivity(intent);
-
     }
 
     @Override
@@ -133,34 +131,24 @@ public class LoginActivity extends Activity implements ILoginView {
 
     @Override
     public void clearErrors() {
-
         mTvErrorEmail.setText("");
         mTvErrorPassword.setText("");
         mTvError.setText("");
-
     }
 
     @Override
     public void showProgress(boolean show) {
-
-        if (show) {
-            mPbLoadingIndicator.setVisibility(View.VISIBLE);
-        } else {
-            mPbLoadingIndicator.setVisibility(View.INVISIBLE);
-        }
-
+        if (show) mPbLoadingIndicator.setVisibility(View.VISIBLE);
+        else mPbLoadingIndicator.setVisibility(View.INVISIBLE);
     }
 
     @OnClick(R.id.tv_register)
     public void register() {
-
         Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);
-
     }
 
     private void setKeyboardListener(){
-
         mEtPassword.setOnKeyListener(new View.OnKeyListener() {
 
             public boolean onKey(View v, int keyCode, KeyEvent event) {
@@ -172,7 +160,6 @@ public class LoginActivity extends Activity implements ILoginView {
             }
 
         });
-
     }
 
     @Override

@@ -3,12 +3,15 @@ package com.example.mateusz.fantasy.team.presenter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.ColorRes;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.RecyclerView;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.mateusz.fantasy.R;
+import com.example.mateusz.fantasy.authentication.login.view.LoginActivity;
 import com.example.mateusz.fantasy.team.model.API.GetAllPlayersAPI;
 import com.example.mateusz.fantasy.team.model.API.UpdateTeamAPI;
 import com.example.mateusz.fantasy.team.model.repo.Player;
@@ -21,6 +24,7 @@ import java.util.Comparator;
 import java.util.Locale;
 
 import static com.example.mateusz.fantasy.authentication.login.view.LoginActivity.BUDGET_EXTRA;
+import static com.example.mateusz.fantasy.authentication.login.view.LoginActivity.USER_ID_EXTRA;
 import static com.example.mateusz.fantasy.team.view.TeamFragment.PLAYERS_TO_TRANSFER_EXTRA;
 import static com.example.mateusz.fantasy.team.view.TeamFragment.USERS_TEAM_EXTRA;
 
@@ -46,6 +50,7 @@ public class TransferPresenter {
         getAllPlayersAPI = new GetAllPlayersAPI(this);
         updateTeamAPI = new UpdateTeamAPI(this);
         selectedPlayers = new ArrayList<>();
+        budget = getBudgetFromSharedPreferences();
     }
 
     public void getAllPlayers() {
@@ -187,7 +192,7 @@ public class TransferPresenter {
         else makeTransfersButton.setEnabled(false);
     }
 
-    public void removeFromTransfer(Player p, TextView gkLeftTV, TextView defLeftTV, TextView midLeftTV, TextView atkLeftTV, TextView budgetTV, Button makeTransfersButton) {
+    private void removeFromTransfer(Player p, TextView gkLeftTV, TextView defLeftTV, TextView midLeftTV, TextView atkLeftTV, TextView budgetTV, Button makeTransfersButton) {
         if (p.getPosition() == 1) goalkeepers++;
         if (p.getPosition() == 2) defenders++;
         if (p.getPosition() == 3) midfielders++;
@@ -209,6 +214,7 @@ public class TransferPresenter {
             defenders = 4;
             midfielders = 4;
             attackers = 2;
+            budget = 75;
         } else {
             for (Player p : playersToTransfer) {
                 budget += p.getValue();
@@ -226,6 +232,10 @@ public class TransferPresenter {
     public void getPlayersToTransferFromIntent(Intent intent) {
         playersToTransfer = (ArrayList<Player>) intent.getSerializableExtra(PLAYERS_TO_TRANSFER_EXTRA);
         usersTeam = (ArrayList<Player>) intent.getSerializableExtra(USERS_TEAM_EXTRA);
-        budget = intent.getFloatExtra(BUDGET_EXTRA, 0);
+    }
+
+    private float getBudgetFromSharedPreferences() {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(LoginActivity.PREFS_NAME, 0);
+        return sharedPreferences.getFloat(BUDGET_EXTRA,0);
     }
 }

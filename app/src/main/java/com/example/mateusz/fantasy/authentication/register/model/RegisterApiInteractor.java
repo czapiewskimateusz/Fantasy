@@ -29,7 +29,7 @@ public class RegisterApiInteractor implements Callback<Response> {
     public void onResponse(Call<Response> call, retrofit2.Response<Response> response) {
         if (response.isSuccessful()) {
             if (response.body().getMessage().equals(MESSAGE_SUCCESSFUL))
-                registerPresenter.onRegisterSuccess();
+                registerPresenter.onRegisterSuccess(response.body().getUserId(),response.body().getTeamId());
              else if (response.body().getMessage().equals(MESSAGE_FAILURE))
                 registerPresenter.onRegisterFailure();
         }

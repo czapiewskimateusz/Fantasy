@@ -2,8 +2,6 @@ package com.example.mateusz.fantasy.team.view;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.annotation.ColorRes;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -28,11 +26,8 @@ import com.example.mateusz.fantasy.utils.NetworkUtils;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import static com.example.mateusz.fantasy.authentication.login.view.LoginActivity.BUDGET_EXTRA;
 import static com.example.mateusz.fantasy.authentication.login.view.LoginActivity.TEAM_ID_EXTRA;
 import static com.example.mateusz.fantasy.authentication.login.view.LoginActivity.USER_ID_EXTRA;
-import static com.example.mateusz.fantasy.team.view.TeamFragment.PLAYERS_TO_TRANSFER_EXTRA;
-import static com.example.mateusz.fantasy.team.view.TeamFragment.USERS_TEAM_EXTRA;
 
 public class TransferActivity extends AppCompatActivity implements RVAllPlayerAdapter.CallbackInterface, RVSelectedPlayerAdapter.SelectedPlayersCallback, ITransferView {
     private Button makeTransfersButton;

@@ -141,6 +141,7 @@ public class HomeFragment extends Fragment implements ParentFragment, IHomeView 
             public void onClick(View view) {
                 deleteUserFromSharedPreferences();
                 Intent intent = new Intent(getActivity(), LoginActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }
         });

@@ -2,6 +2,7 @@ package com.example.mateusz.fantasy.authentication.register.view;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -12,10 +13,18 @@ import android.widget.Toast;
 import com.example.mateusz.fantasy.authentication.login.view.LoginActivity;
 import com.example.mateusz.fantasy.R;
 import com.example.mateusz.fantasy.authentication.register.presenter.RegisterPresenter;
+import com.example.mateusz.fantasy.home.view.HomeActivity;
+import com.example.mateusz.fantasy.team.view.TransferActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
+import static com.example.mateusz.fantasy.authentication.login.view.LoginActivity.BUDGET_EXTRA;
+import static com.example.mateusz.fantasy.authentication.login.view.LoginActivity.PREFS_NAME;
+import static com.example.mateusz.fantasy.authentication.login.view.LoginActivity.TEAM_ID_EXTRA;
+import static com.example.mateusz.fantasy.authentication.login.view.LoginActivity.TOTAL_POINTS_EXTRA;
+import static com.example.mateusz.fantasy.authentication.login.view.LoginActivity.USER_ID_EXTRA;
 
 public class RegisterActivity extends Activity implements IRegisterView {
 
@@ -81,11 +90,18 @@ public class RegisterActivity extends Activity implements IRegisterView {
     }
 
     @Override
-    public void onSignUpSuccess(String email) {
+    public void onSignUpSuccess(int userId, int teamId) {
         Toast.makeText(this,getString(R.string.user_successfully_created),Toast.LENGTH_LONG).show();
 
-        Intent intent = new Intent(this, LoginActivity.class);
-        intent.putExtra(PUT_EMAIL_EXTRA,email);
+        SharedPreferences.Editor editor = getSharedPreferences(PREFS_NAME, MODE_PRIVATE).edit();
+        editor.putInt(USER_ID_EXTRA, userId);
+        editor.putInt(TOTAL_POINTS_EXTRA,0);
+        editor.putInt(TEAM_ID_EXTRA,teamId);
+        editor.putFloat(BUDGET_EXTRA,75);
+        editor.apply();
+
+        Intent intent = new Intent(this, TransferActivity.class);
+        intent.putExtra(BUDGET_EXTRA,75);
         startActivity(intent);
     }
 

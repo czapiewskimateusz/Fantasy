@@ -35,9 +35,9 @@ public class RegisterPresenter {
         context = null;
     }
 
-    public void onRegisterSuccess() {
+    public void onRegisterSuccess(int userId, int teamID) {
         view.showProgress(false);
-        view.onSignUpSuccess(mEmail);
+        view.onSignUpSuccess(userId, teamID);
     }
 
     public void onRegisterFailure() {
@@ -48,15 +48,10 @@ public class RegisterPresenter {
     public void register(String email, String firstname, String lastname, String teamName, String password, String passwordRepeat) {
 
         view.clearErrors();
-
-        if (!validateFields(email, firstname, lastname, teamName, password, passwordRepeat)) {
-            return;
-        }
-
+        if (!validateFields(email, firstname, lastname, teamName, password, passwordRepeat)) return;
         this.mEmail = email;
         view.showProgress(true);
         registerApiInteractor.register(email, firstname, lastname, teamName, password);
-
     }
 
     /**

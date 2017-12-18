@@ -86,6 +86,10 @@ public class TeamFragment extends Fragment implements ParentFragment, RVTeamAdap
     public void presentTeam(ArrayList<Player> usersTeam) {
         this.usersTeam = usersTeam;
         Collections.sort(usersTeam);
+        if (usersTeam.size()==0){
+            Intent intent = new Intent(getActivity(), TransferActivity.class);
+            startActivity(intent);
+        }
         initRVAdapter(usersTeam);
     }
 

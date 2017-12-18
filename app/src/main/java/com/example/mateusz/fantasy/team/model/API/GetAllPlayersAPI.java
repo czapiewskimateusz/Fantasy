@@ -32,8 +32,10 @@ public class GetAllPlayersAPI implements Callback<PlayerJSONResponse> {
 
     @Override
     public void onResponse(Call<PlayerJSONResponse> call, Response<PlayerJSONResponse> response) {
-        ArrayList<Player> allPlayers = new ArrayList<>(Arrays.asList(response.body().getPlayers()));
-        teamPresenter.onGetAllPlayersSuccess(allPlayers);
+        if (response.isSuccessful()){
+            ArrayList<Player> allPlayers = new ArrayList<>(Arrays.asList(response.body().getPlayers()));
+            teamPresenter.onGetAllPlayersSuccess(allPlayers);
+        }
     }
 
     @Override

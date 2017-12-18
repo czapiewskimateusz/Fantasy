@@ -31,8 +31,10 @@ public class GetTeamAPI implements Callback<PlayerJSONResponse> {
 
     @Override
     public void onResponse(Call<PlayerJSONResponse> call, Response<PlayerJSONResponse> response) {
-        ArrayList<Player> userTeam = new ArrayList<>(Arrays.asList(response.body().getPlayers()));
-        teamPresenter.onGetUserTeamSuccess(userTeam);
+        if (response.isSuccessful()){
+            ArrayList<Player> userTeam = new ArrayList<>(Arrays.asList(response.body().getPlayers()));
+            teamPresenter.onGetUserTeamSuccess(userTeam);
+        }
     }
 
     @Override
