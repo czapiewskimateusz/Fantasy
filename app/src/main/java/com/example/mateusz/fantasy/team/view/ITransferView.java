@@ -8,4 +8,8 @@ public interface ITransferView {
     void showProgress(boolean show);
     void presentAllPlayers(ArrayList<Player> allPlayers);
     void onGetAllPlayersFailure();
+
+    void onUpdateSuccess();
+
+    void onUpdateFailure();
 }

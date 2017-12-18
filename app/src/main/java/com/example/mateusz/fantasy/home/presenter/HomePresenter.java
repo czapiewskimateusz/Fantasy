@@ -30,8 +30,8 @@ public class HomePresenter {
         view.showConnectionError();
     }
 
-    public void getHomeData(int teamId){
-        mGetHomeDataAPI.getData(teamId);
+    public void getHomeData(int userId){
+        mGetHomeDataAPI.getData(userId);
     }
 
     public void onGetHomeDataSuccess(HomeData body) {

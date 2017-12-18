@@ -114,7 +114,7 @@ public class HomeFragment extends Fragment implements ParentFragment, IHomeView 
         mTvUserTeamName.setText(user.getTeamName());
         mTeamId = user.getTeamId();
         mHomeUser = user;
-        mHomePresenter.getHomeData(mTeamId);
+        mHomePresenter.getHomeData(mUserId);
     }
 
     @Override

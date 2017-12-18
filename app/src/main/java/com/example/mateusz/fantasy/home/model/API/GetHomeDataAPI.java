@@ -20,10 +20,10 @@ public class GetHomeDataAPI implements Callback<HomeData> {
         this.mHomePresenter = homePresenter;
     }
 
-    public void getData(int teamId) {
+    public void getData(int userId) {
         Retrofit retrofit = getRetrofitInstance();
         HomeWebService api = retrofit.create(HomeWebService.class);
-        Call<HomeData> call = api.getData(teamId);
+        Call<HomeData> call = api.getData(userId);
         call.enqueue(this);
     }
 

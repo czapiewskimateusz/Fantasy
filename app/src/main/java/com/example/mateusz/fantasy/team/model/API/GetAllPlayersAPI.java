@@ -38,6 +38,6 @@ public class GetAllPlayersAPI implements Callback<PlayerJSONResponse> {
 
     @Override
     public void onFailure(Call<PlayerJSONResponse> call, Throwable t) {
-
+        teamPresenter.onGetAllPlayersFailure();
     }
 }

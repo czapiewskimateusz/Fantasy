@@ -1,6 +1,7 @@
 package com.example.mateusz.fantasy.team.view;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.ColorRes;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -16,6 +17,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.mateusz.fantasy.R;
+import com.example.mateusz.fantasy.authentication.login.view.LoginActivity;
 import com.example.mateusz.fantasy.home.view.HomeActivity;
 import com.example.mateusz.fantasy.team.model.repo.Player;
 import com.example.mateusz.fantasy.team.presenter.TransferPresenter;
@@ -29,6 +31,8 @@ import java.util.Comparator;
 import java.util.Locale;
 
 import static com.example.mateusz.fantasy.authentication.login.view.LoginActivity.BUDGET_EXTRA;
+import static com.example.mateusz.fantasy.authentication.login.view.LoginActivity.TEAM_ID_EXTRA;
+import static com.example.mateusz.fantasy.authentication.login.view.LoginActivity.USER_ID_EXTRA;
 import static com.example.mateusz.fantasy.team.view.TeamFragment.PLAYERS_TO_TRANSFER_EXTRA;
 import static com.example.mateusz.fantasy.team.view.TeamFragment.USERS_TEAM_EXTRA;
 
@@ -70,7 +74,7 @@ public class TransferActivity extends AppCompatActivity implements RVAllPlayerAd
         assignPlayersToTransfer();
         initSelectedPlayersRV();
         initAllPlayersRV();
-        transferPresenter = new TransferPresenter(this);
+        transferPresenter = new TransferPresenter(this, this);
         transferPresenter.getAllPlayers();
     }
 
@@ -116,29 +120,37 @@ public class TransferActivity extends AppCompatActivity implements RVAllPlayerAd
         transferPresenter.getAllPlayers();
     }
 
+    @Override
+    public void onUpdateSuccess() {
+        Intent intent = new Intent(this, HomeActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onUpdateFailure() {
+        NetworkUtils.showConnectionErrorToast(this);
+        makeTransfersButton.setEnabled(true);
+    }
+
     @SuppressWarnings("unchecked")
     private void getPlayersToTransferFromIntent() {
         Intent intent = getIntent();
         playersToTransfer = (ArrayList<Player>) intent.getSerializableExtra(PLAYERS_TO_TRANSFER_EXTRA);
         usersTeam = (ArrayList<Player>) intent.getSerializableExtra(USERS_TEAM_EXTRA);
-        budget = intent.getFloatExtra(BUDGET_EXTRA,0);
+        budget = intent.getFloatExtra(BUDGET_EXTRA, 0);
     }
 
     private void setListenerSortB() {
         sortB.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
-                if (position == 0) {
-                    sortByValue();
-                } else {
-                    sortByTotalPoints();
-                }
-               if (allPlayerAdapter!=null) allPlayerAdapter.notifyDataSetChanged();
+                if (position == 0) sortByValue();
+                else sortByTotalPoints();
+                if (allPlayerAdapter != null) allPlayerAdapter.notifyDataSetChanged();
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-
             }
         });
     }
@@ -147,13 +159,9 @@ public class TransferActivity extends AppCompatActivity implements RVAllPlayerAd
         sortA.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
-                if (position == 0) {
-                    sortByName();
-                } else if (position == 1) {
-                    sortByTeam();
-                } else {
-                    sortByPosition();
-                }
+                if (position == 0) sortByName();
+                else if (position == 1) sortByTeam();
+                else sortByPosition();
                 if (allPlayerAdapter != null) allPlayerAdapter.notifyDataSetChanged();
             }
 
@@ -180,8 +188,7 @@ public class TransferActivity extends AppCompatActivity implements RVAllPlayerAd
             Collections.sort(allPlayers, new Comparator<Player>() {
                 @Override
                 public int compare(Player player, Player t1) {
-                    Double d = t1.getValue() - player.getValue();
-                    return d.intValue();
+                    return Double.compare(t1.getValue(), player.getValue());
                 }
             });
         }
@@ -225,7 +232,6 @@ public class TransferActivity extends AppCompatActivity implements RVAllPlayerAd
         makeTransfersButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(TransferActivity.this, HomeActivity.class);
                 if (usersTeam == null) {
                     usersTeam = selectedPlayers;
                 } else {
@@ -233,10 +239,22 @@ public class TransferActivity extends AppCompatActivity implements RVAllPlayerAd
                     usersTeam.addAll(selectedPlayers);
                 }
                 Collections.sort(usersTeam);
-                intent.putExtra(USERS_TEAM_EXTRA, usersTeam);
-                startActivity(intent);
+                int teamId = getTeamIdFromSharedPreferences();
+                int userId = getUserIdFromSharedPreferences();
+                makeTransfersButton.setEnabled(false);
+                transferPresenter.updateTeam(teamId, userId, budget, usersTeam);
             }
         });
+    }
+
+    private int getTeamIdFromSharedPreferences() {
+        SharedPreferences sharedPreferences = getSharedPreferences(LoginActivity.PREFS_NAME, 0);
+        return sharedPreferences.getInt(TEAM_ID_EXTRA, 0);
+    }
+
+    private int getUserIdFromSharedPreferences() {
+        SharedPreferences sharedPreferences = getSharedPreferences(LoginActivity.PREFS_NAME, 0);
+        return sharedPreferences.getInt(USER_ID_EXTRA, 0);
     }
 
     private void initViews() {

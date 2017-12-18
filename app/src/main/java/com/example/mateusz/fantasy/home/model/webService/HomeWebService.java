@@ -17,6 +17,6 @@ public interface HomeWebService {
 
     @FormUrlEncoded
     @POST("getHome.php")
-    Call<HomeData> getData(@Field("team_id") int teamId);
+    Call<HomeData> getData(@Field("user_id") int userId);
 
 }
