@@ -1,5 +1,7 @@
 package com.example.mateusz.fantasy.team.model.repo;
 
+import java.util.ArrayList;
+
 public class Teams {
 
     public static final String ARSENAL = "Arsenal";
@@ -21,5 +23,31 @@ public class Teams {
     public static final String SWANSEA= "Swansea";
     public static final String WATFORD = "Watford";
     public static final String WEST_BROM = "West Brom";
+    public static final String WEST_HAM = "West Ham";
+
+    public static ArrayList<String> getListOfAllTeams(){
+        ArrayList<String> teams = new ArrayList<>();
+        teams.add(ARSENAL);
+        teams.add(BOURNEMOUTH);
+        teams.add(BRIGHTON);
+        teams.add(BURNLEY);
+        teams.add(CHELSEA);
+        teams.add(CRYSTAL_PALACE);
+        teams.add(EVERTON);
+        teams.add(HUDDERSFIELD);
+        teams.add(LEICESTER);
+        teams.add(LIVERPOOL_FC);
+        teams.add(MAN_CITY);
+        teams.add(MAN_UTD);
+        teams.add(NEWCASTLE);
+        teams.add(SOUTHAMPTON);
+        teams.add(SPURS);
+        teams.add(STOKE);
+        teams.add(SWANSEA);
+        teams.add(WATFORD);
+        teams.add(WEST_BROM);
+        teams.add(WEST_HAM);
+        return teams;
+    }
 
 }

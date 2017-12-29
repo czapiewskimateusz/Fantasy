@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.mateusz.fantasy.R;
 import com.example.mateusz.fantasy.authentication.login.view.LoginActivity;
@@ -168,12 +169,17 @@ public class TransferActivity extends AppCompatActivity implements RVAllPlayerAd
         makeTransfersButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (transferPresenter.usersTeam == null) {
+                if (transferPresenter.usersTeam == null)
                     transferPresenter.usersTeam = transferPresenter.selectedPlayers;
-                } else {
+                else {
                     transferPresenter.usersTeam.removeAll(transferPresenter.playersToTransfer);
                     transferPresenter.usersTeam.addAll(transferPresenter.selectedPlayers);
                 }
+                if (checkMaxNumberOfPlayers()){
+                    transferPresenter.usersTeam.removeAll(transferPresenter.selectedPlayers);
+                    return;
+                }
+
                 Collections.sort(transferPresenter.usersTeam);
                 int teamId = getTeamIdFromSharedPreferences();
                 int userId = getUserIdFromSharedPreferences();
@@ -181,6 +187,16 @@ public class TransferActivity extends AppCompatActivity implements RVAllPlayerAd
                 transferPresenter.updateTeam(teamId, userId);
             }
         });
+    }
+
+    private boolean checkMaxNumberOfPlayers() {
+        String check = transferPresenter.checkMaxPlayersFromEachTeam();
+        if (!check.equals("OK")){
+            Toast.makeText(TransferActivity.this,getString(R.string.more_than_3_error)+check,Toast.LENGTH_LONG).show();
+            makeTransfersButton.setEnabled(true);
+            return true;
+        }
+        return false;
     }
 
     private int getTeamIdFromSharedPreferences() {

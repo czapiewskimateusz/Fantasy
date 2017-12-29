@@ -74,4 +74,5 @@
     <string name="team_name">Nazwa drużyny</string>
     <string name="teamName_empty_error">Nazwa drużyny jest pusta</string>
     <string name="teamName_length_error">Nazwa drużyny jest za długa</string>
+    <string name="more_than_3_error">"Twoja drużyna posiada więcej niż 3 piłkarzy z "</string>
 </resources>

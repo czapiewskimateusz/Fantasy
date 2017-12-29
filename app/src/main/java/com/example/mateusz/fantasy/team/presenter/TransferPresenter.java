@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.annotation.ColorRes;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.RecyclerView;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -15,6 +14,7 @@ import com.example.mateusz.fantasy.authentication.login.view.LoginActivity;
 import com.example.mateusz.fantasy.team.model.API.GetAllPlayersAPI;
 import com.example.mateusz.fantasy.team.model.API.UpdateTeamAPI;
 import com.example.mateusz.fantasy.team.model.repo.Player;
+import com.example.mateusz.fantasy.team.model.repo.Teams;
 import com.example.mateusz.fantasy.team.presenter.adapters.RVSelectedPlayerAdapter;
 import com.example.mateusz.fantasy.team.view.ITransferView;
 
@@ -23,8 +23,9 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Locale;
 
+import static android.content.Context.MODE_PRIVATE;
 import static com.example.mateusz.fantasy.authentication.login.view.LoginActivity.BUDGET_EXTRA;
-import static com.example.mateusz.fantasy.authentication.login.view.LoginActivity.USER_ID_EXTRA;
+import static com.example.mateusz.fantasy.authentication.login.view.LoginActivity.PREFS_NAME;
 import static com.example.mateusz.fantasy.team.view.TeamFragment.PLAYERS_TO_TRANSFER_EXTRA;
 import static com.example.mateusz.fantasy.team.view.TeamFragment.USERS_TEAM_EXTRA;
 
@@ -75,6 +76,7 @@ public class TransferPresenter {
     }
 
     public void onUpdateSuccess() {
+        saveBudgetToSharePreferences();
         view.onUpdateSuccess();
     }
 
@@ -235,7 +237,25 @@ public class TransferPresenter {
     }
 
     private float getBudgetFromSharedPreferences() {
-        SharedPreferences sharedPreferences = context.getSharedPreferences(LoginActivity.PREFS_NAME, 0);
+        SharedPreferences sharedPreferences = context.getSharedPreferences(PREFS_NAME, 0);
         return sharedPreferences.getFloat(BUDGET_EXTRA,0);
+    }
+
+    private void saveBudgetToSharePreferences() {
+        SharedPreferences.Editor editor = context.getSharedPreferences(PREFS_NAME, MODE_PRIVATE).edit();
+        editor.putFloat(BUDGET_EXTRA,budget);
+        editor.apply();
+    }
+
+    public String checkMaxPlayersFromEachTeam() {
+        int[] numberOfPlayers = new int[20];
+        ArrayList<String> teams = Teams.getListOfAllTeams();
+
+        for (Player p: usersTeam){
+            for (int i =0; i<teams.size();i++)
+                if (p.getTeam().equals(teams.get(i))) numberOfPlayers[i]++;
+        }
+        for (int i=0;i<20;i++) if (numberOfPlayers[i]>3) return teams.get(i);
+        return "OK";
     }
 }

@@ -35,6 +35,7 @@ import static com.example.mateusz.fantasy.team.model.repo.Teams.STOKE;
 import static com.example.mateusz.fantasy.team.model.repo.Teams.SWANSEA;
 import static com.example.mateusz.fantasy.team.model.repo.Teams.WATFORD;
 import static com.example.mateusz.fantasy.team.model.repo.Teams.WEST_BROM;
+import static com.example.mateusz.fantasy.team.model.repo.Teams.WEST_HAM;
 
 
 public class RVTeamAdapter extends RecyclerView.Adapter<RVTeamAdapter.TeamViewHolder> {
@@ -95,6 +96,7 @@ public class RVTeamAdapter extends RecyclerView.Adapter<RVTeamAdapter.TeamViewHo
         if (player.getTeam().equals(SWANSEA)) holder.kit.setImageResource(R.drawable.swansea_1);
         if (player.getTeam().equals(WATFORD)) holder.kit.setImageResource(R.drawable.watford_1);
         if (player.getTeam().equals(WEST_BROM)) holder.kit.setImageResource(R.drawable.westbrom_2);
+        if (player.getTeam().equals(WEST_HAM)) holder.kit.setImageResource(R.drawable.westham_1);
     }
 
     /**
