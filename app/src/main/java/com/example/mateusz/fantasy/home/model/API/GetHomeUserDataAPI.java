@@ -30,7 +30,6 @@ public class GetHomeUserDataAPI implements Callback<HomeUser> {
     public void onResponse(Call<HomeUser> call, Response<HomeUser> response) {
         if (response.isSuccessful())
             mHomePresenter.onGetUserSuccess(response.body());
-
     }
 
     @Override

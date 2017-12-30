@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -32,7 +31,7 @@
         android:id="@+id/tv_create_league_dialog_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@color/primary_light"
+        android:background="@color/accent_dark"
         android:fontFamily="LATO"
         android:padding="8dp"
         android:text="@string/join_league_dialog_title"

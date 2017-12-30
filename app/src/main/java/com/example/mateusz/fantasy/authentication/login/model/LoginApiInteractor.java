@@ -42,6 +42,6 @@ public class LoginApiInteractor implements Callback<User> {
 
     @Override
     public void onFailure(Call<User> call, Throwable t) {
-        loginPresenter.onConnectionError();
+        loginPresenter.onLoginUnsuccessful(ERROR_TAG_USER_DOESNT_EXIST);
     }
 }

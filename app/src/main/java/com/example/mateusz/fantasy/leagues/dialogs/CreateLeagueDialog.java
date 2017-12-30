@@ -1,9 +1,11 @@
 package com.example.mateusz.fantasy.leagues.dialogs;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.text.TextUtils;
@@ -23,7 +25,7 @@ public class CreateLeagueDialog extends DialogFragment {
     }
 
     public interface CreateLeagueDialogListener {
-        public void onDialogPositiveClick(CreateLeagueDialog dialog);
+        void onDialogPositiveClick(CreateLeagueDialog dialog);
     }
 
     @Override
@@ -36,12 +38,13 @@ public class CreateLeagueDialog extends DialogFragment {
         }
     }
 
+    @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
 
-        final View view = inflater.inflate(R.layout.dialog_create_league, null);
+        @SuppressLint("InflateParams") final View view = inflater.inflate(R.layout.dialog_create_league, null);
         builder.setView(view)
                 .setPositiveButton(getText(R.string.create), new DialogInterface.OnClickListener() {
                     @Override
