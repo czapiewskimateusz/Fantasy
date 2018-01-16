@@ -4,7 +4,7 @@ public interface IRegisterView {
 
     static final String TAG = IRegisterView.class.getName();
 
-    void onSignUpSuccess(int userId, int teamId);
+    void onSignUpSuccess();
 
     void onEmailError(String error);
 

@@ -1,29 +1,36 @@
 package com.example.mateusz.fantasy.home.presenter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.text.TextUtils;
+import android.widget.Toast;
 
 import com.example.mateusz.fantasy.R;
+import com.example.mateusz.fantasy.home.model.API.EditUserAPI;
+import com.example.mateusz.fantasy.home.model.repo.ServerResponse;
+import com.example.mateusz.fantasy.home.view.HomeActivity;
 import com.example.mateusz.fantasy.home.view.UserDetailView;
+import com.example.mateusz.fantasy.utils.NetworkUtils;
 
-/**
- * Created by Mateusz on 29.10.2017.
- */
+import static com.example.mateusz.fantasy.home.model.repo.ServerResponse.MESSAGE_SUCCESS;
 
 public class UserDetailPresenter {
 
     private UserDetailView view;
     private Context context;
+    private EditUserAPI editUserAPI;
 
     public UserDetailPresenter(UserDetailView view, Context context) {
         this.view = view;
         this.context = context;
+        editUserAPI = new EditUserAPI(this);
     }
 
-    public void editUser(String firstName, String lastName, String email, String newPassword, String newPasswordRepeat) {
+    public void editUser(String userEmail, String firstName, String lastName, String newEmail, String newPassword, String newPasswordRepeat) {
         view.clearErrors();
-        if (validateFields(email,firstName,lastName, newPassword, newPasswordRepeat))
-            return;
+        if (validateFields(newEmail,firstName,lastName, newPassword, newPasswordRepeat))
+            view.showProgress(true);
+           editUserAPI.editUser(userEmail,newEmail,firstName,lastName,newPassword);
     }
 
     /**
@@ -95,5 +102,19 @@ public class UserDetailPresenter {
             view.onPasswordRepeatError("");
 
         return check;
+    }
+
+    public void onResponse(ServerResponse body) {
+        view.showProgress(false);
+        if (body.getMessage().equals(MESSAGE_SUCCESS)){
+            Toast.makeText(context,context.getText(R.string.edit_success),Toast.LENGTH_SHORT).show();
+            context.startActivity(new Intent(context, HomeActivity.class));
+        }
+        else view.onEditError();
+    }
+
+    public void onConnectionError() {
+        view.showProgress(false);
+        view.onConnectionError();
     }
 }

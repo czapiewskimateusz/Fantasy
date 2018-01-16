@@ -62,16 +62,6 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent" />
 
-        <ImageView
-            android:id="@+id/iv_home_bcg"
-            android:layout_width="0dp"
-            android:layout_height="110dp"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@color/color_trans_primary" />
-
         <TextView
             android:id="@+id/tv_home_user_name"
             android:layout_width="0dp"
@@ -153,7 +143,7 @@
             android:id="@+id/tv_home_gw"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="24dp"
             android:background="@color/color_trans_primary_dark"
             android:fontFamily="Lato"
             android:padding="8dp"
@@ -161,11 +151,11 @@
             android:textColor="@color/colorWhite"
             android:textSize="18sp"
             android:textStyle="bold"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/iv_home_bcg"
-            tools:text="Gameweek 9 Points"
-            app:layout_constraintHorizontal_bias="0.0" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_home_team_name"
+            tools:text="Gameweek 9 Points" />
 
         <TextView
             android:id="@+id/tv_home_points"

@@ -29,10 +29,10 @@ import static com.example.mateusz.fantasy.utils.NetworkUtils.showConnectionError
 public class LoginActivity extends Activity implements ILoginView {
 
     public static final String USER_ID_EXTRA = "user_id";
-    public static final String TOTAL_POINTS_EXTRA= "total_points";
+    public static final String TOTAL_POINTS_EXTRA = "total_points";
     public static final String PREFS_NAME = "com.example.mateusz.fantasy";
-    public static final String TEAM_ID_EXTRA ="team_id" ;
-    public static final String BUDGET_EXTRA ="budget" ;
+    public static final String TEAM_ID_EXTRA = "team_id";
+    public static final String BUDGET_EXTRA = "budget";
 
     @BindView(R.id.et_email)
     EditText mEtEmail;
@@ -55,24 +55,29 @@ public class LoginActivity extends Activity implements ILoginView {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
         ButterKnife.bind(this);
         setKeyboardListener();
-
         if (sPresenter == null) sPresenter = new LoginPresenter();
+        getEmailFromIntent();
+        checkIfLogged();
+    }
 
+    private void getEmailFromIntent() {
         Intent intent = getIntent();
         String email = intent.getStringExtra(PUT_EMAIL_EXTRA);
         if (email != null) mEtEmail.setText(email);
+    }
 
+    private void checkIfLogged() {
         SharedPreferences sharedPreferences = getSharedPreferences(PREFS_NAME, 0);
         int id = sharedPreferences.getInt(USER_ID_EXTRA, 0);
+        if (id > 0) startHomeActivity(id);
+    }
 
-        if (id > 0) {
-            intent = new Intent(this, HomeActivity.class);
-            intent.putExtra(USER_ID_EXTRA,id);
-            startActivity(intent);
-        }
+    private void startHomeActivity(int id) {
+        Intent intent = new Intent(this, HomeActivity.class);
+        intent.putExtra(USER_ID_EXTRA, id);
+        startActivity(intent);
     }
 
     @Override
@@ -83,16 +88,10 @@ public class LoginActivity extends Activity implements ILoginView {
 
     @Override
     protected void onPause() {
-
         super.onPause();
         getPresenter().onViewDetached();
-
     }
 
-    @Override
-    public void onBackPressed() {
-
-    }
 
     @OnClick(R.id.btn_logIn)
     public void login() {
@@ -103,13 +102,6 @@ public class LoginActivity extends Activity implements ILoginView {
 
     @Override
     public void onLoginSuccess(int userId, int totalPoints, int teamId, float budget) {
-        SharedPreferences.Editor editor = getSharedPreferences(PREFS_NAME, MODE_PRIVATE).edit();
-        editor.putInt(USER_ID_EXTRA, userId);
-        editor.putInt(TOTAL_POINTS_EXTRA,totalPoints);
-        editor.putInt(TEAM_ID_EXTRA,teamId);
-        editor.putFloat(BUDGET_EXTRA,budget);
-        editor.apply();
-
         Intent intent = new Intent(this, HomeActivity.class);
         startActivity(intent);
     }
@@ -148,7 +140,7 @@ public class LoginActivity extends Activity implements ILoginView {
         startActivity(intent);
     }
 
-    private void setKeyboardListener(){
+    private void setKeyboardListener() {
         mEtPassword.setOnKeyListener(new View.OnKeyListener() {
 
             public boolean onKey(View v, int keyCode, KeyEvent event) {

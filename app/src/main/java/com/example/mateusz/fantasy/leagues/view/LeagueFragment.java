@@ -26,12 +26,12 @@ import android.widget.ProgressBar;
 import com.example.mateusz.fantasy.authentication.login.view.LoginActivity;
 import com.example.mateusz.fantasy.home.view.fragment.ParentFragment;
 import com.example.mateusz.fantasy.R;
+import com.example.mateusz.fantasy.leagues.dialogs.CreateLeagueDialog;
+import com.example.mateusz.fantasy.leagues.dialogs.JoinLeagueDialog;
 import com.example.mateusz.fantasy.leagues.model.repo.League;
 import com.example.mateusz.fantasy.leagues.presenter.LeaguePresenter;
 import com.example.mateusz.fantasy.leagues.presenter.adapter.RVLeagueAdapter;
 import com.example.mateusz.fantasy.utils.NetworkUtils;
-import com.example.mateusz.fantasy.utils.dialogs.CreateLeagueDialog;
-import com.example.mateusz.fantasy.utils.dialogs.JoinLeagueDialog;
 import com.github.clans.fab.FloatingActionMenu;
 
 import java.util.List;

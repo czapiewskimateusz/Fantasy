@@ -1,11 +1,19 @@
 package com.example.mateusz.fantasy.authentication.login.presenter;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.text.TextUtils;
 
 import com.example.mateusz.fantasy.authentication.login.model.LoginApiInteractor;
 import com.example.mateusz.fantasy.authentication.login.view.ILoginView;
 import com.example.mateusz.fantasy.R;
+
+import static android.content.Context.MODE_PRIVATE;
+import static com.example.mateusz.fantasy.authentication.login.view.LoginActivity.BUDGET_EXTRA;
+import static com.example.mateusz.fantasy.authentication.login.view.LoginActivity.PREFS_NAME;
+import static com.example.mateusz.fantasy.authentication.login.view.LoginActivity.TEAM_ID_EXTRA;
+import static com.example.mateusz.fantasy.authentication.login.view.LoginActivity.TOTAL_POINTS_EXTRA;
+import static com.example.mateusz.fantasy.authentication.login.view.LoginActivity.USER_ID_EXTRA;
 
 public class LoginPresenter {
 
@@ -54,7 +62,17 @@ public class LoginPresenter {
 
     public void onLoginSuccessful(int userId, int totalPoints, int teamId, float budget) {
         view.showProgress(false);
+        saveUserData(userId, totalPoints, teamId, budget);
         view.onLoginSuccess(userId, totalPoints, teamId, budget);
+    }
+
+    private void saveUserData(int userId, int totalPoints, int teamId, float budget) {
+        SharedPreferences.Editor editor = context.getSharedPreferences(PREFS_NAME, MODE_PRIVATE).edit();
+        editor.putInt(USER_ID_EXTRA, userId);
+        editor.putInt(TOTAL_POINTS_EXTRA,totalPoints);
+        editor.putInt(TEAM_ID_EXTRA,teamId);
+        editor.putFloat(BUDGET_EXTRA,budget);
+        editor.apply();
     }
 
     public void onLoginUnsuccessful(String error) {

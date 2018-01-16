@@ -119,8 +119,11 @@ public class LeagueDetailActivity extends AppCompatActivity implements ILeagueDe
         mTvRanking.setText(String.format(Locale.ENGLISH,"%d", mLeague.getRank()));
         mTvCode.setText(mLeague.getCode());
         mTvNumberOfPlayers.setText(String.format(Locale.ENGLISH,"%d", mLeague.getNumberOfPlayers()));
-        mIvShare.setOnClickListener(new View.OnClickListener() {
+        initShareButton();
+    }
 
+    private void initShareButton() {
+        mIvShare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent sendIntent = new Intent();

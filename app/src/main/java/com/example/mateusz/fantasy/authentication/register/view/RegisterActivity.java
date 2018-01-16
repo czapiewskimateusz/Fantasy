@@ -90,16 +90,12 @@ public class RegisterActivity extends Activity implements IRegisterView {
     }
 
     @Override
-    public void onSignUpSuccess(int userId, int teamId) {
+    public void onSignUpSuccess() {
         Toast.makeText(this,getString(R.string.user_successfully_created),Toast.LENGTH_LONG).show();
+        startTransferActivity();
+    }
 
-        SharedPreferences.Editor editor = getSharedPreferences(PREFS_NAME, MODE_PRIVATE).edit();
-        editor.putInt(USER_ID_EXTRA, userId);
-        editor.putInt(TOTAL_POINTS_EXTRA,0);
-        editor.putInt(TEAM_ID_EXTRA,teamId);
-        editor.putFloat(BUDGET_EXTRA,75);
-        editor.apply();
-
+    private void startTransferActivity() {
         Intent intent = new Intent(this, TransferActivity.class);
         intent.putExtra(BUDGET_EXTRA,75);
         startActivity(intent);
@@ -159,7 +155,6 @@ public class RegisterActivity extends Activity implements IRegisterView {
 
     @OnClick(R.id.btn_register)
     public void register() {
-
         String email = mEtEmail.getText().toString();
         String firstName = mEtFirstName.getText().toString();
         String lastName = mEtLastName.getText().toString();
@@ -168,7 +163,6 @@ public class RegisterActivity extends Activity implements IRegisterView {
         String passwordRepeat = mEtPasswordRepeat.getText().toString();
 
         getPresenter().register(email,firstName,lastName,teamName,password,passwordRepeat);
-
     }
 
     public RegisterPresenter getPresenter() {

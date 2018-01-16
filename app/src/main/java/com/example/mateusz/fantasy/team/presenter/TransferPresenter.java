@@ -10,7 +10,6 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.mateusz.fantasy.R;
-import com.example.mateusz.fantasy.authentication.login.view.LoginActivity;
 import com.example.mateusz.fantasy.team.model.API.GetAllPlayersAPI;
 import com.example.mateusz.fantasy.team.model.API.UpdateTeamAPI;
 import com.example.mateusz.fantasy.team.model.repo.Player;

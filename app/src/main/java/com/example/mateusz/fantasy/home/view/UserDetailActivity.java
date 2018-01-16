@@ -7,9 +7,18 @@ import android.support.design.widget.TextInputLayout;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.example.mateusz.fantasy.R;
 import com.example.mateusz.fantasy.home.presenter.UserDetailPresenter;
+import com.example.mateusz.fantasy.utils.NetworkUtils;
+
+import org.w3c.dom.Text;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 import static com.example.mateusz.fantasy.home.view.fragment.HomeFragment.BUNDLE_EXTRA;
 import static com.example.mateusz.fantasy.home.view.fragment.HomeFragment.EMAIL_EXTRA;
@@ -20,20 +29,37 @@ import static com.example.mateusz.fantasy.home.view.fragment.HomeFragment.PASSWO
 public class UserDetailActivity extends Activity implements UserDetailView {
 
     //UI
-    private TextInputEditText mEtFirstName;
-    private TextInputEditText mEtLastName;
-    private TextInputEditText mEtEmail;
-    private TextInputEditText mEtPassword;
-    private TextInputEditText mEtPasswordRepeat;
+    @BindView(R.id.et_edit_first_name)
+    TextInputEditText mEtFirstName;
+    @BindView(R.id.et_edit_last_name)
+    TextInputEditText mEtLastName;
+    @BindView(R.id.et_edit_email)
+    TextInputEditText mEtEmail;
+    @BindView(R.id.et_edit_password)
+    TextInputEditText mEtPassword;
+    @BindView(R.id.et_edit_repeat_password)
+    TextInputEditText mEtPasswordRepeat;
 
-    private TextInputLayout mLayoutFirstName;
-    private TextInputLayout mLayoutLastName;
-    private TextInputLayout mLayoutEmail;
-    private TextInputLayout mLayoutPassword;
-    private TextInputLayout mLayoutPasswordRepeat;
-    private Button mBtnSave;
+    @BindView(R.id.edit_first_name_layout)
+    TextInputLayout mLayoutFirstName;
+    @BindView(R.id.edit_last_name_layout)
+    TextInputLayout mLayoutLastName;
+    @BindView(R.id.edit_email_layout)
+    TextInputLayout mLayoutEmail;
+    @BindView(R.id.edit_password_layout)
+    TextInputLayout mLayoutPassword;
+    @BindView(R.id.edit_repeat_password_layout)
+    TextInputLayout mLayoutPasswordRepeat;
+
+    @BindView(R.id.edit_PB)
+    ProgressBar editPB;
+    @BindView(R.id.btn_edit_save)
+    Button mBtnSave;
+    @BindView(R.id.tv_edit_error)
+    TextView editError;
 
     private String mUserPassword;
+    private String mUserEmail;
     //Dependencies
     private UserDetailPresenter mUserDetailPresenter;
 
@@ -42,7 +68,7 @@ public class UserDetailActivity extends Activity implements UserDetailView {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_detail);
-
+        ButterKnife.bind(this);
         initViews();
         getDataFromIntent();
 
@@ -81,34 +107,15 @@ public class UserDetailActivity extends Activity implements UserDetailView {
         mLayoutEmail.setError("");
         mLayoutPassword.setError("");
         mLayoutPasswordRepeat.setError("");
+        editError.setText("");
     }
 
     private void initViews() {
-        mEtFirstName = findViewById(R.id.et_edit_first_name);
-        mEtLastName = findViewById(R.id.et_edit_last_name);
-        mEtEmail = findViewById(R.id.et_edit_email);
-        mEtPassword = findViewById(R.id.et_edit_password);
-        mEtPasswordRepeat = findViewById(R.id.et_edit_repeat_password);
-
-        mLayoutFirstName = findViewById(R.id.edit_first_name_layout);
-        mLayoutLastName = findViewById(R.id.edit_last_name_layout);
-        mLayoutEmail = findViewById(R.id.edit_email_layout);
-        mLayoutPassword = findViewById(R.id.edit_password_layout);
-        mLayoutPasswordRepeat = findViewById(R.id.edit_repeat_password_layout);
-
         mLayoutEmail.setErrorEnabled(true);
         mLayoutFirstName.setErrorEnabled(true);
         mLayoutLastName.setErrorEnabled(true);
         mLayoutPassword.setErrorEnabled(true);
         mLayoutPasswordRepeat.setErrorEnabled(true);
-
-        mBtnSave = findViewById(R.id.btn_edit_save);
-        mBtnSave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                editUser();
-            }
-        });
     }
 
     private void getDataFromIntent() {
@@ -117,11 +124,12 @@ public class UserDetailActivity extends Activity implements UserDetailView {
         mLayoutFirstName.setHint(bundle.getString(FIRST_NAME_EXTRA));
         mLayoutLastName.setHint(bundle.getString(LAST_NAME_EXTRA));
         mLayoutEmail.setHint(bundle.getString(EMAIL_EXTRA));
-
+        mUserEmail = bundle.getString(EMAIL_EXTRA);
         mUserPassword = bundle.getString(PASSWORD_EXTRA);
     }
 
-    private void editUser() {
+    @OnClick(R.id.btn_edit_save)
+    public void editUser() {
         String firstName = mEtFirstName.getText().toString();
         String lastName = mEtLastName.getText().toString();
         String email = mEtEmail.getText().toString();
@@ -129,14 +137,26 @@ public class UserDetailActivity extends Activity implements UserDetailView {
         String newPasswordRepeat = mEtPasswordRepeat.getText().toString();
 
         if (TextUtils.isEmpty(firstName)) firstName = mLayoutFirstName.getHint().toString();
-
         if (TextUtils.isEmpty(lastName)) lastName = mLayoutLastName.getHint().toString();
-
         if (TextUtils.isEmpty(email)) email = mLayoutEmail.getHint().toString();
-
-        if (TextUtils.isEmpty(newPassword) && TextUtils.isEmpty(newPasswordRepeat)) newPassword = newPasswordRepeat = mUserPassword;
-
-        mUserDetailPresenter.editUser(firstName, lastName, email, newPassword, newPasswordRepeat);
+        if (TextUtils.isEmpty(newPassword) && TextUtils.isEmpty(newPasswordRepeat))
+            newPassword = newPasswordRepeat = mUserPassword;
+        mUserDetailPresenter.editUser(mUserEmail,firstName, lastName, email, newPassword, newPasswordRepeat);
     }
 
+    @Override
+    public void onEditError() {
+        editError.setText(getText(R.string.edit_error).toString());
+    }
+
+    @Override
+    public void onConnectionError() {
+        NetworkUtils.showConnectionErrorToast(this);
+    }
+
+    @Override
+    public void showProgress(boolean show) {
+        if (show) editPB.setVisibility(View.VISIBLE);
+        else editPB.setVisibility(View.INVISIBLE);
+    }
 }

@@ -120,7 +120,7 @@ public class RVTeamAdapter extends RecyclerView.Adapter<RVTeamAdapter.TeamViewHo
         @Override
         public void onClick(View view) {
             if (alreadyClicked){
-                alreadyClicked =false;
+                alreadyClicked = false;
                 selectedPlayers.remove(player);
                 teamFragmentCallback.updatePlayersToTransfer(selectedPlayers);
                 name.setBackgroundColor(fetchColor(R.color.player_name_color));

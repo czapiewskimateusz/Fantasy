@@ -4,6 +4,7 @@
     <string name="register_label">Sign up</string>
     <string name="edit_user_label">Edit account</string>
     <string name="league_code">Code:</string>
+    <string name="edit_success">User\'s account has been edited successfully</string>
 
     //Hints
     <string name="email_hint" translatable="false">Email</string>
@@ -52,6 +53,7 @@
     <string name="create_league_error">Couldn\'t create league, try again later</string>
     <string name="join_league_error">League doesn\'t exist or code is incorrect</string>
     <string name="more_than_3_error">Your team has more than 3 players from </string>
+    <string name="edit_error">Something went wrong, try again</string>
 
     //Dialogs
     <string name="user_successfully_created">User successfully created!</string>

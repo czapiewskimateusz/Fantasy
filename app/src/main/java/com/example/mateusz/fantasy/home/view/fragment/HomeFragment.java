@@ -74,9 +74,7 @@ public class HomeFragment extends Fragment implements ParentFragment, IHomeView 
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-
         fragmentContainer = view.findViewById(R.id.home_fragment_container);
-
         initViews(view);
         initButton(view);
         getLoggedUserId();

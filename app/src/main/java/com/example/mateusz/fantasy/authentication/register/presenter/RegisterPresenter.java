@@ -1,11 +1,19 @@
 package com.example.mateusz.fantasy.authentication.register.presenter;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.text.TextUtils;
 
 import com.example.mateusz.fantasy.R;
 import com.example.mateusz.fantasy.authentication.register.model.RegisterApiInteractor;
 import com.example.mateusz.fantasy.authentication.register.view.IRegisterView;
+
+import static android.content.Context.MODE_PRIVATE;
+import static com.example.mateusz.fantasy.authentication.login.view.LoginActivity.BUDGET_EXTRA;
+import static com.example.mateusz.fantasy.authentication.login.view.LoginActivity.PREFS_NAME;
+import static com.example.mateusz.fantasy.authentication.login.view.LoginActivity.TEAM_ID_EXTRA;
+import static com.example.mateusz.fantasy.authentication.login.view.LoginActivity.TOTAL_POINTS_EXTRA;
+import static com.example.mateusz.fantasy.authentication.login.view.LoginActivity.USER_ID_EXTRA;
 
 public class RegisterPresenter {
 
@@ -37,7 +45,17 @@ public class RegisterPresenter {
 
     public void onRegisterSuccess(int userId, int teamID) {
         view.showProgress(false);
-        view.onSignUpSuccess(userId, teamID);
+        saveUserData(userId, teamID);
+        view.onSignUpSuccess();
+    }
+
+    private void saveUserData(int userId, int teamId) {
+        SharedPreferences.Editor editor = context.getSharedPreferences(PREFS_NAME, MODE_PRIVATE).edit();
+        editor.putInt(USER_ID_EXTRA, userId);
+        editor.putInt(TOTAL_POINTS_EXTRA, 0);
+        editor.putInt(TEAM_ID_EXTRA, teamId);
+        editor.putFloat(BUDGET_EXTRA, 75);
+        editor.apply();
     }
 
     public void onRegisterFailure() {
@@ -46,7 +64,6 @@ public class RegisterPresenter {
     }
 
     public void register(String email, String firstname, String lastname, String teamName, String password, String passwordRepeat) {
-
         view.clearErrors();
         if (!validateFields(email, firstname, lastname, teamName, password, passwordRepeat)) return;
         this.mEmail = email;
@@ -64,8 +81,7 @@ public class RegisterPresenter {
      * @param passwordRepeat user passwordRepeat
      * @return true if AOK
      */
-    private boolean validateFields(String email, String firstname, String lastname,String teamName, String password, String passwordRepeat) {
-
+    private boolean validateFields(String email, String firstname, String lastname, String teamName, String password, String passwordRepeat) {
         boolean check = true;
 
         if (TextUtils.isEmpty(email)) {

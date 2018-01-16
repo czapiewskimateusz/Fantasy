@@ -17,4 +17,10 @@ public interface UserDetailView {
     void onPasswordRepeatError(String string);
 
     void clearErrors();
+
+    void onEditError();
+
+    void onConnectionError();
+
+    void showProgress(boolean show);
 }

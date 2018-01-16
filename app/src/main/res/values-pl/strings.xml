@@ -67,7 +67,7 @@
     </string-array>
     <string name="gk">BR</string>
     <string name="def">OBR</string>
-    <string name="mid">MID</string>
+    <string name="mid">POM</string>
     <string name="atk">ATK</string>
     <string name="sort">Sortuj:</string>
     <string name="budget">BUDŻET</string>
@@ -75,4 +75,6 @@
     <string name="teamName_empty_error">Nazwa drużyny jest pusta</string>
     <string name="teamName_length_error">Nazwa drużyny jest za długa</string>
     <string name="more_than_3_error">"Twoja drużyna posiada więcej niż 3 piłkarzy z "</string>
+    <string name="edit_success">Konto zostało zaktualizowane</string>
+    <string name="edit_error">Wystąpił problem, spróbuj ponownie</string>
 </resources>
